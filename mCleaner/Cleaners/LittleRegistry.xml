@@ -6,7 +6,7 @@
     <label>ActiveX/Com</label>
     <description></description>
     <action command="littleregistry" search="lrc.activexcom" path="HKCR\CLSID" />
-    <action command="littleregistry" search="lrc.activexcom" path="HKCR\Wow6432Node\CLSID" />
+    <!-- <action command="littleregistry" search="lrc.activexcom" path="HKCR\Wow6432Node\CLSID" />
     <action command="littleregistry" search="lrc.activexcom" path="HKCR" />
     <action command="littleregistry" search="lrc.activexcom" path="HKCR\Wow6432Node" />
     <action command="littleregistry" search="lrc.activexcom" path="HKCR\AppID" />
@@ -24,7 +24,7 @@
     <action command="littleregistry" search="lrc.activexcom" path="HKCR\SOFTWARE\Classes" />
     <action command="littleregistry" search="lrc.activexcom" path="HKCR\SOFTWARE\Wow6432Node\Classes" />
     <action command="littleregistry" search="lrc.activexcom" path="HKCR\SOFTWARE\Classes\AppID" />
-    <action command="littleregistry" search="lrc.activexcom" path="HKCR\SOFTWARE\Wow6432Node\AppID" />
+    <action command="littleregistry" search="lrc.activexcom" path="HKCR\SOFTWARE\Wow6432Node\AppID" /> -->
   </option>
   <option id="appinfo">
     <label>Application Info</label>
@@ -35,21 +35,21 @@
     <label>Program Locations</label>
     <description></description>
     <action command="littleregistry" search="lrc.progloc" path="HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Installer\Folders" />
-    <action command="littleregistry" search="lrc.progloc" path="HKLM\Software\Microsoft\Windows\CurrentVersion\App Paths" />
+    <!-- <action command="littleregistry" search="lrc.progloc" path="HKLM\Software\Microsoft\Windows\CurrentVersion\App Paths" /> -->
   </option>
   <option id="software_settings">
     <label>Software Settings</label>
     <description></description>
     <action command="littleregistry" search="lrc.software.settings" path="HKLM\SOFTWARE" />
-    <action command="littleregistry" search="lrc.software.settings" path="HKCU\SOFTWARE" />
+    <!-- <action command="littleregistry" search="lrc.software.settings" path="HKCU\SOFTWARE" />
     <action command="littleregistry" search="lrc.software.settings" path="HKLM\SOFTWARE\Wow6432Node" />
-    <action command="littleregistry" search="lrc.software.settings" path="HKCU\SOFTWARE\Wow6432Node" />
+    <action command="littleregistry" search="lrc.software.settings" path="HKCU\SOFTWARE\Wow6432Node" /> -->
   </option>
   <option id="startup">
     <label>Startup</label>
     <description></description>
     <action command="littleregistry" search="lrc.startup" path="HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer\Run" />
-    <action command="littleregistry" search="lrc.startup" path="HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunServicesOnce" />
+    <!-- <action command="littleregistry" search="lrc.startup" path="HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunServicesOnce" />
     <action command="littleregistry" search="lrc.startup" path="HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunServices" />
     <action command="littleregistry" search="lrc.startup" path="HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnceEx" />
     <action command="littleregistry" search="lrc.startup" path="HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce\Setup" />
@@ -80,7 +80,7 @@
     <action command="littleregistry" search="lrc.startup" path="HKCU\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\RunOnce\Setup" />
     <action command="littleregistry" search="lrc.startup" path="HKCU\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\RunOnce" />
     <action command="littleregistry" search="lrc.startup" path="HKCU\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\RunEx" />
-    <action command="littleregistry" search="lrc.startup" path="HKCU\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Run" />
+    <action command="littleregistry" search="lrc.startup" path="HKCU\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Run" /> -->
   </option>
   <option id="system_drivers">
     <label>System Drivers</label>
@@ -96,7 +96,7 @@
     <label>Help Files</label>
     <description></description>
     <action command="littleregistry" search="lrc.helpfile" path="HKLM\SOFTWARE\Microsoft\Windows\HTML Help" />
-    <action command="littleregistry" search="lrc.helpfile" path="HKLM\SOFTWARE\Microsoft\Windows\Help" />
+    <!-- <action command="littleregistry" search="lrc.helpfile" path="HKLM\SOFTWARE\Microsoft\Windows\Help" /> -->
   </option>
   <option id="sound_event">
     <label>Sound Events</label>
@@ -107,7 +107,7 @@
     <label>History List</label>
     <description></description>
     <action command="littleregistry" search="lrc.histlist" path="HKCU\Software\Microsoft\Windows\ShellNoRoam\MUICache" />
-    <action command="littleregistry" search="lrc.histlist" path="HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs" />
+    <!-- <action command="littleregistry" search="lrc.histlist" path="HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs" /> -->
   </option>
   <option id="winfont">
     <label>Windows Fonts</label>

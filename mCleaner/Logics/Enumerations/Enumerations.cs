@@ -145,11 +145,38 @@ namespace mCleaner.Logics.Enumerations
         #endregion
 
         #region littl registry cleaner
-        [StringValue("lrc.appinf")]
-        lrc_app_inf,
+        [StringValue("lrc.activexcom")]
+        lrc_activex_com,
+
+        [StringValue("lrc.appinfo")]
+        lrc_app_info,
 
         [StringValue("lrc.progloc")]
-        lrc_prog_loc,
+        lrc_progam_location,
+
+        [StringValue("lrc.software.settings")]
+        lrc_software_settings,
+
+        [StringValue("lrc.startup")]
+        lrc_startup,
+
+        [StringValue("lrc.sysdrv")]
+        lrc_system_drivers,
+
+        [StringValue("lrc.shareddll")]
+        lrc_shared_dll,
+
+        [StringValue("lrc.helpfile")]
+        lrc_help_file,
+
+        [StringValue("lrc.soundevent")]
+        lrc_sound_event,
+
+        [StringValue("lrc.histlist")]
+        lrc_history_list,
+
+        [StringValue("lrc.winfonts")]
+        lrc_win_fonts,
         #endregion
     }
 
@@ -160,6 +187,7 @@ namespace mCleaner.Logics.Enumerations
         regex,
         registry_key,
         registry_name,
-        clamwin
+        clamwin,
+        littlregistrycleaner
     }
 }

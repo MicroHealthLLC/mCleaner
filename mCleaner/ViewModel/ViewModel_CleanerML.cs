@@ -444,6 +444,12 @@ namespace mCleaner.ViewModel
                         axn = new CommandLogic_Clam();
                         break;
                     #endregion
+
+                    #region // little registry commands
+                    case COMMANDS.littleregistry:
+                        axn = new CommandLogic_LittleRegistryCleaner();
+                        break;
+                    #endregion
                 }
 
                 if (axn != null)

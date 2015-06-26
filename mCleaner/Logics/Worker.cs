@@ -1,6 +1,7 @@
 ﻿using mCleaner.Helpers;
 using mCleaner.Helpers.Data;
 using mCleaner.Logics.Clam;
+using mCleaner.Logics.Commands.LittleRegistryCleaner.Scanners;
 using mCleaner.Logics.Enumerations;
 using mCleaner.Model;
 using mCleaner.ViewModel;
@@ -230,6 +231,12 @@ namespace mCleaner.Logics
                         ExecuteClamWinCommand(ttd, true);
                         break;
                     #endregion
+
+                    #region little registry cleaner
+                    case COMMANDS.littleregistry:
+                        ExecuteLittleRegistryCleanerCommand(ttd, true);
+                        break;
+                    #endregion
                 }
             }
 
@@ -310,7 +317,7 @@ namespace mCleaner.Logics
         void ExecuteWinRegCommand(Model_ThingsToDelete ttd, bool preview = false)
         {
             string text = string.Format("{0} {1} {2}",
-                                        "Delete",
+                                        "Clean",
                                         ttd.reg_name == null ?
                                             "registry key" :
                                             "registry name",
@@ -562,6 +569,86 @@ namespace mCleaner.Logics
 
                     log = " - CLEANED\r\n";
                     bgWorker.ReportProgress(-1, log);
+                }
+            }
+        }
+
+        void ExecuteLittleRegistryCleanerCommand(Model_ThingsToDelete ttd, bool preview = false)
+        {
+            string text = "{0} {1}";
+
+            if (preview)
+            {
+                List<ScannerBase.InvalidKeys> BadKeys = new List<ScannerBase.InvalidKeys>();
+                switch (ttd.search)
+                {
+                    case SEARCH.lrc_activex_com:
+                        break;
+                    case SEARCH.lrc_app_info:
+                        ApplicationInfo.I.Preview();
+                        BadKeys.AddRange(ApplicationInfo.I.BadKeys);
+                        
+                        break;
+                    case SEARCH.lrc_progam_location:
+                        ApplicationPaths.I.Preview();
+                        BadKeys.AddRange(ApplicationPaths.I.BadKeys);
+
+                        break;
+                    case SEARCH.lrc_software_settings:
+                        break;
+                    case SEARCH.lrc_startup:
+                        break;
+                    case SEARCH.lrc_system_drivers:
+                        break;
+                    case SEARCH.lrc_shared_dll:
+                        break;
+                    case SEARCH.lrc_help_file:
+                        break;
+                    case SEARCH.lrc_sound_event:
+                        break;
+                    case SEARCH.lrc_history_list:
+                        break;
+                    case SEARCH.lrc_win_fonts:
+                        break;
+                }
+
+                foreach (ScannerBase.InvalidKeys badkey in BadKeys)
+                {
+                    string log = string.Format(text, "Clean", badkey.Key + ", " + badkey.Name);
+                    _preview_log += log + "\r\n";
+
+                    UpdateProgressLog(log);
+
+                    this.TotalSpecialOperations++;
+                }
+            }
+            else
+            {
+                switch (ttd.search)
+                {
+                    case SEARCH.lrc_activex_com:
+                        break;
+                    case SEARCH.lrc_app_info:
+                        //ApplicationInfo.I
+                        break;
+                    case SEARCH.lrc_progam_location:
+                        break;
+                    case SEARCH.lrc_software_settings:
+                        break;
+                    case SEARCH.lrc_startup:
+                        break;
+                    case SEARCH.lrc_system_drivers:
+                        break;
+                    case SEARCH.lrc_shared_dll:
+                        break;
+                    case SEARCH.lrc_help_file:
+                        break;
+                    case SEARCH.lrc_sound_event:
+                        break;
+                    case SEARCH.lrc_history_list:
+                        break;
+                    case SEARCH.lrc_win_fonts:
+                        break;
                 }
             }
         }

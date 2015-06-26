@@ -96,10 +96,13 @@
     <Compile Include="Logics\Commands\CommandLogic_Delete.cs" />
     <Compile Include="Logics\Commands\CommandLogic_Ini.cs" />
     <Compile Include="Logics\Commands\CommandLogic_JSON.cs" />
-    <Compile Include="Logics\Commands\CommandLogic_LittleRegistryCleaner.cs" />
+    <Compile Include="Logics\Commands\LittleRegistryCleaner\CommandLogic_LittleRegistryCleaner.cs" />
     <Compile Include="Logics\Commands\CommandLogic_SQLiteVacuum.cs" />
     <Compile Include="Logics\Commands\CommandLogic_Winreg.cs" />
     <Compile Include="Logics\Commands\iActions.cs" />
+    <Compile Include="Logics\Commands\LittleRegistryCleaner\Scanners\ApplicationInfo.cs" />
+    <Compile Include="Logics\Commands\LittleRegistryCleaner\Scanners\ApplicationPaths.cs" />
+    <Compile Include="Logics\Commands\LittleRegistryCleaner\Scanners\ScannerBase.cs" />
     <Compile Include="Logics\Enumerations\Enumerations.cs" />
     <Compile Include="Logics\Worker.cs" />
     <Compile Include="Model\Model_CleanerML.cs" />
