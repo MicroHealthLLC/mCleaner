@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    BleachBit
+    Copyright (C) 2014 Andrew Ziem
+    http://bleachbit.sourceforge.net
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+-->
+<cleaner id="flash">
+  <label>Flash</label>
+  <description>Multimedia viewer</description>
+  <option id="cache">
+    <label>Cache</label>
+    <description>Delete the cache</description>
+    <!-- reference: http://helpx.adobe.com/x-productkb/multi/flash-player-11-problems-playing.html -->
+    <!-- reference: http://helpx.adobe.com/flash-player/kb/protected-video-content-play.html -->
+    <action command="delete" search="walk.all" path="$APPDATA\Adobe\Flash Player\AssetCache\"/>
+    <action command="delete" search="walk.all" path="$APPDATA\Adobe\Flash Player\APSPrivateData2\"/>
+    <action command="delete" search="walk.all" path="$APPDATA\Adobe\Flash Player\NativeCache\"/>
+    <action command="delete" search="walk.all" path="~/.adobe/Flash_Player/AssetCache/"/>
+    <action command="delete" search="walk.all" path="~/.adobe/Flash_Player/NativeCache/"/>
+  </option>
+  <option id="cookies">
+    <label>Cookies</label>
+    <description>Delete cookies, which contain information such as web site preferences, authentication, and tracking identification</description>
+    <action command="delete" search="walk.all" path="$APPDATA\Macromedia\Flash Player\#SharedObjects\"/>
+    <action command="delete" search="walk.all" path="$APPDATA\Macromedia\Flash Player\macromedia.com\support\flashplayer\sys\"/>
+    <action command="delete" search="walk.all" path="~/.macromedia/Flash_Player/#SharedObjects/"/>
+    <action command="delete" search="walk.all" path="~/.macromedia/Flash_Player/macromedia.com/support/flashplayer/sys/"/>
+  </option>
+</cleaner>

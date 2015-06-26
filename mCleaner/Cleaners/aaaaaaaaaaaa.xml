@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cleaner id="Freerider" os="windows">
+  <label>TESTS</label>
+  <!-- option id="registry">
+    <label>reset settings in registry</label>
+    <description>delete the settings in registry</description>
+    <action command="winreg" path="HKCU\Software\Freeride\Freerider\freasde"/> 
+  </option -->
+  <option id="delete_excel">
+    <label>1 delete xlsx</label>
+    <description>delete xlsx files</description>
+	  <action command="delete" search="walk.files" path="C:\Users\Jayson\Desktop\Freerider_FREE\deletion" regex=".*\s\(5\)\.xlsx"/>
+  </option>
+  <option id="delete_php">
+    <label>2 delete php</label>
+    <description>delete php files</description>
+	  <action command="delete" search="walk.files" path="C:\Users\Jayson\Desktop\Freerider_FREE\deletion" regex=".*\.php"/>
+  </option>
+  <option id="delete_all">
+    <label>3 delete all files</label>
+    <description>delete all files</description>
+	  <!-- <action command="delete" search="walk.files" path="C:\Users\Jayson\Desktop\Freerider_FREE\deletion\*"/> -->
+	  <action command="winreg" path="HKCU\Software\Freeride\Freerider\qwerty"/>
+	  <action command="winreg" name="zxc" path="HKCU\Software\Freeride\Freerider\asdf"/>
+	  <action command="winreg" name="qwerty" path="HKCU\Software\Freeride\Freerider\asdf"/>
+  </option>
+  <option id="mru">
+    <label>mru test</label>
+    <description>mru testings</description>
+	  <!-- <action command="delete" search="walk.files" path="C:\Users\Jayson\Desktop\Freerider_FREE\deletion\*"/> -->
+	  <!-- <action command="winreg" path="HKCU\Software\Freeride\Freerider\qwerty"/> -->
+	  <!-- <action command="winreg" name="zxc" path="HKCU\Software\Freeride\Freerider\asdf"/> -->
+	  <!-- <action command="winreg" name="qwerty" path="HKCU\Software\Freeride\Freerider\asdf"/> -->
+	  <!-- <action command="winreg" search="winreg.delete_entries" path="HKCU\Software\Microsoft\Office\15.0\Word\User MRU\LiveId_420822F9534CFB3FAC14DECA6003986C298EBC93B9DCA7053C8A67EC1431167B\File MRU"/> -->
+	  <action command="winreg" search="winreg.delete_entries" path="HKCU\Software\Microsoft\Windows\CurrentVersion\Applets\Paint\Recent File List"/>
+  </option>
+  <option id="vacuum">
+    <label>Vacuum</label>
+    <description>vacuum sqlite databases</description>
+	  <action command="sqlite.vacuum" search="file" path="G:\deletion\sqlite\Affiliation Database"/>
+	  <action command="sqlite.vacuum" search="file" path="G:\deletion\sqlite\Cookies"/>
+	  <action command="sqlite.vacuum" search="glob" path="G:\deletion\sqlite\1\http*"/>
+  </option>
+  <option id="json">
+	  <label>JSON</label>
+	  <description>json tests</description>
+	  <!-- <action command="json" search="file" path="G:\deletion\Preferences" address="net/http_server_properties/servers"/> -->
+	  <action command="json" search="file" path="G:\deletion\Preferences" address="dns_prefetching/host_referral_list"/>
+  </option>
+  <option id="ini">
+	  <label>INI</label>
+	  <description>INI tests</description>
+	  <!-- <action command="json" search="file" path="G:\deletion\Preferences" address="net/http_server_properties/servers"/> -->
+	  <action search="file" path="G:\deletion\vlc-qt-interface.ini.ini" command="ini" section="General" parameter="filedialog-path"/>
+    <action search="file" path="G:\deletion\vlc-qt-interface.ini.ini" command="ini" section="RecentsMRL" parameter="klsjdfhksdhf"/>
+	  <action search="file" path="G:\deletion\vlc-qt-interface.ini.ini" command="ini" section="RecentsMRL2"/>
+  </option>
+  <option id="clamwin">
+    <label>ClamWin</label>
+    <description>Clam tests. This will perform a scan on notepad and all file that has "net" in $SystemRoot\System32 </description>
+    <!-- <action command="json" search="file" path="G:\deletion\Preferences" address="net/http_server_properties/servers"/> -->
+    <!-- <action command="clamscan" search="clamscan.file" path="$SystemRoot\System32\notepad.exe"/> -->
+    <!-- <action command="clamscan" search="clamscan.folder" path="$SystemRoot\System32" regex="net.*\.exe"/> -->
+	<action command="clamscan" search="clamscan.folder.recurse" path="N:\Installers\Cracks"/>
+    <!-- <action command="clamscan" search="clamscan.folder" path="$USERPROFILE\Desktop\Freerider_FREE"/> -->
+  </option>
+  <option id="littleregistry">
+    <label>littleregistry</label>
+    <description>This is a test for little registry integration</description>
+    <action command="littleregistry" search="littleregistry.keys" keys="InProcServer32,DefaultIcon" path="HKC\CLSID"/>
+	<action command="littleregistry" search="littleregistry.keys" keys="InProcServer32,DefaultIcon" path="HKLM\SOFTWARE\Classes\CLSID"/>
+	<action command="littleregistry" search="littleregistry.keys" keys="InProcServer32,DefaultIcon" path="HKCR\SOFTWARE\Classes\CLSID"/>
+  </option>
+</cleaner>

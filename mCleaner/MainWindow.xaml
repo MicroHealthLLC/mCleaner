@@ -1,0 +1,139 @@
+﻿<Window x:Class="mCleaner.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:mCleaner"
+        xmlns:ucw="clr-namespace:mCleaner.UserControls.Window"
+        
+        DataContext="{Binding Source={StaticResource Locator}}"
+        
+        Title="mCleaner" Height="480" Width="800" Icon="appicon.ico" WindowStartupLocation="CenterScreen">
+    
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+        
+            <!-- menu bar -->
+            <Menu IsMainMenu="True" Grid.Row="0">
+                <MenuItem Header="_File">
+                    <MenuItem Header="_Shred Files" />
+                    <MenuItem Header="Sh_red Folders" />
+                    <MenuItem Header="_Wipe Free Space" />
+                    <MenuItem Header="S_hred Settings and Quit" />
+                    <MenuItem Header="_Quit">
+                        <MenuItem.Icon>
+                            <Image Width="16" Height="16" Source="Assets/Quit.png" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+                <MenuItem Header="_Edit">
+                    <MenuItem Header="Preferences" Command="{Binding Prefs.Command_Menu_Preferences}">
+                        <MenuItem.Icon>
+                            <Image Width="16" Height="16" Source="Assets/check_box_list.png" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+                <MenuItem Header="_Help">
+                    <MenuItem Header="Help Contents" Command="Help">
+                        <MenuItem.Icon>
+                            <Image Width="16" Height="16" Source="Assets/Help.png" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Release Notes">
+                        <MenuItem.Icon>
+                            <Image Width="16" Height="16" Source="Assets/Release Notes.png" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="System Information" />
+                    <MenuItem Header="About">
+                        <MenuItem.Icon>
+                            <Image Width="16" Height="16" Source="Assets/About.png" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+            </Menu>
+
+            <!-- toolbar -->
+            <ToolBarTray Grid.Row="1">
+                <ToolBar>
+                    <Button Width="70" Command="{Binding CleanerML.Command_Preview}" ToolTip="Preview work">
+                        <StackPanel>
+                            <Image Width="32" Height="32" Source="Assets/Preview.png" HorizontalAlignment="Center" />
+                            <TextBlock Text="Preview" HorizontalAlignment="Center" />
+                        </StackPanel>
+                    </Button>
+                    <Button Width="70" Command="{Binding CleanerML.Command_Clean}" ToolTip="Start cleaning!">
+                        <StackPanel>
+                            <Image Width="32" Height="32" Source="Assets/Clean.png" HorizontalAlignment="Center" />
+                            <TextBlock Text="Clean" HorizontalAlignment="Center" />
+                        </StackPanel>
+                    </Button>
+                    <Button Width="70" Command="{Binding Clam.Command_UpdateVirusDefinition}" ToolTip="Update virus definitions">
+                        <StackPanel>
+                            <Image Width="32" Height="32" Source="Assets/dl_vir_def.png" HorizontalAlignment="Center" />
+                            <TextBlock Text="Update" HorizontalAlignment="Center" />
+                        </StackPanel>
+                    </Button>
+                    <Button Width="70" Command="{Binding Clam.Command_ScanForVirus}" ToolTip="Scan system for virus">
+                        <StackPanel>
+                            <Image Width="32" Height="32" Source="Assets/scan_for_virus.png" HorizontalAlignment="Center" />
+                            <TextBlock Text="Scan" HorizontalAlignment="Center" />
+                        </StackPanel>
+                    </Button>
+                    <Button Width="70" Command="{Binding Clam.Command_ScanMemory}" ToolTip="Scan system memory for virus">
+                        <StackPanel>
+                            <Image Width="32" Height="32" Source="Assets/scan_for_memory.png" HorizontalAlignment="Center" />
+                            <TextBlock Text="Memory" HorizontalAlignment="Center" />
+                        </StackPanel>
+                    </Button>
+                </ToolBar>
+            </ToolBarTray>
+        
+            <!-- main content -->
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="5" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <TreeView x:Name="tree"
+                          ItemContainerStyle="{StaticResource TreeViewItemStyle}"
+                          ItemsSource="{Binding CleanerML.CleanersCollection, Mode=OneTime}"
+                          ItemTemplate="{StaticResource CheckBoxItemTemplate}" 
+                          />
+
+                <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" />
+
+                <Grid Grid.Column="2">
+                    <RichTextBox x:Name="rtbCleanerDetails" BorderThickness="0" IsReadOnly="True" />
+
+                    <Grid Visibility="{Binding CleanerML.Run, Converter={StaticResource boolTovis}}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                    
+                        <Grid Grid.Row="0">
+                            <Border BorderThickness="1" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}">
+                                <ProgressBar Height="25" Maximum="{Binding CleanerML.MaxProgress}" Value="{Binding CleanerML.ProgressIndex}" VerticalAlignment="Center" IsHitTestVisible="False" Margin="1"/>
+                            </Border>
+                            <TextBlock Text="{Binding CleanerML.ProgressText}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" >
+                                <TextBlock.Effect>
+                                    <DropShadowEffect ShadowDepth="2" BlurRadius="3" Color="{DynamicResource {x:Static SystemColors.ActiveCaptionTextColorKey}}" Opacity="0.5"/>
+                                </TextBlock.Effect>
+                            </TextBlock>
+                        </Grid>
+                        <TextBox Grid.Row="1" IsReadOnly="True" BorderThickness="0" Text="{Binding CleanerML.TextLog}" AllowDrop="False" IsTabStop="False" ScrollViewer.VerticalScrollBarVisibility="Auto" />
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Grid>
+
+        <ucw:ClamWindow Visibility="{Binding Clam.ShowClamWinVirusUpdateWindow, Converter={StaticResource boolTovis}}"/>
+        <ucw:PreferencesWindow Visibility="{Binding Prefs.ShowWindow, Converter={StaticResource boolTovis}}"/>
+    </Grid>
+</Window>

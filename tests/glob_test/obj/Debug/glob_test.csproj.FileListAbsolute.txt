@@ -1,0 +1,6 @@
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\tests\glob_test\bin\Debug\glob_test.exe.config
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\tests\glob_test\bin\Debug\glob_test.exe
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\tests\glob_test\bin\Debug\glob_test.pdb
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\tests\glob_test\obj\Debug\glob_test.exe
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\tests\glob_test\obj\Debug\glob_test.pdb
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\tests\glob_test\obj\Debug\glob_test.csprojResolveAssemblyReference.cache

@@ -1,0 +1,116 @@
+﻿<Window x:Class="mCleaner.PreferencesWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Preferences" Height="300" Width="400" ResizeMode="NoResize">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        
+        <Grid Grid.Row="0">
+            <TabControl>
+                <TabItem Header="General">
+                    <StackPanel Margin="5">
+                        <StackPanel.Resources>
+                            <Style TargetType="CheckBox">
+                                <Setter Property="Margin" Value="0,5" />
+                            </Style>
+                        </StackPanel.Resources>
+                        
+                        <CheckBox x:Name="cbCheckSoftwareUpdate" Content="Check periodically for software updates via the Internet." />
+                        <StackPanel Margin="10">
+                            <CheckBox x:Name="cbCheckBetaRelease" Content="Check for new beta release" />
+                            <CheckBox x:Name="cbDownloadCleanerFromCommunity" Content="Download and update cleaners from community (winapp2.ini)" />
+                        </StackPanel>
+                        <CheckBox x:Name="cbOverwriteFiles" Content="Overwrite files to hide contents" />
+                        <CheckBox x:Name="cbStartBleachBitBoot" Content="Start BleachBit with computer" />
+                    </StackPanel>
+                </TabItem>
+                <TabItem Header="Custom">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="auto" />
+                        </Grid.RowDefinitions>
+                        
+                        <TextBlock Text="These locations can be selected for deletion." TextAlignment="Center" />
+                        
+                        <TextBlock Text="Path" Grid.Row="1" />
+                        <ListBox Grid.Row="2" BorderThickness="0" x:Name="lbCustom">
+                            
+                        </ListBox>
+                        
+                        <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="3">
+                            <Button x:Name="Custom_btnAddFile" Content=" Add file " />
+                            <TextBlock Text=" " />
+                            <Button x:Name="Custom_btnAddFolder" Content=" Add folder " />
+                            <TextBlock Text=" " />
+                            <Button x:Name="Custom_btnRemove" Content=" Remove " />
+                        </StackPanel>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Drives">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="auto" />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock TextAlignment="Center">
+                            <Run Text="Choose a writable folder for each drive" />
+                            <LineBreak />
+                            <Run Text="for which to overwrite free space." />
+                        </TextBlock>
+
+                        <TextBlock Text=" " Grid.Row="1" />
+                        <ListBox Grid.Row="2" BorderThickness="0" x:Name="lbDrives">
+
+                        </ListBox>
+
+                        <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="3">
+                            <Button x:Name="Drives_btnAddFile" Content=" Add file " />
+                            <TextBlock Text=" " />
+                            <Button x:Name="Drives_btnRemove" Content=" Remove " />
+                        </StackPanel>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Whitelist">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="auto" />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Text="These paths will not be deleted or modified" TextAlignment="Center" />
+
+                        <TextBlock Text="Path" Grid.Row="1" />
+                        <ListBox Grid.Row="2" BorderThickness="0" x:Name="lbWhitelist">
+
+                        </ListBox>
+
+                        <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="3">
+                            <Button x:Name="Whitelist_btnAddFile" Content=" Add file " />
+                            <TextBlock Text=" " />
+                            <Button x:Name="Whitelist_btnAddFolder" Content=" Add folder " />
+                            <TextBlock Text=" " />
+                            <Button x:Name="Whitelist_btnRemove" Content=" Remove " />
+                        </StackPanel>
+                    </Grid>
+                </TabItem>
+            </TabControl>
+        </Grid>
+        
+        <Grid Grid.Row="1">
+            <StackPanel Orientation="Horizontal" Margin="5" HorizontalAlignment="Right">
+                <Button x:Name="btnClose" Content=" Close " />
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>

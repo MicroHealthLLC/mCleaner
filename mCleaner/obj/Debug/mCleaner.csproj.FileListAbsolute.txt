@@ -1,0 +1,127 @@
+C:\Users\jayson\AppData\Local\Temporary Projects\mCleaner\bin\Debug\mCleaner.exe.config
+C:\Users\jayson\AppData\Local\Temporary Projects\mCleaner\bin\Debug\mCleaner.exe
+C:\Users\jayson\AppData\Local\Temporary Projects\mCleaner\bin\Debug\mCleaner.pdb
+C:\Users\jayson\AppData\Local\Temporary Projects\mCleaner\obj\Debug\mCleaner.csprojResolveAssemblyReference.cache
+C:\Users\jayson\AppData\Local\Temporary Projects\mCleaner\obj\Debug\MainWindow.baml
+C:\Users\jayson\AppData\Local\Temporary Projects\mCleaner\obj\Debug\MainWindow.g.cs
+C:\Users\jayson\AppData\Local\Temporary Projects\mCleaner\obj\Debug\App.g.cs
+C:\Users\jayson\AppData\Local\Temporary Projects\mCleaner\obj\Debug\mCleaner_MarkupCompile.cache
+C:\Users\jayson\AppData\Local\Temporary Projects\mCleaner\obj\Debug\mCleaner.g.resources
+C:\Users\jayson\AppData\Local\Temporary Projects\mCleaner\obj\Debug\mCleaner.Properties.Resources.resources
+C:\Users\jayson\AppData\Local\Temporary Projects\mCleaner\obj\Debug\mCleaner.csproj.GenerateResource.Cache
+C:\Users\jayson\AppData\Local\Temporary Projects\mCleaner\obj\Debug\mCleaner.exe
+C:\Users\jayson\AppData\Local\Temporary Projects\mCleaner\obj\Debug\mCleaner.pdb
+C:\Users\jayson\Desktop\VBOXSVRFrank\mCleaner\mCleaner\mCleaner\bin\Debug\mCleaner.exe.config
+C:\Users\jayson\Desktop\VBOXSVRFrank\mCleaner\mCleaner\mCleaner\obj\Debug\mCleaner.exe
+C:\Users\jayson\Desktop\VBOXSVRFrank\mCleaner\mCleaner\mCleaner\obj\Debug\mCleaner.pdb
+C:\Users\jayson\Desktop\VBOXSVRFrank\mCleaner\mCleaner\mCleaner\bin\Debug\mCleaner.exe
+C:\Users\jayson\Desktop\VBOXSVRFrank\mCleaner\mCleaner\mCleaner\bin\Debug\mCleaner.pdb
+C:\Users\jayson\Desktop\VBOXSVRFrank\mCleaner\mCleaner\mCleaner\obj\Debug\mCleaner.csprojResolveAssemblyReference.cache
+C:\Users\jayson\Desktop\VBOXSVRFrank\mCleaner\mCleaner\mCleaner\obj\Debug\MainWindow.baml
+C:\Users\jayson\Desktop\VBOXSVRFrank\mCleaner\mCleaner\mCleaner\obj\Debug\MainWindow.g.cs
+C:\Users\jayson\Desktop\VBOXSVRFrank\mCleaner\mCleaner\mCleaner\obj\Debug\App.g.cs
+C:\Users\jayson\Desktop\VBOXSVRFrank\mCleaner\mCleaner\mCleaner\obj\Debug\mCleaner_MarkupCompile.cache
+C:\Users\jayson\Desktop\VBOXSVRFrank\mCleaner\mCleaner\mCleaner\obj\Debug\mCleaner.g.resources
+C:\Users\jayson\Desktop\VBOXSVRFrank\mCleaner\mCleaner\mCleaner\obj\Debug\mCleaner.Properties.Resources.resources
+C:\Users\jayson\Desktop\VBOXSVRFrank\mCleaner\mCleaner\mCleaner\obj\Debug\mCleaner.csproj.GenerateResource.Cache
+C:\Users\jayson\Desktop\VBOXSVRFrank\mCleaner\mCleaner\mCleaner\obj\Debug\PreferencesWindow.baml
+C:\Users\jayson\Desktop\VBOXSVRFrank\mCleaner\mCleaner\mCleaner\obj\Debug\PreferencesWindow.g.cs
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\bin\Debug\Clam\.clamwin\db\readme.txt
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\bin\Debug\Clam\Microsoft.VC80.CRT.manifest
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\bin\Debug\Clam\freshclam.log
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\bin\Debug\Clam\freshclam.conf
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\bin\Debug\Clam\clamscan.exe
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\bin\Debug\Clam\freshclam.exe
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\bin\Debug\Clam\libclamav.dll
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\bin\Debug\Clam\msvcm80.dll
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\bin\Debug\Clam\msvcp80.dll
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\bin\Debug\Clam\msvcr80.dll
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\bin\Debug\Cleaners\aaaaaaaaaaaa.xml
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\bin\Debug\Cleaners\adobe_reader.xml
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\bin\Debug\Cleaners\amule.xml
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\bin\Debug\Cleaners\chromium.xml
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\bin\Debug\Cleaners\deepscan.xml
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\bin\Debug\Cleaners\filezilla.xml
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\bin\Debug\Cleaners\flash.xml
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\bin\Debug\Cleaners\freerider.xml
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\bin\Debug\Cleaners\gimp.xml
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\bin\Debug\Cleaners\google_chrome.xml
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\bin\Debug\Cleaners\google_earth.xml
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\bin\Debug\Cleaners\google_toolbar.xml
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\bin\Debug\Cleaners\hippo_opensim_viewer.xml
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\bin\Debug\Cleaners\internet_explorer.xml
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\bin\Debug\Cleaners\java.xml
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\bin\Debug\Cleaners\liferea.xml
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\bin\Debug\Cleaners\microsoft_office.xml
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\bin\Debug\Cleaners\miro.xml
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\bin\Debug\Cleaners\mozilla_firefox.xml
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\bin\Debug\Cleaners\octave.xml
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\bin\Debug\Cleaners\opera.xml
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\bin\Debug\Cleaners\paint.xml
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\bin\Debug\Cleaners\pidgin.xml
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\bin\Debug\Cleaners\realplayer.xml
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\bin\Debug\Cleaners\safari.xml
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\bin\Debug\Cleaners\screenlets.xml
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\bin\Debug\Cleaners\seamonkey.xml
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\bin\Debug\Cleaners\secondlife_viewer.xml
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\bin\Debug\Cleaners\silverlight.xml
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\bin\Debug\Cleaners\skype.xml
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\bin\Debug\Cleaners\teamviewer.xml
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\bin\Debug\Cleaners\thunderbird.xml
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\bin\Debug\Cleaners\tortoisesvn.xml
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\bin\Debug\Cleaners\vim.xml
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\bin\Debug\Cleaners\vlc.xml
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\bin\Debug\Cleaners\vuze.xml
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\bin\Debug\Cleaners\warzone2100.xml
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\bin\Debug\Cleaners\winamp.xml
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\bin\Debug\Cleaners\windows_defender.xml
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\bin\Debug\Cleaners\windows_explorer.xml
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\bin\Debug\Cleaners\windows_media_player.xml
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\bin\Debug\Cleaners\winrar.xml
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\bin\Debug\Cleaners\winzip.xml
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\bin\Debug\Cleaners\wordpad.xml
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\bin\Debug\Cleaners\xchat.xml
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\bin\Debug\Cleaners\yahoo_messenger.xml
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\bin\Debug\sqlite3.def
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\bin\Debug\sqlite3.dll
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\bin\Debug\mCleaner.exe.config
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\bin\Debug\mCleaner.exe
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\bin\Debug\mCleaner.pdb
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\bin\Debug\GalaSoft.MvvmLight.dll
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\bin\Debug\GalaSoft.MvvmLight.Extras.dll
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\bin\Debug\Microsoft.Practices.ServiceLocation.dll
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\bin\Debug\Newtonsoft.Json.dll
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\bin\Debug\System.Data.SQLite.dll
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\bin\Debug\System.Windows.Interactivity.dll
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\bin\Debug\GalaSoft.MvvmLight.pdb
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\bin\Debug\GalaSoft.MvvmLight.xml
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\bin\Debug\GalaSoft.MvvmLight.Extras.pdb
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\bin\Debug\GalaSoft.MvvmLight.Extras.xml
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\bin\Debug\Microsoft.Practices.ServiceLocation.pdb
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\bin\Debug\Microsoft.Practices.ServiceLocation.xml
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\bin\Debug\Newtonsoft.Json.xml
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\bin\Debug\System.Data.SQLite.xml
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\bin\Debug\System.Windows.Interactivity.xml
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\obj\Debug\mCleaner.csprojResolveAssemblyReference.cache
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\obj\Debug\Assets\Styles\ButtonStyle.baml
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\obj\Debug\PreferencesWindow.baml
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\obj\Debug\UserControls\Window\ClamWindow.baml
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\obj\Debug\UserControls\Window\PreferencesWindow.baml
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\obj\Debug\MainWindow.g.cs
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\obj\Debug\PreferencesWindow.g.cs
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\obj\Debug\UserControls\Window\ClamWindow.g.cs
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\obj\Debug\UserControls\Window\PreferencesWindow.g.cs
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\obj\Debug\App.g.cs
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\obj\Debug\mCleaner_Content.g.cs
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\obj\Debug\GeneratedInternalTypeHelper.g.cs
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\obj\Debug\mCleaner_MarkupCompile.cache
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\obj\Debug\mCleaner_MarkupCompile.lref
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\obj\Debug\App.baml
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\obj\Debug\Assets\Styles\TreeViewStyle.baml
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\obj\Debug\MainWindow.baml
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\obj\Debug\mCleaner.g.resources
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\obj\Debug\mCleaner.Properties.Resources.resources
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\obj\Debug\mCleaner.csproj.GenerateResource.Cache
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\obj\Debug\mCleaner.exe
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\obj\Debug\mCleaner.pdb
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\mCleaner\bin\Debug\Cleaners\LittleRegistry.xml

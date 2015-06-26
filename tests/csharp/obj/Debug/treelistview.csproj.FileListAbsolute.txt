@@ -1,0 +1,12 @@
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\tests\csharp\bin\Debug\TreeListView.exe
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\tests\csharp\bin\Debug\TreeListView.pdb
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\tests\csharp\obj\Debug\treelistview.csprojResolveAssemblyReference.cache
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\tests\csharp\obj\Debug\Window1.g.cs
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\tests\csharp\obj\Debug\app.g.cs
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\tests\csharp\obj\Debug\GeneratedInternalTypeHelper.g.cs
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\tests\csharp\obj\Debug\TreeListView_MarkupCompile.cache
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\tests\csharp\obj\Debug\TreeListView_MarkupCompile.lref
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\tests\csharp\obj\Debug\Window1.baml
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\tests\csharp\obj\Debug\TreeListView.g.resources
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\tests\csharp\obj\Debug\TreeListView.exe
+D:\Clients\oDesk\2015\Frank\mCleaner\mCleaner\tests\csharp\obj\Debug\TreeListView.pdb
