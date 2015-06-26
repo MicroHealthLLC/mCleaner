@@ -130,11 +130,13 @@ namespace mCleaner.ViewModel
             {
                 Command_Preview = new RelayCommand(Command_Preview_Click);
                 Command_Clean = new RelayCommand(Command_Clean_Click);
+                Command_Quit = new RelayCommand(Command_Quit_Click);
             }
         }
         #endregion
 
         #region commands
+        public ICommand Command_Quit { get; set; }
         public ICommand Command_Preview { get; internal set; }
         public ICommand Command_Clean { get; internal set; }
         
@@ -158,7 +160,12 @@ namespace mCleaner.ViewModel
             Worker.I.DoWork();
         }
 
-        
+        public void Command_Quit_Click()
+        {
+            // Disable needed privileges
+            Permissions.SetPrivileges(false);
+            Process.GetCurrentProcess().Kill();
+        }
         #endregion
 
         #region Events

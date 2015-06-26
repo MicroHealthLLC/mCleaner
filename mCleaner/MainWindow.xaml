@@ -19,11 +19,11 @@
             <!-- menu bar -->
             <Menu IsMainMenu="True" Grid.Row="0">
                 <MenuItem Header="_File">
-                    <MenuItem Header="_Shred Files" />
-                    <MenuItem Header="Sh_red Folders" />
-                    <MenuItem Header="_Wipe Free Space" />
-                    <MenuItem Header="S_hred Settings and Quit" />
-                    <MenuItem Header="_Quit">
+                    <MenuItem IsEnabled="False" Header="_Shred Files" />
+                    <MenuItem IsEnabled="False" Header="Sh_red Folders" />
+                    <MenuItem IsEnabled="False" Header="_Wipe Free Space" />
+                    <MenuItem IsEnabled="False" Header="S_hred Settings and Quit" />
+                    <MenuItem Header="_Quit" Command="{Binding CleanerML.Command_Quit}">
                         <MenuItem.Icon>
                             <Image Width="16" Height="16" Source="Assets/Quit.png" />
                         </MenuItem.Icon>
@@ -37,18 +37,18 @@
                     </MenuItem>
                 </MenuItem>
                 <MenuItem Header="_Help">
-                    <MenuItem Header="Help Contents" Command="Help">
+                    <MenuItem IsEnabled="False" Header="Help Contents" Command="Help">
                         <MenuItem.Icon>
                             <Image Width="16" Height="16" Source="Assets/Help.png" />
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Header="Release Notes">
+                    <MenuItem IsEnabled="False" Header="Release Notes">
                         <MenuItem.Icon>
                             <Image Width="16" Height="16" Source="Assets/Release Notes.png" />
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Header="System Information" />
-                    <MenuItem Header="About">
+                    <MenuItem IsEnabled="False" Header="System Information" />
+                    <MenuItem IsEnabled="False" Header="About">
                         <MenuItem.Icon>
                             <Image Width="16" Height="16" Source="Assets/About.png" />
                         </MenuItem.Icon>
