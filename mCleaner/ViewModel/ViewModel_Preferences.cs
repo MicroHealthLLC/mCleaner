@@ -1,5 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using mCleaner.Properties;
+using System.Windows;
 using System.Windows.Input;
 
 namespace mCleaner.ViewModel
@@ -10,7 +12,7 @@ namespace mCleaner.ViewModel
 
         #endregion
 
-        #region preferences
+        #region properties
         private bool _ShowWindow = false;
         public bool ShowWindow
         {
@@ -80,6 +82,48 @@ namespace mCleaner.ViewModel
                 }
             }
         }
+
+        private string _DatabaseMirror = string.Empty;
+        public string DatabaseMirror
+        {
+            get { return _DatabaseMirror; }
+            set
+            {
+                if (_DatabaseMirror != value)
+                {
+                    _DatabaseMirror = value;
+                    base.RaisePropertyChanged("DatabaseMirror");
+                }
+            }
+        }
+
+        private bool _AutoUpdateDBAtStartup = false;
+        public bool AutoUpdateDBAtStartup
+        {
+            get { return _AutoUpdateDBAtStartup; }
+            set
+            {
+                if (_AutoUpdateDBAtStartup != value)
+                {
+                    _AutoUpdateDBAtStartup = value;
+                    base.RaisePropertyChanged("AutoUpdateDBAtStartup");
+                }
+            }
+        }
+
+        private bool _HideIrrelevantCleaners = true;
+        public bool HideIrrelevantCleaners
+        {
+            get { return _HideIrrelevantCleaners; }
+            set
+            {
+                if (_HideIrrelevantCleaners != value)
+                {
+                    _HideIrrelevantCleaners = value;
+                    base.RaisePropertyChanged("HideIrrelevantCleaners");
+                }
+            }
+        }
         #endregion
 
         #region commands
@@ -109,7 +153,8 @@ namespace mCleaner.ViewModel
         #region command methods
         void Command_OK_Click()
         {
-
+            WriteSettings();
+            this.ShowWindow = false;
         }
         void Command_CloseWindow_Click()
         {
@@ -124,12 +169,60 @@ namespace mCleaner.ViewModel
         #region methods
         void ReadSettings()
         {
-
+            if (Settings.Default.ClamWin_Proxy_Address != string.Empty)
+            {
+                string[] proxy = Settings.Default.ClamWin_Proxy_Address.Split(':');
+                this.ProxyAddress = proxy[0];
+                this.ProxyPort = proxy[1];
+            }
+            if (Settings.Default.ClamWin_Proxy_UserPass != string.Empty)
+            {
+                string[] userpass = Settings.Default.ClamWin_Proxy_UserPass.Split(':');
+                this.ProxyUsername = userpass[0];
+                this.ProxyPassword = userpass[1];
+            }
+            if (Settings.Default.ClamWin_DatabaseMirror != string.Empty)
+            {
+                this.DatabaseMirror = Settings.Default.ClamWin_DatabaseMirror;
+            }
+            this.AutoUpdateDBAtStartup = Settings.Default.ClamWin_UpdateDBAtStartup;
+            this.HideIrrelevantCleaners = Settings.Default.HideIrrelevantCleaners;
         }
 
         void WriteSettings()
         {
+            if (this.ProxyAddress != string.Empty && this.ProxyPort != string.Empty)
+            {
+                Settings.Default.ClamWin_Proxy_Address = this.ProxyAddress + ":" + this.ProxyPort;
+            }
+            else if (this.ProxyAddress != string.Empty && this.ProxyPort != string.Empty)
+            {
+                Settings.Default.ClamWin_Proxy_Address = string.Empty;
+            }
+            else
+            {
+                MessageBox.Show("Incomplete proxy address", "mCleaner", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                return;
+            }
 
+            if (this.ProxyUsername != string.Empty && this.ProxyPassword != string.Empty)
+            {
+                Settings.Default.ClamWin_Proxy_UserPass = this.ProxyUsername + ":" + this.ProxyPassword;
+            }
+            else if (this.ProxyUsername == string.Empty && this.ProxyPassword == string.Empty)
+            {
+                Settings.Default.ClamWin_Proxy_UserPass = string.Empty;
+            }
+            else
+            {
+                MessageBox.Show("Incomplete proxy login", "mCleaner", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                return;
+            }
+
+            Settings.Default.ClamWin_UpdateDBAtStartup = this.AutoUpdateDBAtStartup;
+            Settings.Default.HideIrrelevantCleaners = this.HideIrrelevantCleaners;
+
+            Settings.Default.Save();
         }
         #endregion
     }

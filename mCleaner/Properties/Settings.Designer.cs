@@ -52,13 +52,13 @@ namespace mCleaner.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool ClamWin_UpdateAtStartup {
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ClamWin_UpdateDBAtStartup {
             get {
-                return ((bool)(this["ClamWin_UpdateAtStartup"]));
+                return ((bool)(this["ClamWin_UpdateDBAtStartup"]));
             }
             set {
-                this["ClamWin_UpdateAtStartup"] = value;
+                this["ClamWin_UpdateDBAtStartup"] = value;
             }
         }
         
@@ -160,6 +160,18 @@ namespace mCleaner.Properties {
             }
             set {
                 this["ClamWin_DatabaseMirror"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool HideIrrelevantCleaners {
+            get {
+                return ((bool)(this["HideIrrelevantCleaners"]));
+            }
+            set {
+                this["HideIrrelevantCleaners"] = value;
             }
         }
     }

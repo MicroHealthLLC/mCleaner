@@ -1,4 +1,5 @@
 ﻿using mCleaner.Helpers.Controls;
+using mCleaner.Logics.Clam;
 using mCleaner.Model;
 using mCleaner.Properties;
 using mCleaner.ViewModel;
@@ -33,9 +34,9 @@ namespace mCleaner
 
         void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            if (Settings.Default.ClamWin_UpdateAtStartup)
+            if (Settings.Default.ClamWin_UpdateDBAtStartup)
             {
-                //CommandLogic_Clam.I.LaunchUpdater();
+                CommandLogic_Clam.I.LaunchUpdater();
             }
         }
 

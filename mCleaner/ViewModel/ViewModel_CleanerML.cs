@@ -8,6 +8,7 @@ using mCleaner.Logics.Clam;
 using mCleaner.Logics.Commands;
 using mCleaner.Logics.Enumerations;
 using mCleaner.Model;
+using mCleaner.Properties;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -234,8 +235,11 @@ namespace mCleaner.ViewModel
 
                         if (isSupported)
                         {
-                            // further check if the current cleaner is executable.
-                            isSupported = CheckIfSupported(clnr);
+                            if (Settings.Default.HideIrrelevantCleaners)
+                            {
+                                // further check if the current cleaner is executable.
+                                isSupported = CheckIfSupported(clnr);
+                            }
                         }
 
                         if (isSupported)

@@ -12,8 +12,8 @@
   &lt;string&gt;-memory&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
-    <Setting Name="ClamWin_UpdateAtStartup" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
+    <Setting Name="ClamWin_UpdateDBAtStartup" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="ClamWin_AutoScanMemoryAtStartup" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
@@ -52,6 +52,9 @@
     </Setting>
     <Setting Name="ClamWin_DatabaseMirror" Type="System.String" Scope="User">
       <Value Profile="(Default)">database.clamav.net</Value>
+    </Setting>
+    <Setting Name="HideIrrelevantCleaners" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>
 </SettingsFile>

@@ -38,16 +38,17 @@
                                 </Style>
                             </StackPanel.Resources>
 
-                            <CheckBox x:Name="cbCheckSoftwareUpdate" Content="Check periodically for software updates via the Internet." />
+                            <CheckBox IsEnabled="False" x:Name="cbCheckSoftwareUpdate" Content="Check periodically for software updates via the Internet." />
                             <StackPanel Margin="10">
-                                <CheckBox x:Name="cbCheckBetaRelease" Content="Check for new beta release" />
-                                <CheckBox x:Name="cbDownloadCleanerFromCommunity" Content="Download and update cleaners from community (winapp2.ini)" />
+                                <CheckBox IsEnabled="False" x:Name="cbCheckBetaRelease" Content="Check for new beta release" />
+                                <CheckBox IsEnabled="False" x:Name="cbDownloadCleanerFromCommunity" Content="Download and update cleaners from community (winapp2.ini)" />
                             </StackPanel>
-                            <CheckBox x:Name="cbOverwriteFiles" Content="Overwrite files to hide contents" />
-                            <CheckBox x:Name="cbStartBleachBitBoot" Content="Start BleachBit with computer" />
+                            <CheckBox x:Name="cbHideIrrelevantCleaner" Content="Hide irrelevant cleaners" IsChecked="{Binding Prefs.AutoUpdateDBAtStartup, Mode=TwoWay}" />
+                            <CheckBox IsEnabled="False" x:Name="cbOverwriteFiles" Content="Overwrite files to hide contents" />
+                            <CheckBox IsEnabled="False" x:Name="cbStartBleachBitBoot" Content="Start BleachBit with computer" />
                         </StackPanel>
                     </TabItem>
-                    <TabItem Header="Custom">
+                    <TabItem IsEnabled="False" Header="Custom">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="auto" />
@@ -72,7 +73,7 @@
                             </StackPanel>
                         </Grid>
                     </TabItem>
-                    <TabItem Header="Drives">
+                    <TabItem IsEnabled="False" Header="Drives">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="auto" />
@@ -99,7 +100,7 @@
                             </StackPanel>
                         </Grid>
                     </TabItem>
-                    <TabItem Header="Whitelist">
+                    <TabItem  IsEnabled="False" Header="Whitelist">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="auto" />
@@ -129,7 +130,7 @@
                             <TabItem Header="General">
                                 <TextBlock Text="" />
                             </TabItem>
-                            <TabItem Header="Internet Update">
+                            <TabItem  Header="Internet Update">
                                 <StackPanel Margin="5">
                                     <StackPanel.Resources>
                                         <Style TargetType="CheckBox">
@@ -139,10 +140,18 @@
                                             <Setter Property="Margin" Value="0,5" />
                                         </Style>
                                     </StackPanel.Resources>
-                                    
-                                    <CheckBox x:Name="cbCLAMAV_automaticupdate" Content="Enable automatic virus database updates" />
+
+                                    <CheckBox IsEnabled="False" x:Name="cbCLAMAV_automaticupdate" Content="Enable automatic virus database updates" />
                                     <StackPanel Margin="10,0">
-                                        <CheckBox x:Name="cbCLAMAV_updatevirusdefdbatstartup" Content="Update virus definition database at startup" />
+                                        <CheckBox x:Name="cbCLAMAV_updatevirusdefdbatstartup" Content="Update virus definition database at startup" IsChecked="{Binding Prefs.AutoUpdateDBAtStartup, Mode=TwoWay}" />
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="100" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Text="Download site" />
+                                            <TextBox Text="{Binding Prefs.DatabaseMirror, Mode=TwoWay}" Grid.Column="1" />
+                                        </Grid>
                                     </StackPanel>
                                 </StackPanel>
                             </TabItem>
@@ -174,9 +183,9 @@
                                         </Grid.Resources>
 
                                         <TextBlock Text="Server" Grid.Column="0" Margin="0,0,0,0" />
-                                        <TextBox Text="0.0.0.0" Grid.Column="1" TextAlignment="Center" />
+                                        <TextBox Text="{Binding Prefs.ProxyAddress, Mode=TwoWay}" Grid.Column="1" TextAlignment="Center" />
                                         <TextBlock Text="Port" Grid.Column="2" />
-                                        <TextBox Text="000" Grid.Column="3" TextAlignment="Center" />
+                                        <TextBox Text="{Binding Prefs.ProxyPort, Mode=TwoWay}" Grid.Column="3" TextAlignment="Center" />
                                     </Grid>
 
                                     <Grid>
@@ -186,7 +195,7 @@
                                         </Grid.ColumnDefinitions>
 
                                         <TextBlock Text="User Name" Grid.Column="0" />
-                                        <TextBox Text="n" Grid.Column="1" TextAlignment="Center" Margin="5,0" />
+                                        <TextBox Text="{Binding Prefs.ProxyUsername, Mode=TwoWay}" Grid.Column="1" TextAlignment="Center" Margin="5,0" />
                                     </Grid>
 
                                     <Grid>
@@ -196,7 +205,7 @@
                                         </Grid.ColumnDefinitions>
 
                                         <TextBlock Text="Password" Grid.Column="0" />
-                                        <TextBox Text="n" Grid.Column="1" TextAlignment="Center" Margin="5,0" />
+                                        <TextBox Text="{Binding Prefs.ProxyPassword, Mode=TwoWay}" Grid.Column="1" TextAlignment="Center" Margin="5,0" />
                                     </Grid>
                                 </StackPanel>
                             </TabItem>
@@ -207,7 +216,7 @@
 
             <Grid Grid.Row="2">
                 <StackPanel Orientation="Horizontal" Margin="2" HorizontalAlignment="Right">
-                    <Button x:Name="btnOK" Content="OK" Margin="5,5" Style="{StaticResource ButtonStyle}" Command="{Binding Prefs.Command_CloseWindow}" />
+                    <Button x:Name="btnOK" Content="OK" Margin="5,5" Style="{StaticResource ButtonStyle}" Command="{Binding Prefs.Command_OK}" />
                     <Button x:Name="btnClose" Content="Close" Margin="5,5" Style="{StaticResource ButtonStyle}" Background="#FF1570C7" BorderBrush="#FF1570C7" Command="{Binding Prefs.Command_CloseWindow}" />
                 </StackPanel>
             </Grid>
