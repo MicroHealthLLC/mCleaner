@@ -18,5 +18,5 @@ packages.config<br/>
 then refer to this link on how to reinstall the NuGet packages.<br/>
 https://docs.nuget.org/consume/reinstalling-packages<br/>
 <br/>
-<b>Running</b>
+<b>Running</b><br/>
 Run Visual Studio as Administrator
