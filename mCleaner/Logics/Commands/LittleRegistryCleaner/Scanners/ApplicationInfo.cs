@@ -12,7 +12,7 @@ namespace mCleaner.Logics.Commands.LittleRegistryCleaner.Scanners
         static ApplicationInfo _i = new ApplicationInfo();
         public static ApplicationInfo I { get { return _i; } }
 
-        public void Preview()
+        void Preview()
         {
             this.BadKeys.Clear();
 
@@ -23,7 +23,7 @@ namespace mCleaner.Logics.Commands.LittleRegistryCleaner.Scanners
 
                 foreach (string strProgName in regKey.GetSubKeyNames())
                 {
-                    using (RegistryKey regKey2 = regKey.OpenSubKey(strProgName))
+                    using (RegistryKey regKey2 = regKey.OpenSubKey(strProgName, true))
                     {
                         if (regKey2 != null)
                         {
@@ -35,7 +35,9 @@ namespace mCleaner.Logics.Commands.LittleRegistryCleaner.Scanners
                             {
                                 this.BadKeys.Add(new InvalidKeys()
                                 {
-                                    Key = regKey2.ToString()
+                                    Root = Registry.LocalMachine,
+                                    Subkey = "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall",
+                                    Key = strProgName
                                 });
                             }
                         }
@@ -47,6 +49,34 @@ namespace mCleaner.Logics.Commands.LittleRegistryCleaner.Scanners
             // TODO: What are these?
             //checkARPCache(Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\App Management\ARPCache\"));
             //checkARPCache(Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\App Management\ARPCache\"));
+        }
+
+        void Clean()
+        {
+            Preview();
+
+            foreach (InvalidKeys badkey in this.BadKeys)
+            {
+                using (RegistryKey root = badkey.Root.OpenSubKey(badkey.Subkey, true))
+                {
+                    if (root != null)
+                    {
+                        root.DeleteSubKey(badkey.Key);
+                    }
+                }
+            }
+        }
+
+        public void Clean(bool preview)
+        {
+            if (preview)
+            {
+                Preview();
+            }
+            else
+            {
+                Clean();
+            }
         }
     }
 }

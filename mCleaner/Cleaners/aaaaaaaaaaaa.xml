@@ -64,11 +64,4 @@
 	<action command="clamscan" search="clamscan.folder.recurse" path="N:\Installers\Cracks"/>
     <!-- <action command="clamscan" search="clamscan.folder" path="$USERPROFILE\Desktop\Freerider_FREE"/> -->
   </option>
-  <option id="littleregistry">
-    <label>littleregistry</label>
-    <description>This is a test for little registry integration</description>
-    <action command="littleregistry" search="littleregistry.keys" keys="InProcServer32,DefaultIcon" path="HKC\CLSID"/>
-	<action command="littleregistry" search="littleregistry.keys" keys="InProcServer32,DefaultIcon" path="HKLM\SOFTWARE\Classes\CLSID"/>
-	<action command="littleregistry" search="littleregistry.keys" keys="InProcServer32,DefaultIcon" path="HKCR\SOFTWARE\Classes\CLSID"/>
-  </option>
 </cleaner>

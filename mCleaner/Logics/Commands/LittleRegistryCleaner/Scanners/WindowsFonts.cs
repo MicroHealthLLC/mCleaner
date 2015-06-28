@@ -1,0 +1,100 @@
+﻿
+using mCleaner.Helpers;
+using Microsoft.Win32;
+using System;
+using System.IO;
+using System.Runtime.InteropServices;
+using System.Text;
+namespace mCleaner.Logics.Commands.LittleRegistryCleaner.Scanners
+{
+    public class WindowsFonts : ScannerBase
+    {
+        [DllImport("shell32.dll")]
+        public static extern bool SHGetSpecialFolderPath(IntPtr hwndOwner, [Out] StringBuilder strPath, int nFolder, bool fCreate);
+
+        const int CSIDL_FONTS = 0x0014;    // windows\fonts 
+
+        public WindowsFonts() { }
+        static WindowsFonts _i = new WindowsFonts();
+        public static WindowsFonts I { get { return _i; } }
+
+        public void Clean(bool preview)
+        {
+            if (preview)
+            {
+                Preview(); 
+            }
+            else
+            {
+                Clean();
+            }
+        }
+
+        public void Clean()
+        {
+            Preview();
+
+            foreach (InvalidKeys k in this.BadKeys)
+            {
+                using (RegistryKey key = k.Root.OpenSubKey(k.Subkey, true))
+                {
+                    key.DeleteValue(k.Name);
+                }
+            }
+        }
+
+        public void Preview()
+        {
+            this.BadKeys.Clear();
+
+            StringBuilder strPath = new StringBuilder(260);
+
+            try
+            {
+                using (RegistryKey regKey = Registry.LocalMachine.OpenSubKey("Software\\Microsoft\\Windows NT\\CurrentVersion\\Fonts"))
+                {
+                    if (regKey == null)
+                        return;
+
+                    if (!SHGetSpecialFolderPath(IntPtr.Zero, strPath, CSIDL_FONTS, false))
+                        return;
+
+                    foreach (string strFontName in regKey.GetValueNames())
+                    {
+                        string strValue = regKey.GetValue(strFontName) as string;
+
+                        // Skip if value is empty
+                        if (string.IsNullOrEmpty(strValue))
+                            continue;
+
+                        string sout = string.Empty;
+
+                        // Check value by itself
+                        if (File.Exists(strValue))
+                            continue;
+
+                        // Check for font in fonts folder
+                        string strFontPath = String.Format("{0}\\{1}", strPath.ToString(), strValue);
+
+                        if (!File.Exists(strFontPath))
+                        {
+                            //ScanDlg.StoreInvalidKey(Strings.InvalidFile, regKey.ToString(), strFontName);
+                            this.BadKeys.Add(new InvalidKeys()
+                            {
+                                Root = Registry.LocalMachine,
+                                Subkey = "Software\\Microsoft\\Windows NT\\CurrentVersion\\Fonts",
+                                Key = string.Empty,
+                                Name = strFontName
+                            });
+                        }
+                    }
+
+                }
+            }
+            catch (System.Security.SecurityException ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+            }
+        }
+    }
+}

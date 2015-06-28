@@ -18,8 +18,6 @@ namespace mCleaner.Helpers
         public static extern void PathRemoveArgs([In, Out] StringBuilder path);
         [DllImport("Shlwapi.dll", SetLastError = true, CharSet = CharSet.Auto)]
         private extern static bool PathFileExists(StringBuilder path);
-        [DllImport("kernel32.dll")]
-        public static extern int SearchPath(string strPath, string strFileName, string strExtension, uint nBufferLength, StringBuilder strBuffer, string strFilePart);
 
         #region Interop (IShellLink and IPersistFile)
         [Flags()]
@@ -515,10 +513,10 @@ namespace mCleaner.Helpers
             if (string.IsNullOrEmpty(strCmdLine))
                 return false;
 
-            //if (strCmdLine.Contains("spotify"))
-            //{
-            //    Debug.WriteLine("t");
-            //}
+            if (strCmdLine.Contains("spotify"))
+            {
+                Debug.WriteLine("t");
+            }
 
             // Remove Quotes
             strCmdLine = UnqouteSpaces(strCmdLine);
@@ -528,25 +526,25 @@ namespace mCleaner.Helpers
 
             // Try to see file exists by combining parts
             StringBuilder strFileFullPath = new StringBuilder();
+            int nPos = 0;
             foreach (char ch in strCmdLine.ToCharArray())
             {
                 strFileFullPath.Append(ch);
 
                 // See if part exists
-                //FileInfo fi = new FileInfo
-                bool filexists = PathFile_Exists(strFileFullPath.ToString()); // File.Exists(strFileFullPath.ToString());
-                //bool filexists = File.Exists(strFileFullPath.ToString());
+                //bool filexists = PathFile_Exists(strFileFullPath.ToString()); // File.Exists(strFileFullPath.ToString());
+                bool filexists = File.Exists(strFileFullPath.ToString());
 
                 if (filexists)
                 {
-                    //filePath = string.Copy(strFileFullPath.ToString());
+                    filePath = string.Copy(strFileFullPath.ToString());
                     bRet = true;
                     break;
                 }
             }
 
-            //if (bRet && nPos > 0)
-            //    fileArgs = strCmdLine.Remove(0, nPos).Trim();
+            if (bRet && nPos > 0)
+                fileArgs = strCmdLine.Remove(0, nPos).Trim();
 
             return bRet;
         }
@@ -570,23 +568,6 @@ namespace mCleaner.Helpers
             //return string.Copy(sb.ToString());
 
             return Path.Replace("\"", string.Empty);
-        }
-
-        public static bool SearchPath(string fileName, string Path, out string retPath)
-        {
-            StringBuilder strBuffer = new StringBuilder(260);
-
-            int ret = SearchPath(((!string.IsNullOrEmpty(Path)) ? (Path) : (null)), fileName, null, 260, strBuffer, null);
-
-            if (ret != 0)
-            {
-                retPath = strBuffer.ToString();
-                return true;
-            }
-            else
-                retPath = "";
-
-            return false;
         }
     }
 }

@@ -10,17 +10,6 @@ namespace mCleaner.Helpers
 {
     public class FileOperations
     {
-        [DllImport("Shlwapi.dll", SetLastError = true, CharSet = CharSet.Auto)]
-        public static extern IntPtr PathGetArgs([In] string path);
-        [DllImport("Shlwapi.dll", SetLastError = true, CharSet = CharSet.Auto)]
-        public static extern void PathUnquoteSpaces([In, Out] StringBuilder path);
-        [DllImport("Shlwapi.dll", SetLastError = true, CharSet = CharSet.Auto)]
-        public static extern void PathRemoveArgs([In, Out] StringBuilder path);
-        [DllImport("Shlwapi.dll", SetLastError = true, CharSet = CharSet.Auto)]
-        private extern static bool PathFileExists(StringBuilder path);
-        [DllImport("kernel32.dll")]
-        public static extern int SearchPath(string strPath, string strFileName, string strExtension, uint nBufferLength, StringBuilder strBuffer, string strFilePart);
-
         #region Interop (IShellLink and IPersistFile)
         [Flags()]
         enum SLGP_FLAGS
@@ -472,121 +461,6 @@ namespace mCleaner.Helpers
                 return false;
 
             return true;
-        }
-
-        /// <summary>
-        /// Uses PathGetArgs and PathRemoveArgs API to extract file arguments
-        /// </summary>
-        /// <param name="cmdLine">Command Line</param>
-        /// <param name="filePath">file path</param>
-        /// <param name="fileArgs">arguments</param>
-        /// <exception cref="ArgumentNullException">Thrown when cmdLine is null or empty</exception>
-        /// <returns>False if the path doesnt exist</returns>
-        public static bool ExtractArguments(string cmdLine, out string filePath, out string fileArgs)
-        {
-            StringBuilder strCmdLine = new StringBuilder(cmdLine.ToLower().Trim());
-
-            filePath = fileArgs = "";
-
-            if (string.IsNullOrEmpty(cmdLine))
-                return false;
-
-            fileArgs = Marshal.PtrToStringAuto(PathGetArgs(strCmdLine.ToString()));
-            //fileArgs = string.Copy(PathGetArgs(strCmdLine.ToString()));
-
-            PathRemoveArgs(strCmdLine);
-
-            filePath = string.Copy(strCmdLine.ToString());
-
-            if (!string.IsNullOrEmpty(filePath))
-                if (File.Exists(filePath))
-                    return true;
-
-            return false;
-        }
-
-        public static bool ExtractArguments2(string cmdLine, out string filePath, out string fileArgs)
-        {
-            string strCmdLine = string.Copy(cmdLine.ToLower().Trim());
-            bool bRet = false;
-
-            filePath = fileArgs = "";
-
-            if (string.IsNullOrEmpty(strCmdLine))
-                return false;
-
-            //if (strCmdLine.Contains("spotify"))
-            //{
-            //    Debug.WriteLine("t");
-            //}
-
-            // Remove Quotes
-            strCmdLine = UnqouteSpaces(strCmdLine);
-
-            // Expand variables
-            strCmdLine = Environment.ExpandEnvironmentVariables(strCmdLine);
-
-            // Try to see file exists by combining parts
-            StringBuilder strFileFullPath = new StringBuilder();
-            foreach (char ch in strCmdLine.ToCharArray())
-            {
-                strFileFullPath.Append(ch);
-
-                // See if part exists
-                //FileInfo fi = new FileInfo
-                bool filexists = PathFile_Exists(strFileFullPath.ToString()); // File.Exists(strFileFullPath.ToString());
-                //bool filexists = File.Exists(strFileFullPath.ToString());
-
-                if (filexists)
-                {
-                    //filePath = string.Copy(strFileFullPath.ToString());
-                    bRet = true;
-                    break;
-                }
-            }
-
-            //if (bRet && nPos > 0)
-            //    fileArgs = strCmdLine.Remove(0, nPos).Trim();
-
-            return bRet;
-        }
-
-        public static bool PathFile_Exists(string pathfile)
-        {
-            return PathFileExists(new StringBuilder(pathfile));
-        }
-
-        /// <summary>
-        /// Removes quotes from the path
-        /// </summary>
-        /// <param name="Path">Path w/ quotes</param>
-        /// <returns>Path w/o quotes</returns>
-        private static string UnqouteSpaces(string Path)
-        {
-            //StringBuilder sb = new StringBuilder(Path);
-
-            //PathUnquoteSpaces(sb);
-
-            //return string.Copy(sb.ToString());
-
-            return Path.Replace("\"", string.Empty);
-        }
-
-        public static bool SearchPath(string fileName, string Path, out string retPath)
-        {
-            StringBuilder strBuffer = new StringBuilder(260);
-
-            int ret = SearchPath(((!string.IsNullOrEmpty(Path)) ? (Path) : (null)), fileName, null, 260, strBuffer, null);
-
-            if (ret != 0)
-            {
-                retPath = strBuffer.ToString();
-                return true;
-            }
-            else
-                retPath = "";
-
-            return false;
         }
     }
 }

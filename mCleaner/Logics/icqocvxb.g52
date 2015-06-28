@@ -9,6 +9,7 @@ using Microsoft.Practices.ServiceLocation;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 
@@ -16,7 +17,6 @@ namespace mCleaner.Logics
 {
     public class Worker
     {
-        #region vars
         BackgroundWorker bgWorker;
 
         int TotalFileDelete = 0;
@@ -26,9 +26,7 @@ namespace mCleaner.Logics
 
         string _preview_log = string.Empty;
         string _execute_log = string.Empty;
-        #endregion
 
-        #region perview
         ViewModel_CleanerML CleanerML
         {
             get
@@ -78,9 +76,7 @@ namespace mCleaner.Logics
                 }
             }
         }
-        #endregion
 
-        #region ctors
         public Worker()
         {
             bgWorker = new BackgroundWorker()
@@ -94,9 +90,7 @@ namespace mCleaner.Logics
         }
         private static Worker _i = new Worker();
         public static Worker I { get { return _i; } }
-        #endregion
 
-        #region events
         void bgWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             ShowTotalOperations(false);
@@ -187,9 +181,7 @@ namespace mCleaner.Logics
                 }
             }
         }
-        #endregion
 
-        #region methods
         public void PreviewWork()
         {
             //this.TTD = new Queue<Model_ThingsToDelete>(this.TTD.Reverse());
@@ -595,9 +587,6 @@ namespace mCleaner.Logics
             switch (ttd.search)
             {
                 case SEARCH.lrc_activex_com:
-                    ActiveXComObjects.I.Clean(preview);
-                    BadKeys.AddRange(ActiveXComObjects.I.BadKeys);
-
                     break;
                 case SEARCH.lrc_app_info:
                     ApplicationInfo.I.Clean(preview);
@@ -605,49 +594,25 @@ namespace mCleaner.Logics
 
                     break;
                 case SEARCH.lrc_progam_location:
-                    ApplicationPaths.I.Clean(preview);
+                    ApplicationPaths.I.Clean();
                     BadKeys.AddRange(ApplicationPaths.I.BadKeys);
 
                     break;
                 case SEARCH.lrc_software_settings:
-                    ApplicationSettings.I.Clean(preview);
-                    BadKeys.AddRange(ApplicationSettings.I.BadKeys);
-
                     break;
                 case SEARCH.lrc_startup:
-                    StartupFiles.I.Clean(preview);
-                    BadKeys.AddRange(StartupFiles.I.BadKeys);
-
                     break;
                 case SEARCH.lrc_system_drivers:
-                    SystemDrivers.I.Clean(preview);
-                    BadKeys.AddRange(SystemDrivers.I.BadKeys);
-
                     break;
                 case SEARCH.lrc_shared_dll:
-                    SharedDLLs.I.Clean(preview);
-                    BadKeys.AddRange(SharedDLLs.I.BadKeys);
-
                     break;
                 case SEARCH.lrc_help_file:
-                    WindowsHelpFiles.I.Clean(preview);
-                    BadKeys.AddRange(WindowsHelpFiles.I.BadKeys);
-
                     break;
                 case SEARCH.lrc_sound_event:
-                    WindowsSounds.I.Clean(preview);
-                    BadKeys.AddRange(WindowsSounds.I.BadKeys);
-
                     break;
                 case SEARCH.lrc_history_list:
-                    RecentDocs.I.Clean(preview);
-                    BadKeys.AddRange(RecentDocs.I.BadKeys);
-
                     break;
                 case SEARCH.lrc_win_fonts:
-                    WindowsFonts.I.Clean(preview);
-                    BadKeys.AddRange(WindowsFonts.I.BadKeys);
-
                     break;
             }
 
@@ -782,6 +747,5 @@ namespace mCleaner.Logics
                 CleanerML.ProgressIndex++;
             }, false);
         }
-        #endregion
     }
 }

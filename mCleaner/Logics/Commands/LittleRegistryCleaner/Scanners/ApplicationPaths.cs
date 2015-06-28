@@ -1,9 +1,6 @@
 ﻿using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 
 namespace mCleaner.Logics.Commands.LittleRegistryCleaner.Scanners
 {
@@ -13,7 +10,32 @@ namespace mCleaner.Logics.Commands.LittleRegistryCleaner.Scanners
         static ApplicationPaths _i = new ApplicationPaths();
         public static ApplicationPaths I { get { return _i; } }
 
-        public void Preview()
+        public void Clean(bool preview)
+        {
+            if (preview)
+            {
+                Preview();
+            }
+            else
+            {
+                Clean();
+            }
+        }
+
+        public void Clean()
+        {
+            Preview();
+
+            foreach (InvalidKeys k in this.BadKeys)
+            {
+                using (RegistryKey key = k.Root.OpenSubKey(k.Subkey, true))
+                {
+                    key.DeleteSubKey(k.Key);
+                }
+            }
+        }
+
+        void Preview()
         {
             this.BadKeys.Clear();
 
@@ -38,7 +60,9 @@ namespace mCleaner.Logics.Commands.LittleRegistryCleaner.Scanners
                 {
                     this.BadKeys.Add(new InvalidKeys()
                     {
-                        Key = regKey.ToString(),
+                        Root = Registry.LocalMachine,
+                        Subkey = "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Installer\\Folders",
+                        Key = string.Empty,
                         Name = strFolder
                     });
                 }
@@ -61,27 +85,52 @@ namespace mCleaner.Logics.Commands.LittleRegistryCleaner.Scanners
                     if (Convert.ToInt32(regKey2.GetValue("BlockOnTSNonInstallMode")) == 1)
                         continue;
 
-                    if (string.IsNullOrEmpty(Convert.ToString(regKey2.GetValue("CmstpExtensionDll"))))
+                    if (!string.IsNullOrEmpty(Convert.ToString(regKey2.GetValue("CmstpExtensionDll"))))
                         continue;
 
                     string strAppPath = regKey2.GetValue("") as string;
+                    strAppPath = strAppPath != null ? strAppPath.Replace("\"", string.Empty) : null;
                     string strAppDir = regKey2.GetValue("Path") as string;
+                    strAppDir = strAppDir != null ? strAppDir.Replace("\"", string.Empty) : null;
 
                     if (string.IsNullOrEmpty(strAppPath))
                     {
                         this.BadKeys.Add(new InvalidKeys()
                         {
-                            Key = regKey2.ToString()
+                            Root = Registry.LocalMachine,
+                            Subkey = "Software\\Microsoft\\Windows\\CurrentVersion\\App Paths\\",
+                            Key = strSubKey,
+                            Name = string.Empty
                         });
                         continue;
                     }
 
                     if (!File.Exists(strAppPath))
                     {
-                        this.BadKeys.Add(new InvalidKeys()
+                        bool add = true;
+                        string path = strAppPath;
+
+                        // some default entries has filename only and does not include the fullpath, so 
+                        // we want to check that as well by combining Path entry and the default entry.
+                        if (strAppDir != null)
                         {
-                            Key = regKey2.ToString(), Name = strAppPath
-                        });
+                            string path2 = Path.Combine(strAppDir, strAppPath);
+                            if (File.Exists(path)) // if that exists, then
+                            {
+                                add = false; // flag it to not add in BadKeys collection
+                            }
+                        }
+
+                        if (add)
+                        {
+                            this.BadKeys.Add(new InvalidKeys()
+                            {
+                                Root = Registry.LocalMachine,
+                                Subkey = "Software\\Microsoft\\Windows\\CurrentVersion\\App Paths\\",
+                                Key = strSubKey,
+                                Name = path
+                            });
+                        }
                         continue;
                     }
                 }

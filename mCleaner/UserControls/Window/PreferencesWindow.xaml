@@ -43,7 +43,7 @@
                                 <CheckBox IsEnabled="False" x:Name="cbCheckBetaRelease" Content="Check for new beta release" />
                                 <CheckBox IsEnabled="False" x:Name="cbDownloadCleanerFromCommunity" Content="Download and update cleaners from community (winapp2.ini)" />
                             </StackPanel>
-                            <CheckBox x:Name="cbHideIrrelevantCleaner" Content="Hide irrelevant cleaners" IsChecked="{Binding Prefs.AutoUpdateDBAtStartup, Mode=TwoWay}" />
+                            <CheckBox x:Name="cbHideIrrelevantCleaner" Content="Hide irrelevant cleaners" IsChecked="{Binding Prefs.HideIrrelevantCleaners, Mode=TwoWay}" />
                             <CheckBox IsEnabled="False" x:Name="cbOverwriteFiles" Content="Overwrite files to hide contents" />
                             <CheckBox IsEnabled="False" x:Name="cbStartBleachBitBoot" Content="Start BleachBit with computer" />
                         </StackPanel>

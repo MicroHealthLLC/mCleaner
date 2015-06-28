@@ -1,117 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+	this is Little Registry Cleaner
+	DO NOT CHANGE THE PATH ATTRIBUTE VALUE
+-->
 <cleaner id="little_reg" os="windows">
   <label>Little Registry Cleaner</label>
   <description>Registry Cleaner</description>
   <option id="activex">
     <label>ActiveX/Com</label>
     <description></description>
-    <action command="littleregistry" search="lrc.activexcom" path="HKCR\CLSID" />
-    <!-- <action command="littleregistry" search="lrc.activexcom" path="HKCR\Wow6432Node\CLSID" />
-    <action command="littleregistry" search="lrc.activexcom" path="HKCR" />
-    <action command="littleregistry" search="lrc.activexcom" path="HKCR\Wow6432Node" />
-    <action command="littleregistry" search="lrc.activexcom" path="HKCR\AppID" />
-    <action command="littleregistry" search="lrc.activexcom" path="HKCR\Wow6432Node\AppID" />
-
-    <action command="littleregistry" search="lrc.activexcom" path="HKLM\SOFTWARE\Classes\CLSID" />
-    <action command="littleregistry" search="lrc.activexcom" path="HKLM\SOFTWARE\Wow6432Node\Classes\CLSID" />
-    <action command="littleregistry" search="lrc.activexcom" path="HKLM\SOFTWARE\Classes" />
-    <action command="littleregistry" search="lrc.activexcom" path="HKLM\SOFTWARE\Wow6432Node\Classes" />
-    <action command="littleregistry" search="lrc.activexcom" path="HKLM\SOFTWARE\Classes\AppID" />
-    <action command="littleregistry" search="lrc.activexcom" path="HKLM\SOFTWARE\Wow6432Node\AppID" />
-
-    <action command="littleregistry" search="lrc.activexcom" path="HKCR\SOFTWARE\Classes\CLSID" />
-    <action command="littleregistry" search="lrc.activexcom" path="HKCR\SOFTWARE\Wow6432Node\Classes\CLSID" />
-    <action command="littleregistry" search="lrc.activexcom" path="HKCR\SOFTWARE\Classes" />
-    <action command="littleregistry" search="lrc.activexcom" path="HKCR\SOFTWARE\Wow6432Node\Classes" />
-    <action command="littleregistry" search="lrc.activexcom" path="HKCR\SOFTWARE\Classes\AppID" />
-    <action command="littleregistry" search="lrc.activexcom" path="HKCR\SOFTWARE\Wow6432Node\AppID" /> -->
+    <action command="littleregistry" search="lrc.activexcom" path="HKLM\SOFTWARE" />
   </option>
   <option id="appinfo">
     <label>Application Info</label>
     <description></description>
-    <action command="littleregistry" search="lrc.appinfo" path="HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall" />
+    <action command="littleregistry" search="lrc.appinfo" path="HKLM\SOFTWARE" />
   </option>
   <option id="progloc">
     <label>Program Locations</label>
     <description></description>
-    <action command="littleregistry" search="lrc.progloc" path="HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Installer\Folders" />
-    <!-- <action command="littleregistry" search="lrc.progloc" path="HKLM\Software\Microsoft\Windows\CurrentVersion\App Paths" /> -->
+    <action command="littleregistry" search="lrc.progloc" path="HKLM\SOFTWARE" />
   </option>
   <option id="software_settings">
     <label>Software Settings</label>
     <description></description>
     <action command="littleregistry" search="lrc.software.settings" path="HKLM\SOFTWARE" />
-    <!-- <action command="littleregistry" search="lrc.software.settings" path="HKCU\SOFTWARE" />
-    <action command="littleregistry" search="lrc.software.settings" path="HKLM\SOFTWARE\Wow6432Node" />
-    <action command="littleregistry" search="lrc.software.settings" path="HKCU\SOFTWARE\Wow6432Node" /> -->
   </option>
   <option id="startup">
     <label>Startup</label>
     <description></description>
-    <action command="littleregistry" search="lrc.startup" path="HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer\Run" />
-    <!-- <action command="littleregistry" search="lrc.startup" path="HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunServicesOnce" />
-    <action command="littleregistry" search="lrc.startup" path="HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunServices" />
-    <action command="littleregistry" search="lrc.startup" path="HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnceEx" />
-    <action command="littleregistry" search="lrc.startup" path="HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce\Setup" />
-    <action command="littleregistry" search="lrc.startup" path="HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" />
-    <action command="littleregistry" search="lrc.startup" path="HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunEx" />
-    <action command="littleregistry" search="lrc.startup" path="HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" />
-    <action command="littleregistry" search="lrc.startup" path="HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer\Run" />
-    <action command="littleregistry" search="lrc.startup" path="HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\RunServicesOnce" />
-    <action command="littleregistry" search="lrc.startup" path="HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\RunServices" />
-    <action command="littleregistry" search="lrc.startup" path="HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnceEx" />
-    <action command="littleregistry" search="lrc.startup" path="HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce\Setup" />
-    <action command="littleregistry" search="lrc.startup" path="HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" />
-    <action command="littleregistry" search="lrc.startup" path="HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\RunEx" />
-    <action command="littleregistry" search="lrc.startup" path="HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" />
-
-    <action command="littleregistry" search="lrc.startup" path="HKLM\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Policies\Explorer\Run" />
-    <action command="littleregistry" search="lrc.startup" path="HKLM\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\RunServicesOnce" />
-    <action command="littleregistry" search="lrc.startup" path="HKLM\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\RunServices" />
-    <action command="littleregistry" search="lrc.startup" path="HKLM\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\RunOnceEx" />
-    <action command="littleregistry" search="lrc.startup" path="HKLM\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\RunOnce\Setup" />
-    <action command="littleregistry" search="lrc.startup" path="HKLM\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\RunOnce" />
-    <action command="littleregistry" search="lrc.startup" path="HKLM\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\RunEx" />
-    <action command="littleregistry" search="lrc.startup" path="HKLM\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Run" />
-    <action command="littleregistry" search="lrc.startup" path="HKCU\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Policies\Explorer\Run" />
-    <action command="littleregistry" search="lrc.startup" path="HKCU\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\RunServicesOnce" />
-    <action command="littleregistry" search="lrc.startup" path="HKCU\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\RunServices" />
-    <action command="littleregistry" search="lrc.startup" path="HKCU\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\RunOnceEx" />
-    <action command="littleregistry" search="lrc.startup" path="HKCU\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\RunOnce\Setup" />
-    <action command="littleregistry" search="lrc.startup" path="HKCU\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\RunOnce" />
-    <action command="littleregistry" search="lrc.startup" path="HKCU\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\RunEx" />
-    <action command="littleregistry" search="lrc.startup" path="HKCU\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Run" /> -->
+    <action command="littleregistry" search="lrc.startup" path="HKLM\SOFTWARE" />
   </option>
   <option id="system_drivers">
     <label>System Drivers</label>
     <description></description>
-    <action command="littleregistry" search="lrc.sysdrv" path="HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Drivers32" />
+    <action command="littleregistry" search="lrc.sysdrv" path="HKLM\SOFTWARE" />
   </option>
   <option id="shared_dlls">
     <label>Shared DLLs</label>
     <description></description>
-    <action command="littleregistry" search="lrc.shareddll" path="HKLM\Software\Microsoft\Windows\CurrentVersion\SharedDLLs" />
+    <action command="littleregistry" search="lrc.shareddll" path="HKLM\SOFTWARE" />
   </option>
   <option id="help_files">
     <label>Help Files</label>
     <description></description>
-    <action command="littleregistry" search="lrc.helpfile" path="HKLM\SOFTWARE\Microsoft\Windows\HTML Help" />
-    <!-- <action command="littleregistry" search="lrc.helpfile" path="HKLM\SOFTWARE\Microsoft\Windows\Help" /> -->
+    <action command="littleregistry" search="lrc.helpfile" path="HKLM\SOFTWARE" />
   </option>
   <option id="sound_event">
     <label>Sound Events</label>
     <description></description>
-    <action command="littleregistry" search="lrc.soundevent" path="HKCU\AppEvents\Schemes\Apps" />
+    <action command="littleregistry" search="lrc.soundevent" path="HKLM\SOFTWARE" />
   </option>
   <option id="history_list">
     <label>History List</label>
     <description></description>
-    <action command="littleregistry" search="lrc.histlist" path="HKCU\Software\Microsoft\Windows\ShellNoRoam\MUICache" />
-    <!-- <action command="littleregistry" search="lrc.histlist" path="HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs" /> -->
+    <action command="littleregistry" search="lrc.histlist" path="HKLM\SOFTWARE" />
   </option>
   <option id="winfont">
     <label>Windows Fonts</label>
     <description></description>
-    <action command="littleregistry" search="lrc.winfonts" path="HKCU\Software\Microsoft\Windows NT\CurrentVersion\Fonts" />
+    <action command="littleregistry" search="lrc.winfonts" path="HKLM\SOFTWARE" />
   </option>
 </cleaner>

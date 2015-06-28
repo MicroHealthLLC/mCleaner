@@ -91,6 +91,7 @@
     <Compile Include="Helpers\Data\SQLite.cs" />
     <Compile Include="Helpers\Converters\StringEnum.cs" />
     <Compile Include="Helpers\PInvoke\Win32API.cs" />
+    <Compile Include="Helpers\System\Utils.cs" />
     <Compile Include="Logics\Commands\Clam\CommandLogic_Clam.cs" />
     <Compile Include="Logics\Commands\CommandLogic_Chrome.cs" />
     <Compile Include="Logics\Commands\CommandLogic_Delete.cs" />
@@ -100,9 +101,18 @@
     <Compile Include="Logics\Commands\CommandLogic_SQLiteVacuum.cs" />
     <Compile Include="Logics\Commands\CommandLogic_Winreg.cs" />
     <Compile Include="Logics\Commands\iActions.cs" />
+    <Compile Include="Logics\Commands\LittleRegistryCleaner\Scanners\ActiveXComObjects.cs" />
     <Compile Include="Logics\Commands\LittleRegistryCleaner\Scanners\ApplicationInfo.cs" />
     <Compile Include="Logics\Commands\LittleRegistryCleaner\Scanners\ApplicationPaths.cs" />
+    <Compile Include="Logics\Commands\LittleRegistryCleaner\Scanners\ApplicationSettings.cs" />
+    <Compile Include="Logics\Commands\LittleRegistryCleaner\Scanners\RecentDocs.cs" />
     <Compile Include="Logics\Commands\LittleRegistryCleaner\Scanners\ScannerBase.cs" />
+    <Compile Include="Logics\Commands\LittleRegistryCleaner\Scanners\SharedDLLs.cs" />
+    <Compile Include="Logics\Commands\LittleRegistryCleaner\Scanners\StartupFiles.cs" />
+    <Compile Include="Logics\Commands\LittleRegistryCleaner\Scanners\SystemDrivers.cs" />
+    <Compile Include="Logics\Commands\LittleRegistryCleaner\Scanners\WindowsFonts.cs" />
+    <Compile Include="Logics\Commands\LittleRegistryCleaner\Scanners\WindowsHelpFiles.cs" />
+    <Compile Include="Logics\Commands\LittleRegistryCleaner\Scanners\WindowsSounds.cs" />
     <Compile Include="Logics\Enumerations\Enumerations.cs" />
     <Compile Include="Logics\Worker.cs" />
     <Compile Include="Model\Model_CleanerML.cs" />

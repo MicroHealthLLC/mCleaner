@@ -1,7 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace mCleaner.Logics.Commands.LittleRegistryCleaner.Scanners
 {
@@ -9,6 +7,8 @@ namespace mCleaner.Logics.Commands.LittleRegistryCleaner.Scanners
     {
         public struct InvalidKeys
         {
+            public RegistryKey Root;
+            public string Subkey;
             public string Key;
             public string Name;
             public string Value;
