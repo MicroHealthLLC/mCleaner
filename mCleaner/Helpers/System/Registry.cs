@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Win32;
+using System.Reflection;
+using System.Diagnostics;
 
 namespace mCleaner.Helpers
 {
@@ -128,6 +130,25 @@ namespace mCleaner.Helpers
         public string GetKeyParent(string key)
         {
             return key.Substring(0, key.LastIndexOf("\\"));
+        }
+
+        public void RegisterStartup(bool create = true)
+        {
+            using (RegistryKey key = Registry.CurrentUser.OpenSubKey("Software\\Microsoft\\Windows\\CurrentVersion\\Run", true))
+            {
+                if (create)
+                {
+                    key.SetValue("mCleaner", Process.GetCurrentProcess().MainModule.FileName);
+                }
+                else
+                {
+                    if (key.GetValue("mCleaner") != null)
+                    {
+                        key.DeleteValue("mCleaner");
+                    }
+                }
+                key.Close();
+            }
         }
     }
 }

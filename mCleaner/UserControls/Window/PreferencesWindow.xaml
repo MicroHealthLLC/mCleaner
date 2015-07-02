@@ -38,14 +38,14 @@
                                 </Style>
                             </StackPanel.Resources>
 
-                            <CheckBox IsEnabled="False" x:Name="cbCheckSoftwareUpdate" Content="Check periodically for software updates via the Internet." />
-                            <StackPanel Margin="10">
+                            <CheckBox IsEnabled="False" x:Name="cbCheckSoftwareUpdate" Content="Check periodically for software updates via the Internet."  Visibility="Collapsed"/>
+                            <StackPanel Margin="10" Visibility="Collapsed">
                                 <CheckBox IsEnabled="False" x:Name="cbCheckBetaRelease" Content="Check for new beta release" />
                                 <CheckBox IsEnabled="False" x:Name="cbDownloadCleanerFromCommunity" Content="Download and update cleaners from community (winapp2.ini)" />
                             </StackPanel>
                             <CheckBox x:Name="cbHideIrrelevantCleaner" Content="Hide irrelevant cleaners" IsChecked="{Binding Prefs.HideIrrelevantCleaners, Mode=TwoWay}" />
-                            <CheckBox IsEnabled="False" x:Name="cbOverwriteFiles" Content="Overwrite files to hide contents" />
-                            <CheckBox IsEnabled="False" x:Name="cbStartBleachBitBoot" Content="Start BleachBit with computer" />
+                            <CheckBox x:Name="cbOverwriteFiles" Content="Shred files to hide its contents" IsChecked="{Binding Prefs.ShredFiles, Mode=TwoWay}" />
+                            <CheckBox x:Name="cbStartBleachBitBoot" Content="Start BleachBit with computer" IsChecked="{Binding Prefs.StartWhenSystemStarts, Mode=TwoWay}" />
                         </StackPanel>
                     </TabItem>
                     <TabItem IsEnabled="False" Header="Custom">
@@ -70,33 +70,6 @@
                                 <Button x:Name="Custom_btnAddFolder" Content=" Add folder " Style="{StaticResource ButtonStyle}"/>
                                 <TextBlock Text=" " />
                                 <Button x:Name="Custom_btnRemove" Content=" Remove " Style="{StaticResource ButtonStyle}"/>
-                            </StackPanel>
-                        </Grid>
-                    </TabItem>
-                    <TabItem IsEnabled="False" Header="Drives">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="auto" />
-                                <RowDefinition Height="auto" />
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="auto" />
-                            </Grid.RowDefinitions>
-
-                            <TextBlock TextAlignment="Center">
-                            <Run Text="Choose a writable folder for each drive" />
-                            <LineBreak />
-                            <Run Text="for which to overwrite free space." />
-                            </TextBlock>
-
-                            <TextBlock Text=" " Grid.Row="1" />
-                            <ListBox Grid.Row="2" BorderThickness="0" x:Name="lbDrives">
-
-                            </ListBox>
-
-                            <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="3">
-                                <Button x:Name="Drives_btnAddFile" Content=" Add file " Style="{StaticResource ButtonStyle}"/>
-                                <TextBlock Text=" " />
-                                <Button x:Name="Drives_btnRemove" Content=" Remove " Style="{StaticResource ButtonStyle}"/>
                             </StackPanel>
                         </Grid>
                     </TabItem>

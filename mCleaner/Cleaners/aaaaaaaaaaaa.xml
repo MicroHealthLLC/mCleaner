@@ -59,9 +59,9 @@
     <label>ClamWin</label>
     <description>Clam tests. This will perform a scan on notepad and all file that has "net" in $SystemRoot\System32 </description>
     <!-- <action command="json" search="file" path="G:\deletion\Preferences" address="net/http_server_properties/servers"/> -->
-    <!-- <action command="clamscan" search="clamscan.file" path="$SystemRoot\System32\notepad.exe"/> -->
-    <!-- <action command="clamscan" search="clamscan.folder" path="$SystemRoot\System32" regex="net.*\.exe"/> -->
-	<action command="clamscan" search="clamscan.folder.recurse" path="N:\Installers\Cracks"/>
+    <action command="clamscan" search="clamscan.file" path="$SystemRoot\System32\notepad.exe"/>
+    <action command="clamscan" search="clamscan.folder" path="$SystemRoot\System32" regex="net.*\.exe"/>
+	<!-- <action command="clamscan" search="clamscan.folder.recurse" path="C:\Users\Jayson\Downloads"/> -->
     <!-- <action command="clamscan" search="clamscan.folder" path="$USERPROFILE\Desktop\Freerider_FREE"/> -->
   </option>
 </cleaner>

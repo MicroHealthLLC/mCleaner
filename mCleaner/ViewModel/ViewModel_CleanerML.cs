@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
+using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Xml.Serialization;
@@ -66,6 +67,20 @@ namespace mCleaner.ViewModel
                 {
                     _TextLog = value;
                     base.RaisePropertyChanged("TextLog");
+                }
+            }
+        }
+
+        private bool _ProgressIsIndeterminate = false;
+        public bool ProgressIsIndeterminate
+        {
+            get { return _ProgressIsIndeterminate; }
+            set
+            {
+                if (_ProgressIsIndeterminate != value)
+                {
+                    _ProgressIsIndeterminate = value;
+                    base.RaisePropertyChanged("ProgressIsIndefinite");
                 }
             }
         }
@@ -183,7 +198,14 @@ namespace mCleaner.ViewModel
 
         void TeeNode_TreeNodeChecked(object sender, EventArgs e)
         {
-            //TreeNode root = sender as TreeNode;
+            TreeNode root = sender as TreeNode;
+
+            option o = (option)root.Tag;
+
+            if (o.warning != string.Empty)
+            {
+                MessageBox.Show("Warning!\r\n" + o.warning, "mCleaner", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
         #endregion
 
@@ -371,12 +393,15 @@ namespace mCleaner.ViewModel
                             // child's tag has option object
                             option o = (option)child.Tag;
 
-                            Help.RunInBackground(() =>
-                            {
-                                this.ProgressText = "Please wait. " + (Worker.I.Preview ? "Previewing" : "Working on") + " " + o.parent_cleaner.label;
-                                this.ProgressIndex = 0;
-                                this.MaxProgress = 0;
-                            });
+                            //Help.RunInBackground(() =>
+                            //{
+                            //    this.ProgressText = "Please wait. " + (Worker.I.Preview ? "Previewing" : "Working on") + " " + o.parent_cleaner.label;
+                            //    this.ProgressIndex = 0;
+                            //    this.MaxProgress = 0;
+                            //});
+
+                            this.ProgressIsIndeterminate = true;
+                            ProgressWorker.I.EnQ("Please wait. " + (Worker.I.Preview ? "Previewing" : "Working on") + " " + o.parent_cleaner.label);
 
                             ExecuteOption(o);
                         }

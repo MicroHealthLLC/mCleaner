@@ -32,7 +32,7 @@ namespace mCleaner.Logics.Commands
 
             if (RegistryHelper.I.IsSubkeyExists(reg_root, reg_subkey))
             {
-                // enqueue registry for deletion
+                // enqueue action for cleaning
                 Worker.I.EnqueTTD(new Model_ThingsToDelete()
                 {
                     reg_root = reg_root,

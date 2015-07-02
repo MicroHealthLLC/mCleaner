@@ -96,6 +96,8 @@ namespace mCleaner.Logics.Commands.LittleRegistryCleaner.Scanners
 
             foreach (string strCLSID in regKey.GetSubKeyNames())
             {
+                ProgressWorker.I.EnQ(strCLSID);
+
                 RegistryKey rkCLSID = regKey.OpenSubKey(strCLSID);
 
                 if (rkCLSID == null)

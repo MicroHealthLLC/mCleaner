@@ -174,5 +174,29 @@ namespace mCleaner.Properties {
                 this["HideIrrelevantCleaners"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ShredFiles {
+            get {
+                return ((bool)(this["ShredFiles"]));
+            }
+            set {
+                this["ShredFiles"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool StartWhenSystemStarts {
+            get {
+                return ((bool)(this["StartWhenSystemStarts"]));
+            }
+            set {
+                this["StartWhenSystemStarts"] = value;
+            }
+        }
     }
 }

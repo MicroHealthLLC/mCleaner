@@ -39,6 +39,9 @@
   <PropertyGroup>
     <ApplicationIcon>appicon.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="GalaSoft.MvvmLight">
       <HintPath>..\packages\MvvmLightLibs.5.1.1.0\lib\net40\GalaSoft.MvvmLight.dll</HintPath>
@@ -91,6 +94,7 @@
     <Compile Include="Helpers\Data\SQLite.cs" />
     <Compile Include="Helpers\Converters\StringEnum.cs" />
     <Compile Include="Helpers\PInvoke\Win32API.cs" />
+    <Compile Include="Helpers\System\Shredder.cs" />
     <Compile Include="Helpers\System\Utils.cs" />
     <Compile Include="Logics\Commands\Clam\CommandLogic_Clam.cs" />
     <Compile Include="Logics\Commands\CommandLogic_Chrome.cs" />
@@ -114,6 +118,7 @@
     <Compile Include="Logics\Commands\LittleRegistryCleaner\Scanners\WindowsHelpFiles.cs" />
     <Compile Include="Logics\Commands\LittleRegistryCleaner\Scanners\WindowsSounds.cs" />
     <Compile Include="Logics\Enumerations\Enumerations.cs" />
+    <Compile Include="Logics\ProgressWorker.cs" />
     <Compile Include="Logics\Worker.cs" />
     <Compile Include="Model\Model_CleanerML.cs" />
     <Compile Include="Model\Model_ThingsToDelete.cs" />
@@ -124,11 +129,15 @@
     <Compile Include="UserControls\Window\PreferencesWindow.xaml.cs">
       <DependentUpon>PreferencesWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\Window\ShredWindow.xaml.cs">
+      <DependentUpon>ShredWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="ViewModel\ViewModel_Clam.cs" />
     <Compile Include="ViewModel\ViewModel_CleanerML.cs" />
     <Compile Include="ViewModel\ViewModel_Preferences.cs" />
+    <Compile Include="ViewModel\ViewModel_Shred.cs" />
     <Page Include="Assets\Styles\TreeViewStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -162,6 +171,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UserControls\Window\ShredWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PreferencesWindow.xaml.cs">
@@ -184,9 +197,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="app.manifest">
-      <SubType>Designer</SubType>
-    </None>
     <Resource Include="appicon.ico" />
     <Resource Include="Assets\dl_vir_def.png" />
     <Resource Include="Assets\scan_for_virus.png" />
@@ -194,6 +204,7 @@
     <Resource Include="Assets\clamwin_big.png" />
     <Resource Include="Assets\scan_for_memory.png" />
     <Resource Include="Assets\check_box_list.png" />
+    <Resource Include="Assets\document_shred.png" />
     <Content Include="Clam\.clamwin\db\readme.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -206,6 +217,7 @@
     <Content Include="Clam\freshclam.conf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="app.manifest" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

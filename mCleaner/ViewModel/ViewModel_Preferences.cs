@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using mCleaner.Helpers;
 using mCleaner.Properties;
 using System.Windows;
 using System.Windows.Input;
@@ -124,6 +125,34 @@ namespace mCleaner.ViewModel
                 }
             }
         }
+
+        private bool _ShredFiles = false;
+        public bool ShredFiles
+        {
+            get { return _ShredFiles; }
+            set
+            {
+                if (_ShredFiles != value)
+                {
+                    _ShredFiles = value;
+                    base.RaisePropertyChanged("ShredFiles");
+                }
+            }
+        }
+
+        private bool _StartWhenSystemStarts = false;
+        public bool StartWhenSystemStarts
+        {
+            get { return _StartWhenSystemStarts; }
+            set
+            {
+                if (_StartWhenSystemStarts != value)
+                {
+                    _StartWhenSystemStarts = value;
+                    base.RaisePropertyChanged("StartWhenSystemStarts");
+                }
+            }
+        }
         #endregion
 
         #region commands
@@ -185,8 +214,10 @@ namespace mCleaner.ViewModel
             {
                 this.DatabaseMirror = Settings.Default.ClamWin_DatabaseMirror;
             }
-            this.AutoUpdateDBAtStartup = Settings.Default.ClamWin_UpdateDBAtStartup;
-            this.HideIrrelevantCleaners = Settings.Default.HideIrrelevantCleaners;
+            this.AutoUpdateDBAtStartup      = Settings.Default.ClamWin_UpdateDBAtStartup;
+            this.HideIrrelevantCleaners     = Settings.Default.HideIrrelevantCleaners;
+            this.ShredFiles                 = Settings.Default.ShredFiles;
+            this.StartWhenSystemStarts      = Settings.Default.StartWhenSystemStarts;
         }
 
         void WriteSettings()
@@ -219,8 +250,12 @@ namespace mCleaner.ViewModel
                 return;
             }
 
-            Settings.Default.ClamWin_UpdateDBAtStartup = this.AutoUpdateDBAtStartup;
-            Settings.Default.HideIrrelevantCleaners = this.HideIrrelevantCleaners;
+            Settings.Default.ClamWin_UpdateDBAtStartup  = this.AutoUpdateDBAtStartup;
+            Settings.Default.HideIrrelevantCleaners     = this.HideIrrelevantCleaners;
+            Settings.Default.ShredFiles                 = this.ShredFiles;
+            Settings.Default.StartWhenSystemStarts      = this.StartWhenSystemStarts;
+
+            RegistryHelper.I.RegisterStartup(this.StartWhenSystemStarts);
 
             Settings.Default.Save();
         }

@@ -9,6 +9,7 @@
   <option id="activex">
     <label>ActiveX/Com</label>
     <description></description>
+	<warning>This scanner may take a while to finish.</warning>
     <action command="littleregistry" search="lrc.activexcom" path="HKLM\SOFTWARE" />
   </option>
   <option id="appinfo">

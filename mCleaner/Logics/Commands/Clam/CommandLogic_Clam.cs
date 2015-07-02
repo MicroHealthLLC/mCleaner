@@ -332,6 +332,8 @@ namespace mCleaner.Logics.Clam
                 bgWorker.RunWorkerAsync(Path.Combine(this._exec_clam, "clamscan.exe") + "|" + full_param);
             }
 
+            this.Clam.ShowClamWinVirusUpdateWindow = false;
+
             //bgWorker.RunWorkerAsync(full_param);
         }
 

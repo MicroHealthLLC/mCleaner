@@ -296,7 +296,7 @@ namespace mCleaner.Logics
                         bgWorker.ReportProgress(-1, text);
 
                         // then we delete it.
-                        fi.Delete();
+                        FileOperations.Delete(fi.FullName);
 
                         text = string.Format(" - DELETED\r\n");
                         // then report to the gui
@@ -778,10 +778,12 @@ namespace mCleaner.Logics
 
         void UpdateProgressLog(string text)
         {
+            ProgressWorker.I.EnQ(text);
+
             Help.RunInBackground(() =>
             {
                 CleanerML.TextLog = _preview_log;
-                CleanerML.ProgressText = text;
+                //CleanerML.ProgressText = text;
                 CleanerML.MaxProgress = this.TTD.Count;
                 CleanerML.ProgressIndex++;
             }, false);
