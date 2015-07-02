@@ -17,9 +17,11 @@ namespace mCleaner.Helpers
         [DllImport("Shlwapi.dll", SetLastError = true, CharSet = CharSet.Auto)]
         public static extern void PathRemoveArgs([In, Out] StringBuilder path);
         [DllImport("Shlwapi.dll", SetLastError = true, CharSet = CharSet.Auto)]
-        private extern static bool PathFileExists(StringBuilder path);
+        private extern static bool PathFileExists(string path);
         [DllImport("kernel32.dll")]
         public static extern int SearchPath(string strPath, string strFileName, string strExtension, uint nBufferLength, StringBuilder strBuffer, string strFilePart);
+        [DllImport("Shlwapi.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        public static extern int PathParseIconLocation([In, Out] StringBuilder path);
 
         #region Interop (IShellLink and IPersistFile)
         [Flags()]
@@ -553,7 +555,7 @@ namespace mCleaner.Helpers
 
         public static bool PathFile_Exists(string pathfile)
         {
-            return PathFileExists(new StringBuilder(pathfile));
+            return PathFileExists(pathfile);
         }
 
         /// <summary>
@@ -587,6 +589,142 @@ namespace mCleaner.Helpers
                 retPath = "";
 
             return false;
+        }
+
+        /// <summary>
+        /// Gets the icon path and sees if it exists
+        /// </summary>
+        /// <param name="IconPath">The icon path</param>
+        /// <returns>True if it exists</returns>
+        public static bool IconExists(string IconPath)
+        {
+            string strFileName = string.Copy(IconPath.Trim().ToLower());
+
+            // Remove quotes
+            strFileName = UnqouteSpaces(strFileName);
+
+            // Remove starting @
+            if (strFileName.StartsWith("@"))
+                strFileName = strFileName.Substring(1);
+
+            // Return true if %1
+            if (strFileName == "%1")
+                return true;
+
+            // Get icon path
+            int nSlash = strFileName.IndexOf(',');
+            if (nSlash > -1)
+            {
+                strFileName = strFileName.Substring(0, nSlash);
+
+                return FileExists(strFileName);
+            }
+            else
+            {
+                StringBuilder sb = new StringBuilder(strFileName);
+                if (PathParseIconLocation(sb) >= 0)
+                {
+                    if (!string.IsNullOrEmpty(sb.ToString()))
+                    {
+                        return FileExists(sb.ToString());
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Sees if the file exists
+        /// </summary>
+        /// <remarks>Always use this to check for files in the scanners!</remarks>
+        /// <param name="filePath">The filename (including path)</param>
+        /// <returns>
+        /// True if it exists or if the path should be skipped. Otherwise, false if the file path is empty or doesnt exist
+        /// </returns>
+        public static bool FileExists(string filePath)
+        {
+            if (filePath.Contains("iyuv_32.dll"))
+            {
+                int a = 0;
+            }
+
+            if (string.IsNullOrEmpty(filePath))
+                return false;
+
+            string strFileName = string.Copy(filePath.Trim().ToLower());
+
+            // Remove quotes
+            strFileName = UnqouteSpaces(strFileName);
+
+            // Expand environment variables
+            strFileName = Environment.ExpandEnvironmentVariables(strFileName);
+
+            // Check for illegal characters
+            if (FindAnyIllegalChars(strFileName))
+                return false;
+
+            //// Check Drive Type
+            //VDTReturn ret = ValidDriveType(strFileName);
+            //if (ret == VDTReturn.InvalidDrive)
+            //    return false;
+            //else if (ret == VDTReturn.SkipCheck)
+            //    return true;
+
+            //// See if it is on exclude list
+            //if (ScanDlg.IsOnIgnoreList(strFileName))
+            //    return true;
+
+            // Now see if file exists
+            if (File.Exists(strFileName))
+                return true;
+
+            if (PathFileExists(strFileName))
+                return true;
+
+            if (SearchPath(strFileName))
+                return true;
+
+            return false;
+        }
+
+        /// <summary>
+        /// Parses the path and checks for any illegal characters
+        /// </summary>
+        /// <param name="path">The path</param>
+        /// <returns>Returns true if it contains illegal characters</returns>
+        private static bool FindAnyIllegalChars(string path)
+        {
+            // Get directory portion of the path.
+            string dirName = path;
+            string fullFileName = "";
+            int pos = 0;
+            if ((pos = path.LastIndexOf(Path.DirectorySeparatorChar)) >= 0)
+            {
+                dirName = path.Substring(0, pos);
+
+                // Get filename portion of the path.
+                if (pos >= 0 && (pos + 1) < path.Length)
+                    fullFileName = path.Substring(pos + 1);
+            }
+
+            // Find any characters in the directory that are illegal.
+            if (dirName.IndexOfAny(Path.GetInvalidPathChars()) != -1) // Found invalid character in directory
+                return true;
+
+            // Find any characters in the filename that are illegal.
+            if (!string.IsNullOrEmpty(fullFileName))
+                if (fullFileName.IndexOfAny(Path.GetInvalidFileNameChars()) != -1) // Found invalid character in filename
+                    return true;
+
+            return false;
+        }
+
+        public static bool SearchPath(string fileName)
+        {
+            string retPath = "";
+
+            return SearchPath(fileName, null, out retPath);
         }
     }
 }

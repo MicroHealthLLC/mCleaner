@@ -653,7 +653,11 @@ namespace mCleaner.Logics
 
             foreach (ScannerBase.InvalidKeys badkey in BadKeys)
             {
-                string log = string.Format(text, "Clean", badkey.Root.OpenSubKey(badkey.Subkey).ToString() + (badkey.Key != string.Empty ? "\\" + badkey.Key : string.Empty) + ", " + badkey.Name);
+                string log = string.Empty;
+
+                string root = badkey.Root.OpenSubKey(badkey.Subkey).ToString();
+
+                log = string.Format(text, "Clean", root + (badkey.Key != string.Empty ? "\\" + badkey.Key : string.Empty) + ", " + badkey.Name);
                 _preview_log += log + "\r\n";
 
                 if (preview)

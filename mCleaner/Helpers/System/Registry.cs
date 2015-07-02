@@ -124,5 +124,10 @@ namespace mCleaner.Helpers
 
             return res;
         }
+
+        public string GetKeyParent(string key)
+        {
+            return key.Substring(0, key.LastIndexOf("\\"));
+        }
     }
 }
