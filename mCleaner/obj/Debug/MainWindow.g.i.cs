@@ -30,6 +30,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Shell;
 using mCleaner;
+using mCleaner.Helpers.Controls;
 using mCleaner.UserControls.Window;
 
 

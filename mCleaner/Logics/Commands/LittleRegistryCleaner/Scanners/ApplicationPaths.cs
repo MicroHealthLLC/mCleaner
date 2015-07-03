@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace mCleaner.Logics.Commands.LittleRegistryCleaner.Scanners
 {
@@ -10,19 +11,27 @@ namespace mCleaner.Logics.Commands.LittleRegistryCleaner.Scanners
         static ApplicationPaths _i = new ApplicationPaths();
         public static ApplicationPaths I { get { return _i; } }
 
-        public void Clean(bool preview)
-        {
-            if (preview)
-            {
-                Preview();
-            }
-            else
-            {
-                Clean();
-            }
-        }
+        //public async Task<bool> Clean(bool preview)
+        //{
+        //    if (preview)
+        //    {
+        //        await PreviewAsync();
+        //    }
+        //    else
+        //    {
+        //        Clean();
+        //    }
 
-        public void Clean()
+        //    return true;
+        //}
+
+        //public async Task<bool> PreviewAsync()
+        //{
+        //    await Task.Run(() => Preview());
+        //    return true;
+        //}
+
+        public override void Clean()
         {
             Preview();
 
@@ -35,7 +44,7 @@ namespace mCleaner.Logics.Commands.LittleRegistryCleaner.Scanners
             }
         }
 
-        void Preview()
+        public override void Preview()
         {
             this.BadKeys.Clear();
 
@@ -82,6 +91,8 @@ namespace mCleaner.Logics.Commands.LittleRegistryCleaner.Scanners
 
                 if (regKey2 != null)
                 {
+                    ProgressWorker.I.EnQ("Scanning " + regKey2.ToString());
+
                     if (Convert.ToInt32(regKey2.GetValue("BlockOnTSNonInstallMode")) == 1)
                         continue;
 

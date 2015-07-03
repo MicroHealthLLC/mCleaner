@@ -3,6 +3,7 @@ using mCleaner.Helpers;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 namespace mCleaner.Logics.Commands.LittleRegistryCleaner.Scanners
 {
     public class ActiveXComObjects : ScannerBase
@@ -11,19 +12,26 @@ namespace mCleaner.Logics.Commands.LittleRegistryCleaner.Scanners
         static ActiveXComObjects _i = new ActiveXComObjects();
         public static ActiveXComObjects I { get { return _i; } }
 
-        public void Clean(bool preview)
-        {
-            if (preview)
-            {
-                Preview();
-            }
-            else
-            {
-                Clean();
-            }
-        }
+        //public async Task<bool> Clean(bool preview)
+        //{
+        //    if (preview)
+        //    {
+        //        await PreviewAsync();
+        //    }
+        //    else
+        //    {
+        //        Clean();
+        //    }
 
-        public void Clean()
+        //    return true;
+        //}
+
+        //public async Task PreviewAsync()
+        //{
+        //    await Task.Run(() => Preview());
+        //}
+
+        public override void Clean()
         {
             Preview();
 
@@ -39,7 +47,7 @@ namespace mCleaner.Logics.Commands.LittleRegistryCleaner.Scanners
             }
         }
 
-        public void Preview()
+        public override void Preview()
         {
             this.BadKeys.Clear();
 
@@ -96,12 +104,12 @@ namespace mCleaner.Logics.Commands.LittleRegistryCleaner.Scanners
 
             foreach (string strCLSID in regKey.GetSubKeyNames())
             {
-                ProgressWorker.I.EnQ(strCLSID);
-
                 RegistryKey rkCLSID = regKey.OpenSubKey(strCLSID);
 
                 if (rkCLSID == null)
                     continue;
+
+                ProgressWorker.I.EnQ("Scanning " + rkCLSID.ToString());
 
                 // Check for valid AppID
                 string strAppID = regKey.GetValue("AppID") as string;
@@ -225,12 +233,11 @@ namespace mCleaner.Logics.Commands.LittleRegistryCleaner.Scanners
 
             foreach (string strSubKey in regKey.GetSubKeyNames())
             {
-                // Update scan dialog
-                //ScanDlg.CurrentScannedObject = string.Format("{0}\\{1}", regKey.Name, strSubKey);
-
                 // Skip any file (*)
                 if (strSubKey == "*")
                     continue;
+
+                ProgressWorker.I.EnQ(string.Format("Scanning {0}\\{1}", regKey.Name, strSubKey));
 
                 if (strSubKey[0] == '.')
                 {
@@ -374,7 +381,7 @@ namespace mCleaner.Logics.Commands.LittleRegistryCleaner.Scanners
                     if (rkAppId != null)
                     {
                         // Update scan dialog
-                        //ScanDlg.CurrentScannedObject = rkAppId.ToString();
+                        ProgressWorker.I.EnQ(string.Format("Scanning {0}", rkAppId.ToString()));
 
                         // Check for reference to AppID
                         string strCLSID = rkAppId.GetValue("AppID") as string;
@@ -422,6 +429,8 @@ namespace mCleaner.Logics.Commands.LittleRegistryCleaner.Scanners
                     {
                         if ((rkBHO = regKey.OpenSubKey(strGuid)) != null)
                         {
+                            ProgressWorker.I.EnQ(string.Format("Scanning {0}\\{1}", regKey.Name, strGuid));
+
                             if (!clsidExists(strGuid))
                             {
                                 this.BadKeys.Add(new InvalidKeys()
@@ -446,6 +455,8 @@ namespace mCleaner.Logics.Commands.LittleRegistryCleaner.Scanners
                 {
                     foreach (string strGuid in regKey.GetValueNames())
                     {
+                        ProgressWorker.I.EnQ(string.Format("Scanning {0}\\{1}", regKey.Name, strGuid));
+
                         // Update scan dialog
                         //ScanDlg.CurrentScannedObject = "CLSID: " + strGuid;
 
@@ -476,6 +487,8 @@ namespace mCleaner.Logics.Commands.LittleRegistryCleaner.Scanners
                 {
                     foreach (string strGuid in regKey.GetSubKeyNames())
                     {
+                        ProgressWorker.I.EnQ(string.Format("Scanning {0}\\{1}", regKey.Name, strGuid));
+
                         if ((rkExt = regKey.OpenSubKey(strGuid)) != null)
                         {
                             // Update scan dialog
@@ -498,6 +511,8 @@ namespace mCleaner.Logics.Commands.LittleRegistryCleaner.Scanners
                 {
                     foreach (string strFileExt in regKey.GetSubKeyNames())
                     {
+                        ProgressWorker.I.EnQ(string.Format("Scanning {0}\\{1}", regKey.Name, strFileExt));
+
                         if ((rkFileExt = regKey.OpenSubKey(strFileExt)) == null || strFileExt[0] != '.')
                             continue;
 

@@ -3,6 +3,7 @@ using mCleaner.Helpers;
 using Microsoft.Win32;
 using System.Diagnostics;
 using System.IO;
+using System.Threading.Tasks;
 namespace mCleaner.Logics.Commands.LittleRegistryCleaner.Scanners
 {
     public class StartupFiles : ScannerBase
@@ -11,19 +12,27 @@ namespace mCleaner.Logics.Commands.LittleRegistryCleaner.Scanners
         static StartupFiles _i = new StartupFiles();
         public static StartupFiles I { get { return _i; } }
 
-        public void Clean(bool preview)
-        {
-            if (preview)
-            {
-                Preview(); 
-            }
-            else
-            {
-                Clean();
-            }
-        }
+        //public async Task<bool> Clean(bool preview)
+        //{
+        //    if (preview)
+        //    {
+        //        await PreviewAsync();
+        //    }
+        //    else
+        //    {
+        //        Clean();
+        //    }
 
-        public void Clean()
+        //    return true;
+        //}
+
+        //public async Task<bool> PreviewAsync()
+        //{
+        //    await Task.Run(() => Preview());
+        //    return true;
+        //}
+
+        public override void Clean()
         {
             Preview();
 
@@ -36,7 +45,7 @@ namespace mCleaner.Logics.Commands.LittleRegistryCleaner.Scanners
             }
         }
 
-        public void Preview()
+        public override void Preview()
         {
             this.BadKeys.Clear();
 
@@ -104,6 +113,8 @@ namespace mCleaner.Logics.Commands.LittleRegistryCleaner.Scanners
 
             foreach (string strProgName in regKey.GetValueNames())
             {
+                ProgressWorker.I.EnQ(string.Format("Scanning {0}\\{1}", regKey.ToString(), string.Empty));
+
                 string strRunPath = regKey.GetValue(strProgName) as string;
                 string strFilePath, strArgs;
 

@@ -1,6 +1,7 @@
 ﻿
 using Microsoft.Win32;
 using System.IO;
+using System.Threading.Tasks;
 namespace mCleaner.Logics.Commands.LittleRegistryCleaner.Scanners
 {
     public class SharedDLLs : ScannerBase
@@ -9,19 +10,27 @@ namespace mCleaner.Logics.Commands.LittleRegistryCleaner.Scanners
         static SharedDLLs _i = new SharedDLLs();
         public static SharedDLLs I { get { return _i; } }
 
-        public void Clean(bool preview)
-        {
-            if (preview)
-            {
-                Preview(); 
-            }
-            else
-            {
-                Clean();
-            }
-        }
+        //public async Task<bool> Clean(bool preview)
+        //{
+        //    if (preview)
+        //    {
+        //        await PreviewAsync();
+        //    }
+        //    else
+        //    {
+        //        Clean();
+        //    }
 
-        public void Clean()
+        //    return true;
+        //}
+
+        //public async Task<bool> PreviewAsync()
+        //{
+        //    await Task.Run(() => Preview());
+        //    return true;
+        //}
+
+        public override void Clean()
         {
             Preview();
 
@@ -37,7 +46,7 @@ namespace mCleaner.Logics.Commands.LittleRegistryCleaner.Scanners
             }
         }
 
-        public void Preview()
+        public override void Preview()
         {
             this.BadKeys.Clear();
 
@@ -51,6 +60,8 @@ namespace mCleaner.Logics.Commands.LittleRegistryCleaner.Scanners
                 // Validate Each DLL from the value names
                 foreach (string strFilePath in regKey.GetValueNames())
                 {
+                    ProgressWorker.I.EnQ(string.Format("Scanning {0}\\{1}", regKey.ToString(), string.Empty));
+
                     if (!string.IsNullOrEmpty(strFilePath))
                     {
                         if (!File.Exists(strFilePath))

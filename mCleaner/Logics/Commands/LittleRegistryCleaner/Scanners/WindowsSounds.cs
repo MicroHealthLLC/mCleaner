@@ -9,19 +9,19 @@ namespace mCleaner.Logics.Commands.LittleRegistryCleaner.Scanners
         static WindowsSounds _i = new WindowsSounds();
         public static WindowsSounds I { get { return _i; } }
 
-        public void Clean(bool preview)
-        {
-            if (preview)
-            {
-                Preview(); 
-            }
-            else
-            {
-                Clean();
-            }
-        }
+        //public void Clean(bool preview)
+        //{
+        //    if (preview)
+        //    {
+        //        Preview(); 
+        //    }
+        //    else
+        //    {
+        //        Clean();
+        //    }
+        //}
 
-        public void Clean()
+        public override void Clean()
         {
             Preview();
 
@@ -34,7 +34,7 @@ namespace mCleaner.Logics.Commands.LittleRegistryCleaner.Scanners
             }
         }
 
-        public void Preview()
+        public override void Preview()
         {
             this.BadKeys.Clear();
 
@@ -67,6 +67,8 @@ namespace mCleaner.Logics.Commands.LittleRegistryCleaner.Scanners
 
                     if (rk2 != null)
                     {
+                        ProgressWorker.I.EnQ(string.Format("Scanning {0}\\{1}", rk2.ToString(), string.Empty));
+
                         string strSoundPath = rk2.GetValue("") as string;
 
                         if (!string.IsNullOrEmpty(strSoundPath))

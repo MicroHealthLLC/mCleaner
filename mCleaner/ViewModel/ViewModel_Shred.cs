@@ -74,14 +74,25 @@ namespace mCleaner.ViewModel
         {
             OpenFileDialog ofd = new OpenFileDialog()
             {
-                
+                Filter = "All files|*.*",
+                Title = "Select a multiple file to shred",
+                Multiselect = true
             };
             {
-                
+                ofd.ShowDialog();
+                if (ofd.FileName != string.Empty || ofd.FileNames.Length > 0)
+                {
+
+                }
             };
         }
 
         public void Command_ShredFolder_Click()
+        {
+
+        }
+
+        void StartShredding()
         {
 
         }

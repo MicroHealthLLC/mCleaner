@@ -200,11 +200,18 @@ namespace mCleaner.ViewModel
         {
             TreeNode root = sender as TreeNode;
 
-            option o = (option)root.Tag;
-
-            if (o.warning != string.Empty)
+            if (root.Tag is option)
             {
-                MessageBox.Show("Warning!\r\n" + o.warning, "mCleaner", MessageBoxButton.OK, MessageBoxImage.Information);
+                option o = (option)root.Tag;
+
+                if (o.warning != string.Empty && o.warning != null)
+                {
+                    MessageBox.Show("Warning!\r\n" + o.warning, "mCleaner", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+            }
+            else if (root.Tag is cleaner)
+            {
+
             }
         }
         #endregion

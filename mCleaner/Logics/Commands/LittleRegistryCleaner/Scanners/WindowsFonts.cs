@@ -18,19 +18,19 @@ namespace mCleaner.Logics.Commands.LittleRegistryCleaner.Scanners
         static WindowsFonts _i = new WindowsFonts();
         public static WindowsFonts I { get { return _i; } }
 
-        public void Clean(bool preview)
-        {
-            if (preview)
-            {
-                Preview(); 
-            }
-            else
-            {
-                Clean();
-            }
-        }
+        //public void Clean(bool preview)
+        //{
+        //    if (preview)
+        //    {
+        //        Preview(); 
+        //    }
+        //    else
+        //    {
+        //        Clean();
+        //    }
+        //}
 
-        public void Clean()
+        public override void Clean()
         {
             Preview();
 
@@ -43,7 +43,7 @@ namespace mCleaner.Logics.Commands.LittleRegistryCleaner.Scanners
             }
         }
 
-        public void Preview()
+        public override void Preview()
         {
             this.BadKeys.Clear();
 
@@ -58,6 +58,8 @@ namespace mCleaner.Logics.Commands.LittleRegistryCleaner.Scanners
 
                     if (!SHGetSpecialFolderPath(IntPtr.Zero, strPath, CSIDL_FONTS, false))
                         return;
+
+                    ProgressWorker.I.EnQ(string.Format("Scanning {0}\\{1}", regKey.ToString(), string.Empty));
 
                     foreach (string strFontName in regKey.GetValueNames())
                     {

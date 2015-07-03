@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace mCleaner.Logics.Commands.LittleRegistryCleaner.Scanners
 {
@@ -12,7 +13,27 @@ namespace mCleaner.Logics.Commands.LittleRegistryCleaner.Scanners
         static ApplicationInfo _i = new ApplicationInfo();
         public static ApplicationInfo I { get { return _i; } }
 
-        void Preview()
+        //public async Task<bool> Clean(bool preview)
+        //{
+        //    if (preview)
+        //    {
+        //        await PreviewAsync();
+        //    }
+        //    else
+        //    {
+        //        Clean();
+        //    }
+
+        //    return true;
+        //}
+
+        //public async Task<bool> PreviewAsync()
+        //{
+        //    await Task.Run(() => Preview());
+        //    return true;
+        //}
+
+        public override void Preview()
         {
             this.BadKeys.Clear();
 
@@ -27,6 +48,8 @@ namespace mCleaner.Logics.Commands.LittleRegistryCleaner.Scanners
                     {
                         if (regKey2 != null)
                         {
+                            ProgressWorker.I.EnQ("Scanning " + regKey2.ToString());
+
                             // check entries if it has "DisplayName"
                             // without it, it's not a valid UninstallKey
 
@@ -51,7 +74,7 @@ namespace mCleaner.Logics.Commands.LittleRegistryCleaner.Scanners
             //checkARPCache(Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\App Management\ARPCache\"));
         }
 
-        void Clean()
+        public override void Clean()
         {
             Preview();
 
@@ -67,16 +90,6 @@ namespace mCleaner.Logics.Commands.LittleRegistryCleaner.Scanners
             }
         }
 
-        public void Clean(bool preview)
-        {
-            if (preview)
-            {
-                Preview();
-            }
-            else
-            {
-                Clean();
-            }
-        }
+        
     }
 }

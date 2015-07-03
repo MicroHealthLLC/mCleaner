@@ -1,5 +1,6 @@
 ﻿using mCleaner.ViewModel;
 using Microsoft.Practices.ServiceLocation;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 
@@ -9,6 +10,10 @@ namespace mCleaner.Logics
     {
         BackgroundWorker _bgWorker = new BackgroundWorker();
         Queue<string> _q = new Queue<string>();
+
+        int _interval_s = 2; // interval when to show the progress text
+        DateTime _start = DateTime.Now;
+        DateTime _end = DateTime.Now;
 
         public ViewModel_CleanerML CleanerML
         {
@@ -37,7 +42,25 @@ namespace mCleaner.Logics
                 if (this._q.Count > 0)
                 {
                     string log = this._q.Dequeue();
-                    this._bgWorker.ReportProgress(-1, log);
+
+                    if (this._interval_s == 0)
+                    {
+                        this._bgWorker.ReportProgress(-1, log);
+                    }
+                    else
+                    {
+                        TimeSpan timespan = this._end - this._start;
+                        int total_sec = ((int)timespan.TotalSeconds);
+
+                        if (total_sec >= this._interval_s)
+                        {
+                            this._bgWorker.ReportProgress(-1, log);
+
+                            this._start = DateTime.Now;
+                        }
+                    }
+
+                    this._end = DateTime.Now;
                 }
             }
         }
@@ -46,7 +69,10 @@ namespace mCleaner.Logics
         {
             if (e.ProgressPercentage == -1)
             {
-                this.CleanerML.ProgressText = e.UserState.ToString();
+                if (e.UserState != null)
+                {
+                    this.CleanerML.ProgressText = e.UserState.ToString();
+                }
             }
         }
 
@@ -62,6 +88,7 @@ namespace mCleaner.Logics
 
         public void Start()
         {
+            this._start = DateTime.Now;
             this._bgWorker.RunWorkerAsync();
         }
 

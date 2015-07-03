@@ -88,7 +88,7 @@ namespace mCleaner.ViewModel
                 return ServiceLocator.Current.GetInstance<ViewModel_Shred>();
             }
         }
-        
+
         public static void Cleanup()
         {
             // TODO Clear the ViewModels

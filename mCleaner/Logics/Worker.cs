@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace mCleaner.Logics
 {
@@ -190,7 +191,7 @@ namespace mCleaner.Logics
         #endregion
 
         #region methods
-        public void PreviewWork()
+        public async Task<bool> PreviewWork()
         {
             //this.TTD = new Queue<Model_ThingsToDelete>(this.TTD.Reverse());
 
@@ -248,13 +249,15 @@ namespace mCleaner.Logics
 
                     #region little registry cleaner
                     case COMMANDS.littleregistry:
-                        ExecuteLittleRegistryCleanerCommand(ttd, true);
+                        await Task.Run(() => ExecuteLittleRegistryCleanerCommand(ttd, true));
                         break;
                     #endregion
                 }
             }
 
             ShowTotalOperations();
+
+            return true;
         }
 
         public void DoWork()
@@ -587,7 +590,7 @@ namespace mCleaner.Logics
             }
         }
 
-        void ExecuteLittleRegistryCleanerCommand(Model_ThingsToDelete ttd, bool preview = false)
+        async Task<bool> ExecuteLittleRegistryCleanerCommand(Model_ThingsToDelete ttd, bool preview = false)
         {
             string text = "{0} {1}";
 
@@ -595,57 +598,57 @@ namespace mCleaner.Logics
             switch (ttd.search)
             {
                 case SEARCH.lrc_activex_com:
-                    ActiveXComObjects.I.Clean(preview);
+                    await ActiveXComObjects.I.Clean(preview);
                     BadKeys.AddRange(ActiveXComObjects.I.BadKeys);
 
                     break;
                 case SEARCH.lrc_app_info:
-                    ApplicationInfo.I.Clean(preview);
+                    await ApplicationInfo.I.Clean(preview);
                     BadKeys.AddRange(ApplicationInfo.I.BadKeys);
 
                     break;
                 case SEARCH.lrc_progam_location:
-                    ApplicationPaths.I.Clean(preview);
+                    await ApplicationPaths.I.Clean(preview);
                     BadKeys.AddRange(ApplicationPaths.I.BadKeys);
 
                     break;
                 case SEARCH.lrc_software_settings:
-                    ApplicationSettings.I.Clean(preview);
+                    await ApplicationSettings.I.Clean(preview);
                     BadKeys.AddRange(ApplicationSettings.I.BadKeys);
 
                     break;
                 case SEARCH.lrc_startup:
-                    StartupFiles.I.Clean(preview);
+                    await StartupFiles.I.Clean(preview);
                     BadKeys.AddRange(StartupFiles.I.BadKeys);
 
                     break;
                 case SEARCH.lrc_system_drivers:
-                    SystemDrivers.I.Clean(preview);
+                    await SystemDrivers.I.Clean(preview);
                     BadKeys.AddRange(SystemDrivers.I.BadKeys);
 
                     break;
                 case SEARCH.lrc_shared_dll:
-                    SharedDLLs.I.Clean(preview);
+                    await SharedDLLs.I.Clean(preview);
                     BadKeys.AddRange(SharedDLLs.I.BadKeys);
 
                     break;
                 case SEARCH.lrc_help_file:
-                    WindowsHelpFiles.I.Clean(preview);
+                    await WindowsHelpFiles.I.Clean(preview);
                     BadKeys.AddRange(WindowsHelpFiles.I.BadKeys);
 
                     break;
                 case SEARCH.lrc_sound_event:
-                    WindowsSounds.I.Clean(preview);
+                    await WindowsSounds.I.Clean(preview);
                     BadKeys.AddRange(WindowsSounds.I.BadKeys);
 
                     break;
                 case SEARCH.lrc_history_list:
-                    RecentDocs.I.Clean(preview);
+                    await RecentDocs.I.Clean(preview);
                     BadKeys.AddRange(RecentDocs.I.BadKeys);
 
                     break;
                 case SEARCH.lrc_win_fonts:
-                    WindowsFonts.I.Clean(preview);
+                    await WindowsFonts.I.Clean(preview);
                     BadKeys.AddRange(WindowsFonts.I.BadKeys);
 
                     break;
@@ -662,7 +665,7 @@ namespace mCleaner.Logics
 
                 if (preview)
                 {
-                    UpdateProgressLog(log);
+                    UpdateProgressLog(log, false);
                 }
                 else
                 {
@@ -671,6 +674,8 @@ namespace mCleaner.Logics
 
                 this.TotalSpecialOperations++;
             }
+
+            return true;
         }
         #endregion
 
@@ -776,9 +781,9 @@ namespace mCleaner.Logics
             });
         }
 
-        void UpdateProgressLog(string text)
+        void UpdateProgressLog(string text, bool update_progress_text = true)
         {
-            ProgressWorker.I.EnQ(text);
+            if(update_progress_text) ProgressWorker.I.EnQ(text);
 
             Help.RunInBackground(() =>
             {
