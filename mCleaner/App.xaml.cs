@@ -6,6 +6,7 @@ using System.Configuration;
 using System.Data;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -30,6 +31,16 @@ namespace mCleaner
 
             // Enable needed privileges
             Permissions.SetPrivileges(true);
+
+            Version version = Assembly.GetEntryAssembly().GetName().Version;
+            string s_version = version.ToString();
+
+            if (s_version != mCleaner.Properties.Settings.Default.Version)
+            {
+                mCleaner.Properties.Settings.Default.Upgrade();
+                mCleaner.Properties.Settings.Default.Version = s_version;
+                mCleaner.Properties.Settings.Default.Save();
+            }
 
             // check for clamwin installation and
             // decide which database to use

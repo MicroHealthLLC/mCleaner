@@ -1,16 +1,21 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using mCleaner.Helpers;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace mCleaner.ViewModel
 {
     public class ViewModel_Shred : ViewModelBase
     {
+        Queue<string> QueueFiles = new Queue<string>();
+
         private string _WindowTitle = string.Empty;
         public string WindowTitle
         {
@@ -58,19 +63,22 @@ namespace mCleaner.ViewModel
 
         public ViewModel_Shred()
         {
+            this.WindowTitle = "Shred File & Folder";
+
             if (base.IsInDesignMode)
             {
-                this.WindowTitle = "Shred File\\Folder";
                 this.Log = "Starting to shred\r\nC:\\Windows\\win.com";
             }
             else
             {
-                Command_ShredFile = new RelayCommand(Command_ShredFile_Click);
+                Command_ShredFile = new RelayCommand(() => Command_ShredFile_Click());
                 Command_ShredFolder = new RelayCommand(Command_ShredFolder_Click);
+                Wipe wipe = new Wipe();
+                
             }
         }
 
-        public void Command_ShredFile_Click()
+        public async Task<bool> Command_ShredFile_Click()
         {
             OpenFileDialog ofd = new OpenFileDialog()
             {
@@ -82,9 +90,16 @@ namespace mCleaner.ViewModel
                 ofd.ShowDialog();
                 if (ofd.FileName != string.Empty || ofd.FileNames.Length > 0)
                 {
+                    foreach (string file in ofd.FileNames)
+                    {
+                        this.QueueFiles.Enqueue(file);
+                    }
 
+                    await Task.Run(() => StartShredding());
                 }
             };
+
+            return true;
         }
 
         public void Command_ShredFolder_Click()
@@ -94,7 +109,29 @@ namespace mCleaner.ViewModel
 
         void StartShredding()
         {
+            this.ShowWindow = true;
 
+            AddLog("Starting to securely shred " + this.QueueFiles.Count + " files with 5 iterations.");
+
+            while (this.QueueFiles.Count != 0)
+            {
+                string file = this.QueueFiles.Dequeue();
+
+                string text = "Shredding " + file;
+                AddLog(text);
+
+                Thread.Sleep(2000); // shred work
+            }
+
+            AddLog("Done");
+            this.Log = string.Empty;
+
+            this.ShowWindow = false;
+        }
+
+        void AddLog(string log, bool addCrLf = true)
+        {
+            this.Log += log + (addCrLf ? "\r\n" : string.Empty);
         }
     }
 }

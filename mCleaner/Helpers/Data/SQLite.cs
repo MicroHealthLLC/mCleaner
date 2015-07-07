@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.SQLite;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
+using System.IO;
 
 namespace mCleaner.Helpers
 {
@@ -49,6 +47,32 @@ namespace mCleaner.Helpers
             }
 
             return res;
+        }
+
+        public static void ExecuteNonQuery(string file, string sql)
+        {
+            FileInfo fi = new FileInfo(file);
+            string sqlitefile = "Data Source=" + fi.FullName;
+
+            using (SQLiteConnection conn = new SQLiteConnection(sqlitefile))
+            {
+                conn.Open();
+                SQLiteCommand comm = conn.CreateCommand();
+
+                Debug.WriteLine("query: " + sql);
+                comm.CommandText = sql;
+                comm.CommandType = System.Data.CommandType.Text;
+
+                try
+                {
+                    comm.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                }
+
+                conn.Close();
+            }
         }
     }
 }

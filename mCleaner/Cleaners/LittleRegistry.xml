@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- 
-	this is Little Registry Cleaner
+	this is Registry Cleaner
 	DO NOT CHANGE THE PATH ATTRIBUTE VALUE
 -->
 <cleaner id="little_reg" os="windows">
-  <label>Little Registry Cleaner</label>
+  <label>Registry Cleaner</label>
   <description>Registry Cleaner</description>
   <option id="activex">
     <label>ActiveX/Com</label>

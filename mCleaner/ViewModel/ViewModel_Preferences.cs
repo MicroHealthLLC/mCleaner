@@ -2,8 +2,13 @@
 using GalaSoft.MvvmLight.Command;
 using mCleaner.Helpers;
 using mCleaner.Properties;
+using System.Collections.Specialized;
 using System.Windows;
 using System.Windows.Input;
+using System.Linq;
+using Microsoft.Win32;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
 
 namespace mCleaner.ViewModel
 {
@@ -153,12 +158,46 @@ namespace mCleaner.ViewModel
                 }
             }
         }
+
+        private ObservableCollection<string> _Whitelist = new ObservableCollection<string>();
+        public ObservableCollection<string> Whitelist
+        {
+            get { return _Whitelist; }
+            set
+            {
+                if (_Whitelist != value)
+                {
+                    _Whitelist = value;
+                    base.RaisePropertyChanged("Whitelist");
+                }
+            }
+        }
+
+        private ObservableCollection<string> _CustomLocationList = new ObservableCollection<string>();
+        public ObservableCollection<string> CustomLocationList
+        {
+            get { return _CustomLocationList; }
+            set
+            {
+                if (_CustomLocationList != value)
+                {
+                    _CustomLocationList = value;
+                    base.RaisePropertyChanged("CustomLocationList");
+                }
+            }
+        }
         #endregion
 
         #region commands
         public ICommand Command_OK { get; set; }
         public ICommand Command_CloseWindow { get; set; }
         public ICommand Command_Menu_Preferences { get; set; }
+        public ICommand Command_CustomLocation_AddFile { get; set; }
+        public ICommand Command_CustomLocation_AddFolder { get; set; }
+        public ICommand Command_CustomLocation_RemoveSelected { get; set; }
+        public ICommand Command_Whitelist_AddFile { get; set; }
+        public ICommand Command_Whitelist_AddFolder { get; set; }
+        public ICommand Command_Whitelist_RemoveSelected { get; set; }
         #endregion
 
         #region ctor
@@ -167,12 +206,25 @@ namespace mCleaner.ViewModel
             if (base.IsInDesignMode)
             {
                 this.ShowWindow = false;
+
+                this.CustomLocationList.Add("One");
+                this.CustomLocationList.Add("Two");
+                this.CustomLocationList.Add("Three");
+                this.CustomLocationList.Add("Four");
             }
             else
             {
                 Command_OK = new RelayCommand(Command_OK_Click);
                 Command_CloseWindow = new RelayCommand(Command_CloseWindow_Click);
                 Command_Menu_Preferences = new RelayCommand(Command_Menu_Preferences_Click);
+
+                Command_CustomLocation_AddFile = new RelayCommand(Command_CustomLocation_AddFile_Click);
+                Command_CustomLocation_AddFolder = new RelayCommand(Command_CustomLocation_AddFolder_Click);
+                Command_CustomLocation_RemoveSelected = new RelayCommand<string>(Command_CustomLocation_RemoveSelected_Click);
+
+                Command_Whitelist_AddFile = new RelayCommand(Command_Whitelist_AddFile_Click);
+                Command_Whitelist_AddFolder = new RelayCommand(Command_Whitelist_AddFolder_Click);
+                Command_Whitelist_RemoveSelected = new RelayCommand<string>(Command_Whitelist_RemoveSelected_Click);
 
                 ReadSettings();
             }
@@ -192,6 +244,86 @@ namespace mCleaner.ViewModel
         void Command_Menu_Preferences_Click()
         {
             this.ShowWindow = true;
+        }
+
+        void Command_CustomLocation_AddFile_Click()
+        {
+            OpenFileDialog ofd = new OpenFileDialog()
+            {
+                Title = "Select file to add",
+                Filter = "All files|*.*",
+                Multiselect = true
+            };
+            ofd.ShowDialog();
+            if (ofd.FileName != string.Empty && ofd.FileNames.Length > 0)
+            {
+                foreach (string s in ofd.FileNames)
+                {
+                    if (!this.CustomLocationList.Contains(s))
+                    {
+                        this.CustomLocationList.Add(s);
+                    }
+                }
+            }
+        }
+        void Command_CustomLocation_AddFolder_Click()
+        {
+            System.Windows.Forms.FolderBrowserDialog fbd = new System.Windows.Forms.FolderBrowserDialog();
+            fbd.ShowDialog();
+            if (fbd.SelectedPath != string.Empty)
+            {
+                if (!this.CustomLocationList.Contains(fbd.SelectedPath))
+                {
+                    this.CustomLocationList.Add(fbd.SelectedPath);
+                }
+            }
+        }
+        void Command_CustomLocation_RemoveSelected_Click(string selected)
+        {
+            if (this.CustomLocationList.Contains(selected))
+            {
+                this.CustomLocationList.Remove(selected);
+            }
+        }
+
+        void Command_Whitelist_AddFile_Click()
+        {
+            OpenFileDialog ofd = new OpenFileDialog()
+            {
+                Title = "Select file to add",
+                Filter = "All files|*.*",
+                Multiselect = true
+            };
+            ofd.ShowDialog();
+            if (ofd.FileName != string.Empty && ofd.FileNames.Length > 0)
+            {
+                foreach (string s in ofd.FileNames)
+                {
+                    if (!this.Whitelist.Contains(s))
+                    {
+                        this.Whitelist.Add(s);
+                    }
+                }
+            }
+        }
+        void Command_Whitelist_AddFolder_Click()
+        {
+            System.Windows.Forms.FolderBrowserDialog fbd = new System.Windows.Forms.FolderBrowserDialog();
+            fbd.ShowDialog();
+            if (fbd.SelectedPath != string.Empty)
+            {
+                if (!this.Whitelist.Contains(fbd.SelectedPath))
+                {
+                    this.Whitelist.Add(fbd.SelectedPath);
+                }
+            }
+        }
+        void Command_Whitelist_RemoveSelected_Click(string selected)
+        {
+            if (this.Whitelist.Contains(selected))
+            {
+                this.Whitelist.Remove(selected);
+            }
         }
         #endregion
 
@@ -218,6 +350,25 @@ namespace mCleaner.ViewModel
             this.HideIrrelevantCleaners     = Settings.Default.HideIrrelevantCleaners;
             this.ShredFiles                 = Settings.Default.ShredFiles;
             this.StartWhenSystemStarts      = Settings.Default.StartWhenSystemStarts;
+            //this.Whitelist                  = Settings.Default.WhitelistCollection;
+            //this.CustomLocationList         = Settings.Default.CustomLocationForDeletion;
+            if (Settings.Default.WhitelistCollection != null)
+            {
+                this.Whitelist.Clear();
+                foreach (string s in Settings.Default.WhitelistCollection)
+                {
+                    this.Whitelist.Add(s);
+                }
+            }
+
+            if (Settings.Default.CustomLocationForDeletion != null)
+            {
+                this.CustomLocationList.Clear();
+                foreach (string s in Settings.Default.CustomLocationForDeletion)
+                {
+                    this.CustomLocationList.Add(s);
+                }
+            }
         }
 
         void WriteSettings()
@@ -254,6 +405,13 @@ namespace mCleaner.ViewModel
             Settings.Default.HideIrrelevantCleaners     = this.HideIrrelevantCleaners;
             Settings.Default.ShredFiles                 = this.ShredFiles;
             Settings.Default.StartWhenSystemStarts      = this.StartWhenSystemStarts;
+
+            if (Settings.Default.CustomLocationForDeletion == null) Settings.Default.CustomLocationForDeletion = new StringCollection();
+            Settings.Default.CustomLocationForDeletion.Clear();
+            Settings.Default.CustomLocationForDeletion.AddRange(this.CustomLocationList.ToArray());
+            if (Settings.Default.WhitelistCollection == null) Settings.Default.WhitelistCollection = new StringCollection();
+            Settings.Default.WhitelistCollection.Clear();
+            Settings.Default.WhitelistCollection.AddRange(this.Whitelist.ToArray());
 
             RegistryHelper.I.RegisterStartup(this.StartWhenSystemStarts);
 

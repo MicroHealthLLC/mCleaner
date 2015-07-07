@@ -11,7 +11,7 @@ namespace mCleaner.Logics
         BackgroundWorker _bgWorker = new BackgroundWorker();
         Queue<string> _q = new Queue<string>();
 
-        int _interval_s = 2; // interval when to show the progress text
+        int _interval_s = 0; // interval when to show the progress text
         DateTime _start = DateTime.Now;
         DateTime _end = DateTime.Now;
 
@@ -39,7 +39,9 @@ namespace mCleaner.Logics
         {
             while (this._bgWorker.CancellationPending == false)
             {
-                if (this._q.Count > 0)
+                //if (this._q.Count > -1 )
+                if (this._q.Count == 0) continue;
+
                 {
                     string log = this._q.Dequeue();
 

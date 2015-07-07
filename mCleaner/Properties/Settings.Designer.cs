@@ -198,5 +198,39 @@ namespace mCleaner.Properties {
                 this["StartWhenSystemStarts"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1.0.0.0")]
+        public string Version {
+            get {
+                return ((string)(this["Version"]));
+            }
+            set {
+                this["Version"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Collections.Specialized.StringCollection CustomLocationForDeletion {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["CustomLocationForDeletion"]));
+            }
+            set {
+                this["CustomLocationForDeletion"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Collections.Specialized.StringCollection WhitelistCollection {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["WhitelistCollection"]));
+            }
+            set {
+                this["WhitelistCollection"] = value;
+            }
+        }
     }
 }

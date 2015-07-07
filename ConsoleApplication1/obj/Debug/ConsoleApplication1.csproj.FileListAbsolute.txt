@@ -1,0 +1,8 @@
+D:\Clients\oDesk\2015\Frank\MicroHealthLLC_Git\mCleaner\mCleaner\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe.config
+D:\Clients\oDesk\2015\Frank\MicroHealthLLC_Git\mCleaner\mCleaner\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe
+D:\Clients\oDesk\2015\Frank\MicroHealthLLC_Git\mCleaner\mCleaner\ConsoleApplication1\bin\Debug\ConsoleApplication1.pdb
+D:\Clients\oDesk\2015\Frank\MicroHealthLLC_Git\mCleaner\mCleaner\ConsoleApplication1\bin\Debug\Newtonsoft.Json.dll
+D:\Clients\oDesk\2015\Frank\MicroHealthLLC_Git\mCleaner\mCleaner\ConsoleApplication1\bin\Debug\Newtonsoft.Json.xml
+D:\Clients\oDesk\2015\Frank\MicroHealthLLC_Git\mCleaner\mCleaner\ConsoleApplication1\obj\Debug\ConsoleApplication1.csprojResolveAssemblyReference.cache
+D:\Clients\oDesk\2015\Frank\MicroHealthLLC_Git\mCleaner\mCleaner\ConsoleApplication1\obj\Debug\ConsoleApplication1.exe
+D:\Clients\oDesk\2015\Frank\MicroHealthLLC_Git\mCleaner\mCleaner\ConsoleApplication1\obj\Debug\ConsoleApplication1.pdb

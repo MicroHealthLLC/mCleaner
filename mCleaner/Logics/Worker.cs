@@ -1,6 +1,7 @@
 ﻿using mCleaner.Helpers;
 using mCleaner.Helpers.Data;
 using mCleaner.Logics.Clam;
+using mCleaner.Logics.Commands;
 using mCleaner.Logics.Commands.LittleRegistryCleaner.Scanners;
 using mCleaner.Logics.Enumerations;
 using mCleaner.Model;
@@ -202,48 +203,48 @@ namespace mCleaner.Logics
                 switch (ttd.command)
                 {
                     case COMMANDS.delete:
-                        ExecuteDeleteCommand(ttd, true);
+                        await Task.Run(() => ExecuteDeleteCommand(ttd, true));
                         break;
 
                     #region // special commands
                     case COMMANDS.winreg:
-                        ExecuteWinRegCommand(ttd, true);
+                        await Task.Run(() => ExecuteWinRegCommand(ttd, true));
                         break;
                     case COMMANDS.sqlite_vacuum:
-                        ExecuteSQLiteVacuumCommand(ttd, true);
+                        await Task.Run(() => ExecuteSQLiteVacuumCommand(ttd, true));
                         break;
                     #endregion
 
                     #region // other special commands
                     case COMMANDS.ini:
-                        ExecuteIniCommand(ttd, true);
+                        await Task.Run(() => ExecuteIniCommand(ttd, true));
                         break;
                     case COMMANDS.json:
-                        ExecuteJSONCommand(ttd, true);
+                        await Task.Run(() => ExecuteJSONCommand(ttd, true));
                         break;
                     #endregion
 
                     #region // Google Chrome commands
                     case COMMANDS.chrome_autofill:
-                        ExecuteChromeCommand(ttd, true);
+                        await Task.Run(() => ExecuteChromeCommand(ttd, true));
                         break;
                     case COMMANDS.chrome_database_db:
-                        ExecuteChromeCommand(ttd, true);
+                        await Task.Run(() => ExecuteChromeCommand(ttd, true));
                         break;
                     case COMMANDS.chrome_favicons:
-                        ExecuteChromeCommand(ttd, true);
+                        await Task.Run(() => ExecuteChromeCommand(ttd, true));
                         break;
                     case COMMANDS.chrome_history:
-                        ExecuteChromeCommand(ttd, true);
+                        await Task.Run(() => ExecuteChromeCommand(ttd, true));
                         break;
                     case COMMANDS.chrome_keywords:
-                        ExecuteChromeCommand(ttd, true);
+                        await Task.Run(() => ExecuteChromeCommand(ttd, true));
                         break;
                     #endregion
 
                     #region // ClamWin
                     case COMMANDS.clamscan:
-                        ExecuteClamWinCommand(ttd, true);
+                        await Task.Run(() => ExecuteClamWinCommand(ttd, true));
                         break;
                     #endregion
 
@@ -533,7 +534,24 @@ namespace mCleaner.Logics
             }
             else
             {
-
+                switch (ttd.command)
+                {
+                    case COMMANDS.chrome_autofill:
+                        CommandLogic_Chrome.CleanAutofill(ttd.FullPathName);
+                        break;
+                    case COMMANDS.chrome_database_db:
+                        CommandLogic_Chrome.CleanDatabases(ttd.FullPathName);
+                        break;
+                    case COMMANDS.chrome_favicons:
+                        CommandLogic_Chrome.CleanFavIcons(ttd.FullPathName);
+                        break;
+                    case COMMANDS.chrome_history:
+                        CommandLogic_Chrome.CleanHistory(ttd.FullPathName);
+                        break;
+                    case COMMANDS.chrome_keywords:
+                        CommandLogic_Chrome.CleanKeywords(ttd.FullPathName);
+                        break;
+                }
             }
         }
 
@@ -771,27 +789,19 @@ namespace mCleaner.Logics
 
             _execute_log += string.Format(final_note, Win32API.FormatByteSize(this.TotalFileSize), this.TotalFileDelete, this.TotalSpecialOperations);
 
-            Help.RunInBackground(() =>
-            {
-                CleanerML.ProgressText = "Done";
-                CleanerML.TextLog = text;
-
-                CleanerML.ProgressIndex = 0;
-                CleanerML.MaxProgress = 0;
-            });
+            ProgressWorker.I.EnQ("Done");
+            CleanerML.TextLog = text;
+            CleanerML.ProgressIndex = 0;
+            CleanerML.MaxProgress = 0;
         }
 
         void UpdateProgressLog(string text, bool update_progress_text = true)
         {
             if(update_progress_text) ProgressWorker.I.EnQ(text);
 
-            Help.RunInBackground(() =>
-            {
-                CleanerML.TextLog = _preview_log;
-                //CleanerML.ProgressText = text;
-                CleanerML.MaxProgress = this.TTD.Count;
-                CleanerML.ProgressIndex++;
-            }, false);
+            CleanerML.TextLog = _preview_log;
+            CleanerML.MaxProgress = this.TTD.Count;
+            CleanerML.ProgressIndex++;
         }
         #endregion
     }

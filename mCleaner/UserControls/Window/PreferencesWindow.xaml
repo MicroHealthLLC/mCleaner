@@ -48,7 +48,7 @@
                             <CheckBox x:Name="cbStartBleachBitBoot" Content="Start BleachBit with computer" IsChecked="{Binding Prefs.StartWhenSystemStarts, Mode=TwoWay}" />
                         </StackPanel>
                     </TabItem>
-                    <TabItem IsEnabled="False" Header="Custom">
+                    <TabItem IsEnabled="True" Header="Custom">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="auto" />
@@ -60,20 +60,20 @@
                             <TextBlock Text="These locations can be selected for deletion." TextAlignment="Center" />
 
                             <TextBlock Text="Path" Grid.Row="1" />
-                            <ListBox Grid.Row="2" BorderThickness="0" x:Name="lbCustom">
+                            <ListBox Grid.Row="2" BorderThickness="0" x:Name="lbCustom" ItemsSource="{Binding Prefs.CustomLocationList}">
 
                             </ListBox>
 
                             <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="3">
-                                <Button x:Name="Custom_btnAddFile" Content=" Add file " Style="{StaticResource ButtonStyle}" />
+                                <Button x:Name="Custom_btnAddFile" Content=" Add file " Style="{StaticResource ButtonStyle}"  Command="{Binding Prefs.Command_CustomLocation_AddFile}"/>
                                 <TextBlock Text=" " />
-                                <Button x:Name="Custom_btnAddFolder" Content=" Add folder " Style="{StaticResource ButtonStyle}"/>
+                                <Button x:Name="Custom_btnAddFolder" Content=" Add folder " Style="{StaticResource ButtonStyle}" Command="{Binding Prefs.Command_CustomLocation_AddFolder}"/>
                                 <TextBlock Text=" " />
-                                <Button x:Name="Custom_btnRemove" Content=" Remove " Style="{StaticResource ButtonStyle}"/>
+                                <Button x:Name="Custom_btnRemove" Content=" Remove " Style="{StaticResource ButtonStyle}" Command="{Binding Prefs.Command_CustomLocation_RemoveSelected}" CommandParameter="{Binding SelectedItem, ElementName=lbCustom}"/>
                             </StackPanel>
                         </Grid>
                     </TabItem>
-                    <TabItem  IsEnabled="False" Header="Whitelist">
+                    <TabItem  IsEnabled="True" Header="Whitelist">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="auto" />
@@ -85,16 +85,16 @@
                             <TextBlock Text="These paths will not be deleted or modified" TextAlignment="Center" />
 
                             <TextBlock Text="Path" Grid.Row="1" />
-                            <ListBox Grid.Row="2" BorderThickness="0" x:Name="lbWhitelist">
+                            <ListBox Grid.Row="2" BorderThickness="0" x:Name="lbWhitelist" ItemsSource="{Binding Prefs.Whitelist}">
 
                             </ListBox>
 
                             <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="3">
-                                <Button x:Name="Whitelist_btnAddFile" Content=" Add file " Style="{StaticResource ButtonStyle}"/>
+                                <Button x:Name="Whitelist_btnAddFile" Content=" Add file " Style="{StaticResource ButtonStyle}" Command="{Binding Prefs.Command_Whitelist_AddFile}"/>
                                 <TextBlock Text=" " />
-                                <Button x:Name="Whitelist_btnAddFolder" Content=" Add folder " Style="{StaticResource ButtonStyle}"/>
+                                <Button x:Name="Whitelist_btnAddFolder" Content=" Add folder " Style="{StaticResource ButtonStyle}" Command="{Binding Prefs.Command_Whitelist_AddFolder}"/>
                                 <TextBlock Text=" " />
-                                <Button x:Name="Whitelist_btnRemove" Content=" Remove " Style="{StaticResource ButtonStyle}"/>
+                                <Button x:Name="Whitelist_btnRemove" Content=" Remove " Style="{StaticResource ButtonStyle}" Command="{Binding Prefs.Command_Whitelist_RemoveSelected}" CommandParameter="{Binding SelectedItem, ElementName=lbWhitelist}"/>
                             </StackPanel>
                         </Grid>
                     </TabItem>

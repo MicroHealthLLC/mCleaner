@@ -158,13 +158,13 @@ namespace mCleaner.ViewModel
         #endregion
 
         #region command methods
-        public void Command_Preview_Click()
+        public async void Command_Preview_Click()
         {
             Worker.I.Preview = true;
             this.Run = true;
 
             Start();
-            Worker.I.PreviewWork();
+            await Worker.I.PreviewWork();
         }
 
         public void Command_Clean_Click()
@@ -311,6 +311,8 @@ namespace mCleaner.ViewModel
                         }
                     }
                 }
+
+                AddSystemCleaner();
             }
 
             return this.CleanersCollection;
@@ -400,13 +402,6 @@ namespace mCleaner.ViewModel
                             // child's tag has option object
                             option o = (option)child.Tag;
 
-                            //Help.RunInBackground(() =>
-                            //{
-                            //    this.ProgressText = "Please wait. " + (Worker.I.Preview ? "Previewing" : "Working on") + " " + o.parent_cleaner.label;
-                            //    this.ProgressIndex = 0;
-                            //    this.MaxProgress = 0;
-                            //});
-
                             this.ProgressIsIndeterminate = true;
                             ProgressWorker.I.EnQ("Please wait. " + (Worker.I.Preview ? "Previewing" : "Working on") + " " + o.parent_cleaner.label);
 
@@ -415,6 +410,8 @@ namespace mCleaner.ViewModel
                     }
                 }
             }
+
+            //AddCustomLocationsToTTD();
         }
 
         public void ExecuteOption(option o)
@@ -491,6 +488,88 @@ namespace mCleaner.ViewModel
                 }
             }
         }
+
+        #region System cleaner 
+        void AddSystemCleaner()
+        {
+            cleaner c = new cleaner()
+            {
+                id = "system",
+                label = "System",
+                option = new List<option>()
+            };
+
+            TreeNode root = new TreeNode();
+            root = new TreeNode(c.label, c.id);
+            root.Tag = c;
+            root.TreeNodeChecked += TeeNode_TreeNodeChecked;
+            root.TreeNodeSelected += TreeNode_TreeNodeSelected;
+            root.Children = new List<TreeNode>();
+
+            c.option.Add(AddCustomLocationsToTTD());
+
+            foreach (option o in c.option)
+            {
+                o.parent_cleaner = c;
+
+                TreeNode child = new TreeNode(o.label, o.id);
+                child.Tag = o;
+                child.TreeNodeChecked += TeeNode_TreeNodeChecked;
+                child.TreeNodeSelected += TreeNode_TreeNodeSelected;
+                child.Initialize();
+
+                root.Children.Add(child);
+
+                foreach (action a in o.action)
+                {
+                    a.parent_option = o;
+                }
+            }
+
+            root.Initialize();
+            this.CleanersCollection.Add(root);
+        }
+
+        option AddCustomLocationsToTTD()
+        {
+            option o = new option()
+            {
+                id = "custom_locations",
+                label = "Custom Location",
+                action = new List<action>()
+            };
+
+            if (mCleaner.Properties.Settings.Default.CustomLocationForDeletion != null)
+            {
+
+                foreach (string filepath in mCleaner.Properties.Settings.Default.CustomLocationForDeletion)
+                {
+                    if (File.Exists(filepath))
+                    {
+                        o.action.Add(new action()
+                        {
+                            command = "delete",
+                            search = "file",
+                            path = filepath,
+                            parent_option = o
+                        });
+                    }
+                    else if (Directory.Exists(filepath))
+                    {
+                        o.action.Add(new action()
+                        {
+                            command = "delete",
+                            search = "walk.all",
+                            path = filepath,
+                            parent_option = o
+                        });
+                    }
+                }
+            }
+
+            return o;
+        }
+        #endregion
         #endregion
     }
 }

@@ -19,9 +19,8 @@
             <!-- menu bar -->
             <Menu IsMainMenu="True" Grid.Row="0">
                 <MenuItem Header="_File">
-                    <MenuItem IsEnabled="False" Header="_Shred Files" Command="{Binding ShredWindow.Command_ShredFile}" />
-                    <MenuItem IsEnabled="False" Header="Sh_red Folders" Command="{Binding ShredWindow.Command_ShredFile}" />
-                    <MenuItem IsEnabled="False" Header="_Wipe Free Space" />
+                    <MenuItem IsEnabled="True" Header="_Shred Files" Command="{Binding ShredWindow.Command_ShredFile}" />
+                    <MenuItem IsEnabled="True" Header="Sh_red Folders" Command="{Binding ShredWindow.Command_ShredFolder}" />
                     <MenuItem IsEnabled="False" Header="S_hred Settings and Quit" />
                     <MenuItem Header="_Quit" Command="{Binding CleanerML.Command_Quit}">
                         <MenuItem.Icon>
@@ -135,6 +134,6 @@
 
         <ucw:ClamWindow Visibility="{Binding Clam.ShowClamWinVirusUpdateWindow, Converter={StaticResource boolTovis}}"/>
         <ucw:PreferencesWindow Visibility="{Binding Prefs.ShowWindow, Converter={StaticResource boolTovis}}"/>
-        <ucw:ShredWindow Visibility="Collapsed" />
+        <ucw:ShredWindow Visibility="{Binding ShredWindow.ShowWindow, Converter={StaticResource boolTovis}}" />
     </Grid>
 </Window>
