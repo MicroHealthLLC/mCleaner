@@ -30,8 +30,8 @@ namespace mCleaner.Logics
         string _execute_log = string.Empty;
         #endregion
 
-        #region perview
-        ViewModel_CleanerML CleanerML
+        #region properties
+        ViewModel_CleanerML VMCleanerML
         {
             get
             {
@@ -47,24 +47,6 @@ namespace mCleaner.Logics
             }
         }
 
-        private Queue<Model_ThingsToDelete> _TTD = new Queue<Model_ThingsToDelete>();
-        public Queue<Model_ThingsToDelete> TTD
-        {
-            get { return _TTD; }
-            set
-            {
-                if (_TTD != value)
-                {
-                    _TTD = value;
-
-                    if (CleanerML.MaxProgress == 0)
-                    {
-                        CleanerML.MaxProgress = value.Count();
-                    }
-                }
-            }
-        }
-
         /// <summary>
         /// set to true by default
         /// </summary>
@@ -77,6 +59,24 @@ namespace mCleaner.Logics
                 if (_Preview != value)
                 {
                     _Preview = value;
+                }
+            }
+        }
+
+        private Queue<Model_ThingsToDelete> _TTD = new Queue<Model_ThingsToDelete>();
+        public Queue<Model_ThingsToDelete> TTD
+        {
+            get { return _TTD; }
+            set
+            {
+                if (_TTD != value)
+                {
+                    _TTD = value;
+
+                    if (VMCleanerML.MaxProgress == 0)
+                    {
+                        VMCleanerML.MaxProgress = value.Count();
+                    }
                 }
             }
         }
@@ -115,10 +115,10 @@ namespace mCleaner.Logics
             {
                 _execute_log += e.UserState.ToString();
 
-                CleanerML.TextLog = _execute_log;
-                CleanerML.ProgressText = e.UserState.ToString();
-                CleanerML.MaxProgress = this.TTD.Count;
-                CleanerML.ProgressIndex++;
+                VMCleanerML.TextLog = _execute_log;
+                VMCleanerML.ProgressText = e.UserState.ToString();
+                VMCleanerML.MaxProgress = this.TTD.Count;
+                VMCleanerML.ProgressIndex++;
             }
         }
 
@@ -135,7 +135,8 @@ namespace mCleaner.Logics
                     switch (ttd.command)
                     {
                         case COMMANDS.delete:
-                            ExecuteDeleteCommand(ttd);
+                            //ExecuteDeleteCommand(ttd);
+                            CommandLogic_Delete.I.ExecuteDeleteCommand(ttd, this.bgWorker, this.TTD);
                             break;
 
                         #region // special commands
@@ -204,6 +205,7 @@ namespace mCleaner.Logics
                 {
                     case COMMANDS.delete:
                         await Task.Run(() => ExecuteDeleteCommand(ttd, true));
+                        //await Task.Run(() => CommandLogic_Delete.I.ExecuteDeleteCommand(ttd, this.bgWorker, this.TTD, true));
                         break;
 
                     #region // special commands
@@ -265,10 +267,10 @@ namespace mCleaner.Logics
         {
             this.TTD.Reverse(); // reverse our Stack
 
-            CleanerML.MaxProgress = 0;
-            CleanerML.ProgressIndex = 0;
+            VMCleanerML.MaxProgress = 0;
+            VMCleanerML.ProgressIndex = 0;
             _execute_log = string.Empty;
-            CleanerML.TextLog = _execute_log;
+            VMCleanerML.TextLog = _execute_log;
 
             bgWorker.RunWorkerAsync();
         }
@@ -762,10 +764,10 @@ namespace mCleaner.Logics
                 TotalWork = 0;
                 TotalSpecialOperations = 0;
 
-                CleanerML.MaxProgress = 0;
-                CleanerML.ProgressIndex = 0;
+                VMCleanerML.MaxProgress = 0;
+                VMCleanerML.ProgressIndex = 0;
                 _execute_log = string.Empty;
-                CleanerML.TextLog = _execute_log;
+                VMCleanerML.TextLog = _execute_log;
             }
 
             this.TTD.Clear();
@@ -790,18 +792,18 @@ namespace mCleaner.Logics
             _execute_log += string.Format(final_note, Win32API.FormatByteSize(this.TotalFileSize), this.TotalFileDelete, this.TotalSpecialOperations);
 
             ProgressWorker.I.EnQ("Done");
-            CleanerML.TextLog = text;
-            CleanerML.ProgressIndex = 0;
-            CleanerML.MaxProgress = 0;
+            VMCleanerML.TextLog = text;
+            VMCleanerML.ProgressIndex = 0;
+            VMCleanerML.MaxProgress = 0;
         }
 
         void UpdateProgressLog(string text, bool update_progress_text = true)
         {
             if(update_progress_text) ProgressWorker.I.EnQ(text);
 
-            CleanerML.TextLog = _preview_log;
-            CleanerML.MaxProgress = this.TTD.Count;
-            CleanerML.ProgressIndex++;
+            VMCleanerML.TextLog = _preview_log;
+            VMCleanerML.MaxProgress = this.TTD.Count;
+            VMCleanerML.ProgressIndex++;
         }
         #endregion
     }

@@ -186,6 +186,20 @@ namespace mCleaner.ViewModel
                 }
             }
         }
+
+        private ObservableCollection<string> _ClamWin_ScanLocations = new ObservableCollection<string>();
+        public ObservableCollection<string> ClamWinScanLocations
+        {
+            get { return _ClamWin_ScanLocations; }
+            set
+            {
+                if (_ClamWin_ScanLocations != value)
+                {
+                    _CustomLocationList = value;
+                    base.RaisePropertyChanged("ClamWinScanLocations");
+                }
+            }
+        }
         #endregion
 
         #region commands
@@ -198,6 +212,9 @@ namespace mCleaner.ViewModel
         public ICommand Command_Whitelist_AddFile { get; set; }
         public ICommand Command_Whitelist_AddFolder { get; set; }
         public ICommand Command_Whitelist_RemoveSelected { get; set; }
+        public ICommand Command_ClamAV_ScanLocation_AddFile { get; set; }
+        public ICommand Command_ClamAV_ScanLocation_AddFolder { get; set; }
+        public ICommand Command_ClamAV_ScanLocation_RemoveSelected { get; set; }
         #endregion
 
         #region ctor
@@ -225,6 +242,10 @@ namespace mCleaner.ViewModel
                 Command_Whitelist_AddFile = new RelayCommand(Command_Whitelist_AddFile_Click);
                 Command_Whitelist_AddFolder = new RelayCommand(Command_Whitelist_AddFolder_Click);
                 Command_Whitelist_RemoveSelected = new RelayCommand<string>(Command_Whitelist_RemoveSelected_Click);
+
+                Command_ClamAV_ScanLocation_AddFile = new RelayCommand(Command_ClamAV_ScanLocation_AddFile_Click);
+                Command_ClamAV_ScanLocation_AddFolder = new RelayCommand(Command_ClamAV_ScanLocation_AddFolder_Click);
+                Command_ClamAV_ScanLocation_RemoveSelected = new RelayCommand<string>(Command_ClamAV_ScanLocation_RemoveSelected_Click);
 
                 ReadSettings();
             }
@@ -325,6 +346,46 @@ namespace mCleaner.ViewModel
                 this.Whitelist.Remove(selected);
             }
         }
+
+        void Command_ClamAV_ScanLocation_AddFile_Click()
+        {
+            OpenFileDialog ofd = new OpenFileDialog()
+            {
+                Title = "Select file to add",
+                Filter = "All files|*.*",
+                Multiselect = true
+            };
+            ofd.ShowDialog();
+            if (ofd.FileName != string.Empty && ofd.FileNames.Length > 0)
+            {
+                foreach (string s in ofd.FileNames)
+                {
+                    if (!this.ClamWinScanLocations.Contains(s))
+                    {
+                        this.ClamWinScanLocations.Add(s);
+                    }
+                }
+            }
+        }
+        void Command_ClamAV_ScanLocation_AddFolder_Click()
+        {
+            System.Windows.Forms.FolderBrowserDialog fbd = new System.Windows.Forms.FolderBrowserDialog();
+            fbd.ShowDialog();
+            if (fbd.SelectedPath != string.Empty)
+            {
+                if (!this.ClamWinScanLocations.Contains(fbd.SelectedPath))
+                {
+                    this.ClamWinScanLocations.Add(fbd.SelectedPath);
+                }
+            }
+        }
+        void Command_ClamAV_ScanLocation_RemoveSelected_Click(string selected)
+        {
+            if (this.ClamWinScanLocations.Contains(selected))
+            {
+                this.ClamWinScanLocations.Remove(selected);
+            }
+        }
         #endregion
 
         #region methods
@@ -369,6 +430,15 @@ namespace mCleaner.ViewModel
                     this.CustomLocationList.Add(s);
                 }
             }
+
+            if (Settings.Default.ClamWin_ScanLocations != null)
+            {
+                this.ClamWinScanLocations.Clear();
+                foreach (string s in Settings.Default.ClamWin_ScanLocations)
+                {
+                    this.ClamWinScanLocations.Add(s);
+                }
+            }
         }
 
         void WriteSettings()
@@ -409,9 +479,15 @@ namespace mCleaner.ViewModel
             if (Settings.Default.CustomLocationForDeletion == null) Settings.Default.CustomLocationForDeletion = new StringCollection();
             Settings.Default.CustomLocationForDeletion.Clear();
             Settings.Default.CustomLocationForDeletion.AddRange(this.CustomLocationList.ToArray());
+
             if (Settings.Default.WhitelistCollection == null) Settings.Default.WhitelistCollection = new StringCollection();
             Settings.Default.WhitelistCollection.Clear();
             Settings.Default.WhitelistCollection.AddRange(this.Whitelist.ToArray());
+
+            if (Settings.Default.ClamWin_ScanLocations == null) Settings.Default.ClamWin_ScanLocations = new StringCollection();
+            Settings.Default.ClamWin_ScanLocations.Clear();
+            Settings.Default.ClamWin_ScanLocations.AddRange(this.ClamWinScanLocations.ToArray());
+
 
             RegistryHelper.I.RegisterStartup(this.StartWhenSystemStarts);
 

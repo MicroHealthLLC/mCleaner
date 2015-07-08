@@ -100,8 +100,30 @@
                     </TabItem>
                     <TabItem Header="ClamAV">
                         <TabControl Margin="5,0,5,0">
-                            <TabItem Header="General">
-                                <TextBlock Text="" />
+                            <TabItem Header="Scan Locations">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="auto" />
+                                    </Grid.RowDefinitions>
+
+                                    <TextBlock Text="These paths will be included in scanning" TextAlignment="Center" />
+
+                                    <TextBlock Text="Path" Grid.Row="1" />
+                                    <ListBox Grid.Row="2" BorderThickness="0" x:Name="lbClamAVCustomLocation" ItemsSource="{Binding Prefs.ClamWinScanLocations}">
+
+                                    </ListBox>
+
+                                    <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="3">
+                                        <Button x:Name="ClamAV_btnAddFile" Content=" Add file " Style="{StaticResource ButtonStyle}" Command="{Binding Prefs.Command_ClamAV_ScanLocation_AddFile}"/>
+                                        <TextBlock Text=" " />
+                                        <Button x:Name="ClamAV_btnAddFolder" Content=" Add folder " Style="{StaticResource ButtonStyle}" Command="{Binding Prefs.Command_ClamAV_ScanLocation_AddFolder}"/>
+                                        <TextBlock Text=" " />
+                                        <Button x:Name="ClamAV_btnRemove" Content=" Remove " Style="{StaticResource ButtonStyle}" Command="{Binding Prefs.Command_ClamAV_ScanLocation_RemoveSelected}" CommandParameter="{Binding SelectedItem, ElementName=lbWhitelist}"/>
+                                    </StackPanel>
+                                </Grid>
                             </TabItem>
                             <TabItem  Header="Internet Update">
                                 <StackPanel Margin="5">

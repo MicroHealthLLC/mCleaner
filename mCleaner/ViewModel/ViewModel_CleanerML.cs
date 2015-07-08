@@ -507,6 +507,7 @@ namespace mCleaner.ViewModel
             root.Children = new List<TreeNode>();
 
             c.option.Add(AddCustomLocationsToTTD());
+            c.option.Add(AddClamAVCustomLocationsToTTD());
 
             foreach (option o in c.option)
             {
@@ -541,7 +542,6 @@ namespace mCleaner.ViewModel
 
             if (mCleaner.Properties.Settings.Default.CustomLocationForDeletion != null)
             {
-
                 foreach (string filepath in mCleaner.Properties.Settings.Default.CustomLocationForDeletion)
                 {
                     if (File.Exists(filepath))
@@ -560,6 +560,46 @@ namespace mCleaner.ViewModel
                         {
                             command = "delete",
                             search = "walk.all",
+                            path = filepath,
+                            parent_option = o
+                        });
+                    }
+                }
+            }
+
+            return o;
+        }
+
+        option AddClamAVCustomLocationsToTTD()
+        {
+            option o = new option()
+            {
+                id = "clamav+custom_locations",
+                label = "ClamAV Custom Location",
+                description = "ClamAV custom locations",
+                action = new List<action>()
+            };
+
+            if (mCleaner.Properties.Settings.Default.ClamWin_ScanLocations != null)
+            {
+                foreach (string filepath in mCleaner.Properties.Settings.Default.ClamWin_ScanLocations)
+                {
+                    if (File.Exists(filepath))
+                    {
+                        o.action.Add(new action()
+                        {
+                            command = "clamscan",
+                            search = "clamscan.file",
+                            path = filepath,
+                            parent_option = o
+                        });
+                    }
+                    else if (Directory.Exists(filepath))
+                    {
+                        o.action.Add(new action()
+                        {
+                            command = "clamscan",
+                            search = "clamscan.folder",
                             path = filepath,
                             parent_option = o
                         });

@@ -103,6 +103,7 @@
     <Compile Include="Helpers\System\Shredder.cs" />
     <Compile Include="Helpers\System\Utils.cs" />
     <Compile Include="Logics\Commands\Clam\CommandLogic_Clam.cs" />
+    <Compile Include="Logics\Commands\CommandLogic_Base.cs" />
     <Compile Include="Logics\Commands\CommandLogic_Chrome.cs" />
     <Compile Include="Logics\Commands\CommandLogic_Delete.cs" />
     <Compile Include="Logics\Commands\CommandLogic_Ini.cs" />

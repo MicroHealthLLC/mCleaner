@@ -4,11 +4,13 @@ using mCleaner.Logics.Enumerations;
 using mCleaner.Model;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.ComponentModel;
 using System.IO;
 
 namespace mCleaner.Logics.Commands
 {
-    public class CommandLogic_Delete : iActions
+    public class CommandLogic_Delete : CommandLogic_Base, iActions
     {
         bool _apply = false;
 
@@ -21,19 +23,6 @@ namespace mCleaner.Logics.Commands
                 if (_CleanerML != value)
                 {
                     _CleanerML = value;
-                }
-            }
-        }
-
-        private action _Action = new action();
-        public action Action
-        {
-            get { return _Action; }
-            set
-            {
-                if (_Action != value)
-                {
-                    _Action = value;
                 }
             }
         }
@@ -55,21 +44,80 @@ namespace mCleaner.Logics.Commands
                 case SEARCH.deep:
                     break;
                 case SEARCH.file:
-                    File();
+                    Search_File();
                     break;
                 case SEARCH.glob:
-                    Glob(Action.regex);
+                    Search_Glob(Action.regex);
                     break;
                 case SEARCH.walk_all:
-                    Walk(true, Action.regex);
+                    Search_Walk(true, Action.regex);
                     break;
                 case SEARCH.walk_files:
-                    Walk(regex: Action.regex);
+                    Search_Walk(regex: Action.regex);
                     break;
             }
         }
 
-        public void File()
+        public void ExecuteDeleteCommand(Model_ThingsToDelete ttd, BackgroundWorker bgWorker, Queue<Model_ThingsToDelete> TTD, bool preview = false)
+        {
+            if (preview)
+            {
+                FileInfo fi = new FileInfo(ttd.FullPathName);
+                if (fi.Exists)
+                {
+                    string text = string.Format("{0} {1} {2}", "Delete", Win32API.FormatByteSize(fi.Length), ttd.FullPathName);
+                    _preview_log += text + "\r\n";
+
+                    UpdateProgressLog(text);
+                }
+            }
+            else
+            {
+                // next we need to know if the file exists so we can delete it.
+                FileInfo fi = new FileInfo(ttd.FullPathName);
+                if (fi.Exists)
+                {
+                    try
+                    {
+                        string text = string.Format("{0} {1} {2}", "Delete", Win32API.FormatByteSize(fi.Length), ttd.FullPathName);
+                        // then report to the gui
+                        bgWorker.ReportProgress(-1, text);
+
+                        // then we delete it.
+                        FileOperations.Delete(fi.FullName);
+
+                        text = string.Format(" - DELETED\r\n");
+
+                        // then report to the gui
+                        bgWorker.ReportProgress(-1, text);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("ERROR while deleting a file: " + ex.Message);
+                    }
+                }
+
+                // delete directories as well if search parameter is walk.all
+                if (ttd.search == SEARCH.walk_all)
+                {
+                    if (TTD.Count == 0)
+                    {
+                        DirectoryInfo di = new DirectoryInfo(ttd.path);
+                        if (di.Exists)
+                        {
+                            FileOperations.I.DeleteEmptyDirectories(ttd.path, (a) =>
+                            {
+                                string text = string.Format("Delete 0 {0} - DELETED\r\n", a);
+                                // then report to the gui
+                                bgWorker.ReportProgress(-1, text);
+                            });
+                        }
+                    }
+                }
+            }
+        }
+
+        public void Search_File()
         {
             string path = Action.path;
 
@@ -85,17 +133,20 @@ namespace mCleaner.Logics.Commands
                 FileInfo fi = new FileInfo(path);
                 if (fi.Exists)
                 {
-                    // enqueue file for deletion
-                    Worker.I.EnqueTTD(new Model_ThingsToDelete()
+                    if (!IsWhitelisted(fi.FullName))
                     {
-                        FullPathName = Action.path,
-                        IsWhitelisted = false,
-                        OverWrite = false,
-                        WhatKind = THINGS_TO_DELETE.file,
-                        command = COMMANDS.delete,
-                        search = SEARCH.file,
-                        path = string.Empty
-                    });
+                        // enqueue file for deletion
+                        Worker.I.EnqueTTD(new Model_ThingsToDelete()
+                        {
+                            FullPathName = Action.path,
+                            IsWhitelisted = false,
+                            OverWrite = false,
+                            WhatKind = THINGS_TO_DELETE.file,
+                            command = COMMANDS.delete,
+                            search = SEARCH.file,
+                            path = string.Empty
+                        });
+                    }
                 }
             }
         }
@@ -105,7 +156,7 @@ namespace mCleaner.Logics.Commands
         /// </summary>
         /// <param name="include_dir"></param>
         /// <param name="regex"></param>
-        public void Walk(bool include_dir = false, string regex = null)
+        public void Search_Walk(bool include_dir = false, string regex = null)
         {
             string path = Action.path;
             List<string> list_paths = new List<string>();
@@ -143,23 +194,26 @@ namespace mCleaner.Logics.Commands
 
                     foreach (string file in files)
                     {
-                        // enqueue file for deletion
-                        Worker.I.EnqueTTD(new Model_ThingsToDelete()
+                        if (!IsWhitelisted(file))
                         {
-                            FullPathName = file,
-                            IsWhitelisted = false,
-                            OverWrite = false,
-                            WhatKind = THINGS_TO_DELETE.file,
-                            command = COMMANDS.delete,
-                            search = include_dir ? SEARCH.walk_all : SEARCH.walk_files,
-                            path = di.FullName
-                        });
+                            // enqueue file for deletion
+                            Worker.I.EnqueTTD(new Model_ThingsToDelete()
+                            {
+                                FullPathName = file,
+                                IsWhitelisted = false,
+                                OverWrite = false,
+                                WhatKind = THINGS_TO_DELETE.file,
+                                command = COMMANDS.delete,
+                                search = include_dir ? SEARCH.walk_all : SEARCH.walk_files,
+                                path = di.FullName
+                            });
+                        }
                     }
                 }
             }
         }
 
-        public void Glob(string regex = null)
+        public void Search_Glob(string regex = null)
         {
             List<string> list_paths = new List<string>();
 
@@ -184,17 +238,20 @@ namespace mCleaner.Logics.Commands
 
                     foreach (string file in files)
                     {
-                        // enqueue file for deletion
-                        Worker.I.EnqueTTD(new Model_ThingsToDelete()
+                        if (!IsWhitelisted(file))
                         {
-                            FullPathName = file,
-                            IsWhitelisted = false,
-                            OverWrite = false,
-                            WhatKind = THINGS_TO_DELETE.file,
-                            command = COMMANDS.delete,
-                            search = SEARCH.glob,
-                            path = di.FullName
-                        });
+                            // enqueue file for deletion
+                            Worker.I.EnqueTTD(new Model_ThingsToDelete()
+                            {
+                                FullPathName = file,
+                                IsWhitelisted = false,
+                                OverWrite = false,
+                                WhatKind = THINGS_TO_DELETE.file,
+                                command = COMMANDS.delete,
+                                search = SEARCH.glob,
+                                path = di.FullName
+                            });
+                        }
                     }
                 }
                 else
@@ -203,20 +260,49 @@ namespace mCleaner.Logics.Commands
                     FileInfo fi = new FileInfo(currPath);
                     if (fi.Exists)
                     {
-                        // enqueue file for deletion
-                        Worker.I.EnqueTTD(new Model_ThingsToDelete()
+                        if (!IsWhitelisted(fi.FullName))
                         {
-                            FullPathName = fi.FullName,
-                            IsWhitelisted = false,
-                            OverWrite = false,
-                            WhatKind = THINGS_TO_DELETE.file,
-                            command = COMMANDS.delete,
-                            search = SEARCH.glob,
-                            path = fi.Directory.FullName
-                        });
+                            // enqueue file for deletion
+                            Worker.I.EnqueTTD(new Model_ThingsToDelete()
+                            {
+                                FullPathName = fi.FullName,
+                                IsWhitelisted = false,
+                                OverWrite = false,
+                                WhatKind = THINGS_TO_DELETE.file,
+                                command = COMMANDS.delete,
+                                search = SEARCH.glob,
+                                path = fi.Directory.FullName
+                            });
+                        }
                     }
                 }
             }
+        }
+
+        public bool IsWhitelisted(string path)
+        {
+            bool ret = false;
+            StringCollection lists = Properties.Settings.Default.WhitelistCollection;
+
+            foreach (string f in lists)
+            {
+                ret = false;
+                if (File.Exists(f))
+                {
+                    if (path.ToLower() == f.ToLower()) { ret = true; break; }
+                }
+                else if(Directory.Exists(f))
+                {
+                    // eg
+                    // whitelisted directory: C:\Users\Jayson\AppData\Local\Temp\ALM
+                    // path to be deleted   : C:\Users\Jayson\AppData\Local\Temp\ALM\ShadowCopies\d926192406574f99b57077a37efb88b7
+                    string p = path.Substring(0, f.Length);
+                    // p will be            : C:\Users\Jayson\AppData\Local\Temp\ALM
+                    if (p == f) { ret = true; break; }
+                }
+            }
+
+            return ret;
         }
     }
 }
