@@ -274,7 +274,27 @@ namespace mCleaner.ViewModel
                             if (Settings.Default.HideIrrelevantCleaners)
                             {
                                 // further check if the current cleaner is executable.
-                                isSupported = CheckIfSupported(clnr);
+
+                                // though check if it has a slow option so skip the precheck
+                                // and just include it automatically
+                                bool skipprecheck = false;
+                                foreach (option o in clnr.option)
+                                {
+                                    if (o.warning != null && o.warning != string.Empty)
+                                    {
+                                        skipprecheck = true;
+                                        break;
+                                    }
+                                }
+
+                                if (skipprecheck)
+                                {
+                                    isSupported = true;
+                                }
+                                else
+                                {
+                                    isSupported = CheckIfSupported(clnr);
+                                }
                             }
                         }
 
@@ -490,7 +510,22 @@ namespace mCleaner.ViewModel
         }
 
         #region System cleaner 
-        void AddSystemCleaner()
+        public void RefreshSystemCleaners()
+        {
+            TreeNode systemnode = new TreeNode();
+
+            foreach (TreeNode node in this.CleanersCollection)
+            {
+                if (node.Key == "system") { systemnode = node; break; }
+            }
+
+            this.CleanersCollection.Remove(systemnode);
+            systemnode = null;
+
+            AddSystemCleaner();
+        }
+
+        void AddSystemCleaner(bool select = false)
         {
             cleaner c = new cleaner()
             {
@@ -528,6 +563,7 @@ namespace mCleaner.ViewModel
             }
 
             root.Initialize();
+            root.IsInitiallySelected = select;
             this.CleanersCollection.Add(root);
         }
 

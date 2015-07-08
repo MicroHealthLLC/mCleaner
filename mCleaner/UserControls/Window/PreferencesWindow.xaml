@@ -121,7 +121,7 @@
                                         <TextBlock Text=" " />
                                         <Button x:Name="ClamAV_btnAddFolder" Content=" Add folder " Style="{StaticResource ButtonStyle}" Command="{Binding Prefs.Command_ClamAV_ScanLocation_AddFolder}"/>
                                         <TextBlock Text=" " />
-                                        <Button x:Name="ClamAV_btnRemove" Content=" Remove " Style="{StaticResource ButtonStyle}" Command="{Binding Prefs.Command_ClamAV_ScanLocation_RemoveSelected}" CommandParameter="{Binding SelectedItem, ElementName=lbWhitelist}"/>
+                                        <Button x:Name="ClamAV_btnRemove" Content=" Remove " Style="{StaticResource ButtonStyle}" Command="{Binding Prefs.Command_ClamAV_ScanLocation_RemoveSelected}" CommandParameter="{Binding SelectedItem, ElementName=lbClamAVCustomLocation}"/>
                                     </StackPanel>
                                 </Grid>
                             </TabItem>

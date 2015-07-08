@@ -7,7 +7,10 @@
         DataContext="{Binding Source={StaticResource Locator}}"
         
         Title="mCleaner" Height="480" Width="800" Icon="appicon.ico" WindowStartupLocation="CenterScreen">
-    
+	<Window.Resources>
+		
+	</Window.Resources>
+
     <Grid>
         <Grid>
             <Grid.RowDefinitions>
@@ -15,7 +18,7 @@
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-        
+
             <!-- menu bar -->
             <Menu IsMainMenu="True" Grid.Row="0">
                 <MenuItem Header="_File">
@@ -67,7 +70,16 @@
                     <Button Width="70" Command="{Binding CleanerML.Command_Clean}" ToolTip="Start cleaning!">
                         <StackPanel>
                             <Image Width="32" Height="32" Source="Assets/Clean.png" HorizontalAlignment="Center" />
-                            <TextBlock Text="Clean" HorizontalAlignment="Center" />
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Clean" HorizontalAlignment="Center" />
+                                <Menu Style="{DynamicResource CleanMenuStyle}">
+                                    <MenuItem Header="" FontFamily="Wingdings 3">
+                                        <MenuItem Header="Safe" FontFamily="Segoe UI"/>
+                                        <MenuItem Header="Moderate" FontFamily="Segoe UI"/>
+                                        <MenuItem Header="Aggressive" FontFamily="Segoe UI"/>
+                                    </MenuItem>
+                                </Menu>
+                            </StackPanel>
                         </StackPanel>
                     </Button>
                     <Button Width="70" Command="{Binding Clam.Command_UpdateVirusDefinition}" ToolTip="Update virus definitions">
@@ -90,7 +102,7 @@
                     </Button>
                 </ToolBar>
             </ToolBarTray>
-        
+
             <!-- main content -->
             <Grid Grid.Row="2">
                 <Grid.ColumnDefinitions>
@@ -115,7 +127,7 @@
                             <RowDefinition Height="auto" />
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
-                    
+
                         <Grid Grid.Row="0">
                             <Border BorderThickness="1" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}">
                                 <ProgressBar Height="25" Maximum="{Binding CleanerML.MaxProgress}" Value="{Binding CleanerML.ProgressIndex}" VerticalAlignment="Center" IsHitTestVisible="False" Margin="1" IsIndeterminate="{Binding CleanerML.ProgressIsIndeterminate}"/>

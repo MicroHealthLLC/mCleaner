@@ -145,6 +145,10 @@
     <Compile Include="ViewModel\ViewModel_CleanerML.cs" />
     <Compile Include="ViewModel\ViewModel_Preferences.cs" />
     <Compile Include="ViewModel\ViewModel_Shred.cs" />
+    <Page Include="Assets\Styles\CleanMenuStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Assets\Styles\TreeViewStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

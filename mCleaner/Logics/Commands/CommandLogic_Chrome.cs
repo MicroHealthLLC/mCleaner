@@ -65,7 +65,6 @@ namespace mCleaner.Logics.Commands
 
             ChromeDefaultPath = Environment.ExpandEnvironmentVariables("%localappdata%");
             ChromeDefaultPath = Path.Combine(ChromeDefaultPath, @"Google\Chrome\User Data\Default");
-            ChromeCurrentVersion = ChromeVersion();
         }
 
         static int ChromeVersion()
@@ -338,6 +337,8 @@ namespace mCleaner.Logics.Commands
             }
             sql += string.Format("delete from favicon_bitmaps {0};", where);
 
+            ChromeCurrentVersion = ChromeVersion();
+
             // favicon bitmaps
             if (ChromeCurrentVersion < 28)
             {
@@ -395,6 +396,23 @@ namespace mCleaner.Logics.Commands
             sql = string.Format("delete from Databases {0};", where);
             SQLite.ExecuteNonQuery(file, sql);
 
+            return ret;
+        }
+
+        public static bool IsChromeRunning()
+        {
+            bool ret = false;
+            foreach (Process proc in Process.GetProcesses())
+            {
+                if (proc.ProcessName.ToLower().Contains("chrome"))
+                {
+                    if (proc.MainWindowTitle != string.Empty)
+                    {
+                        ret = true;
+                        break;
+                    }
+                }
+            }
             return ret;
         }
     }

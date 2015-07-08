@@ -2,13 +2,13 @@
 using GalaSoft.MvvmLight.Command;
 using mCleaner.Helpers;
 using mCleaner.Properties;
-using System.Collections.Specialized;
-using System.Windows;
-using System.Windows.Input;
-using System.Linq;
+using Microsoft.Practices.ServiceLocation;
 using Microsoft.Win32;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
+using System.Collections.Specialized;
+using System.Linq;
+using System.Windows;
+using System.Windows.Input;
 
 namespace mCleaner.ViewModel
 {
@@ -19,6 +19,14 @@ namespace mCleaner.ViewModel
         #endregion
 
         #region properties
+        public ViewModel_CleanerML CleanerML
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<ViewModel_CleanerML>();
+            }
+        }
+
         private bool _ShowWindow = false;
         public bool ShowWindow
         {
@@ -256,6 +264,7 @@ namespace mCleaner.ViewModel
         void Command_OK_Click()
         {
             WriteSettings();
+            this.CleanerML.RefreshSystemCleaners();
             this.ShowWindow = false;
         }
         void Command_CloseWindow_Click()

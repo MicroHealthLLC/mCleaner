@@ -25,6 +25,7 @@
   <option id="cache">
     <label>Cache</label>
     <description>Delete the web cache, which reduces time to display revisited pages</description>
+	<warning>This option is slow</warning>
 	<action command="delete" search="glob" path="$localappdata\Mozilla\Firefox\Profiles\*.default\Cache*" />
 	<action command="delete" search="glob" path="$localappdata\Mozilla\Firefox\Profiles\*.default\OfflineCache\index.sqlite" />
 	<action command="delete" search="glob" path="$localappdata\Mozilla\Firefox\Profiles\*.default\jumpListCache" />
