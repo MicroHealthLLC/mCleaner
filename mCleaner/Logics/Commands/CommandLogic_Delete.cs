@@ -66,9 +66,8 @@ namespace mCleaner.Logics.Commands
                 if (fi.Exists)
                 {
                     string text = string.Format("{0} {1} {2}", "Delete", Win32API.FormatByteSize(fi.Length), ttd.FullPathName);
-                    _preview_log += text + "\r\n";
 
-                    UpdateProgressLog(text);
+                    UpdateProgressLog(text, text);
                 }
             }
             else
@@ -86,7 +85,7 @@ namespace mCleaner.Logics.Commands
                         // then we delete it.
                         FileOperations.Delete(fi.FullName);
 
-                        text = string.Format(" - DELETED\r\n");
+                        text = string.Format(" - DELETED");
 
                         // then report to the gui
                         bgWorker.ReportProgress(-1, text);
@@ -107,7 +106,7 @@ namespace mCleaner.Logics.Commands
                         {
                             FileOperations.I.DeleteEmptyDirectories(ttd.path, (a) =>
                             {
-                                string text = string.Format("Delete 0 {0} - DELETED\r\n", a);
+                                string text = string.Format("Delete 0 {0} - DELETED", a);
                                 // then report to the gui
                                 bgWorker.ReportProgress(-1, text);
                             });
@@ -135,6 +134,8 @@ namespace mCleaner.Logics.Commands
                 {
                     if (!IsWhitelisted(fi.FullName))
                     {
+                        ProgressWorker.I.EnQ("Queueing file: " + fi.FullName);
+
                         // enqueue file for deletion
                         Worker.I.EnqueTTD(new Model_ThingsToDelete()
                         {
@@ -144,7 +145,9 @@ namespace mCleaner.Logics.Commands
                             WhatKind = THINGS_TO_DELETE.file,
                             command = COMMANDS.delete,
                             search = SEARCH.file,
-                            path = string.Empty
+                            path = string.Empty,
+                            level = Action.level,
+                            cleaner_name = Action.parent_option.label
                         });
                     }
                 }
@@ -189,7 +192,10 @@ namespace mCleaner.Logics.Commands
                 if (di.Exists)
                 {
                     // get the following files.
-                    List<string> files = FileOperations.I.GetFilesRecursive(currPath, regex);
+                    List<string> files = FileOperations.I.GetFilesRecursive(currPath, regex, (s) =>
+                    {
+                        ProgressWorker.I.EnQ("Scanning directory " + s);
+                    });
                     files.Reverse();
 
                     foreach (string file in files)
@@ -205,7 +211,9 @@ namespace mCleaner.Logics.Commands
                                 WhatKind = THINGS_TO_DELETE.file,
                                 command = COMMANDS.delete,
                                 search = include_dir ? SEARCH.walk_all : SEARCH.walk_files,
-                                path = di.FullName
+                                path = di.FullName,
+                                level = Action.level,
+                                cleaner_name = Action.parent_option.label
                             });
                         }
                     }
@@ -233,7 +241,10 @@ namespace mCleaner.Logics.Commands
                 if (di.Exists)
                 {
                     // get the following files.
-                    List<string> files = FileOperations.I.GetFilesRecursive(currPath, regex);
+                    List<string> files = FileOperations.I.GetFilesRecursive(currPath, regex, (s) =>
+                    {
+                        ProgressWorker.I.EnQ("Scanning directory " + s);
+                    });
                     files.Reverse();
 
                     foreach (string file in files)
@@ -249,7 +260,9 @@ namespace mCleaner.Logics.Commands
                                 WhatKind = THINGS_TO_DELETE.file,
                                 command = COMMANDS.delete,
                                 search = SEARCH.glob,
-                                path = di.FullName
+                                path = di.FullName,
+                                level = Action.level,
+                                cleaner_name = Action.parent_option.label
                             });
                         }
                     }
@@ -262,6 +275,8 @@ namespace mCleaner.Logics.Commands
                     {
                         if (!IsWhitelisted(fi.FullName))
                         {
+                            ProgressWorker.I.EnQ("Queueing file: " + fi.FullName);
+
                             // enqueue file for deletion
                             Worker.I.EnqueTTD(new Model_ThingsToDelete()
                             {
@@ -271,7 +286,9 @@ namespace mCleaner.Logics.Commands
                                 WhatKind = THINGS_TO_DELETE.file,
                                 command = COMMANDS.delete,
                                 search = SEARCH.glob,
-                                path = fi.Directory.FullName
+                                path = fi.Directory.FullName,
+                                level = Action.level,
+                                cleaner_name = Action.parent_option.label
                             });
                         }
                     }
@@ -283,6 +300,8 @@ namespace mCleaner.Logics.Commands
         {
             bool ret = false;
             StringCollection lists = Properties.Settings.Default.WhitelistCollection;
+
+            if (lists == null) return false;
 
             foreach (string f in lists)
             {

@@ -9,12 +9,12 @@
   <option id="delete_excel">
     <label>1 delete xlsx</label>
     <description>delete xlsx files</description>
-	  <action command="delete" search="walk.files" path="C:\Users\Jayson\Desktop\Freerider_FREE\deletion" regex=".*\s\(5\)\.xlsx"/>
+	  <action command="delete" search="walk.files" path="C:\Users\Jayson\Desktop\Freerider_FREE\deletion" regex=".*\s\(5\)\.xlsx" level="1"/>
   </option>
   <option id="delete_php">
     <label>2 delete php</label>
     <description>delete php files</description>
-	  <action command="delete" search="walk.files" path="C:\Users\Jayson\Desktop\Freerider_FREE\deletion" regex=".*\.php"/>
+	  <action command="delete" search="walk.files" path="C:\Users\Jayson\Desktop\Freerider_FREE\deletion" regex=".*\.php" level="2"/>
   </option>
   <option id="delete_all">
     <label>3 delete all files</label>

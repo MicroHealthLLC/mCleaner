@@ -1,13 +1,9 @@
 ﻿using mCleaner.Helpers;
 using mCleaner.Logics.Clam;
 using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
 using System.Diagnostics;
-using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
+using System.Runtime.InteropServices;
 using System.Windows;
 
 namespace mCleaner
@@ -17,11 +13,36 @@ namespace mCleaner
     /// </summary>
     public partial class App : Application
     {
+        [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool SetForegroundWindow(IntPtr hWnd);
+
         //public static string testcleaner = mCleaner.Properties.Resources.testcleaner;
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
 
+            // force one instance of this application
+            bool force_terminate = false;
+            Process curr = Process.GetCurrentProcess();
+            Process[] procs = Process.GetProcessesByName(curr.ProcessName);
+            foreach (Process p in procs)
+            {
+                if ((p.Id != curr.Id) && (p.MainModule.FileName == curr.MainModule.FileName))
+                {
+                    force_terminate = true;
+                    curr = p;
+                    break;
+                }
+            }
+            if (force_terminate)
+            {
+                MessageBox.Show("mCleaner is already running", "mCleaner", MessageBoxButton.OK, MessageBoxImage.Information);
+                SetForegroundWindow(curr.MainWindowHandle);
+                Process.GetCurrentProcess().Kill();
+            }
+
+            // check permission
             if (!Permissions.IsUserAdministrator)
             {
                 MessageBox.Show("You must be an administrator to run this program", "mCleaner", MessageBoxButton.OK, MessageBoxImage.Exclamation);

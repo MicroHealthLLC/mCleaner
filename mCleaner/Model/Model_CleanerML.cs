@@ -157,14 +157,16 @@ namespace mCleaner.Model
                 {
                     _path = mCleaner.Helpers.FileOperations.I.GetSpecialFolderPath(value);
                 }
-                else if ( // we do not need linux paths
-                value.Substring(0, 2) == "~/" ||
-                value.Substring(0, 4) == "/var" ||
-                value.Substring(0, 4) == "/tmp" ||
-                value.Substring(0, 4) == "/dev"
-                )
-                {
-                    _path = string.Empty;
+                else if (value.Substring(0, 1) == "~" || value.Substring(0, 1) == "/") { 
+                    if ( // we do not need linux paths
+                        value.Substring(0, 2) == "~/" ||
+                        value.Substring(0, 4) == "/var" ||
+                        value.Substring(0, 4) == "/tmp" ||
+                        value.Substring(0, 4) == "/dev"
+                    )
+                    {
+                        _path = string.Empty;
+                    }
                 }
                 else
                 {
@@ -199,6 +201,14 @@ namespace mCleaner.Model
         /// </summary>
         [XmlAttribute("parameter")]
         public string parameter { get; set; }
+
+        // level of cleaning
+        // 0 - safe
+        // 1 - moderate
+        // 2 - aggressive
+        // when no level attribute, the default value is aggressive. Default cleaning option should be safe
+        [XmlAttribute("level")]
+        public int level { get; set; }
 
         [XmlIgnore]
         public option parent_option { get; set; }

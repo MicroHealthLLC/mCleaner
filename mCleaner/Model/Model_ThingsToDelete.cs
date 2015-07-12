@@ -87,6 +87,15 @@ namespace mCleaner.Model
         /// </summary>
         public string path { get; set; }
 
+        // level of cleaning
+        // 0 - safe
+        // 1 - moderate
+        // 2 - aggressive
+        // when no level attribute, the default value is aggressive. Default cleaning option should be safe
+        public int level { get; set; }
+
+        public string cleaner_name { get; set; }
+
         #region for registry
         public string reg_root { get; set; }
         public string reg_subkey { get; set; }

@@ -59,7 +59,9 @@ namespace mCleaner.Logics.Commands
                     OverWrite = false,
                     WhatKind = THINGS_TO_DELETE.clamwin,
                     command = command,
-                    search = SEARCH.file
+                    search = SEARCH.file,
+                    level = Action.level,
+                    cleaner_name = Action.parent_option.label
                 });
             }
 
@@ -159,48 +161,39 @@ namespace mCleaner.Logics.Commands
             return ret;
         }
 
-        public static bool CleanKeywords(string file)
+        public static string CleanKeywords(string file)
         {
-            bool res = false;
+            string ret = string.Empty;
 
-            string sqlitefile = "Data Source=" + file;
+            string sql = string.Empty;
 
-            using (SQLiteConnection conn = new SQLiteConnection(sqlitefile))
+            if (Shred)
             {
-                conn.Open();
-                SQLiteCommand comm = conn.CreateCommand();
-
-                string sql = string.Empty;
-
-                if (Shred)
-                {
-                    string[] cols = { "short_name", "keyword", "favicon_url", "originating_url", "suggest_url" };
-                    sql += CreateRandomBlobQuery(cols, "keywords", "where not date_created = 0");
-                }
-
-                sql += "delete from keywords where not date_created = 0;";
-
-                comm.CommandText = sql;
-
-                comm.CommandType = System.Data.CommandType.Text;
-                try
-                {
-                    comm.ExecuteNonQuery();
-                    res = true;
-                }
-                catch (Exception ex)
-                {
-                    res = false;
-                }
-                conn.Close();
+                string[] cols = { "short_name", "keyword", "favicon_url", "originating_url", "suggest_url" };
+                sql += CreateRandomBlobQuery(cols, "keywords", "where not date_created = 0");
             }
 
-            return res;
+            sql += "delete from keywords where not date_created = 0;";
+
+            string result = SQLite.ExecuteNonQuery(file, sql);
+
+            if (result != string.Empty)
+            {
+                ret = "An unkown error occured while executing a query in CommandLogic_Chrome.CleanAutofill";
+
+                if (result.Contains("database is locked"))
+                {
+                    ret = "database is locked";
+                }
+            }
+
+            return ret;
         }
 
-        public static bool CleanHistory(string file)
+        public static string CleanHistory(string file)
         {
-            bool ret = false;
+            string ret = string.Empty;
+
             string sql = string.Empty;
 
             FileInfo fi = new FileInfo(file);
@@ -277,38 +270,25 @@ namespace mCleaner.Logics.Commands
             sql += "delete from keyword_search_terms;";
             #endregion
 
-            #region // execute query
-            string sqlitefile = "Data Source=" + fi.FullName;
+            string result = SQLite.ExecuteNonQuery(file, sql);
 
-            using (SQLiteConnection conn = new SQLiteConnection(sqlitefile))
+            if (result != string.Empty)
             {
-                conn.Open();
-                SQLiteCommand comm = conn.CreateCommand();
+                ret = "An unkown error occured while executing a query in CommandLogic_Chrome.CleanAutofill";
 
-                Debug.WriteLine("query: " + sql);
-                comm.CommandText = sql;
-                comm.CommandType = System.Data.CommandType.Text;
-
-                try
+                if (result.Contains("database is locked"))
                 {
-                    comm.ExecuteNonQuery();
-                    ret = true;
+                    ret = "database is locked";
                 }
-                catch (Exception ex)
-                {
-                    ret = false;
-                }
-
-                conn.Close();
             }
-            #endregion
 
             return ret;
         }
 
-        public static bool CleanFavIcons(string file)
+        public static string CleanFavIcons(string file)
         {
-            bool ret = true;
+            string ret = string.Empty;
+
             string history_db = Path.Combine(ChromeDefaultPath, "History");
             string sql = string.Empty;
             string where = string.Empty;
@@ -355,14 +335,24 @@ namespace mCleaner.Logics.Commands
             }
             sql += string.Format("delete from favicons {0};", where);
 
-            SQLite.ExecuteNonQuery(file, sql);
+            string result = SQLite.ExecuteNonQuery(file, sql);
+
+            if (result != string.Empty)
+            {
+                ret = "An unkown error occured while executing a query in CommandLogic_Chrome.CleanAutofill";
+
+                if (result.Contains("database is locked"))
+                {
+                    ret = "database is locked";
+                }
+            }
 
             return ret;
         }
 
-        public static bool CleanDatabases(string file)
+        public static string CleanDatabases(string file)
         {
-            bool ret = true;
+            string ret = string.Empty;
             string sql = string.Empty;
             sql = "";
             string where = string.Empty;
@@ -375,13 +365,25 @@ namespace mCleaner.Logics.Commands
                 sql += CreateRandomBlobQuery(cols, "Databases", where);
             }
             sql = string.Format("delete from Databases {0};", where);
-            SQLite.ExecuteNonQuery(file, sql);
+
+            string result = SQLite.ExecuteNonQuery(file, sql);
+
+            if (result != string.Empty)
+            {
+                ret = "An unkown error occured while executing a query in CommandLogic_Chrome.CleanDatabase";
+
+                if (result.Contains("database is locked"))
+                {
+                    ret = "database is locked";
+                }
+            }
+
             return ret;
         }
 
-        public static bool CleanAutofill(string file)
+        public static string CleanAutofill(string file)
         {
-            bool ret = true;
+            string ret = string.Empty;
 
             string sql = string.Empty;
             sql = "";
@@ -393,8 +395,18 @@ namespace mCleaner.Logics.Commands
             {
                 sql += CreateRandomBlobQuery(cols, "autofill", where);
             }
-            sql = string.Format("delete from Databases {0};", where);
-            SQLite.ExecuteNonQuery(file, sql);
+            sql = string.Format("delete from autofill {0};", where);
+            string result = SQLite.ExecuteNonQuery(file, sql);
+
+            if (result != string.Empty)
+            {
+                ret = "An unkown error occured while executing a query in CommandLogic_Chrome.CleanAutofill";
+
+                if (result.Contains("database is locked"))
+                {
+                    ret = "database is locked";
+                }
+            }
 
             return ret;
         }

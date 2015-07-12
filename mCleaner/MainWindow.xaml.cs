@@ -34,6 +34,12 @@ namespace mCleaner
             this.Loaded += MainWindow_Loaded;
             
         }
+        public static MainWindow I { get { return new MainWindow(); } }
+
+        public void ClearClipboard()
+        {
+            Clipboard.Clear();
+        }
 
         void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {

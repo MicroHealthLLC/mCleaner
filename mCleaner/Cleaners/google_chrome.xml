@@ -24,10 +24,10 @@
   <description>Web browser</description>
   <running type="exe">chrome.exe</running>
   <running type="exe">chrome</running>
-  <option id="cache">
+  <!-- <option id="cache">
     <label>Cache</label>
     <description>Delete the web cache, which reduces time to display revisited pages</description>
-    <!-- <action command="delete" search="file" path="$localappdata\Google\Chrome\User Data\Default\Application Cache\Index-journal"/>
+    <action command="delete" search="file" path="$localappdata\Google\Chrome\User Data\Default\Application Cache\Index-journal"/>
     <action command="delete" search="walk.all" path="$localappdata\Google\Chrome\User Data\Default\Pepper Data\Shockwave Flash\CacheWritableAdobeRoot\"/>
     <action command="delete" search="walk.files" path="$localappdata\Google\Chrome\User Data\Default\Cache\"/>
     <action command="delete" search="walk.files" path="$localappdata\Google\Chrome\User Data\Default\Media Cache\"/>
@@ -41,21 +41,20 @@
     <action command="json" search="file" path="~/.config/google-chrome/Default/Preferences" address="dns_prefetching/host_referral_list"/>
     <action command="json" search="file" path="~/.config/google-chrome/Default/Preferences" address="dns_prefetching/startup_list"/>
     <action command="json" search="file" path="~/.config/google-chrome/Local State" address="HostReferralList"/>
-    <action command="json" search="file" path="~/.config/google-chrome/Local State" address="StartupDNSPrefetchList"/> -->
-  </option>
-  <option id="cookies">
+    <action command="json" search="file" path="~/.config/google-chrome/Local State" address="StartupDNSPrefetchList"/>
+  </option> -->
+  <!-- <option id="cookies">
     <label>Cookies</label>
     <description>Delete cookies, which contain information such as web site preferences, authentication, and tracking identification</description>
     <action command="delete" search="file" path="$localappdata\Google\Chrome\User Data\Default\Cookies"/>
-    <!-- <action command="delete" search="file" path="$localappdata\Google\Chrome\User Data\Default\Cookies"/>
     <action command="delete" search="file" path="$localappdata\Google\Chrome\User Data\Default\Cookies-journal"/>
     <action command="delete" search="file" path="$localappdata\Google\Chrome\User Data\Default\Extension Cookies"/>
     <action command="delete" search="walk.all" path="$localappdata\Google\Chrome\User Data\Default\Pepper Data\Shockwave Flash\WritableRoot\"/>
     <action command="delete" search="file" path="~/.config/google-chrome/Default/Cookies"/>
     <action command="delete" search="file" path="~/.config/google-chrome/Default/Cookies-journal"/>
     <action command="delete" search="file" path="~/.config/google-chrome/Default/Extension Cookies"/>
-    <action command="delete" search="walk.all" path="~/.config/google-chrome/Default/Pepper Data/Shockwave Flash/WritableRoot/"/> -->
-  </option>
+    <action command="delete" search="walk.all" path="~/.config/google-chrome/Default/Pepper Data/Shockwave Flash/WritableRoot/"/>
+  </option> -->
   <option id="dom">
     <label>DOM Storage</label>
     <description>Delete HTML5 cookies</description>
@@ -81,7 +80,7 @@
     <label>History</label>
     <description>Delete the history which includes visited sites, downloads, and thumbnails</description>
     <!-- keep /History before /Favicons -->
-    <!-- <action command="chrome.history" search="file" path="$localappdata\Google\Chrome\User Data\Default\History"/> -->
+    <action command="chrome.history" search="file" path="$localappdata\Google\Chrome\User Data\Default\History"/>
     <action command="chrome.favicons" search="file" path="$localappdata\Google\Chrome\User Data\Default\Favicons"/>
     <!-- <action command="delete" search="file" path="$localappdata\Google\Chrome\User Data\chrome_shutdown_ms.txt"/>
     <action command="delete" search="file" path="$localappdata\Google\Chrome\User Data\Safe Browsing Cookies-journal"/>
@@ -106,8 +105,8 @@
     <action command="delete" search="walk.files" path="$localappdata\Google\Chrome\User Data\Default\Session Storage\"/>
     <action command="delete" search="walk.files" path="$localappdata\Google\Chrome\User Data\Default\JumpListIcons\"/>
     <action command="delete" search="walk.files" path="$localappdata\Google\Chrome\User Data\Default\JumpListIconsOld\"/> -->
-    <!-- <action command="chrome.history" search="file" path="~/.config/google-chrome/Default/History"/> -->
-    <!-- <action command="chrome.favicons" search="file" path="~/.config/google-chrome/Default/Favicons"/> -->
+    <action command="chrome.history" search="file" path="~/.config/google-chrome/Default/History"/>
+    <action command="chrome.favicons" search="file" path="~/.config/google-chrome/Default/Favicons"/>
     <!-- <action command="delete" search="file" path="~/.config/google-chrome/chrome_shutdown_ms.txt"/>
     <action command="delete" search="file" path="~/.config/google-chrome/Safe Browsing Cookies-journal"/>
     <action command="delete" search="file" path="~/.config/google-chrome/Default/Archived History"/>
@@ -128,39 +127,36 @@
     <action command="delete" search="glob" path="~/.config/google-chrome/Default/History Index ????-??-journal"/>
     <action command="delete" search="walk.files" path="~/.config/google-chrome/Default/Session Storage/"/> -->
   </option>
-  <option id="passwords">
+  <!-- <option id="passwords">
     <label>Passwords</label>
     <description>A database of usernames and passwords as well as a list of sites that should not store passwords</description>
     <action command="delete" search="file" path="$localappdata\Google\Chrome\User Data\Default\Login Data"/>
-    <!-- <action command="delete" search="file" path="$localappdata\Google\Chrome\User Data\Default\Login Data"/>
     <action command="delete" search="file" path="$localappdata\Google\Chrome\User Data\Default\Login Data-journal"/>
     <action command="delete" search="file" path="~/.config/google-chrome/Default/Login Data"/>
-    <action command="delete" search="file" path="~/.config/google-chrome/Default/Login Data-journal"/> -->
-  </option>
-  <option id="search_engines">
+    <action command="delete" search="file" path="~/.config/google-chrome/Default/Login Data-journal"/>
+  </option> -->
+  <!-- <option id="search_engines">
     <label>Search engines</label>
     <description translators="'Factory' means a search engine that is installed by default 'from the factory,' but this is different than a 'default search engine' https://lists.launchpad.net/launchpad-translators/msg00283.html">Reset the search engine usage history and delete non-factory search engines, some of which are added automatically</description>
     <action command="chrome.keywords" search="file" path="~/.config/google-chrome/Default/Web Data"/>
     <action command="chrome.keywords" search="file" path="$localappdata\Google\Chrome\User Data\Default\Web Data"/>
-  </option>
-  <option id="session">
+  </option> -->
+  <!-- <option id="session">
     <label>Session</label>
     <description>Delete the current and last sessions</description>
     <action command="delete" search="file" path="$localappdata\Google\Chrome\User Data\Default\Current Session"/>
-    <!-- <action command="delete" search="file" path="$localappdata\Google\Chrome\User Data\Default\Current Session"/>
     <action command="delete" search="file" path="$localappdata\Google\Chrome\User Data\Default\Current Tabs"/>
     <action command="delete" search="file" path="$localappdata\Google\Chrome\User Data\Default\Last Session"/>
     <action command="delete" search="file" path="$localappdata\Google\Chrome\User Data\Default\Last Tabs"/>
     <action command="delete" search="file" path="~/.config/google-chrome/Default/Current Session"/>
     <action command="delete" search="file" path="~/.config/google-chrome/Default/Current Tabs"/>
     <action command="delete" search="file" path="~/.config/google-chrome/Default/Last Session"/>
-    <action command="delete" search="file" path="~/.config/google-chrome/Default/Last Tabs"/> -->
+    <action command="delete" search="file" path="~/.config/google-chrome/Default/Last Tabs"/>
   </option>
   <option id="vacuum">
     <label>Vacuum</label>
     <description>Clean database fragmentation to reduce space and improve speed without removing any data</description>
     <action command="sqlite.vacuum" search="file" path="$localappdata\Google\Chrome\User Data\Default\Archived History"/>
-    <!-- <action command="sqlite.vacuum" search="file" path="$localappdata\Google\Chrome\User Data\Default\Archived History"/>
     <action command="sqlite.vacuum" search="file" path="$localappdata\Google\Chrome\User Data\Default\Cookies"/>
     <action command="sqlite.vacuum" search="file" path="$localappdata\Google\Chrome\User Data\Default\Extension Cookies"/>
     <action command="sqlite.vacuum" search="file" path="$localappdata\Google\Chrome\User Data\Default\History"/>
@@ -180,6 +176,6 @@
     <action command="sqlite.vacuum" search="file" path="~/.config/google-chrome/Default/Web Data"/>
     <action command="sqlite.vacuum" search="file" path="~/.config/google-chrome/Default/databases/Databases.db"/>
     <action command="sqlite.vacuum" search="glob" path="~/.config/google-chrome/Default/History Index ????-??"/>
-    <action command="sqlite.vacuum" search="glob" path="~/.config/google-chrome/Default/databases/http*/?"/> --> 
-  </option>
+    <action command="sqlite.vacuum" search="glob" path="~/.config/google-chrome/Default/databases/http*/?"/>
+  </option> -->
 </cleaner>

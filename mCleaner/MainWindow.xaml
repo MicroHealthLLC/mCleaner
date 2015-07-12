@@ -7,10 +7,7 @@
         DataContext="{Binding Source={StaticResource Locator}}"
         
         Title="mCleaner" Height="480" Width="800" Icon="appicon.ico" WindowStartupLocation="CenterScreen">
-	<Window.Resources>
-		
-	</Window.Resources>
-
+    
     <Grid>
         <Grid>
             <Grid.RowDefinitions>
@@ -67,16 +64,25 @@
                             <TextBlock Text="Preview" HorizontalAlignment="Center" />
                         </StackPanel>
                     </Button>
-                    <Button Width="70" Command="{Binding CleanerML.Command_Clean}" ToolTip="Start cleaning!">
+                    <Button Width="70" ToolTip="Start cleaning!" Command="{Binding CleanerML.Command_Clean}">
                         <StackPanel>
                             <Image Width="32" Height="32" Source="Assets/Clean.png" HorizontalAlignment="Center" />
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="Clean" HorizontalAlignment="Center" />
+                                <TextBlock Text=" " />
                                 <Menu Style="{DynamicResource CleanMenuStyle}">
-                                    <MenuItem Header="" FontFamily="Wingdings 3">
-                                        <MenuItem Header="Safe" FontFamily="Segoe UI"/>
-                                        <MenuItem Header="Moderate" FontFamily="Segoe UI"/>
-                                        <MenuItem Header="Aggressive" FontFamily="Segoe UI"/>
+                                    <MenuItem Style="{DynamicResource CleanMenuItemStyle}">
+                                        <MenuItem.HeaderTemplate>
+                                            <DataTemplate>
+                                                <StackPanel>
+                                                    <Image Width="16" Height="16" Source="Assets/downarrow.png" />
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </MenuItem.HeaderTemplate>
+                                        
+                                        <MenuItem Header="Safe" IsChecked="{Binding CleanerML.CleanOption_Safe}" Command="{Binding CleanerML.Command_CleanOption}" CommandParameter="1"/>
+                                        <MenuItem Header="Moderate" IsChecked="{Binding CleanerML.CleanOption_Moderate}" Command="{Binding CleanerML.Command_CleanOption}" CommandParameter="2"/>
+                                        <MenuItem Header="Aggressive" IsChecked="{Binding CleanerML.CleanOption_Aggressive}" Command="{Binding CleanerML.Command_CleanOption}" CommandParameter="3"/>
                                     </MenuItem>
                                 </Menu>
                             </StackPanel>

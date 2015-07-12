@@ -230,5 +230,17 @@ namespace mCleaner.Properties {
                 this["WhitelistCollection"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int CleanOption {
+            get {
+                return ((int)(this["CleanOption"]));
+            }
+            set {
+                this["CleanOption"] = value;
+            }
+        }
     }
 }

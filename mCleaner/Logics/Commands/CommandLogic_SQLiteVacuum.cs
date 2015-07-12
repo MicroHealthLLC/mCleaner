@@ -61,6 +61,8 @@ namespace mCleaner.Logics.Commands
                     WhatKind = THINGS_TO_DELETE.file,
                     command = COMMANDS.sqlite_vacuum,
                     search = SEARCH.file,
+                    level = Action.level,
+                    cleaner_name = Action.parent_option.label
                 });
             }
         }
@@ -78,6 +80,8 @@ namespace mCleaner.Logics.Commands
                     WhatKind = THINGS_TO_DELETE.file,
                     command = COMMANDS.sqlite_vacuum,
                     search = SEARCH.file,
+                    level = Action.level,
+                    cleaner_name = Action.parent_option.label
                 });
             }
         }

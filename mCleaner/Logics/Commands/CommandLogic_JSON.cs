@@ -66,7 +66,9 @@ namespace mCleaner.Logics.Commands
                             command = COMMANDS.json,
                             search = SEARCH.file,
 
-                            address = Action.address
+                            address = Action.address,
+                            level = Action.level,
+                            cleaner_name = Action.parent_option.label
                         });
                     }
                 }

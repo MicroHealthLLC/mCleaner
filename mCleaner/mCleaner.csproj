@@ -105,6 +105,7 @@
     <Compile Include="Logics\Commands\Clam\CommandLogic_Clam.cs" />
     <Compile Include="Logics\Commands\CommandLogic_Base.cs" />
     <Compile Include="Logics\Commands\CommandLogic_Chrome.cs" />
+    <Compile Include="Logics\Commands\CommandLogic_Clipboard.cs" />
     <Compile Include="Logics\Commands\CommandLogic_Delete.cs" />
     <Compile Include="Logics\Commands\CommandLogic_Ini.cs" />
     <Compile Include="Logics\Commands\CommandLogic_JSON.cs" />
@@ -216,6 +217,7 @@
     <Resource Include="Assets\scan_for_memory.png" />
     <Resource Include="Assets\check_box_list.png" />
     <Resource Include="Assets\document_shred.png" />
+    <Resource Include="Assets\downarrow.png" />
     <Content Include="Clam\.clamwin\db\readme.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

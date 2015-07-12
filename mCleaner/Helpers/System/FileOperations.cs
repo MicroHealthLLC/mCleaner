@@ -249,7 +249,7 @@ namespace mCleaner.Helpers
         }
 
         // https://msdn.microsoft.com/en-us/library/bb513869.aspx
-        public List<string> GetFilesRecursive(string b, string regex = "")
+        public List<string> GetFilesRecursive(string b, string regex = "", Action<string> progress_callback = null)
         {
             List<string> result = new List<string>();
 
@@ -269,6 +269,10 @@ namespace mCleaner.Helpers
                 string[] subDirs;
                 try
                 {
+                    if (progress_callback != null)
+                    {
+                        progress_callback(currentDir);
+                    }
                     subDirs = System.IO.Directory.GetDirectories(currentDir);
                 }
                 // An UnauthorizedAccessException exception will be thrown if we do not have 

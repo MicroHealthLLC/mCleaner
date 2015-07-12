@@ -49,8 +49,10 @@ namespace mCleaner.Helpers
             return res;
         }
 
-        public static void ExecuteNonQuery(string file, string sql)
+        public static string ExecuteNonQuery(string file, string sql)
         {
+            string result = string.Empty;
+
             FileInfo fi = new FileInfo(file);
             string sqlitefile = "Data Source=" + fi.FullName;
 
@@ -69,10 +71,16 @@ namespace mCleaner.Helpers
                 }
                 catch (Exception ex)
                 {
+                    string msg = string.Empty;
+                    msg = "ERROR in SQLite.ExecuteNonQuery('{0}', '{1}') msg: {2}\r\n{3}";
+                    msg = string.Format(msg, file, sql, ex.Message, ex.StackTrace);
+                    result = msg;
                 }
 
                 conn.Close();
             }
+
+            return result;
         }
     }
 }

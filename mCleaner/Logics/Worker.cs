@@ -25,9 +25,6 @@ namespace mCleaner.Logics
         long TotalFileSize = 0;
         int TotalWork = 0;
         int TotalSpecialOperations = 0;
-
-        string _preview_log = string.Empty;
-        string _execute_log = string.Empty;
         #endregion
 
         #region properties
@@ -46,6 +43,19 @@ namespace mCleaner.Logics
                 return ServiceLocator.Current.GetInstance<ViewModel_Clam>();
             }
         }
+
+        //private string _PreviewLog = string.Empty;
+        //public string PreviewLog
+        //{
+        //    get { return _PreviewLog; }
+        //    set
+        //    {
+        //        if (_PreviewLog != value)
+        //        {
+        //            _PreviewLog = value;
+        //        }
+        //    }
+        //}
 
         /// <summary>
         /// set to true by default
@@ -113,9 +123,7 @@ namespace mCleaner.Logics
         {
             if (e.ProgressPercentage == -1)
             {
-                _execute_log += e.UserState.ToString();
-
-                VMCleanerML.TextLog = _execute_log;
+                VMCleanerML.TextLog += e.UserState.ToString();
                 VMCleanerML.ProgressText = e.UserState.ToString();
                 VMCleanerML.MaxProgress = this.TTD.Count;
                 VMCleanerML.ProgressIndex++;
@@ -124,6 +132,8 @@ namespace mCleaner.Logics
 
         void bgWorker_DoWork(object sender, DoWorkEventArgs e)
         {
+            string last_Log = string.Empty;
+
             while (this.TTD.Count != 0)
             {
                 if (bgWorker.CancellationPending) break;
@@ -132,6 +142,7 @@ namespace mCleaner.Logics
                 {
                     Model_ThingsToDelete ttd = this.TTD.Dequeue();
 
+                    #region // execute cleaning commands
                     switch (ttd.command)
                     {
                         case COMMANDS.delete:
@@ -186,7 +197,12 @@ namespace mCleaner.Logics
                             ExecuteLittleRegistryCleanerCommand(ttd, false);
                             break;
                         #endregion
+
+                        case COMMANDS.clipboard:
+                            CommandLogic_Clipboard.I.ExecuteCommand();
+                            break;
                     }
+                    #endregion
                 }
             }
         }
@@ -197,10 +213,13 @@ namespace mCleaner.Logics
         {
             //this.TTD = new Queue<Model_ThingsToDelete>(this.TTD.Reverse());
 
-            _preview_log = string.Empty;
+            //PreviewLog = string.Empty;
+            //VMCleanerML.TextLog = string.Empty;
+            string last_Log = string.Empty;
 
             foreach (Model_ThingsToDelete ttd in this.TTD)
             {
+                #region execute preview commands
                 switch (ttd.command)
                 {
                     case COMMANDS.delete:
@@ -250,12 +269,17 @@ namespace mCleaner.Logics
                         break;
                     #endregion
 
-                    #region little registry cleaner
+                    #region // little registry cleaner
                     case COMMANDS.littleregistry:
                         await Task.Run(() => ExecuteLittleRegistryCleanerCommand(ttd, true));
                         break;
                     #endregion
+
+                    case COMMANDS.clipboard:
+                        await Task.Run(() => CommandLogic_Clipboard.I.ExecuteCommand(true));
+                        break;
                 }
+                #endregion
             }
 
             ShowTotalOperations();
@@ -269,8 +293,6 @@ namespace mCleaner.Logics
 
             VMCleanerML.MaxProgress = 0;
             VMCleanerML.ProgressIndex = 0;
-            _execute_log = string.Empty;
-            VMCleanerML.TextLog = _execute_log;
 
             bgWorker.RunWorkerAsync();
         }
@@ -284,9 +306,9 @@ namespace mCleaner.Logics
                 if (fi.Exists)
                 {
                     string text = string.Format("{0} {1} {2}", "Delete", Win32API.FormatByteSize(fi.Length), ttd.FullPathName);
-                    _preview_log += text + "\r\n";
+                    //PreviewLog += text + "\r\n";
 
-                    UpdateProgressLog(text);
+                    UpdateProgressLog(text, text);
                 }
             }
             else
@@ -304,7 +326,7 @@ namespace mCleaner.Logics
                         // then we delete it.
                         FileOperations.Delete(fi.FullName);
 
-                        text = string.Format(" - DELETED\r\n");
+                        text = string.Format(" - DELETED");
                         // then report to the gui
                         bgWorker.ReportProgress(-1, text);
                     }
@@ -324,7 +346,7 @@ namespace mCleaner.Logics
                         {
                             FileOperations.I.DeleteEmptyDirectories(ttd.path, (a) =>
                             {
-                                string text = string.Format("Delete 0 {0} - DELETED\r\n", a);
+                                string text = string.Format("Delete 0 {0} - DELETED", a);
                                 // then report to the gui
                                 bgWorker.ReportProgress(-1, text);
                             });
@@ -358,9 +380,9 @@ namespace mCleaner.Logics
                 //            ttd.reg_root + "\\" + ttd.reg_subkey + "\\" + ttd.reg_name
                 //        );
 
-                _preview_log += text + "\r\n";
+                //PreviewLog += text + "\r\n";
 
-                UpdateProgressLog(text);
+                UpdateProgressLog(text, text);
             }
             else
             {
@@ -387,7 +409,7 @@ namespace mCleaner.Logics
                     RegistryHelper.I.DeleteEntries(ttd.reg_root, ttd.reg_subkey, ttd.reg_name);
                 }
 
-                text = string.Format(" - DELETED\r\n");
+                text = string.Format(" - DELETED");
                 bgWorker.ReportProgress(-1, text);
             }
         }
@@ -404,9 +426,9 @@ namespace mCleaner.Logics
 
             if (preview)
             {
-                _preview_log += text + "\r\n";
+                //PreviewLog += text + "\r\n";
 
-                UpdateProgressLog(text);
+                UpdateProgressLog(text, text);
             }
             else
             {
@@ -433,7 +455,7 @@ namespace mCleaner.Logics
                     }
                 }
 
-                text = string.Format(" - " + (res ? status : "NOT CLEANED") + "\r\n");
+                text = string.Format(" - " + (res ? status : "NOT CLEANED"));
                 bgWorker.ReportProgress(-1, text);
             }
         }
@@ -453,12 +475,12 @@ namespace mCleaner.Logics
                 if (!preview)
                 {
                     Win32API.IniHelper.SetValue(ttd.path, ttd.section, ttd.key, string.Empty);
-                    bgWorker.ReportProgress(-1, log + "\r\n");
+                    bgWorker.ReportProgress(-1, log);
                 }
                 else
                 {
-                    _preview_log += log + "\r\n";
-                    UpdateProgressLog(log);
+                    //PreviewLog += log + "\r\n";
+                    UpdateProgressLog(log, log);
                 }
             }
             else
@@ -475,12 +497,12 @@ namespace mCleaner.Logics
                     if (!preview)
                     {
                         Win32API.IniHelper.SetValue(ttd.path, ttd.section, key, string.Empty);
-                        bgWorker.ReportProgress(-1, log + "\r\n");
+                        bgWorker.ReportProgress(-1, log);
                     }
                     else
                     {
-                        _preview_log += log + "\r\n";
-                        UpdateProgressLog(log);
+                        //PreviewLog += log + "\r\n";
+                        UpdateProgressLog(log, log);
                     }
                 }
             }
@@ -494,9 +516,9 @@ namespace mCleaner.Logics
             if (preview)
             {   
                 string log = string.Format(text, add[add.Length - 1], ttd.FullPathName);
-                _preview_log += log + "\r\n";
+                //PreviewLog += log + "\r\n";
 
-                UpdateProgressLog(text);
+                UpdateProgressLog(log, text);
             }
             else
             {
@@ -514,7 +536,7 @@ namespace mCleaner.Logics
                         writer.Write(json);
                     }
 
-                    log = " - CLEANED\r\n";
+                    log = " - CLEANED";
                     bgWorker.ReportProgress(-1, log);
                 }
             }
@@ -522,6 +544,8 @@ namespace mCleaner.Logics
 
         void ExecuteChromeCommand(Model_ThingsToDelete ttd, bool preview = false)
         {
+            string ret = string.Empty;
+
             string text = "Clean file {0} {1}";
 
             if (preview)
@@ -530,29 +554,48 @@ namespace mCleaner.Logics
                 if (fi.Exists)
                 {
                     string log = string.Format(text, Win32API.FormatByteSize(fi.Length), fi.FullName);
-                    _preview_log += log + "\r\n";
-                    UpdateProgressLog(text);
+                    //PreviewLog += log + "\r\n";
+                    UpdateProgressLog(log, text);
                 }
             }
             else
             {
+                string log = string.Empty;
+                log = string.Format(text, string.Empty, ttd.FullPathName);
+                bgWorker.ReportProgress(-1, log);
+
                 switch (ttd.command)
                 {
                     case COMMANDS.chrome_autofill:
-                        CommandLogic_Chrome.CleanAutofill(ttd.FullPathName);
+                        ProgressWorker.I.EnQ("Cleaning Chrome Autofill");
+                        ret = CommandLogic_Chrome.CleanAutofill(ttd.FullPathName);
                         break;
                     case COMMANDS.chrome_database_db:
-                        CommandLogic_Chrome.CleanDatabases(ttd.FullPathName);
+                        ProgressWorker.I.EnQ("Cleaning Chrome Database.db");
+                        ret = CommandLogic_Chrome.CleanDatabases(ttd.FullPathName);
                         break;
                     case COMMANDS.chrome_favicons:
-                        CommandLogic_Chrome.CleanFavIcons(ttd.FullPathName);
+                        ProgressWorker.I.EnQ("Cleaning Chrome Favicons");
+                        ret = CommandLogic_Chrome.CleanFavIcons(ttd.FullPathName);
                         break;
                     case COMMANDS.chrome_history:
-                        CommandLogic_Chrome.CleanHistory(ttd.FullPathName);
+                        ProgressWorker.I.EnQ("Cleaning Chrome History");
+                        ret = CommandLogic_Chrome.CleanHistory(ttd.FullPathName);
                         break;
                     case COMMANDS.chrome_keywords:
-                        CommandLogic_Chrome.CleanKeywords(ttd.FullPathName);
+                        ProgressWorker.I.EnQ("Cleaning Chrome Keywords");
+                        ret = CommandLogic_Chrome.CleanKeywords(ttd.FullPathName);
                         break;
+                }
+
+                if (ret != string.Empty)
+                {
+                    log = string.Format(" - Not cleaned due to error\r\n\t{0}", ret);
+                    bgWorker.ReportProgress(-1, log);
+                }
+                else
+                {
+                    bgWorker.ReportProgress(-1, " - Cleaned");
                 }
             }
         }
@@ -569,8 +612,8 @@ namespace mCleaner.Logics
                     if (fi.Exists)
                     {
                         string log = string.Format(text, Win32API.FormatByteSize(fi.Length), fi.FullName);
-                        _preview_log += log + "\r\n";
-                        UpdateProgressLog(text);
+                        //PreviewLog += log + "\r\n";
+                        UpdateProgressLog(log, log);
 
                     }
                 }
@@ -579,8 +622,8 @@ namespace mCleaner.Logics
                     if (Directory.Exists(ttd.FullPathName))
                     {
                         string log = string.Format(text, "", ttd.FullPathName);
-                        _preview_log += log + "\r\n";
-                        UpdateProgressLog(text);
+                        //PreviewLog += log + "\r\n";
+                        UpdateProgressLog(log, log);
                     }
                 }
             }
@@ -594,7 +637,7 @@ namespace mCleaner.Logics
 
                     CommandLogic_Clam.I.LaunchScanner(ttd.search, ttd.FullPathName);
 
-                    log = " - CLEANED\r\n";
+                    log = " - CLEANED";
                     bgWorker.ReportProgress(-1, log);
                 }
                 else if (ttd.search == SEARCH.clamscan_folder_recurse || ttd.search == SEARCH.clamscan_folder)
@@ -604,7 +647,7 @@ namespace mCleaner.Logics
 
                     CommandLogic_Clam.I.LaunchScanner(ttd.search, ttd.FullPathName, regex: ttd.regex);
 
-                    log = " - CLEANED\r\n";
+                    log = " - CLEANED";
                     bgWorker.ReportProgress(-1, log);
                 }
             }
@@ -681,15 +724,15 @@ namespace mCleaner.Logics
                 string root = badkey.Root.OpenSubKey(badkey.Subkey).ToString();
 
                 log = string.Format(text, "Clean", root + (badkey.Key != string.Empty ? "\\" + badkey.Key : string.Empty) + ", " + badkey.Name);
-                _preview_log += log + "\r\n";
+                //PreviewLog += log + "\r\n";
 
                 if (preview)
                 {
-                    UpdateProgressLog(log, false);
+                    UpdateProgressLog(log, log, false);
                 }
                 else
                 {
-                    bgWorker.ReportProgress(-1, log + "\r\n");
+                    bgWorker.ReportProgress(-1, log);
                 }
 
                 this.TotalSpecialOperations++;
@@ -743,7 +786,8 @@ namespace mCleaner.Logics
                 else if (
                             ttd.WhatKind == THINGS_TO_DELETE.registry_key ||
                             ttd.WhatKind == THINGS_TO_DELETE.registry_name ||
-                            ttd.WhatKind == THINGS_TO_DELETE.clamwin
+                            ttd.WhatKind == THINGS_TO_DELETE.clamwin ||
+                            ttd.WhatKind == THINGS_TO_DELETE.system
                         )
                 {
                     this.TotalSpecialOperations++;
@@ -766,8 +810,7 @@ namespace mCleaner.Logics
 
                 VMCleanerML.MaxProgress = 0;
                 VMCleanerML.ProgressIndex = 0;
-                _execute_log = string.Empty;
-                VMCleanerML.TextLog = _execute_log;
+
             }
 
             this.TTD.Clear();
@@ -775,33 +818,31 @@ namespace mCleaner.Logics
 
         void ShowTotalOperations(bool preview = true)
         {
-            string final_note = "\r\nDisk space recovered: {0}\r\nFiles deleted: {1}\r\nSpecial operations: {2}";
+            string final_note = "\r\nDisk space {3}recovered: {0}\r\nFiles {3}deleted: {1}\r\nSpecial operations: {2}";
             string text = string.Empty;
 
             if (preview)
             {
-                _preview_log += string.Format(final_note, Win32API.FormatByteSize(this.TotalFileSize), this.TotalFileDelete, this.TotalSpecialOperations);
-                text = _preview_log;
+                text = string.Format(final_note, Win32API.FormatByteSize(this.TotalFileSize), this.TotalFileDelete, this.TotalSpecialOperations, "to be ");
             }
             else
             {
-                _execute_log += string.Format(final_note, Win32API.FormatByteSize(this.TotalFileSize), this.TotalFileDelete, this.TotalSpecialOperations);
-                text = _execute_log;
+                text = string.Format(final_note, Win32API.FormatByteSize(this.TotalFileSize), this.TotalFileDelete, this.TotalSpecialOperations);
             }
 
-            _execute_log += string.Format(final_note, Win32API.FormatByteSize(this.TotalFileSize), this.TotalFileDelete, this.TotalSpecialOperations);
+            //ExecuteLog += string.Format(final_note, Win32API.FormatByteSize(this.TotalFileSize), this.TotalFileDelete, this.TotalSpecialOperations);
 
             ProgressWorker.I.EnQ("Done");
-            VMCleanerML.TextLog = text;
+            VMCleanerML.TextLog += text;
             VMCleanerML.ProgressIndex = 0;
             VMCleanerML.MaxProgress = 0;
         }
 
-        void UpdateProgressLog(string text, bool update_progress_text = true)
+        void UpdateProgressLog(string WindowLogText, string ProgressText, bool update_progress_text = true)
         {
-            if(update_progress_text) ProgressWorker.I.EnQ(text);
+            if (update_progress_text) ProgressWorker.I.EnQ(ProgressText);
 
-            VMCleanerML.TextLog = _preview_log;
+            VMCleanerML.TextLog += WindowLogText;
             VMCleanerML.MaxProgress = this.TTD.Count;
             VMCleanerML.ProgressIndex++;
         }

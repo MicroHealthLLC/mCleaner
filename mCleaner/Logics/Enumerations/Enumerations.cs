@@ -55,6 +55,7 @@ namespace mCleaner.Logics.Enumerations
 
         // special commands
 
+        #region chrome special commands
         [StringValue("chrome.databases_db")]
         chrome_database_db,
 
@@ -69,6 +70,7 @@ namespace mCleaner.Logics.Enumerations
 
         [StringValue("chrome.keywords")]
         chrome_keywords,
+        #endregion
 
         [StringValue("json")]
         json,
@@ -81,6 +83,9 @@ namespace mCleaner.Logics.Enumerations
 
         [StringValue("littleregistry")]
         littleregistry,
+
+        [StringValue("clipboard")]
+        clipboard
     }
 
     public enum SEARCH
@@ -178,6 +183,9 @@ namespace mCleaner.Logics.Enumerations
         [StringValue("lrc.winfonts")]
         lrc_win_fonts,
         #endregion
+
+        [StringValue("clipboard.clear")]
+        clipboard_clear,
     }
 
     public enum THINGS_TO_DELETE
@@ -188,6 +196,7 @@ namespace mCleaner.Logics.Enumerations
         registry_key,
         registry_name,
         clamwin,
-        littlregistrycleaner
+        littlregistrycleaner,
+        system
     }
 }

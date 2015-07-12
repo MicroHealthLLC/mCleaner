@@ -94,7 +94,9 @@ namespace mCleaner.Logics.Commands
                         search = SEARCH.file,
 
                         section = section,
-                        key = key
+                        key = key,
+                        level = Action.level,
+                        cleaner_name = Action.parent_option.label
                     });
                 }
             }

@@ -29,11 +29,11 @@ namespace mCleaner.Logics.Commands
             }
         }
 
-        public void UpdateProgressLog(string text, bool update_progress_text = true)
+        public void UpdateProgressLog(string WindowLogText, string ProgressText, bool update_progress_text = true)
         {
-            if (update_progress_text) ProgressWorker.I.EnQ(text);
+            if (update_progress_text) ProgressWorker.I.EnQ(ProgressText);
 
-            VMCleanerML.TextLog = _preview_log;
+            VMCleanerML.TextLog += WindowLogText;
             //VMCleanerML.MaxProgress = this.TTD.Count;
             //VMCleanerML.ProgressIndex++;
         }
