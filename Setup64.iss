@@ -33,19 +33,19 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "D:\Clients\oDesk\2015\Frank\MicroHealthLLC_Git\mCleaner\mCleaner\mCleaner\bin\Release\mCleaner.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\Clients\oDesk\2015\Frank\MicroHealthLLC_Git\mCleaner\mCleaner\mCleaner\bin\Release\Clam\*"; DestDir: "{app}\Clam"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "D:\Clients\oDesk\2015\Frank\MicroHealthLLC_Git\mCleaner\mCleaner\mCleaner\bin\Release\Cleaners\*"; DestDir: "{app}\Cleaners"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "D:\Clients\oDesk\2015\Frank\MicroHealthLLC_Git\mCleaner\mCleaner\mCleaner\bin\Release\GalaSoft.MvvmLight.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\Clients\oDesk\2015\Frank\MicroHealthLLC_Git\mCleaner\mCleaner\mCleaner\bin\Release\GalaSoft.MvvmLight.Extras.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\Clients\oDesk\2015\Frank\MicroHealthLLC_Git\mCleaner\mCleaner\mCleaner\bin\Release\GalaSoft.MvvmLight.Platform.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\Clients\oDesk\2015\Frank\MicroHealthLLC_Git\mCleaner\mCleaner\mCleaner\bin\Release\mCleaner.exe.config"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\Clients\oDesk\2015\Frank\MicroHealthLLC_Git\mCleaner\mCleaner\mCleaner\bin\Release\Microsoft.Practices.ServiceLocation.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\Clients\oDesk\2015\Frank\MicroHealthLLC_Git\mCleaner\mCleaner\mCleaner\bin\Release\Newtonsoft.Json.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\Clients\oDesk\2015\Frank\MicroHealthLLC_Git\mCleaner\mCleaner\mCleaner\bin\Release\sqlite3.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\Clients\oDesk\2015\Frank\MicroHealthLLC_Git\mCleaner\mCleaner\mCleaner\bin\Release\x64\SQLite.Interop.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\Clients\oDesk\2015\Frank\MicroHealthLLC_Git\mCleaner\mCleaner\mCleaner\bin\Release\System.Data.SQLite.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\Clients\oDesk\2015\Frank\MicroHealthLLC_Git\mCleaner\mCleaner\mCleaner\bin\Release\System.Windows.Interactivity.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "mCleaner\bin\Release\mCleaner.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "mCleaner\bin\Release\Clam\*"; DestDir: "{app}\Clam"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "mCleaner\bin\Release\Cleaners\*"; DestDir: "{app}\Cleaners"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "mCleaner\bin\Release\GalaSoft.MvvmLight.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "mCleaner\bin\Release\GalaSoft.MvvmLight.Extras.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "mCleaner\bin\Release\GalaSoft.MvvmLight.Platform.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "mCleaner\bin\Release\mCleaner.exe.config"; DestDir: "{app}"; Flags: ignoreversion
+Source: "mCleaner\bin\Release\Microsoft.Practices.ServiceLocation.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "mCleaner\bin\Release\Newtonsoft.Json.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "mCleaner\bin\Release\sqlite3.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "mCleaner\bin\Release\x64\SQLite.Interop.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "mCleaner\bin\Release\System.Data.SQLite.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "mCleaner\bin\Release\System.Windows.Interactivity.dll"; DestDir: "{app}"; Flags: ignoreversion
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
