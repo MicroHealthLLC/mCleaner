@@ -25,14 +25,14 @@
     <label>Backup files</label>
     <description>Delete the backup files</description>
     <warning>Inspect the preview for any files you want to keep.</warning>
-    <action command="delete" search="walk.all" path="C:\" regex="\.[Bb][Aa][Kk]$" cache="false"/>
+    <action command="delete" search="walk.all" path="C:\" regex="\.[Bb][Aa][Kk]$" cache="false" level="2"/>
     <!-- <action command="delete" search="deep" regex="[a-zA-Z]{1,4}~$" cache="false"/> -->
   </option>
   <option id="thumbs_db">
     <label translate="false">Thumbs.db</label>
     <description>Delete the files</description>
     <warning>This option is slow.</warning>
-    <action command="delete" search="walk.all" path="C:\" regex="Thumbs\.db" cache="false"/>
+    <action command="delete" search="walk.all" path="C:\" regex="Thumbs\.db" cache="false" level="2"/>
     <!-- <action command="delete" search="deep" regex="^Thumbs\.db:encryptable$" cache="false"/> -->
   </option>
   <option id="tmp">
@@ -40,8 +40,8 @@
     <description>Delete the temporary files</description>
     <warning>This option is slow.</warning>
     <!-- http://support.microsoft.com/kb/211632 -->
-    <action command="delete" search="walk.all" cache="false" path="C:\" regex="~wr[a-z][0-9]{4}\.tmp$"/>
+    <action command="delete" search="walk.all" cache="false" path="C:\" regex="~wr[a-z][0-9]{4}\.tmp$" level="2"/>
     <!-- http://support.microsoft.com/kb/826810 -->
-    <action command="delete" search="walk.all" cache="false" path="C:\" regex="ppt[0-9]{4}\.tmp"/>
+    <action command="delete" search="walk.all" cache="false" path="C:\" regex="ppt[0-9]{4}\.tmp" level="2"/>
   </option>
 </cleaner>

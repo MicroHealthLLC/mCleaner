@@ -32,11 +32,11 @@
   <option id="mru">
     <label>Most recently used</label>
     <description>Delete the most recently used list</description>
-    <action search="file" path="$APPDATA\vlc\vlc-qt-interface.ini" command="ini" section="General" parameter="filedialog-path"/>
-    <action search="file" path="$APPDATA\vlc\vlc-qt-interface.ini" command="ini" section="RecentsMRL"/>
-    <action search="file" path="~/.config/vlc/vlc-qt-interface.conf" command="ini" section="General" parameter="filedialog-path"/>
+    <action search="file" path="$APPDATA\vlc\vlc-qt-interface.ini" command="ini" section="General" parameter="filedialog-path" level="1"/>
+    <action search="file" path="$APPDATA\vlc\vlc-qt-interface.ini" command="ini" section="RecentsMRL" level="1"/>
+    <!--<action search="file" path="~/.config/vlc/vlc-qt-interface.conf" command="ini" section="General" parameter="filedialog-path"/>
     <action search="file" path="~/.config/vlc/vlc-qt-interface.conf" command="ini" section="RecentsMRL"/>
-    <action search="file" path="~/.config/vlc/vlc-qt-interface.conf" command="ini" section="OpenDialog" parameter="netMRL"/>
-    <action command="delete" search="walk.files" path="$APPDATA\vlc\art\artistalbum\"/>
+    <action search="file" path="~/.config/vlc/vlc-qt-interface.conf" command="ini" section="OpenDialog" parameter="netMRL"/>-->
+    <action command="delete" search="walk.files" path="$APPDATA\vlc\art\artistalbum\" level="1"/>
   </option>
 </cleaner>

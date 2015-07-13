@@ -25,52 +25,52 @@
     <label>Most recently used</label>
     <description>Delete the most recently used list</description>
     <!-- applications executed including date and time -->
-    <action command="winreg" path="HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\UserAssist"/>
+    <action command="winreg" path="HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\UserAssist" level="2"/>
     <!-- reference: reference: http://support.microsoft.com/kb/142298 -->
     <!-- common open dialog -->
-    <action command="winreg" path="HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\ComDlg32\LastVisitedMRU"/>
+    <action command="winreg" path="HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\ComDlg32\LastVisitedMRU" level="2"/>
     <!--  Windows Vista/7 -->
-    <action command="winreg" path="HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\ComDlg32\LastVisitedPidlMRU"/>
+    <action command="winreg" path="HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\ComDlg32\LastVisitedPidlMRU" level="2"/>
     <!--  common save as dialog -->
-    <action command="winreg" path="HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\ComDlg32\OpenSaveMRU"/>
+    <action command="winreg" path="HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\ComDlg32\OpenSaveMRU" level="2"/>
     <!--  Windows Vista/7 -->
-    <action command="winreg" path="HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\ComDlg32\OpenSavePidlMRU"/>
+    <action command="winreg" path="HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\ComDlg32\OpenSavePidlMRU" level="2"/>
     <!--  find files command -->
-    <action command="winreg" path="HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Doc Find Spec MRU"/>
+    <action command="winreg" path="HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Doc Find Spec MRU" level="2"/>
     <!--  find Computer command -->
-    <action command="winreg" path="HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\FindComputerMRU"/>
+    <action command="winreg" path="HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\FindComputerMRU" level="2"/>
     <!--  map network drives -->
-    <action command="winreg" path="HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Map Network Drive MRU"/>
+    <action command="winreg" path="HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Map Network Drive MRU" level="2"/>
     <!--  printer ports -->
-    <action command="winreg" path="HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\PrnPortsMRU"/>
+    <action command="winreg" path="HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\PrnPortsMRU" level="1"/>
   </option>
   <option id="recent_documents">
     <label>Recent documents list</label>
     <description>Delete the list of recently used documents</description>
     <!-- Windows XP -->
-    <action command="delete" search="glob" path="$USERPROFILE\Recent\*.lnk"/>
+    <action command="delete" search="glob" path="$USERPROFILE\Recent\*.lnk" level="2"/>
     <!-- Vista -->
-    <action command="delete" search="glob" path="$APPDATA\Microsoft\Windows\Recent\*.lnk"/>
+    <action command="delete" search="glob" path="$APPDATA\Microsoft\Windows\Recent\*.lnk" level="2"/>
     <!-- recent documents in start menu -->
-    <action command="winreg" path="HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs"/>
+    <action command="winreg" path="HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs" level="2"/>
     <!-- Windows 7 jump list -->
-    <action command="delete" search="glob" path="$APPDATA\Microsoft\Windows\Recent\AutomaticDestinations\*.automaticDestinations-ms"/>
-    <action command="delete" search="glob" path="$APPDATA\Microsoft\Windows\Recent\CustomDestinations\*customDestinations-ms"/>
+    <action command="delete" search="glob" path="$APPDATA\Microsoft\Windows\Recent\AutomaticDestinations\*.automaticDestinations-ms" level="2"/>
+    <action command="delete" search="glob" path="$APPDATA\Microsoft\Windows\Recent\CustomDestinations\*customDestinations-ms" level="2"/>
   </option>
   <option id="run">
     <label translators="In Windows 'Run' is the dialog in the Start menu">Run</label>
     <description>Delete the most recently used list</description>
     <!--  run command -->
-    <action command="winreg" path="HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU"/>
+    <action command="winreg" path="HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU" level="1"/>
   </option>
   <option id="search_history">
     <label>Search history</label>
     <description>Delete the search history</description>
-    <action command="winreg" path="HKCU\Software\Microsoft\Search Assistant\ACMru"/>
+    <action command="winreg" path="HKCU\Software\Microsoft\Search Assistant\ACMru" level="1"/>
   </option>
   <option id="thumbnails">
     <label>Thumbnails</label>
     <description>Delete the cache</description>
-    <action command="delete" search="glob" path="$LOCALAPPDATA\Microsoft\Windows\Explorer\thumbcache*.db"/>
+    <action command="delete" search="glob" path="$LOCALAPPDATA\Microsoft\Windows\Explorer\thumbcache*.db" level="1"/>
   </option>
 </cleaner>

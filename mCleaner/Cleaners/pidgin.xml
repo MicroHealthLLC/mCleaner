@@ -26,13 +26,13 @@
     <label>Cache</label>
     <description>Delete the cache</description>
     <!-- avatars -->
-    <action command="delete" search="walk.all" path="~/.purple/icons/"/>
-    <action command="delete" search="walk.all" path="$APPDATA\.purple\icons\"/>
+    <action command="delete" search="walk.all" path="~/.purple/icons/" level="2"/>
+    <action command="delete" search="walk.all" path="$APPDATA\.purple\icons\" level="2"/>
   </option>
   <option id="logs">
     <label>Chat logs</label>
     <description>Delete the chat logs</description>
-    <action command="delete" search="walk.all" path="~/.purple/logs/"/>
-    <action command="delete" search="walk.all" path="$APPDATA\.purple\logs\"/>
+    <action command="delete" search="walk.all" path="~/.purple/logs/" level="1"/>
+    <action command="delete" search="walk.all" path="$APPDATA\.purple\logs\" level="1"/>
   </option>
 </cleaner>

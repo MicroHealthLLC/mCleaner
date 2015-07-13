@@ -24,10 +24,10 @@
   <option id="mru">
     <label>Most recently used</label>
     <description>Delete the most recently used list</description>
-    <action command="winreg" path="HKCU\Software\WinRAR\ArcHistory"/>
-    <action command="winreg" path="HKCU\Software\WinRAR\DialogEditHistory\ArcName"/>
-    <action command="winreg" path="HKCU\Software\WinRAR\DialogEditHistory\ExtrPath"/>
-    <action command="winreg" path="HKCU\Software\WinRAR\DialogEditHistory\WizArcName"/>
-    <action command="winreg" path="HKCU\Software\WinRAR\General" name="LastFolder"/>
+    <action command="winreg" path="HKCU\Software\WinRAR\ArcHistory" level="1"/>
+    <action command="winreg" path="HKCU\Software\WinRAR\DialogEditHistory\ArcName" level="1"/>
+    <action command="winreg" path="HKCU\Software\WinRAR\DialogEditHistory\ExtrPath" level="1"/>
+    <action command="winreg" path="HKCU\Software\WinRAR\DialogEditHistory\WizArcName" level="1"/>
+    <action command="winreg" path="HKCU\Software\WinRAR\General" name="LastFolder" level="1"/>
   </option>
 </cleaner>

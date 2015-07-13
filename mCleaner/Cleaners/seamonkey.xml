@@ -41,20 +41,20 @@
     -->
     <action command="delete" search="walk.files" path="~/.mozilla/default/Cache/"/>
     <action command="delete" search="walk.files" path="~/.mozilla/seamonkey/*/Cache/"/>
-    <action command="delete" search="walk.files" path="$localappdata\Mozilla\Profiles\default\Cache\"/>
-    <action command="delete" search="walk.files" path="$localappdata\Mozilla\SeaMonkey\Profiles\*\Cache\"/>
-    <action command="delete" search="walk.files" path="$localappdata\Mozilla\SeaMonkey\Profiles\*\startupCache\"/>
+    <action command="delete" search="walk.files" path="$localappdata\Mozilla\Profiles\default\Cache\" level="2"/>
+    <action command="delete" search="walk.files" path="$localappdata\Mozilla\SeaMonkey\Profiles\*\Cache\" level="2"/>
+    <action command="delete" search="walk.files" path="$localappdata\Mozilla\SeaMonkey\Profiles\*\startupCache\" level="2"/>
   </option>
   <option id="chat_logs">
     <label>Chat logs</label>
     <description>Delete the chat logs</description>
     <!-- example: /home/bob/.mozilla/default/1oq1wrww.slt/chatzilla/logs/client.2009-07-03.log -->
     <!-- example: C:\Documents and Settings\bob\Application Data\Mozilla\SeaMonkey\Profiles\mpt1tdce.default\chatzilla\logs (SeaMonkey 2.4.1, Windows XP) -->
-    <action command="delete" search="glob" path="$APPDATA\Mozilla\Profiles\default\????????.slt\chatzilla\logs\*log"/>
-    <action command="delete" search="glob" path="$APPDATA\Mozilla\SeaMonkey\Profiles\*\chatzilla\inputHistory.txt"/>
-    <action command="delete" search="glob" path="$APPDATA\Mozilla\SeaMonkey\Profiles\*\chatzilla\urls.txt"/>
-    <action command="delete" search="glob" path="~/.mozilla/*/????????.slt/chatzilla/logs/*log"/>
-    <action command="delete" search="walk.files" path="$APPDATA\Mozilla\SeaMonkey\Profiles\*\chatzilla\logs\"/>
+    <action command="delete" search="glob" path="$APPDATA\Mozilla\Profiles\default\????????.slt\chatzilla\logs\*log" level="1"/>
+    <action command="delete" search="glob" path="$APPDATA\Mozilla\SeaMonkey\Profiles\*\chatzilla\inputHistory.txt" level="1"/>
+    <action command="delete" search="glob" path="$APPDATA\Mozilla\SeaMonkey\Profiles\*\chatzilla\urls.txt" level="1"/>
+    <action command="delete" search="glob" path="~/.mozilla/*/????????.slt/chatzilla/logs/*log" level="1"/>
+    <action command="delete" search="walk.files" path="$APPDATA\Mozilla\SeaMonkey\Profiles\*\chatzilla\logs\" level="1"/>
   </option>
   <option id="cookies">
     <label>Cookies</label>
@@ -71,15 +71,15 @@
   <option id="download_history">
     <label>Download history</label>
     <description>List of files downloaded</description>
-    <action command="delete" search="glob" path="~/.mozilla/seamonkey/*.default/downloads.sqlite"/>
-    <action command="delete" search="glob" path="$APPDATA\Mozilla\SeaMonkey\Profiles\*\downloads.sqlite"/>
+    <action command="delete" search="glob" path="~/.mozilla/seamonkey/*.default/downloads.sqlite" level="1"/>
+    <action command="delete" search="glob" path="$APPDATA\Mozilla\SeaMonkey\Profiles\*\downloads.sqlite" level="1"/>
   </option>
   <option id="history">
     <label>History</label>
     <description>Delete the list of visited web pages</description>
-    <action command="delete" search="glob" path="$APPDATA\Mozilla\Profiles\default\????????.slt\history.dat"/>
-    <action command="delete" search="glob" path="~/.mozilla/*/????????.slt/history.dat"/>
-    <action command="delete" search="glob" path="~/.mozilla/seamonkey/*.default/urlbarhistory.sqlite"/>
-    <action command="delete" search="glob" path="$APPDATA\Mozilla\SeaMonkey\Profiles\*\urlbarhistory.sqlite"/>
+    <action command="delete" search="glob" path="$APPDATA\Mozilla\Profiles\default\????????.slt\history.dat" level="1"/>
+    <action command="delete" search="glob" path="~/.mozilla/*/????????.slt/history.dat" level="1"/>
+    <action command="delete" search="glob" path="~/.mozilla/seamonkey/*.default/urlbarhistory.sqlite" level="1"/>
+    <action command="delete" search="glob" path="$APPDATA\Mozilla\SeaMonkey\Profiles\*\urlbarhistory.sqlite" level="1"/>
   </option>
 </cleaner>

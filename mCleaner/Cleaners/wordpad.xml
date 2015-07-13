@@ -25,6 +25,6 @@
     <label>Most recently used</label>
     <description>Delete the most recently used list</description>
     <!-- Windows XP and 7 -->
-    <action command="winreg" path="HKCU\Software\Microsoft\Windows\CurrentVersion\Applets\Wordpad\Recent File List"/>
+    <action command="winreg" path="HKCU\Software\Microsoft\Windows\CurrentVersion\Applets\Wordpad\Recent File List" level="1"/>
   </option>
 </cleaner>

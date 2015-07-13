@@ -24,11 +24,11 @@
   <option id="cache">
     <label>Cache</label>
     <description>Delete the cache</description>
-    <action command="delete" search="walk.files" path="~/.java/deployment/cache/"/>
-    <action command="delete" search="walk.all" path="~/.icedteaplugin/cache/"/>
-    <action command="delete" search="walk.files" path="$APPDATA\Sun\Java\Deployment\cache\"/>
-    <action command="delete" search="walk.files" path="$USERPROFILE\AppData\LocalLow\Sun\Java\Deployment\cache\"/>
+    <!--<action command="delete" search="walk.files" path="~/.java/deployment/cache/" level="2"/>
+    <action command="delete" search="walk.all" path="~/.icedteaplugin/cache/" level="2"/>-->
+    <action command="delete" search="walk.files" path="$APPDATA\Sun\Java\Deployment\cache\" level="2"/>
+    <action command="delete" search="walk.files" path="$USERPROFILE\AppData\LocalLow\Sun\Java\Deployment\cache\" level="2"/>
     <!-- Ubuntu 12.10 and 13.04 has ~/.icedtea/cache/ -->
-    <action command="delete" search="walk.all" path="~/.icedtea/cache"/>
+    <!--<action command="delete" search="walk.all" path="~/.icedtea/cache"/>-->
   </option>
 </cleaner>

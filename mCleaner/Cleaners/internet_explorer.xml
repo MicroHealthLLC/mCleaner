@@ -25,10 +25,10 @@
   <option id="cookies">
     <label>Cookies</label>
     <description>Delete cookies, which contain information such as web site preferences, authentication, and tracking identification</description>
-    <action command="delete" search="walk.files" path="$USERPROFILE\Cookies\"/>
-    <action command="delete" search="walk.files" path="$APPDATA\Microsoft\Windows\Cookies\"/>
-    <action command="delete" search="walk.files" path="$localappdata\Microsoft\Internet Explorer\DOMStore\"/>
-    <action command="delete" search="walk.files" path="$USERPROFILE\AppData\LocalLow\Microsoft\Internet Explorer\DOMStore\"/>
+    <action command="delete" search="walk.files" path="$USERPROFILE\Cookies\" level="2"/>
+    <action command="delete" search="walk.files" path="$APPDATA\Microsoft\Windows\Cookies\" level="2"/>
+    <action command="delete" search="walk.files" path="$localappdata\Microsoft\Internet Explorer\DOMStore\" level="2"/>
+    <action command="delete" search="walk.files" path="$USERPROFILE\AppData\LocalLow\Microsoft\Internet Explorer\DOMStore\" level="2"/>
   </option>
   <option id="forms">
     <label>Form history</label>
@@ -51,9 +51,9 @@
   <option id="temporary_files">
     <label>Temporary files</label>
     <description>Delete the temporary files</description>
-    <action command="delete" search="walk.files" path="$APPDATA\Microsoft\Windows\IETldCache\"/>
-    <action command="delete" search="walk.files" path="$USERPROFILE\AppData\Local\Microsoft\Windows\Temporary Internet Files\"/>
-    <action command="delete" search="walk.files" path="$USERPROFILE\Local Settings\Temporary Internet Files\"/>
-    <action command="delete" search="walk.files" path="$localappdata\Microsoft\Feeds Cache\"/>
+    <action command="delete" search="walk.files" path="$APPDATA\Microsoft\Windows\IETldCache\" level="1"/>
+    <action command="delete" search="walk.files" path="$USERPROFILE\AppData\Local\Microsoft\Windows\Temporary Internet Files\" level="1"/>
+    <action command="delete" search="walk.files" path="$USERPROFILE\Local Settings\Temporary Internet Files\" level="1"/>
+    <action command="delete" search="walk.files" path="$localappdata\Microsoft\Feeds Cache\" level="1"/>
   </option>
 </cleaner>

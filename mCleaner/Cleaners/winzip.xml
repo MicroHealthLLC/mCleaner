@@ -24,7 +24,7 @@
   <option id="mru">
     <label>Most recently used</label>
     <description>Delete the most recently used list</description>
-    <action command="winreg" path="HKCU\Software\Nico Mak Computing\WinZip\mru\jobs"/>
-    <action command="winreg" path="HKCU\Software\Nico Mak Computing\WinZip\mru\archives"/>
+    <action command="winreg" path="HKCU\Software\Nico Mak Computing\WinZip\mru\jobs" level="1"/>
+    <action command="winreg" path="HKCU\Software\Nico Mak Computing\WinZip\mru\archives" level="1"/>
   </option>
 </cleaner>

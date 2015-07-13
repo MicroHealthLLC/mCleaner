@@ -25,27 +25,27 @@
   <option id="backup_files">
     <label>Backup files</label>
     <description>Delete the backup files</description>
-    <action command="delete" search="glob" path="~/.azureus/active/*.bak"/>
-    <action command="delete" search="glob" path="$APPDATA\Azureus\active\*.bak"/>
+    <!--<action command="delete" search="glob" path="~/.azureus/active/*.bak"/>-->
+    <action command="delete" search="glob" path="$APPDATA\Azureus\active\*.bak" level="1"/>
   </option>
   <option id="cache">
     <label>Cache</label>
     <description>Delete the cache</description>
-    <action command="delete" search="file" path="~/.azureus/ipfilter.cache"/>
-    <action command="delete" search="file" path="$APPDATA\Azureus\ipfilter.cache"/>
+    <!--<action command="delete" search="file" path="~/.azureus/ipfilter.cache"/>-->
+    <action command="delete" search="file" path="$APPDATA\Azureus\ipfilter.cache" level="2"/>
   </option>
   <option id="logs">
     <label>Logs</label>
     <description>Delete the logs</description>
-    <action command="delete" search="walk.all" path="~/.azureus/logs/"/>
+    <!--<action command="delete" search="walk.all" path="~/.azureus/logs/"/>
     <action command="delete" search="file" path="~/.azureus/update.log"/>
-    <action command="delete" search="file" path="~/.azureus/tracker.log"/>
-    <action command="delete" search="walk.all" path="$APPDATA\Azureus\logs\"/>
+    <action command="delete" search="file" path="~/.azureus/tracker.log"/>-->
+    <action command="delete" search="walk.all" path="$APPDATA\Azureus\logs\" level="1"/>
   </option>
   <option id="tmp">
     <label>Temporary files</label>
     <description>Delete the temporary files</description>
-    <action command="delete" search="walk.files" path="~/.azureus/tmp/"/>
-    <action command="delete" search="walk.files" path="$APPDATA\Azureus\tmp\"/>
+    <!--<action command="delete" search="walk.files" path="~/.azureus/tmp/"/>-->
+    <action command="delete" search="walk.files" path="$APPDATA\Azureus\tmp\" level="1"/>
   </option>
 </cleaner>

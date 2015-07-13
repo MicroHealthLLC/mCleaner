@@ -25,12 +25,12 @@
   <option id="logs">
     <label>Chat logs</label>
     <description>Delete the chat logs</description>
-    <action command="delete" search="walk.all" path="~/.xchat2/scrollback/"/>
-    <action command="delete" search="glob" path="~/.xchat2/logs/*log"/>
+    <!--<action command="delete" search="walk.all" path="~/.xchat2/scrollback/"/>-->
+    <!--<action command="delete" search="glob" path="~/.xchat2/logs/*log"/>-->
     <!-- ~/.xchat2/logs/*log seen before XChat version 2.8.6.  Not present in XChat 2.4.0 Windows. -->
-    <action command="delete" search="glob" path="~/.xchat2/xchatlogs/*log"/>
+    <!--<action command="delete" search="glob" path="~/.xchat2/xchatlogs/*log"/>-->
     <!-- ~/.xchat2/xchatlogs/*log seen first in XChat version 2.8.6 -->
-    <action command="delete" search="walk.all" path="$APPDATA\X-Chat 2\scrollback\"/>
-    <action command="delete" search="glob" path="$APPDATA\X-Chat 2\xchatlogs\*log"/>
+    <action command="delete" search="walk.all" path="$APPDATA\X-Chat 2\scrollback\" level="1"/>
+    <action command="delete" search="glob" path="$APPDATA\X-Chat 2\xchatlogs\*log" level="1"/>
   </option>
 </cleaner>

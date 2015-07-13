@@ -24,6 +24,6 @@
   <option id="search_history">
     <label>Search history</label>
     <description>Delete the search history</description>
-    <action command="delete" search="walk.files" path="$APPDATA\Google\Local Search History\"/>
+    <action command="delete" search="walk.files" path="$APPDATA\Google\Local Search History\" level="1"/>
   </option>
 </cleaner>

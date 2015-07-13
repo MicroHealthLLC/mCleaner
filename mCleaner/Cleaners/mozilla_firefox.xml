@@ -26,43 +26,43 @@
     <label>Cache</label>
     <description>Delete the web cache, which reduces time to display revisited pages</description>
 	<warning>This option is slow</warning>
-	<action command="delete" search="glob" path="$localappdata\Mozilla\Firefox\Profiles\*.default\Cache*" />
-	<action command="delete" search="glob" path="$localappdata\Mozilla\Firefox\Profiles\*.default\OfflineCache\index.sqlite" />
-	<action command="delete" search="glob" path="$localappdata\Mozilla\Firefox\Profiles\*.default\jumpListCache" />
+	<action command="delete" search="glob" path="$localappdata\Mozilla\Firefox\Profiles\*.default\Cache*" level="2" />
+	<action command="delete" search="glob" path="$localappdata\Mozilla\Firefox\Profiles\*.default\OfflineCache\index.sqlite" level="2" />
+	<action command="delete" search="glob" path="$localappdata\Mozilla\Firefox\Profiles\*.default\jumpListCache"  level="2"/>
   </option>
   
   <option id="cookies">
     <label>Cookies</label>
     <description>Delete cookies, which contain information such as web site preferences, authentication, and tracking identification</description>
-	<action command="delete" search="glob" path="$USERPROFILE\Application Data\Mozilla\Firefox\Profiles\*.default\cookies.txt" />
-	<action command="delete" search="glob" path="$USERPROFILE\Application Data\Mozilla\Firefox\Profiles\*.default\cookies.sqlite" />
+	  <action command="delete" search="glob" path="$USERPROFILE\Application Data\Mozilla\Firefox\Profiles\*.default\cookies.txt"  level="2"/>
+	  <action command="delete" search="glob" path="$USERPROFILE\Application Data\Mozilla\Firefox\Profiles\*.default\cookies.sqlite"  level="2"/>
   </option>
   
   <option id="crash_report">
     <label>Crash reports</label>
     <description>Delete the files</description>
-	<action command="delete" search="walk.files" path="$userprofile\Application Data\Mozilla\Firefox\Crash Reports" />
-	<action command="delete" search="glob" path="$userprofile\Application Data\Mozilla\Firefox\Crash Reports\minidumps\*.dmp" />
+	  <action command="delete" search="walk.files" path="$userprofile\Application Data\Mozilla\Firefox\Crash Reports"  level="1"/>
+	  <action command="delete" search="glob" path="$userprofile\Application Data\Mozilla\Firefox\Crash Reports\minidumps\*.dmp" level="1" />
   </option>
   
   <option id="dom_storage">
     <label>DOM Storage</label>
     <description>Delete HTML5 cookies</description>
-	<action command="delete" search="glob" path="$USERPROFILE\Application Data\Mozilla\Firefox\Profiles\*.default\webappsstore.sqlite" />
+	<action command="delete" search="glob" path="$USERPROFILE\Application Data\Mozilla\Firefox\Profiles\*.default\webappsstore.sqlite"  level="3"/>
   </option>
   
   <option id="download_history">
     <label>Download history</label>
     <description>List of files downloaded</description>
-	<action command="delete" search="glob" path="$USERPROFILE\Application Data\Mozilla\Firefox\Profiles\*.default\downloads.rdf" />
-	<action command="delete" search="glob" path="$USERPROFILE\Application Data\Mozilla\Firefox\Profiles\*.default\downloads.sqlite" />
+	<action command="delete" search="glob" path="$USERPROFILE\Application Data\Mozilla\Firefox\Profiles\*.default\downloads.rdf"  level="1"/>
+	<action command="delete" search="glob" path="$USERPROFILE\Application Data\Mozilla\Firefox\Profiles\*.default\downloads.sqlite"  level="1"/>
   </option>
   
   <option id="form_history">
     <label>Form history</label>
     <description>A history of forms entered in web sites and in the Search bar</description>
-	<action command="delete" search="glob" path="$USERPROFILE\Application Data\Mozilla\Firefox\Profiles\*.default\formhistory.dat" />
-	<action command="delete" search="glob" path="$USERPROFILE\Application Data\Mozilla\Firefox\Profiles\*.default\formhistory.sqlite" />
+	  <action command="delete" search="glob" path="$USERPROFILE\Application Data\Mozilla\Firefox\Profiles\*.default\formhistory.dat"  level="2"/>
+	  <action command="delete" search="glob" path="$USERPROFILE\Application Data\Mozilla\Firefox\Profiles\*.default\formhistory.sqlite"  level="2"/>
   </option>
   
   <option id="passwords">
@@ -76,27 +76,27 @@
   <option id="session_restore">
     <label>Session restore</label>
     <description>Loads the initial session after the browser closes or crashes</description>
-	<action command="delete" search="glob" path="$USERPROFILE\Application Data\Mozilla\Firefox\Profiles\*.default\sessionstore*.js" />
-	<action command="delete" search="glob" path="$USERPROFILE\Application Data\Mozilla\Firefox\Profiles\*.default\sessionstore.bak" />
-	<action command="delete" search="glob" path="$USERPROFILE\Application Data\Mozilla\Firefox\Profiles\*.default\sessionstore-backups\previous.js" />
-	<action command="delete" search="glob" path="$USERPROFILE\Application Data\Mozilla\Firefox\Profiles\*.default\sessionstore-backups\upgrade.js-20*" />
-	<action command="delete" search="glob" path="$USERPROFILE\Application Data\Mozilla\Firefox\Profiles\*.default\sessionstore-backups\recovery.js" />
-	<action command="delete" search="glob" path="$USERPROFILE\Application Data\Mozilla\Firefox\Profiles\*.default\sessionstore-backups\recover.bak" />
+	<action command="delete" search="glob" path="$USERPROFILE\Application Data\Mozilla\Firefox\Profiles\*.default\sessionstore*.js"  level="1"/>
+	<action command="delete" search="glob" path="$USERPROFILE\Application Data\Mozilla\Firefox\Profiles\*.default\sessionstore.bak"  level="1"/>
+	<action command="delete" search="glob" path="$USERPROFILE\Application Data\Mozilla\Firefox\Profiles\*.default\sessionstore-backups\previous.js"  level="1"/>
+	<action command="delete" search="glob" path="$USERPROFILE\Application Data\Mozilla\Firefox\Profiles\*.default\sessionstore-backups\upgrade.js-20*"  level="1"/>
+	<action command="delete" search="glob" path="$USERPROFILE\Application Data\Mozilla\Firefox\Profiles\*.default\sessionstore-backups\recovery.js"  level="1"/>
+	<action command="delete" search="glob" path="$USERPROFILE\Application Data\Mozilla\Firefox\Profiles\*.default\sessionstore-backups\recover.bak"  level="1"/>
   </option>
   
   <option id="site_pref">
     <label>Site preferences</label>
     <description>Settings for individual sites</description>
-	<action command="delete" search="glob" path="$USERPROFILE\Application Data\Mozilla\Firefox\Profiles\*.default\content-prefs.sqlite" />
+	  <action command="delete" search="glob" path="$USERPROFILE\Application Data\Mozilla\Firefox\Profiles\*.default\content-prefs.sqlite"  level="3"/>
   </option>
   
   <option id="url_history">
     <label>URL history</label>
     <description>List of visited web pages</description>
-	<action command="delete" search="glob" path="$USERPROFILE\Application Data\Mozilla\Firefox\Profiles\*.default\history.dat" />
-	<action command="delete" search="glob" path="$USERPROFILE\Application Data\Mozilla\Firefox\Profiles\*.default\history.dat" />
-	<action command="delete" search="glob" path="$localappdata\Mozilla\Firefox\Profiles\*.default\thumbnails\*.png" />
-	<action command="delete" search="glob" path="$USERPROFILE\Application Data\Mozilla\Firefox\Profiles\*.default\history.dat" />
+	  <action command="delete" search="glob" path="$USERPROFILE\Application Data\Mozilla\Firefox\Profiles\*.default\history.dat"  level="1"/>
+	  <action command="delete" search="glob" path="$USERPROFILE\Application Data\Mozilla\Firefox\Profiles\*.default\history.dat"  level="1"/>
+	  <action command="delete" search="glob" path="$localappdata\Mozilla\Firefox\Profiles\*.default\thumbnails\*.png"  level="1"/>
+	  <action command="delete" search="glob" path="$USERPROFILE\Application Data\Mozilla\Firefox\Profiles\*.default\history.dat"  level="1"/>
 	<!-- todo -->
 	<!-- <action command="delete" search="glob" path="$USERPROFILE\Application Data\Mozilla\Firefox\Profiles\*.default\places.sqlite" /> -->
   </option>
@@ -104,6 +104,6 @@
   <option id="vacuum">
     <label>Vacuum</label>
     <description>Clean database fragmentation to reduce space and improve speed without removing any data</description>
-	<action command="sqlite.vacuum" search="glob" path="$USERPROFILE\Application Data\Mozilla\Firefox\Profiles\*.default\*.sqlite" />
+	<action command="sqlite.vacuum" search="glob" path="$USERPROFILE\Application Data\Mozilla\Firefox\Profiles\*.default\*.sqlite"  level="3"/>
   </option>
 </cleaner>
