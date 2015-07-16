@@ -85,7 +85,10 @@ namespace mCleaner.Logics.Enumerations
         littleregistry,
 
         [StringValue("clipboard")]
-        clipboard
+        clipboard,
+
+        [StringValue("dupchecker")]
+        dupchecker,
     }
 
     public enum SEARCH
@@ -186,6 +189,9 @@ namespace mCleaner.Logics.Enumerations
 
         [StringValue("clipboard.clear")]
         clipboard_clear,
+
+        [StringValue("dupchecker.all")]
+        dupchecker_all
     }
 
     public enum THINGS_TO_DELETE

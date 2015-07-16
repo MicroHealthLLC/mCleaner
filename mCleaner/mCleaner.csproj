@@ -197,6 +197,7 @@
     <Compile Include="Logics\Commands\CommandLogic_Chrome.cs" />
     <Compile Include="Logics\Commands\CommandLogic_Clipboard.cs" />
     <Compile Include="Logics\Commands\CommandLogic_Delete.cs" />
+    <Compile Include="Logics\Commands\CommandLogic_DuplicateChecker.cs" />
     <Compile Include="Logics\Commands\CommandLogic_Ini.cs" />
     <Compile Include="Logics\Commands\CommandLogic_JSON.cs" />
     <Compile Include="Logics\Commands\LittleRegistryCleaner\CommandLogic_LittleRegistryCleaner.cs" />
@@ -219,6 +220,7 @@
     <Compile Include="Logics\ProgressWorker.cs" />
     <Compile Include="Logics\Worker.cs" />
     <Compile Include="Model\Model_CleanerML.cs" />
+    <Compile Include="Model\Model_DuplicateChecker.cs" />
     <Compile Include="Model\Model_ThingsToDelete.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="UserControls\Window\ClamWindow.xaml.cs">
@@ -234,6 +236,7 @@
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="ViewModel\ViewModel_Clam.cs" />
     <Compile Include="ViewModel\ViewModel_CleanerML.cs" />
+    <Compile Include="ViewModel\ViewModel_DuplicateChecker.cs" />
     <Compile Include="ViewModel\ViewModel_Preferences.cs" />
     <Compile Include="ViewModel\ViewModel_Shred.cs" />
     <Page Include="Assets\Styles\CleanMenuStyle.xaml">

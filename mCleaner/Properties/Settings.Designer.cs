@@ -242,5 +242,64 @@ namespace mCleaner.Properties {
                 this["CleanOption"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Collections.Specialized.StringCollection DupChecker_CustomPath {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["DupChecker_CustomPath"]));
+            }
+            set {
+                this["DupChecker_CustomPath"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int DupChecker_MinSize {
+            get {
+                return ((int)(this["DupChecker_MinSize"]));
+            }
+            set {
+                this["DupChecker_MinSize"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int DupChecker_MaxSize {
+            get {
+                return ((int)(this["DupChecker_MaxSize"]));
+            }
+            set {
+                this["DupChecker_MaxSize"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string DupChecker_FileContaining {
+            get {
+                return ((string)(this["DupChecker_FileContaining"]));
+            }
+            set {
+                this["DupChecker_FileContaining"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string DupChecker_FileExtensions {
+            get {
+                return ((string)(this["DupChecker_FileExtensions"]));
+            }
+            set {
+                this["DupChecker_FileExtensions"] = value;
+            }
+        }
     }
 }

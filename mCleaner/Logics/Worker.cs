@@ -278,6 +278,10 @@ namespace mCleaner.Logics
                     case COMMANDS.clipboard:
                         await Task.Run(() => CommandLogic_Clipboard.I.ExecuteCommand(true));
                         break;
+
+                    case COMMANDS.dupchecker:
+                        await Task.Run(() => CommandLogic_DuplicateChecker.I.ScanPath(ttd.FullPathName));
+                        break;
                 }
                 #endregion
             }

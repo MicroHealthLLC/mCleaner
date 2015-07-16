@@ -18,7 +18,6 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Threading;
 using System.Xml.Serialization;
 
 namespace mCleaner.ViewModel
@@ -621,6 +620,10 @@ namespace mCleaner.ViewModel
                     case COMMANDS.clipboard:
                         axn = new CommandLogic_Clipboard();
                         break;
+
+                    case COMMANDS.dupchecker:
+                        axn = new CommandLogic_DuplicateChecker();
+                        break;
                 }
 
                 if (axn != null)
@@ -667,6 +670,7 @@ namespace mCleaner.ViewModel
             c.option.Add(AddClipboardCleaner());
             c.option.Add(AddClamAVCustomLocationsToTTD());
             c.option.Add(AddCustomLocationsToTTD());
+            c.option.Add(AddDuplicateCheckerCleaner());
             c.option.Add(AddWindowsLogsCleaner());
             c.option.Add(AddMemoryDumpCleaner());
             c.option.Add(AddMUICacheCleaner());
@@ -1055,6 +1059,38 @@ namespace mCleaner.ViewModel
                     parent_option = o,
                     level = 1
                 });
+            }
+
+            return o;
+        }
+
+        option AddDuplicateCheckerCleaner()
+        {
+            option o = new option()
+            {
+                id = "duplicate_checker",
+                label = "Duplicate Checker",
+                description = "Check for duplicate entries in selected paths",
+                warning = "This option is slow!",
+                action = new List<action>()
+            };
+
+            if (mCleaner.Properties.Settings.Default.DupChecker_CustomPath != null)
+            {
+                foreach (string filepath in mCleaner.Properties.Settings.Default.DupChecker_CustomPath)
+                {
+                    if (Directory.Exists(filepath))
+                    {
+                        o.action.Add(new action()
+                        {
+                            command = "dupchecker",
+                            search = "dupchecker.all",
+                            path = filepath,
+                            level = 2,
+                            parent_option = o,
+                        });
+                    }
+                }
             }
 
             return o;

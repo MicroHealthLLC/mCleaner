@@ -208,6 +208,19 @@ namespace mCleaner.ViewModel
                 }
             }
         }
+
+        private ObservableCollection<string> _DupCheckerLocations = new ObservableCollection<string>();
+        public ObservableCollection<string> DupCheckerLocations
+        {
+            get { return _DupCheckerLocations; }
+            set
+            {
+                if (_DupCheckerLocations != value)
+                {
+                    _DupCheckerLocations = value;
+                }
+            }
+        }
         #endregion
 
         #region commands
@@ -223,6 +236,8 @@ namespace mCleaner.ViewModel
         public ICommand Command_ClamAV_ScanLocation_AddFile { get; set; }
         public ICommand Command_ClamAV_ScanLocation_AddFolder { get; set; }
         public ICommand Command_ClamAV_ScanLocation_RemoveSelected { get; set; }
+        public ICommand Command_DupChecker_AddFolder { get; set; }
+        public ICommand Command_DupChecker_RemoveSelected { get; set; }
         #endregion
 
         #region ctor
@@ -254,6 +269,9 @@ namespace mCleaner.ViewModel
                 Command_ClamAV_ScanLocation_AddFile = new RelayCommand(Command_ClamAV_ScanLocation_AddFile_Click);
                 Command_ClamAV_ScanLocation_AddFolder = new RelayCommand(Command_ClamAV_ScanLocation_AddFolder_Click);
                 Command_ClamAV_ScanLocation_RemoveSelected = new RelayCommand<string>(Command_ClamAV_ScanLocation_RemoveSelected_Click);
+
+                Command_DupChecker_AddFolder = new RelayCommand(Command_DupChecker_AddFolder_Click);
+                Command_DupChecker_RemoveSelected = new RelayCommand<string>(Command_DupChecker_RemoveSelected_Click);
 
                 ReadSettings();
             }
@@ -395,6 +413,26 @@ namespace mCleaner.ViewModel
                 this.ClamWinScanLocations.Remove(selected);
             }
         }
+
+        void Command_DupChecker_AddFolder_Click()
+        {
+            System.Windows.Forms.FolderBrowserDialog fbd = new System.Windows.Forms.FolderBrowserDialog();
+            fbd.ShowDialog();
+            if (fbd.SelectedPath != string.Empty)
+            {
+                if (!this.DupCheckerLocations.Contains(fbd.SelectedPath))
+                {
+                    this.DupCheckerLocations.Add(fbd.SelectedPath);
+                }
+            }
+        }
+        void Command_DupChecker_RemoveSelected_Click(string selected)
+        {
+            if (this.DupCheckerLocations.Contains(selected))
+            {
+                this.DupCheckerLocations.Remove(selected);
+            }
+        }
         #endregion
 
         #region methods
@@ -448,6 +486,15 @@ namespace mCleaner.ViewModel
                     this.ClamWinScanLocations.Add(s);
                 }
             }
+
+            if (Settings.Default.DupChecker_CustomPath != null)
+            {
+                this.DupCheckerLocations.Clear();
+                foreach (string s in Settings.Default.DupChecker_CustomPath)
+                {
+                    this.DupCheckerLocations.Add(s);
+                }
+            }
         }
 
         void WriteSettings()
@@ -497,6 +544,9 @@ namespace mCleaner.ViewModel
             Settings.Default.ClamWin_ScanLocations.Clear();
             Settings.Default.ClamWin_ScanLocations.AddRange(this.ClamWinScanLocations.ToArray());
 
+            if (Settings.Default.DupChecker_CustomPath == null) Settings.Default.DupChecker_CustomPath = new StringCollection();
+            Settings.Default.DupChecker_CustomPath.Clear();
+            Settings.Default.DupChecker_CustomPath.AddRange(this.DupCheckerLocations.ToArray());
 
             RegistryHelper.I.RegisterStartup(this.StartWhenSystemStarts);
 

@@ -8,7 +8,7 @@ namespace mCleaner.Logics.Commands
     {
         public string _preview_log = string.Empty;
 
-        ViewModel_CleanerML VMCleanerML
+        public ViewModel_CleanerML VMCleanerML
         {
             get
             {

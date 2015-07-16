@@ -206,6 +206,31 @@
                             </TabItem>
                         </TabControl>
                     </TabItem>
+                    <TabItem Header="Duplicate Checker">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="auto" />
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Text="These locations can be selected to scan for duplicate." TextAlignment="Center" />
+
+                            <TextBlock Text="Path" Grid.Row="1" />
+                            <ListBox Grid.Row="2" BorderThickness="0" x:Name="lbDupCheck" ItemsSource="{Binding Prefs.DupCheckerLocations}">
+
+                            </ListBox>
+
+                            <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="3">
+                                <Button x:Name="DupCheck_btnAddFile" Content=" Add file " Style="{StaticResource ButtonStyle}" Visibility="Collapsed"/>
+                                <TextBlock Text=" " Visibility="Collapsed" />
+                                <Button x:Name="DupCheck_btnAddFolder" Content=" Add folder " Style="{StaticResource ButtonStyle}" Command="{Binding Prefs.Command_DupChecker_AddFolder}"/>
+                                <TextBlock Text=" " />
+                                <Button x:Name="DupCheck_btnRemove" Content=" Remove " Style="{StaticResource ButtonStyle}" Command="{Binding Prefs.Command_DupChecker_RemoveSelected}" CommandParameter="{Binding SelectedItem, ElementName=lbDupCheck}"/>
+                            </StackPanel>
+                        </Grid>
+                    </TabItem>
                 </TabControl>
             </Grid>
 
