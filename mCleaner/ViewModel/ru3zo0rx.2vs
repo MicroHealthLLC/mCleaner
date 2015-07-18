@@ -169,20 +169,6 @@ namespace mCleaner.ViewModel
                 }
             }
         }
-
-        private int _SelectedTabIndex = 0;
-        public int SelectedTabIndex
-        {
-            get { return _SelectedTabIndex; }
-            set
-            {
-                if (_SelectedTabIndex != value)
-                {
-                    _SelectedTabIndex = value;
-                    base.RaisePropertyChanged("SelectedTabIndex");
-                }
-            }
-        }
         #endregion
 
         #region ctor
@@ -206,34 +192,34 @@ namespace mCleaner.ViewModel
                 CleanOption_Aggressive = Properties.Settings.Default.CleanOption == 3 ? true : false;
 
                 Command_Preview = new RelayCommand(Command_Preview_Click);
-                Command_Clean = new RelayCommand<string>(Command_Clean_Click);
+                Command_Clean = new RelayCommand(Command_Clean_Click);
                 Command_Quit = new RelayCommand(Command_Quit_Click);
-                //Command_CleanOption = new RelayCommand<string>(new Action<string>((i) =>
-                //{
-                //    /*
-                //     * Safe
-                //       Safe removes temp files, keeps settings, preferences and passwords, cleans for malware.  
-                //     * Doesn't clean registry
+                Command_CleanOption = new RelayCommand<string>(new Action<string>((i) =>
+                {
+                    /*
+                     * Safe
+                       Safe removes temp files, keeps settings, preferences and passwords, cleans for malware.  
+                     * Doesn't clean registry
 
-                //       Moderate
-                //       Recommended does all of the above plus cleans registry.  
-                //     * Instead of calling it recommended call it Moderate
+                       Moderate
+                       Recommended does all of the above plus cleans registry.  
+                     * Instead of calling it recommended call it Moderate
 
-                //       Aggressive
-                //       Aggressive cleans every option including preferences, forms and passwords.
-                //     */
+                       Aggressive
+                       Aggressive cleans every option including preferences, forms and passwords.
+                     */
 
-                //    CleanOption_Safe = false;
-                //    CleanOption_Moderate = false;
-                //    CleanOption_Aggressive = false;
+                    CleanOption_Safe = false;
+                    CleanOption_Moderate = false;
+                    CleanOption_Aggressive = false;
 
-                //    CleanOption_Safe = i == "1" ? true : false;
-                //    CleanOption_Moderate = i == "2" ? true : false;
-                //    CleanOption_Aggressive = i == "3" ? true : false;
+                    CleanOption_Safe = i == "1" ? true : false;
+                    CleanOption_Moderate = i == "2" ? true : false;
+                    CleanOption_Aggressive = i == "3" ? true : false;
 
-                //    Properties.Settings.Default.CleanOption = int.Parse(i);
-                //    Properties.Settings.Default.Save();
-                //}));
+                    Properties.Settings.Default.CleanOption = int.Parse(i);
+                    Properties.Settings.Default.Save();
+                }));
             }
         }
         #endregion
@@ -257,19 +243,8 @@ namespace mCleaner.ViewModel
             await Worker.I.PreviewWork();
         }
 
-        public async void Command_Clean_Click(string i)
+        public async void Command_Clean_Click()
         {
-            CleanOption_Safe = false;
-            CleanOption_Moderate = false;
-            CleanOption_Aggressive = false;
-
-            CleanOption_Safe = i == "1" ? true : false;
-            CleanOption_Moderate = i == "2" ? true : false;
-            CleanOption_Aggressive = i == "3" ? true : false;
-
-            Properties.Settings.Default.CleanOption = int.Parse(i);
-            Properties.Settings.Default.Save();
-
             Worker.I.Preview = false;
             this.Run = true;
 
@@ -296,15 +271,6 @@ namespace mCleaner.ViewModel
                     TreeNodeSelected(root, new EventArgs());
                 }
             }
-
-            if (root.Key.Contains("duplicate_checker"))
-            {
-                SelectedTabIndex = 1;
-            }
-            else
-            {
-                SelectedTabIndex = 0;
-            }
         }
 
         void TeeNode_TreeNodeChecked(object sender, EventArgs e)
@@ -323,15 +289,6 @@ namespace mCleaner.ViewModel
             else if (root.Tag is cleaner)
             {
 
-            }
-
-            if (root.Key.Contains("duplicate_checker"))
-            {
-                SelectedTabIndex = 1;
-            }
-            else
-            {
-                SelectedTabIndex = 0;
             }
         }
         #endregion
@@ -681,20 +638,15 @@ namespace mCleaner.ViewModel
         #region System cleaner 
         public void RefreshSystemCleaners()
         {
-            List<TreeNode> nodes_to_remove = new List<TreeNode>();
+            TreeNode systemnode = new TreeNode();
 
             foreach (TreeNode node in this.CleanersCollection)
             {
-                if (node.Key == "system" || node.Key == "duplicate_checker")
-                {
-                    nodes_to_remove.Add(node);
-                }
+                if (node.Key == "system") { systemnode = node; break; }
             }
 
-            nodes_to_remove.ForEach((x) => this.CleanersCollection.Remove(x));
-
-            nodes_to_remove.Clear();
-            nodes_to_remove = null;
+            this.CleanersCollection.Remove(systemnode);
+            systemnode = null;
 
             AddSystemCleaner();
             AddDuplicateCleaner();

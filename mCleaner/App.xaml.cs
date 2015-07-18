@@ -2,6 +2,7 @@
 using mCleaner.Logics.Clam;
 using System;
 using System.Diagnostics;
+using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Windows;
@@ -66,6 +67,12 @@ namespace mCleaner
             // check for clamwin installation and
             // decide which database to use
             CommandLogic_Clam.I.CheckClamWinInstallation();
+
+            if (mCleaner.Properties.Settings.Default.DupChecker_DuplicateFolderPath == string.Empty)
+            {
+                mCleaner.Properties.Settings.Default.DupChecker_DuplicateFolderPath = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "Duplicates");
+                mCleaner.Properties.Settings.Default.Save();
+            }
         }
 
         protected override void OnExit(ExitEventArgs e)

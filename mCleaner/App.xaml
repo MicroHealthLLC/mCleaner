@@ -5,9 +5,14 @@
             <cv:Converter_BooleanToVisibility x:Key="boolTovis" />
             
             <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Assets\Styles\Theme.xaml" />
+                
                 <ResourceDictionary Source="Assets\Styles\ButtonStyle.xaml" />
                 <ResourceDictionary Source="Assets\Styles\TreeViewStyle.xaml" />
                 <ResourceDictionary Source="Assets\Styles\CleanMenuStyle.xaml" />
+                <ResourceDictionary Source="Assets\Styles\ToolbarStyle.xaml" />
+                <ResourceDictionary Source="Assets\Styles\ListViewStyle.xaml" />
+                <ResourceDictionary Source="Assets\Styles\ProgressBarStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

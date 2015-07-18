@@ -44,6 +44,14 @@ namespace mCleaner.Logics
             }
         }
 
+        public ViewModel_DuplicateChecker DupChecker
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<ViewModel_DuplicateChecker>();
+            }
+        }
+
         //private string _PreviewLog = string.Empty;
         //public string PreviewLog
         //{
@@ -281,6 +289,7 @@ namespace mCleaner.Logics
 
                     case COMMANDS.dupchecker:
                         await Task.Run(() => CommandLogic_DuplicateChecker.I.ScanPath(ttd.FullPathName));
+                        DupChecker.FileOperationPanelShow = true;
                         break;
                 }
                 #endregion
@@ -831,7 +840,7 @@ namespace mCleaner.Logics
             }
             else
             {
-                text = string.Format(final_note, Win32API.FormatByteSize(this.TotalFileSize), this.TotalFileDelete, this.TotalSpecialOperations);
+                text = string.Format(final_note, Win32API.FormatByteSize(this.TotalFileSize), this.TotalFileDelete, this.TotalSpecialOperations, string.Empty);
             }
 
             //ExecuteLog += string.Format(final_note, Win32API.FormatByteSize(this.TotalFileSize), this.TotalFileDelete, this.TotalSpecialOperations);

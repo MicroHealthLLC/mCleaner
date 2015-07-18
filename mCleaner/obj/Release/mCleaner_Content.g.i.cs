@@ -63,6 +63,7 @@
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("cleaners/wordpad.xml")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("cleaners/xchat.xml")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("cleaners/yahoo_messenger.xml")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("duplicates/duplicate_files.txt")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("sqlite3.def")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("sqlite3.dll")]
 

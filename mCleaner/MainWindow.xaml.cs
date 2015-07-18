@@ -60,20 +60,20 @@ namespace mCleaner
 
         void CleanerML_TreeNodeSelected(object sender, System.EventArgs e)
         {
+            logo.Visibility = System.Windows.Visibility.Collapsed;
+
             TreeNode node = sender as TreeNode;
-            //if (node.Parent != null)
+            if (node.Key.Contains("duplicate_checker"))
             {
 
+            }
+            else
+            {
                 CleanerML.Run = false;
 
                 rtbCleanerDetails.Document = CleanerML.BuildCleanerDetails(
                     node.Parent != null ? (cleaner)node.Parent.Tag : (cleaner)node.Tag
                 );
-
-                //foreach (option o in c.option)
-                //{
-
-                //}
             }
         }
     }

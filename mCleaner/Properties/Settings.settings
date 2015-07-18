@@ -81,9 +81,12 @@
       <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="DupChecker_FileContaining" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">*</Value>
     </Setting>
     <Setting Name="DupChecker_FileExtensions" Type="System.String" Scope="User">
+      <Value Profile="(Default)">*.*</Value>
+    </Setting>
+    <Setting Name="DupChecker_DuplicateFolderPath" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
   </Settings>

@@ -6,10 +6,10 @@ using mCleaner.ViewModel;
 using Microsoft.Practices.ServiceLocation;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
+using System.Threading.Tasks;
+using System.Windows;
 
 namespace mCleaner.Logics.Commands
 {
@@ -88,6 +88,7 @@ namespace mCleaner.Logics.Commands
             ProgressWorker.I.EnQ("Checking for same file size. This may take a while"); // to minimize work load looking for duplicate files
             base.VMCleanerML.MaxProgress = files.Count;
             base.VMCleanerML.ProgressIndex = 0;
+            int i = 0;
             foreach (string file in files)
             {
                 FileInfo fi = new FileInfo(file);
@@ -105,7 +106,34 @@ namespace mCleaner.Logics.Commands
 
                 base.VMCleanerML.ProgressIndex++;
             }
+            //foreach (string file in files)
+            //{
+            //    foreach (string file2 in files)
+            //    {
+            //        FileInfo fi1 = new FileInfo(file);
+            //        FileInfo fi2 = new FileInfo(file2);
 
+            //        if (fi1.FullName != fi2.FullName) // do not match two the same file in same location
+            //        {
+            //            if (fi1.Length == fi2.Length)
+            //            {
+            //                if (files_with_same_size.ContainsKey(file))
+            //                {
+            //                    files_with_same_size[file].Add(file2);
+            //                }
+            //                else
+            //                {
+            //                    files_with_same_size.Add(file, new List<string>());
+            //                    files_with_same_size[file].Add(file);
+            //                    files_with_same_size[file].Add(file2);
+            //                    ProgressWorker.I.EnQ("Queueing file: " + file);
+            //                    base.VMCleanerML.ProgressIndex = i;
+            //                }
+            //            }
+            //        }
+            //    }
+            //    i++;
+            //}
             base.VMCleanerML.ProgressIndex = 0;
 
             ProgressWorker.I.EnQ("Please wait while hashing files. This may take a while");
@@ -153,6 +181,15 @@ namespace mCleaner.Logics.Commands
             //}
             //else
             {
+                //foreach (string file in files_with_same_size.Keys)
+                //{
+                //    foreach (string samfilesize in files_with_same_size[file])
+                //    {
+                //        ProgressWorker.I.EnQ("Hashing: " + samfilesize);
+                //        hashed_files.Add(samfilesize + "|" + FileOperations.I.HashFile(samfilesize));
+                //    }
+                //    base.VMCleanerML.ProgressIndex++;
+                //}
                 foreach (string filename in files_to_hash)
                 {
                     try
@@ -208,31 +245,10 @@ namespace mCleaner.Logics.Commands
             }
 
             ProgressWorker.I.EnQ("Adding to collection for previewing");
-            
-            App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
+            Application.Current.Dispatcher.BeginInvoke(new Action(() =>
             {
-                DupChecker.DupplicateCollection.Clear();
-                base.VMCleanerML.MaxProgress = files_with_same_hash.Count;
-                base.VMCleanerML.ProgressIndex = 0;
-                foreach (string entry in files_with_same_hash.Keys)
-                {
-                    for (int i = 0; i < files_with_same_hash[entry].ToArray().Length; i++)
-                    {
-                        string file_entries = files_with_same_hash[entry][i];
-                        FileInfo fi = new FileInfo(file_entries);
-                        Model_DuplicateChecker e = new Model_DuplicateChecker();
-                        e.Hash = entry;
-                        e.Selected = i != 0;
-                        e.FileDetails = new Model_DuplicateChecker_FileDetails()
-                        {
-                            Filename = fi.Name,
-                            Fullfilepath = fi.FullName,
-                            ParentDirectory = fi.Directory.FullName
-                        };
-                        DupChecker.DupplicateCollection.Add(e);
-                    }
-                }
-            });
+                v
+            }), null);
             
 
             // clear some memory
@@ -250,68 +266,6 @@ namespace mCleaner.Logics.Commands
             //        UpdateProgressLog(string.Format("Duplicate {2} \"{0}\" in \"{1}\" - {3}", fi.Name, fi.Directory.FullName, Win32API.FormatByteSize(fi.Length), e.Hash), "Retreiving duplicate files from the collection");
             //    }
             //}
-        }
-
-        public void Start(ObservableCollection<Model_DuplicateChecker> files, int operation = 0) // 0 = delete, 1 = move
-        {
-            List<Model_DuplicateChecker> errors = new List<Model_DuplicateChecker>();
-            List<Model_DuplicateChecker> done = new List<Model_DuplicateChecker>();
-
-            base.VMCleanerML.MaxProgress = (from a in files where a.Selected select a).ToList().Count;
-            base.VMCleanerML.ProgressIndex = 0;
-            foreach (Model_DuplicateChecker dc in files)
-            {
-                if (dc.Selected)
-                {
-                    FileInfo fi = new FileInfo(dc.FileDetails.Fullfilepath);
-                    if (fi.Exists)
-                    {
-                        try
-                        {
-                            #region process
-                            if (operation == 0)
-                            {
-                                if (Properties.Settings.Default.ShredFiles)
-                                {
-                                    ProgressWorker.I.EnQ("Shredding file: " + fi.FullName);
-                                    FileOperations.WipeFile(fi.FullName, 5);
-                                }
-                                else
-                                {
-                                    ProgressWorker.I.EnQ("Deleting file: " + fi.FullName);
-                                    fi.Delete();
-                                }
-                            }
-                            else if (operation == 1)
-                            {
-                                ProgressWorker.I.EnQ("Moving file: " + fi.FullName);
-                                string moveDir = Properties.Settings.Default.DupChecker_DuplicateFolderPath;
-                                moveDir = Path.Combine(moveDir, fi.Name);
-                                FileInfo fi_moveDir = new FileInfo(moveDir);
-
-                                if (fi_moveDir.Exists)
-                                {
-                                    fi.Delete();
-                                }
-
-                                fi.MoveTo(moveDir);
-                            }
-
-                            done.Add(dc);
-                            #endregion
-                        }
-                        catch (Exception ex)
-                        {
-                            //this.UpdateProgressLog("Erorr while {0} the file \"{0}\"", "Error", false);
-                            Debug.WriteLine(ex.Message);
-                            errors.Add(dc);
-
-                        }
-                    }
-
-                    base.VMCleanerML.ProgressIndex++;
-                }
-            }
         }
         #endregion
     }

@@ -178,7 +178,7 @@
                                         </Grid.Resources>
 
                                         <TextBlock Text="Server" Grid.Column="0" Margin="0,0,0,0" />
-                                        <TextBox Text="{Binding Prefs.ProxyAddress, Mode=TwoWay}" Grid.Column="1" TextAlignment="Center" />
+                                        <TextBox Text="{Binding Prefs.ClamWin_Proxy_Address, Mode=TwoWay}" Grid.Column="1" TextAlignment="Center" />
                                         <TextBlock Text="Port" Grid.Column="2" />
                                         <TextBox Text="{Binding Prefs.ProxyPort, Mode=TwoWay}" Grid.Column="3" TextAlignment="Center" />
                                     </Grid>
@@ -237,7 +237,7 @@
             <Grid Grid.Row="2">
                 <StackPanel Orientation="Horizontal" Margin="2" HorizontalAlignment="Right">
                     <Button x:Name="btnOK" Content="OK" Margin="5,5" Style="{StaticResource ButtonStyle}" Command="{Binding Prefs.Command_OK}" />
-                    <Button x:Name="btnClose" Content="Close" Margin="5,5" Style="{StaticResource ButtonStyle}" Background="#FF1570C7" BorderBrush="#FF1570C7" Command="{Binding Prefs.Command_CloseWindow}" />
+                    <Button x:Name="btnClose" Content="Close" Margin="5,5" Style="{StaticResource ButtonStyle}" Background="#FF6D929B" BorderBrush="#FF6D929B" Command="{Binding Prefs.Command_CloseWindow}" />
                 </StackPanel>
             </Grid>
         </Grid>

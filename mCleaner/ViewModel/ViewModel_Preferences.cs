@@ -42,7 +42,7 @@ namespace mCleaner.ViewModel
         }
 
         private string _ProxyAddress = string.Empty;
-        public string ProxyAddress
+        public string ClamWin_Proxy_Address
         {
             get { return _ProxyAddress; }
             set
@@ -209,6 +209,7 @@ namespace mCleaner.ViewModel
             }
         }
 
+        #region DupChecker 
         private ObservableCollection<string> _DupCheckerLocations = new ObservableCollection<string>();
         public ObservableCollection<string> DupCheckerLocations
         {
@@ -221,6 +222,72 @@ namespace mCleaner.ViewModel
                 }
             }
         }
+
+        private int _DupChecker_MinSize = 0;
+        public int DupChecker_MinSize
+        {
+            get { return _DupChecker_MinSize; }
+            set
+            {
+                if (_DupChecker_MinSize != value)
+                {
+                    _DupChecker_MinSize = value;
+                }
+            }
+        }
+
+        private int _DupChecker_MaxSize = 0;
+        public int DupChecker_MaxSize
+        {
+            get { return _DupChecker_MaxSize; }
+            set
+            {
+                if (_DupChecker_MaxSize != value)
+                {
+                    _DupChecker_MaxSize = value;
+                }
+            }
+        }
+
+        private string _DupChecker_FileContaining = string.Empty;
+        public string DupChecker_FileContaining
+        {
+            get { return _DupChecker_FileContaining; }
+            set
+            {
+                if (_DupChecker_FileContaining != value)
+                {
+                    _DupChecker_FileContaining = value;
+                }
+            }
+        }
+
+        private string _DupChecker_FileExtensions = string.Empty;
+        public string DupChecker_FileExtensions
+        {
+            get { return _DupChecker_FileExtensions; }
+            set
+            {
+                if (_DupChecker_FileExtensions != value)
+                {
+                    _DupChecker_FileExtensions = value;
+                }
+            }
+        }
+
+        private string _DupChecker_DuplicateFolderPath = string.Empty;
+        public string DupChecker_DuplicateFolderPath
+        {
+            get { return _DupChecker_DuplicateFolderPath; }
+            set
+            {
+                if (_DupChecker_DuplicateFolderPath != value)
+                {
+                    _DupChecker_DuplicateFolderPath = value;
+                }
+            }
+        }
+        #endregion
         #endregion
 
         #region commands
@@ -441,7 +508,7 @@ namespace mCleaner.ViewModel
             if (Settings.Default.ClamWin_Proxy_Address != string.Empty)
             {
                 string[] proxy = Settings.Default.ClamWin_Proxy_Address.Split(':');
-                this.ProxyAddress = proxy[0];
+                this.ClamWin_Proxy_Address = proxy[0];
                 this.ProxyPort = proxy[1];
             }
             if (Settings.Default.ClamWin_Proxy_UserPass != string.Empty)
@@ -499,11 +566,11 @@ namespace mCleaner.ViewModel
 
         void WriteSettings()
         {
-            if (this.ProxyAddress != string.Empty && this.ProxyPort != string.Empty)
+            if (this.ClamWin_Proxy_Address != string.Empty && this.ProxyPort != string.Empty)
             {
-                Settings.Default.ClamWin_Proxy_Address = this.ProxyAddress + ":" + this.ProxyPort;
+                Settings.Default.ClamWin_Proxy_Address = this.ClamWin_Proxy_Address + ":" + this.ProxyPort;
             }
-            else if (this.ProxyAddress != string.Empty && this.ProxyPort != string.Empty)
+            else if (this.ClamWin_Proxy_Address != string.Empty && this.ProxyPort != string.Empty)
             {
                 Settings.Default.ClamWin_Proxy_Address = string.Empty;
             }

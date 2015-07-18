@@ -280,7 +280,7 @@ namespace mCleaner.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("*")]
         public string DupChecker_FileContaining {
             get {
                 return ((string)(this["DupChecker_FileContaining"]));
@@ -292,13 +292,25 @@ namespace mCleaner.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("*.*")]
         public string DupChecker_FileExtensions {
             get {
                 return ((string)(this["DupChecker_FileExtensions"]));
             }
             set {
                 this["DupChecker_FileExtensions"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string DupChecker_DuplicateFolderPath {
+            get {
+                return ((string)(this["DupChecker_DuplicateFolderPath"]));
+            }
+            set {
+                this["DupChecker_DuplicateFolderPath"] = value;
             }
         }
     }
