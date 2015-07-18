@@ -2,6 +2,7 @@
 using mCleaner.Helpers;
 using mCleaner.Logics.Enumerations;
 using mCleaner.Model;
+using mCleaner.Properties;
 using mCleaner.ViewModel;
 using Microsoft.Practices.ServiceLocation;
 using System;
@@ -90,16 +91,36 @@ namespace mCleaner.Logics.Commands
             base.VMCleanerML.ProgressIndex = 0;
             foreach (string file in files)
             {
+                bool add = true;
+
                 FileInfo fi = new FileInfo(file);
+                if (Settings.Default.DupChecker_MinSize != 0)
+                {
+                    if (fi.Length < Settings.Default.DupChecker_MinSize * 1000) add = false;
+                }
+                if (Settings.Default.DupChecker_MaxSize != 0)
+                {
+                    if (fi.Length > Settings.Default.DupChecker_MaxSize * 1000) add = false;
+                }
+
+                if (Settings.Default.DupChecker_FileExtensions != "*.*")
+                {
+                    string[] exts = Settings.Default.DupChecker_FileExtensions.Split(';');
+                    if (!exts.Contains("*" + fi.Extension.ToLower())) add = false;
+                }
+
                 if (fi.Length > 0) // do not include 0 length files.
                 {
-                    if (files_with_same_size.ContainsKey(fi.Length))
+                    if (add)
                     {
-                        files_with_same_size[fi.Length].Add(fi.FullName);
-                    }
-                    else
-                    {
-                        files_with_same_size.Add(fi.Length, new List<string>() { fi.FullName });
+                        if (files_with_same_size.ContainsKey(fi.Length))
+                        {
+                            files_with_same_size[fi.Length].Add(fi.FullName);
+                        }
+                        else
+                        {
+                            files_with_same_size.Add(fi.Length, new List<string>() { fi.FullName });
+                        }
                     }
                 }
 

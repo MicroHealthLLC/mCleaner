@@ -232,6 +232,7 @@ namespace mCleaner.ViewModel
                 if (_DupChecker_MinSize != value)
                 {
                     _DupChecker_MinSize = value;
+                    base.RaisePropertyChanged("DupChecker_MinSize");
                 }
             }
         }
@@ -245,6 +246,7 @@ namespace mCleaner.ViewModel
                 if (_DupChecker_MaxSize != value)
                 {
                     _DupChecker_MaxSize = value;
+                    base.RaisePropertyChanged("DupChecker_MaxSize");
                 }
             }
         }
@@ -258,11 +260,12 @@ namespace mCleaner.ViewModel
                 if (_DupChecker_FileContaining != value)
                 {
                     _DupChecker_FileContaining = value;
+                    base.RaisePropertyChanged("DupChecker_FileContaining");
                 }
             }
         }
 
-        private string _DupChecker_FileExtensions = string.Empty;
+        private string _DupChecker_FileExtensions = "*.*";
         public string DupChecker_FileExtensions
         {
             get { return _DupChecker_FileExtensions; }
@@ -271,6 +274,7 @@ namespace mCleaner.ViewModel
                 if (_DupChecker_FileExtensions != value)
                 {
                     _DupChecker_FileExtensions = value;
+                    base.RaisePropertyChanged("DupChecker_FileExtensions");
                 }
             }
         }
@@ -284,6 +288,7 @@ namespace mCleaner.ViewModel
                 if (_DupChecker_DuplicateFolderPath != value)
                 {
                     _DupChecker_DuplicateFolderPath = value;
+                    base.RaisePropertyChanged("DupChecker_DuplicateFolderPath");
                 }
             }
         }
@@ -305,6 +310,7 @@ namespace mCleaner.ViewModel
         public ICommand Command_ClamAV_ScanLocation_RemoveSelected { get; set; }
         public ICommand Command_DupChecker_AddFolder { get; set; }
         public ICommand Command_DupChecker_RemoveSelected { get; set; }
+        public ICommand Command_DupChecker_BrowseFolder { get; set; }
         #endregion
 
         #region ctor
@@ -339,6 +345,7 @@ namespace mCleaner.ViewModel
 
                 Command_DupChecker_AddFolder = new RelayCommand(Command_DupChecker_AddFolder_Click);
                 Command_DupChecker_RemoveSelected = new RelayCommand<string>(Command_DupChecker_RemoveSelected_Click);
+                Command_DupChecker_BrowseFolder = new RelayCommand(Command_DupChecker_BrowseFolder_Click);
 
                 ReadSettings();
             }
@@ -355,6 +362,7 @@ namespace mCleaner.ViewModel
         void Command_CloseWindow_Click()
         {
             this.ShowWindow = false;
+            ReadSettings();
         }
         void Command_Menu_Preferences_Click()
         {
@@ -500,6 +508,15 @@ namespace mCleaner.ViewModel
                 this.DupCheckerLocations.Remove(selected);
             }
         }
+        void Command_DupChecker_BrowseFolder_Click()
+        {
+            System.Windows.Forms.FolderBrowserDialog fbd = new System.Windows.Forms.FolderBrowserDialog();
+            fbd.ShowDialog();
+            if (fbd.SelectedPath != string.Empty)
+            {
+                this.DupChecker_DuplicateFolderPath = fbd.SelectedPath;
+            }
+        }
         #endregion
 
         #region methods
@@ -560,8 +577,13 @@ namespace mCleaner.ViewModel
                 foreach (string s in Settings.Default.DupChecker_CustomPath)
                 {
                     this.DupCheckerLocations.Add(s);
-                }
+                } 
             }
+
+            this.DupChecker_MinSize = Settings.Default.DupChecker_MinSize;
+            this.DupChecker_MaxSize = Settings.Default.DupChecker_MaxSize;
+            this.DupChecker_FileExtensions = Settings.Default.DupChecker_FileExtensions;
+            this.DupChecker_DuplicateFolderPath = Settings.Default.DupChecker_DuplicateFolderPath;
         }
 
         void WriteSettings()
@@ -614,6 +636,11 @@ namespace mCleaner.ViewModel
             if (Settings.Default.DupChecker_CustomPath == null) Settings.Default.DupChecker_CustomPath = new StringCollection();
             Settings.Default.DupChecker_CustomPath.Clear();
             Settings.Default.DupChecker_CustomPath.AddRange(this.DupCheckerLocations.ToArray());
+
+            Settings.Default.DupChecker_MinSize = this.DupChecker_MinSize;
+            Settings.Default.DupChecker_MaxSize = this.DupChecker_MaxSize;
+            Settings.Default.DupChecker_FileExtensions = this.DupChecker_FileExtensions;
+            Settings.Default.DupChecker_DuplicateFolderPath = this.DupChecker_DuplicateFolderPath;
 
             RegistryHelper.I.RegisterStartup(this.StartWhenSystemStarts);
 

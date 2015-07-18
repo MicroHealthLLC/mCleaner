@@ -207,29 +207,83 @@
                         </TabControl>
                     </TabItem>
                     <TabItem Header="Duplicate Checker">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="auto" />
-                                <RowDefinition Height="auto" />
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="auto" />
-                            </Grid.RowDefinitions>
+                        <TabControl>
+                            <TabItem Header="Custom Location">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="auto" />
+                                    </Grid.RowDefinitions>
 
-                            <TextBlock Text="These locations can be selected to scan for duplicate." TextAlignment="Center" />
+                                    <TextBlock Text="These locations can be selected to scan for duplicate." TextAlignment="Center" />
 
-                            <TextBlock Text="Path" Grid.Row="1" />
-                            <ListBox Grid.Row="2" BorderThickness="0" x:Name="lbDupCheck" ItemsSource="{Binding Prefs.DupCheckerLocations}">
+                                    <TextBlock Text="Path" Grid.Row="1" />
+                                    <ListBox Grid.Row="2" BorderThickness="0" x:Name="lbDupCheck" ItemsSource="{Binding Prefs.DupCheckerLocations}">
 
-                            </ListBox>
+                                    </ListBox>
 
-                            <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="3">
-                                <Button x:Name="DupCheck_btnAddFile" Content=" Add file " Style="{StaticResource ButtonStyle}" Visibility="Collapsed"/>
-                                <TextBlock Text=" " Visibility="Collapsed" />
-                                <Button x:Name="DupCheck_btnAddFolder" Content=" Add folder " Style="{StaticResource ButtonStyle}" Command="{Binding Prefs.Command_DupChecker_AddFolder}"/>
-                                <TextBlock Text=" " />
-                                <Button x:Name="DupCheck_btnRemove" Content=" Remove " Style="{StaticResource ButtonStyle}" Command="{Binding Prefs.Command_DupChecker_RemoveSelected}" CommandParameter="{Binding SelectedItem, ElementName=lbDupCheck}"/>
-                            </StackPanel>
-                        </Grid>
+                                    <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="3">
+                                        <Button x:Name="DupCheck_btnAddFile" Content=" Add file " Style="{StaticResource ButtonStyle}" Visibility="Collapsed"/>
+                                        <TextBlock Text=" " Visibility="Collapsed" />
+                                        <Button x:Name="DupCheck_btnAddFolder" Content=" Add folder " Style="{StaticResource ButtonStyle}" Command="{Binding Prefs.Command_DupChecker_AddFolder}"/>
+                                        <TextBlock Text=" " />
+                                        <Button x:Name="DupCheck_btnRemove" Content=" Remove " Style="{StaticResource ButtonStyle}" Command="{Binding Prefs.Command_DupChecker_RemoveSelected}" CommandParameter="{Binding SelectedItem, ElementName=lbDupCheck}"/>
+                                    </StackPanel>
+                                </Grid>
+                            </TabItem>
+                            <TabItem Header="Filters">
+                                <StackPanel Margin="5">
+                                    <TextBlock Text="File size" />
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        
+                                        <Grid Margin="5">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="auto" />
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="auto" />
+                                            </Grid.ColumnDefinitions>
+                                            
+                                            <TextBlock Text="Minimum" />
+                                            <TextBox Text="{Binding Prefs.DupChecker_MinSize}" Grid.Column="1" Margin="5,0" TextAlignment="Right" />
+                                            <TextBlock Text="Kb" Grid.Column="2" />
+                                        </Grid>
+
+                                        <Grid Grid.Column="1" Margin="5">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="auto" />
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="auto" />
+                                            </Grid.ColumnDefinitions>
+
+                                            <TextBlock Text="Maximum" />
+                                            <TextBox Text="{Binding Prefs.DupChecker_MaxSize}" Grid.Column="1" Margin="5,0" TextAlignment="Right" />
+                                            <TextBlock Text="Kb" Grid.Column="2" />
+                                        </Grid>
+                                    </Grid>
+                                    <TextBlock Text="" />
+                                    <TextBlock Text="File extension" />
+                                    <TextBlock Text="e.g. *.jpg;*.gif;*.exe and seprate extensions by semicolon" Opacity="0.70" />
+                                    <TextBox Text="{Binding Prefs.DupChecker_FileExtensions}" Margin="5,5" />
+                                    <TextBlock Text="" />
+                                    <TextBlock Text="Duplicate folder" />
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="auto" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBox Text="{Binding Prefs.DupChecker_DuplicateFolderPath}" Margin="5,5" />
+                                        <Button Content="..." Grid.Column="1" Style="{StaticResource ButtonStyle}" Command="{Binding Prefs.Command_DupChecker_BrowseFolder}"/>
+                                    </Grid>
+                                </StackPanel>
+                            </TabItem>
+                        </TabControl>
                     </TabItem>
                 </TabControl>
             </Grid>
