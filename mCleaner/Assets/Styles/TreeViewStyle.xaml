@@ -117,8 +117,8 @@
         <Setter Property="Padding" Value="0,0,0,0"/>
         <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
         <Setter Property="FocusVisualStyle" Value="{StaticResource TreeViewItemFocusVisual}"/>
-        
-        <Setter Property="IsExpanded" Value="False" />
+
+        <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}" />
         <Setter Property="IsSelected" Value="{Binding IsInitiallySelected, Mode=TwoWay}" />
         <Setter Property="KeyboardNavigation.AcceptsReturn" Value="True" />
         <Setter Property="dw:VirtualToggleButton.IsVirtualToggleButton" Value="True" />
@@ -127,14 +127,14 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TreeViewItem}">
-                    <Grid x:Name="GridNodeContainer">
+                    <Grid x:Name="GridNodeContainer" Margin="0,-1,0,0">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
 
-                        <Border x:Name="ParentNodeContainer" Margin="-1">
+                        <Border x:Name="ParentNodeContainer" Margin="0">
                             <Grid x:Name="ParentNodeContainer2">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
@@ -148,8 +148,8 @@
                             </Grid>
                         </Border>
 
-                        <Path Data="{StaticResource DownArrow}" Width="20" Height="10" Stretch="Fill" Fill="{StaticResource TreeViewHeader_Background}" Grid.Row="1" x:Name="DownArrow" HorizontalAlignment="Left" Margin="14,0,0,0"/>
-                        <ItemsPresenter x:Name="ItemsHost" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="2" Margin="0,0,0,5"/>
+                        <Path Data="{StaticResource DownArrow}" Width="20" Height="10" Stretch="Fill" Fill="{StaticResource TreeViewHeader_Background}" Grid.Row="1" x:Name="DownArrow" HorizontalAlignment="Left" Margin="7,-1,0,0"/>
+                        <ItemsPresenter x:Name="ItemsHost" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="2" Margin="0,0,0,0"/>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsExpanded" Value="false">
@@ -157,13 +157,15 @@
                             <Setter Property="Visibility" TargetName="DownArrow" Value="Collapsed" />
                         </Trigger>
                         <Trigger Property="HasItems" Value="false">
-                            <Setter Property="Visibility" TargetName="Expander" Value="Hidden"/>
+                            <Setter Property="Visibility" TargetName="Expander" Value="Collapsed"/>
                             <Setter Property="Visibility" TargetName="DownArrow" Value="Collapsed" />
+                            
                         </Trigger>
-                        <Trigger Property="HasItems" Value="true">
+                        <DataTrigger Binding="{Binding IsAccordionHeader}" Value="true">
                             <Setter Property="Margin" Value="5" TargetName="ParentNodeContainer2" />
                             <Setter Property="Background" Value="{StaticResource TreeViewHeader_Background}" TargetName="ParentNodeContainer" />
-                        </Trigger>
+                            <Setter Property="Margin" TargetName="ParentNodeContainer" Value="-5,0,0,0" />
+                        </DataTrigger>
                         <Trigger Property="IsSelected" Value="true">
                             <Setter Property="Background" TargetName="Bd" Value="{StaticResource TreeViewHeader_Background}"/>
                             <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}"/>
@@ -176,6 +178,13 @@
                             <Setter Property="Background" TargetName="Bd" Value="{StaticResource TreeViewHeader_Background}"/>
                             <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}}"/>
                         </MultiTrigger>
+                        <!--<MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Property="HasItems" Value="false"/>
+                                <Condition Binding="{Binding IsAccordionHeader}" Value="true" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="Margin" Value="5" TargetName="ParentNodeContainer2" />
+                        </MultiDataTrigger>-->
                         <Trigger Property="IsEnabled" Value="false">
                             <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
                         </Trigger>
@@ -196,20 +205,26 @@
         </Style.Triggers>
     </Style>
 
-    <HierarchicalDataTemplate x:Key="CheckBoxItemTemplate" ItemsSource="{Binding Children, Mode=OneTime}">
-        <Grid Margin="0,4,10,4">
+    <HierarchicalDataTemplate x:Key="CheckBoxItemTemplate" ItemsSource="{Binding Children, Mode=OneTime}" DataType="{x:Type dw:TreeNode}" >
+        <Grid Margin="10,4,10,4">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="auto" />
             </Grid.ColumnDefinitions>
 
-            <ContentPresenter Grid.Column="1" Content="{Binding Name, Mode=OneTime}"/>
-            <!--<TextBlock Grid.Column="1" Text="{Binding Name}" Margin="2,0" />-->
-
-            <Border Grid.Column="0" Margin="0,0,5,0">
+            <Border x:Name="border" Grid.Column="0" Margin="0,0,5,0">
                 <CheckBox Focusable="False" IsChecked="{Binding IsChecked}" VerticalAlignment="Center" />
             </Border>
+            
+            <ContentPresenter Grid.Column="1" Content="{Binding Name, Mode=OneTime}"/>
         </Grid>
+        
+        <!--<HierarchicalDataTemplate.Triggers>
+            <DataTrigger Binding="{Binding Tag}" Value="1">
+                <Setter Property="Background" TargetName="border" Value="Black" />
+            </DataTrigger>
+        </HierarchicalDataTemplate.Triggers>-->
     </HierarchicalDataTemplate>
+    
 
 </ResourceDictionary>

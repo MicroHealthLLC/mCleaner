@@ -45,6 +45,22 @@ namespace mCleaner.Helpers.Controls
 
         public object Tag { get; set; }
 
+        public object IsAccordionHeader { get; set; }
+
+        private bool _IsExpanded = false;
+        public bool IsExpanded
+        {
+            get { return _IsExpanded; }
+            set
+            {
+                if (_IsExpanded != value)
+                {
+                    _IsExpanded = value;
+                    this.OnPropertyChanged("IsExpanded");
+                }
+            }
+        }
+
         /// <summary>
         /// Gets/sets the state of the associated UI toggle (ex. CheckBox).
         /// The return value is calculated based on the check state of all

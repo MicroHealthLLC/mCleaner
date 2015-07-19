@@ -9,11 +9,13 @@ using mCleaner.Logics.Commands;
 using mCleaner.Logics.Enumerations;
 using mCleaner.Model;
 using mCleaner.Properties;
+using Microsoft.Practices.ServiceLocation;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Documents;
@@ -29,6 +31,8 @@ namespace mCleaner.ViewModel
 
         string _exec_path = string.Empty;
 
+        List<TreeNode> _nodes = new List<TreeNode>();
+
         #region properties
         private ObservableCollection<TreeNode> _CleanersCollection = new ObservableCollection<TreeNode>();
         public ObservableCollection<TreeNode> CleanersCollection
@@ -41,6 +45,14 @@ namespace mCleaner.ViewModel
                     _CleanersCollection = value;
                     base.RaisePropertyChanged("CleanersCollection");
                 }
+            }
+        }
+
+        public ViewModel_DuplicateChecker DupChecker
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<ViewModel_DuplicateChecker>();
             }
         }
 
@@ -289,6 +301,7 @@ namespace mCleaner.ViewModel
         void TreeNode_TreeNodeSelected(object sender, EventArgs e)
         {
             TreeNode root = sender as TreeNode;
+            
             //if (root.Parent != null)
             {
                 if (TreeNodeSelected != null)
@@ -299,7 +312,14 @@ namespace mCleaner.ViewModel
 
             if (root.Key.Contains("duplicate_checker"))
             {
-                SelectedTabIndex = 1;
+                if (DupChecker.DupplicateCollection.Count > 0)
+                {
+                    SelectedTabIndex = 1;
+                }
+                else
+                {
+                    SelectedTabIndex = 0;
+                }
             }
             else
             {
@@ -345,17 +365,21 @@ namespace mCleaner.ViewModel
                 TreeNode root = new TreeNode("Chromium")
                 {
                     IsInitiallySelected = true,
-                    Children =
-                    {
-                        new TreeNode("Cache") {},
-                        new TreeNode("Cookies") {}
-                    }
+                    IsAccordionHeader = true,
+                    Tag = 1,
+                    //Children =
+                    //{
+                    //    new TreeNode("Cache") {},
+                    //    new TreeNode("Cookies") {}
+                    //}
                 };
                 root.Initialize();
                 this.CleanersCollection.Add(root);
 
                 TreeNode root2 = new TreeNode("Windows Explorer")
                 {
+                    IsAccordionHeader = true,
+                    Tag = 1,
                     Children =
                     {
                         new TreeNode("Most recently used") {},
@@ -375,7 +399,11 @@ namespace mCleaner.ViewModel
                 Model_CleanerML CleanerML = new Model_CleanerML();
 
                 string cleaners_folder = Path.Combine(this._exec_path, "cleaners");
-                foreach (string filename in Directory.GetFiles(cleaners_folder, "*.xml"))
+                string[] files = Directory.GetFiles(cleaners_folder, "*.xml");
+                Array.Sort(files);
+                this._nodes.Clear();
+                
+                foreach (string filename in files)
                 {
                     TreeNode root = new TreeNode();
 
@@ -426,6 +454,8 @@ namespace mCleaner.ViewModel
                             root.Tag = clnr;
                             root.TreeNodeChecked += TeeNode_TreeNodeChecked;
                             root.TreeNodeSelected += TreeNode_TreeNodeSelected;
+                            root.IsAccordionHeader = true;
+                            //root.IsExpanded = false;
                             root.Children = new List<TreeNode>();
 
                             foreach (option o in clnr.option)
@@ -447,7 +477,7 @@ namespace mCleaner.ViewModel
                             }
 
                             root.Initialize();
-                            this.CleanersCollection.Add(root);
+                            this._nodes.Add(root);
                         }
                     }
                 }
@@ -456,7 +486,19 @@ namespace mCleaner.ViewModel
                 AddDuplicateCleaner();
             }
 
+            SortCleanerCollection();
+
             return this.CleanersCollection;
+        }
+
+        void SortCleanerCollection()
+        {
+            this._nodes = this._nodes.OrderBy(p => p.Key).ToList();
+            this.CleanersCollection.Clear();
+            foreach (TreeNode t in this._nodes)
+            {
+                this.CleanersCollection.Add(t);
+            }
         }
 
         bool CheckIfSupported(cleaner c)
@@ -683,7 +725,7 @@ namespace mCleaner.ViewModel
         {
             List<TreeNode> nodes_to_remove = new List<TreeNode>();
 
-            foreach (TreeNode node in this.CleanersCollection)
+            foreach (TreeNode node in this._nodes)
             {
                 if (node.Key == "system" || node.Key == "duplicate_checker")
                 {
@@ -691,13 +733,15 @@ namespace mCleaner.ViewModel
                 }
             }
 
-            nodes_to_remove.ForEach((x) => this.CleanersCollection.Remove(x));
+            nodes_to_remove.ForEach((x) => this._nodes.Remove(x));
 
             nodes_to_remove.Clear();
             nodes_to_remove = null;
 
             AddSystemCleaner();
             AddDuplicateCleaner();
+
+            SortCleanerCollection();
         }
 
         void AddDuplicateCleaner(bool select = false)
@@ -712,6 +756,8 @@ namespace mCleaner.ViewModel
 
             TreeNode root = new TreeNode();
             root = new TreeNode(c.label, c.id);
+            root.IsAccordionHeader = true;
+            //root.IsExpanded = false;
             root.Tag = c;
             root.TreeNodeChecked += TeeNode_TreeNodeChecked;
             root.TreeNodeSelected += TreeNode_TreeNodeSelected;
@@ -740,7 +786,7 @@ namespace mCleaner.ViewModel
 
             root.Initialize();
             root.IsInitiallySelected = select;
-            this.CleanersCollection.Add(root);
+            this._nodes.Add(root);
         }
 
         void AddSystemCleaner(bool select = false)
@@ -755,6 +801,8 @@ namespace mCleaner.ViewModel
 
             TreeNode root = new TreeNode();
             root = new TreeNode(c.label, c.id);
+            root.IsAccordionHeader = true;
+            //root.IsExpanded = false;
             root.Tag = c;
             root.TreeNodeChecked += TeeNode_TreeNodeChecked;
             root.TreeNodeSelected += TreeNode_TreeNodeSelected;
@@ -792,7 +840,7 @@ namespace mCleaner.ViewModel
 
             root.Initialize();
             root.IsInitiallySelected = select;
-            this.CleanersCollection.Add(root);
+            this._nodes.Add(root);
         }
 
         option AddCustomLocationsToTTD()

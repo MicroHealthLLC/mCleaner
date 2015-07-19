@@ -180,6 +180,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Helpers\Controls\RichTextBoxEx.cs" />
     <Compile Include="Helpers\Controls\TreeNode.cs" />
     <Compile Include="Helpers\Converters\Converter_BooleanToVisibility.cs" />
     <Compile Include="Helpers\Data\JSON.cs" />
@@ -230,6 +231,9 @@
     <Compile Include="UserControls\Window\PreferencesWindow.xaml.cs">
       <DependentUpon>PreferencesWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\Window\ReleaseNotesWindow.xaml.cs">
+      <DependentUpon>ReleaseNotesWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\Window\ShredWindow.xaml.cs">
       <DependentUpon>ShredWindow.xaml</DependentUpon>
     </Compile>
@@ -239,6 +243,7 @@
     <Compile Include="ViewModel\ViewModel_CleanerML.cs" />
     <Compile Include="ViewModel\ViewModel_DuplicateChecker.cs" />
     <Compile Include="ViewModel\ViewModel_Preferences.cs" />
+    <Compile Include="ViewModel\ViewModel_ReleaseNotes.cs" />
     <Compile Include="ViewModel\ViewModel_Shred.cs" />
     <Page Include="Assets\Styles\CleanMenuStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -293,6 +298,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UserControls\Window\ReleaseNotesWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControls\Window\ShredWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -333,6 +342,7 @@
     <Resource Include="Assets\clean_moderate.png" />
     <Resource Include="Assets\clean_safe.png" />
     <Resource Include="Assets\dupcheck.png" />
+    <Resource Include="Assets\ReleaseNotesGNU.png" />
     <Content Include="Clam\.clamwin\db\readme.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

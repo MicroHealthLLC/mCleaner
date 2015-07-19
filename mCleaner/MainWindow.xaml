@@ -5,7 +5,6 @@
         xmlns:ucw="clr-namespace:mCleaner.UserControls.Window"
         x:Class="mCleaner.MainWindow"
         Title="mCleaner" Height="480" Width="800" Icon="appicon.ico" WindowStartupLocation="CenterScreen"
-        DataContext="{Binding Source={StaticResource Locator}}"
     >
 
     <Window.Resources>
@@ -14,8 +13,11 @@
                 <PropertyGroupDescription PropertyName="Hash" />
             </CollectionViewSource.GroupDescriptions>
         </CollectionViewSource>
-        
     </Window.Resources>
+
+    <Window.DataContext>
+        <Binding Source="{StaticResource Locator}"/>
+    </Window.DataContext>
 
     <Grid>
         <Grid>
@@ -45,18 +47,18 @@
                     </MenuItem>
                 </MenuItem>
                 <MenuItem Header="_Help">
-                    <MenuItem IsEnabled="False" Header="Help Contents" Command="Help">
+                    <MenuItem IsEnabled="True" Header="Help Contents" Visibility="Collapsed">
                         <MenuItem.Icon>
                             <Image Width="16" Height="16" Source="Assets/Help.png" />
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem IsEnabled="False" Header="Release Notes">
+                    <MenuItem IsEnabled="True" Header="Release Notes" Command="{Binding ReleaseNote.Command_Menu_ReleaseNotes}">
                         <MenuItem.Icon>
                             <Image Width="16" Height="16" Source="Assets/Release Notes.png" />
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem IsEnabled="False" Header="System Information" />
-                    <MenuItem IsEnabled="False" Header="About">
+                    <MenuItem IsEnabled="True" Header="System Information" Visibility="Collapsed" />
+                    <MenuItem IsEnabled="True" Header="About" Visibility="Collapsed">
                         <MenuItem.Icon>
                             <Image Width="16" Height="16" Source="Assets/About.png" />
                         </MenuItem.Icon>
@@ -84,7 +86,7 @@
                             <TextBlock Text="" />
                         </StackPanel>
                     </Button>
-                    <Button Width="70" ToolTip="Start cleaning!" Command="{Binding CleanerML.Command_Clean}" Visibility="Collapsed">
+                    <!--<Button Width="70" ToolTip="Start cleaning!" Command="{Binding CleanerML.Command_Clean}" Visibility="Collapsed">
                         <StackPanel>
                             <Image Width="32" Height="32" Source="Assets/Clean.png" HorizontalAlignment="Center" />
                             <StackPanel Orientation="Horizontal">
@@ -107,7 +109,7 @@
                                 </Menu>
                             </StackPanel>
                         </StackPanel>
-                    </Button>
+                    </Button>-->
                     <Button Width="70" ToolTip="Start cleaning!" Command="{Binding CleanerML.Command_Clean}" CommandParameter="1"  VerticalAlignment="Top">
                         <StackPanel>
                             <Image Width="32" Height="32" Source="Assets/clean_safe.png" HorizontalAlignment="Center" />
@@ -149,7 +151,7 @@
                         </StackPanel>
                     </Button>
                     <Separator />
-                    <Button Width="70" Command="{Binding Clam.Command_ScanMemory}" ToolTip="Scan system memory for virus">
+                    <Button Width="70" Command="{Binding Clam.Command_ScanMemory}" ToolTip="Scan system memory for virus" Visibility="Collapsed">
                         <StackPanel>
                             <Image Width="32" Height="32" Source="Assets/dupcheck.png" HorizontalAlignment="Center" />
                             <TextBlock Text="Duplicate Checker" HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" />
@@ -172,11 +174,12 @@
                     </Grid.RowDefinitions>
 
                     <TreeView Style="{StaticResource TreeViewStyle}" 
-                              ItemContainerStyle="{StaticResource TreeViewItemStyleStandard}"
-                              ItemTemplate="{StaticResource CheckBoxItemTemplate}" 
-                              ItemsSource="{Binding CleanerML.CleanersCollection, Mode=OneTime}"
-                              >
-                    </TreeView>
+						ItemContainerStyle="{StaticResource TreeViewItemStyleStandard}"
+						ItemTemplate="{StaticResource CheckBoxItemTemplate}" 
+						ItemsSource="{Binding CleanerML.CleanersCollection, Mode=OneTime}"
+                        BorderThickness="0"
+						x:Name="tvCleaners"
+                              />
                 </Grid>
 
 
@@ -238,10 +241,11 @@
                                         </Grid>
 
                                         <Grid Grid.Column="1">
-                                            <ListView ItemsSource="{Binding Source={StaticResource ListViewSource}}" x:Name="lvDuplicateFiles" >
-                                                <!--<ListView ItemsSource="{Binding DupChecker.DupplicateCollection}" >-->
+                                            <ListView ItemsSource="{Binding Source={StaticResource ListViewSource}}" 
+                                                      ItemContainerStyle="{StaticResource ListViewItemStyle}"
+                                                      x:Name="lvDuplicateFiles">
                                                 <ListView.View>
-                                                    <GridView>
+                                                    <GridView>                                                        
                                                         <GridViewColumn Header="File" Width="200">
                                                             <GridViewColumn.CellTemplate>
                                                                 <DataTemplate>
@@ -282,6 +286,21 @@
                                                         </GroupStyle.ContainerStyle>
                                                     </GroupStyle>
                                                 </ListView.GroupStyle>
+
+                                                <!--<ListView.ItemContainerStyle>
+                                                    <Style>
+                                                        <Style.Triggers>
+                                                            <Trigger Property="Control.IsMouseOver" Value="True">
+                                                                <Setter Property="Control.BorderThickness" Value="0" />
+                                                                <Setter Property="Control.Background" Value="Transparent" />
+                                                            </Trigger>
+                                                            <Trigger Property="Control.IsSelected" Value="True">
+                                                                <Setter Property="Control.BorderThickness" Value="0" />
+                                                                <Setter Property="Control.Background" Value="Transparent" />
+                                                            </Trigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </ListView.ItemContainerStyle>-->
                                             </ListView>
                                         </Grid>
                                     </Grid>
@@ -296,5 +315,6 @@
         <ucw:ClamWindow Visibility="{Binding Clam.ShowClamWinVirusUpdateWindow, Converter={StaticResource boolTovis}}"/>
         <ucw:PreferencesWindow Visibility="{Binding Prefs.ShowWindow, Converter={StaticResource boolTovis}}"/>
         <ucw:ShredWindow Visibility="{Binding ShredWindow.ShowWindow, Converter={StaticResource boolTovis}}" />
+        <ucw:ReleaseNotesWindow Visibility="{Binding ReleaseNote.ShowWindow, Converter={StaticResource boolTovis}}" />
     </Grid>
 </Window>

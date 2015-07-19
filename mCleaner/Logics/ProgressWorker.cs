@@ -41,30 +41,28 @@ namespace mCleaner.Logics
             while (this._bgWorker.CancellationPending == false)
             {
                 //if (this._q.Count > -1 )
-                if (this._q.Count == 0) continue;
+                if (this._q.Count == 0) break;
 
+                string log = this._q.Dequeue();
+
+                if (this._interval_s == 0)
                 {
-                    string log = this._q.Dequeue();
+                    this._bgWorker.ReportProgress(-1, log);
+                }
+                else
+                {
+                    TimeSpan timespan = this._end - this._start;
+                    int total_sec = ((int)timespan.TotalSeconds);
 
-                    if (this._interval_s == 0)
+                    if (total_sec >= this._interval_s)
                     {
                         this._bgWorker.ReportProgress(-1, log);
+
+                        this._start = DateTime.Now;
                     }
-                    else
-                    {
-                        TimeSpan timespan = this._end - this._start;
-                        int total_sec = ((int)timespan.TotalSeconds);
-
-                        if (total_sec >= this._interval_s)
-                        {
-                            this._bgWorker.ReportProgress(-1, log);
-
-                            this._start = DateTime.Now;
-                        }
-                    }
-
-                    this._end = DateTime.Now;
                 }
+
+                this._end = DateTime.Now;
             }
         }
 
@@ -87,12 +85,16 @@ namespace mCleaner.Logics
         public void EnQ(string log)
         {
             _q.Enqueue(log);
+            Start();
         }
 
         public void Start()
         {
-            this._start = DateTime.Now;
-            this._bgWorker.RunWorkerAsync();
+            if (!this._bgWorker.IsBusy)
+            {
+                this._start = DateTime.Now;
+                this._bgWorker.RunWorkerAsync();
+            }
         }
 
         public void Stop()

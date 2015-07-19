@@ -6,6 +6,9 @@ using mCleaner.Properties;
 using mCleaner.ViewModel;
 using Microsoft.Practices.ServiceLocation;
 using System.Windows;
+using System.Linq;
+using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace mCleaner
 {
@@ -14,11 +17,21 @@ namespace mCleaner
     /// </summary>
     public partial class MainWindow : Window
     {
+        TreeNode _SelectedNode;// = new TreeNode();
+
         public ViewModel_CleanerML CleanerML
         {
             get
             {
                 return ServiceLocator.Current.GetInstance<ViewModel_CleanerML>();
+            }
+        }
+
+        public ViewModel_DuplicateChecker DupChecker
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<ViewModel_DuplicateChecker>();
             }
         }
 
@@ -29,11 +42,25 @@ namespace mCleaner
             //System.Windows.Input.ApplicationCommands.Close
 
             CleanerML.TreeNodeSelected += CleanerML_TreeNodeSelected;
+            tvCleaners.SelectedItemChanged += tvCleaners_SelectedItemChanged;
+            tvCleaners.MouseDown += tvCleaners_MouseDown;
+            
             //CleanerML.TreeNodeSelected
              
             this.Loaded += MainWindow_Loaded;
             
         }
+
+        void tvCleaners_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            
+        }
+
+        void tvCleaners_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            //((TreeNode)e.NewValue).IsExpanded = !((TreeNode)e.NewValue).IsExpanded;
+        }
+
         public static MainWindow I { get { return new MainWindow(); } }
 
         public void ClearClipboard()
@@ -63,18 +90,29 @@ namespace mCleaner
             logo.Visibility = System.Windows.Visibility.Collapsed;
 
             TreeNode node = sender as TreeNode;
+            //node.IsExpanded = !node.IsExpanded;
+
+            CleanerML.Run = false;
+
+            rtbCleanerDetails.Document = CleanerML.BuildCleanerDetails(
+                node.Parent != null ? (cleaner)node.Parent.Tag : (cleaner)node.Tag
+            );
+
             if (node.Key.Contains("duplicate_checker"))
             {
-
+                if (DupChecker.DupplicateCollection.Count > 0)
+                {
+                    CleanerML.Run = true;
+                }
             }
-            else
-            {
-                CleanerML.Run = false;
+        }
 
-                rtbCleanerDetails.Document = CleanerML.BuildCleanerDetails(
-                    node.Parent != null ? (cleaner)node.Parent.Tag : (cleaner)node.Tag
-                );
-            }
+        static DependencyObject VisualUpwardSearch<T>(DependencyObject source)
+        {
+            while (source != null && source.GetType() != typeof(T))
+                source = VisualTreeHelper.GetParent(source);
+
+            return source;
         }
     }
 }
