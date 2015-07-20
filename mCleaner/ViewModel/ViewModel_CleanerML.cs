@@ -335,9 +335,12 @@ namespace mCleaner.ViewModel
             {
                 option o = (option)root.Tag;
 
-                if (o.warning != string.Empty && o.warning != null)
+                if (root.IsChecked.Value)
                 {
-                    MessageBox.Show("Warning!\r\n" + o.warning, "mCleaner", MessageBoxButton.OK, MessageBoxImage.Information);
+                    if (o.warning != string.Empty && o.warning != null)
+                    {
+                        MessageBox.Show("Warning!\r\n" + o.warning, "mCleaner", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
                 }
             }
             else if (root.Tag is cleaner)
