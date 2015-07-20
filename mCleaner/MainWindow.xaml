@@ -236,7 +236,7 @@
                                                 <RadioButton IsChecked="{Binding DupChecker.IsMove, Mode=TwoWay}" Content="Move files" Tag="Move" x:Name="rbMoveFiles" GroupName="DupCheck_FileOperation" />
                                                 <RadioButton IsChecked="{Binding DupChecker.IsDelete, Mode=TwoWay}" Content="Delete files" Tag="Delete" x:Name="rbDeleteFiles" GroupName="DupCheck_FileOperation" />
                                                 <TextBlock Text=" " />
-                                                <Button x:Name="btnOK" Content="Start" Style="{StaticResource ButtonStyle}" Command="{Binding DupChecker.Command_Start}" />
+                                                <Button x:Name="btnOK" Content="Start" Style="{StaticResource ButtonStyle}" Command="{Binding DupChecker.Command_Start}" Visibility="Collapsed"/>
                                             </StackPanel>
                                         </Grid>
 

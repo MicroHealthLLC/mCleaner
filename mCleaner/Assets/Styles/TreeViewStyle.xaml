@@ -167,8 +167,8 @@
                             <Setter Property="Margin" TargetName="ParentNodeContainer" Value="-5,0,0,0" />
                         </DataTrigger>
                         <Trigger Property="IsSelected" Value="true">
-                            <Setter Property="Background" TargetName="Bd" Value="{StaticResource TreeViewHeader_Background}"/>
-                            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}"/>
+                            <Setter Property="Background" TargetName="Bd" Value="{StaticResource TreeViewItem_Select}"/>
+                            <Setter Property="Foreground" Value="{StaticResource TreeViewItem_Select_Text}"/>
                         </Trigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>

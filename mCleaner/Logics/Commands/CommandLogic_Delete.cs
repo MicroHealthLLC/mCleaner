@@ -85,10 +85,10 @@ namespace mCleaner.Logics.Commands
                         // then we delete it.
                         FileOperations.Delete(fi.FullName);
 
-                        text = string.Format(" - DELETED");
+                        //text = string.Format(" - DELETED");
 
-                        // then report to the gui
-                        bgWorker.ReportProgress(-1, text);
+                        //// then report to the gui
+                        //bgWorker.ReportProgress(-1, text);
                     }
                     catch (Exception ex)
                     {
@@ -106,7 +106,8 @@ namespace mCleaner.Logics.Commands
                         {
                             FileOperations.I.DeleteEmptyDirectories(ttd.path, (a) =>
                             {
-                                string text = string.Format("Delete 0 {0} - DELETED", a);
+                                //string text = string.Format("Delete 0 {0} - DELETED", a);
+                                string text = string.Format("Delete 0 {0}", a);
                                 // then report to the gui
                                 bgWorker.ReportProgress(-1, text);
                             });

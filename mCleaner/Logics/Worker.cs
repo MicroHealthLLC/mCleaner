@@ -21,10 +21,10 @@ namespace mCleaner.Logics
         #region vars
         BackgroundWorker bgWorker;
 
-        int TotalFileDelete = 0;
-        long TotalFileSize = 0;
-        int TotalWork = 0;
-        int TotalSpecialOperations = 0;
+        public int  TotalFileDelete = 0;
+        public long TotalFileSize = 0;
+        public int  TotalWork = 0;
+        public int  TotalSpecialOperations = 0;
         #endregion
 
         #region properties
@@ -208,6 +208,14 @@ namespace mCleaner.Logics
 
                         case COMMANDS.clipboard:
                             CommandLogic_Clipboard.I.ExecuteCommand();
+                            break;
+
+                        case COMMANDS.dupchecker:
+                            CommandLogic_DuplicateChecker.I.ScanPath(ttd.FullPathName);
+                            CommandLogic_DuplicateChecker.I.Start(this.DupChecker.DupplicateCollection, this.DupChecker.IsMove ? 1 : 0, this.bgWorker);
+                            CommandLogic_DuplicateChecker.I.ScanPath(ttd.FullPathName);
+                            this.DupChecker.FileOperationPanelShow = true;
+                            
                             break;
                     }
                     #endregion

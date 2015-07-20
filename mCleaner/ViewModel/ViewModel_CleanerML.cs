@@ -606,40 +606,43 @@ namespace mCleaner.ViewModel
 
             foreach (action _a in o.action)
             {
-                #region // check cleaning level
-                int level = 3; // let it be the default
-                int curlevel = Properties.Settings.Default.CleanOption;
-
-                if (_a.level == 0)
+                if (!Worker.I.Preview) // check only when not in preview mode
                 {
-                    level = 3;
-                }
-                else
-                {
-                    level = _a.level;
-                }
+                    #region // check cleaning level
+                    int level = 3; // let it be the default
+                    int curlevel = Properties.Settings.Default.CleanOption;
 
-                if (level > curlevel)
-                {
-                    // do not execute the cleaner when the level set is greater than
-                    // what is in current setting.
-
-                    string level_name = "Aggressive";
-                    if (level == 1) level_name = "Safe";
-                    else if (level == 2) level_name = "Moderate";
-
-                    string text = string.Format("\"{0}\" cleaner skipped because it is set for {1} cleaning level", _a.parent_option.label, level_name);
-
-                    if (last_Log != text)
+                    if (_a.level == 0)
                     {
-                        last_Log = text;
-
-                        this.TextLog += text;
+                        level = 3;
+                    }
+                    else
+                    {
+                        level = _a.level;
                     }
 
-                    continue;
+                    if (level > curlevel)
+                    {
+                        // do not execute the cleaner when the level set is greater than
+                        // what is in current setting.
+
+                        string level_name = "Aggressive";
+                        if (level == 1) level_name = "Safe";
+                        else if (level == 2) level_name = "Moderate";
+
+                        string text = string.Format("\"{0}\" cleaner skipped because it is set for {1} cleaning level", _a.parent_option.label, level_name);
+
+                        if (last_Log != text)
+                        {
+                            last_Log = text;
+
+                            this.TextLog += text;
+                        }
+
+                        continue;
+                    }
+                    #endregion
                 }
-                #endregion
 
                 Console.WriteLine("Executing '{0}' action from '{3}' option in '{4}' cleaner, command with '{1}' search parameter in '{2}' path", _a.command, _a.search, _a.path, _a.parent_option.label, _a.parent_option.parent_cleaner.label);
 

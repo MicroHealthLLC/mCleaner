@@ -8,6 +8,7 @@ using Microsoft.Practices.ServiceLocation;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -33,14 +34,14 @@ namespace mCleaner.Logics.Commands
         #region commands
 
         #endregion
+        
+        #region ctor
         public CommandLogic_DuplicateChecker()
         {
 
         }
         private static CommandLogic_DuplicateChecker _i = new CommandLogic_DuplicateChecker();
         public static CommandLogic_DuplicateChecker I { get { return _i; } }
-        #region ctor
-
         #endregion
 
         #region command methods
@@ -273,7 +274,7 @@ namespace mCleaner.Logics.Commands
             //}
         }
 
-        public void Start(ObservableCollection<Model_DuplicateChecker> files, int operation = 0) // 0 = delete, 1 = move
+        public void Start(ObservableCollection<Model_DuplicateChecker> files, int operation = 0, BackgroundWorker bgWorker = null) // 0 = delete, 1 = move
         {
             List<Model_DuplicateChecker> errors = new List<Model_DuplicateChecker>();
             List<Model_DuplicateChecker> done = new List<Model_DuplicateChecker>();
@@ -285,6 +286,12 @@ namespace mCleaner.Logics.Commands
                 if (dc.Selected)
                 {
                     FileInfo fi = new FileInfo(dc.FileDetails.Fullfilepath);
+
+                    string text = string.Format("{0} {1} {2}", operation == 0 ? "Delete" : "Move", Win32API.FormatByteSize(fi.Length), dc.FileDetails.Fullfilepath);
+                    // then report to the gui
+                    bgWorker.ReportProgress(-1, text);
+                    Worker.I.TotalSpecialOperations++;
+                    
                     if (fi.Exists)
                     {
                         try
@@ -302,6 +309,9 @@ namespace mCleaner.Logics.Commands
                                     ProgressWorker.I.EnQ("Deleting file: " + fi.FullName);
                                     fi.Delete();
                                 }
+
+                                Worker.I.TotalFileDelete++;
+                                Worker.I.TotalFileSize += fi.Length;
                             }
                             else if (operation == 1)
                             {
