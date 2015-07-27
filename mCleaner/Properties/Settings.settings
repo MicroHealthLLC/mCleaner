@@ -39,7 +39,7 @@
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
     <Setting Name="ClamWin_Proxy_Address" Type="System.String" Scope="User">
-      <Value Profile="(Default)">192.168.15.6:808</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="ClamWin_SupressMessageAtStartup" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
@@ -51,7 +51,7 @@
       <Value Profile="(Default)">database.clamav.net</Value>
     </Setting>
     <Setting Name="HideIrrelevantCleaners" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
+      <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="ShredFiles" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
@@ -87,6 +87,18 @@
       <Value Profile="(Default)">*.*</Value>
     </Setting>
     <Setting Name="DupChecker_DuplicateFolderPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ClamWin_LastDBUpdate" Type="System.DateTime" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ClamWin_DaysBeforeNotifyToUpdate" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">3</Value>
+    </Setting>
+    <Setting Name="ClamWin_Update" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="LastActionsChecked" Type="System.Collections.Specialized.StringCollection" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
   </Settings>

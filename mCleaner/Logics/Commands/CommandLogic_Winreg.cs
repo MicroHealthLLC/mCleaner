@@ -31,7 +31,7 @@ namespace mCleaner.Logics.Commands
         private static CommandLogic_Winreg _i = new CommandLogic_Winreg();
         public static CommandLogic_Winreg I { get { return _i; } }
 
-        public void Execute(bool apply = false)
+        public void Enqueue(bool apply = false)
         {
             this._apply = apply;
 

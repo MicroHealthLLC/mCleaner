@@ -17,7 +17,7 @@ namespace mCleaner.Logics.Commands
         static CommandLogic_Clipboard _i = new CommandLogic_Clipboard();
         public static CommandLogic_Clipboard I { get { return _i; } }
 
-        public void Execute(bool apply = false)
+        public void Enqueue(bool apply = false)
         {
             this._apply = apply;
 

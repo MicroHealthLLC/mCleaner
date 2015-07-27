@@ -115,7 +115,7 @@ namespace mCleaner.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("192.168.15.6:808")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string ClamWin_Proxy_Address {
             get {
                 return ((string)(this["ClamWin_Proxy_Address"]));
@@ -163,7 +163,7 @@ namespace mCleaner.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool HideIrrelevantCleaners {
             get {
                 return ((bool)(this["HideIrrelevantCleaners"]));
@@ -311,6 +311,52 @@ namespace mCleaner.Properties {
             }
             set {
                 this["DupChecker_DuplicateFolderPath"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.DateTime ClamWin_LastDBUpdate {
+            get {
+                return ((global::System.DateTime)(this["ClamWin_LastDBUpdate"]));
+            }
+            set {
+                this["ClamWin_LastDBUpdate"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("3")]
+        public int ClamWin_DaysBeforeNotifyToUpdate {
+            get {
+                return ((int)(this["ClamWin_DaysBeforeNotifyToUpdate"]));
+            }
+            set {
+                this["ClamWin_DaysBeforeNotifyToUpdate"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ClamWin_Update {
+            get {
+                return ((bool)(this["ClamWin_Update"]));
+            }
+            set {
+                this["ClamWin_Update"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Collections.Specialized.StringCollection LastActionsChecked {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["LastActionsChecked"]));
+            }
+            set {
+                this["LastActionsChecked"] = value;
             }
         }
     }

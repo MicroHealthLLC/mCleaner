@@ -20,7 +20,7 @@
 
 -->
 <cleaner id="internet_explorer" os="windows">
-  <label>Internet Explorer</label>
+  <label>Microsoft Internet Explorer</label>
   <description>Web browser</description>
   <option id="cookies">
     <label>Cookies</label>

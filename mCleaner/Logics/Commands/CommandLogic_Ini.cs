@@ -31,7 +31,7 @@ namespace mCleaner.Logics.Commands
             }
         }
 
-        public void Execute(bool apply = false)
+        public void Enqueue(bool apply = false)
         {
             SEARCH search = (SEARCH)StringEnum.Parse(typeof(SEARCH), Action.search);
 

@@ -1,13 +1,9 @@
-﻿using GalaSoft.MvvmLight;
+﻿using System.Windows;
+using System.Windows.Input;
+using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using mCleaner.Logics.Clam;
 using mCleaner.Logics.Enumerations;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
-using System.Windows.Input;
 
 namespace mCleaner.ViewModel
 {
@@ -86,7 +82,9 @@ namespace mCleaner.ViewModel
 
         public void Command_ScanForVirus_Click()
         {
-            MessageBox.Show("Scheduled for Sprint 3");
+            //MessageBox.Show("Scheduled for Sprint 3");
+            this.ShowClamWinVirusUpdateWindow = true;
+            CommandLogic_Clam.I.LaunchCleaner();
         }
 
         public void Command_CancelUpdate_Click()
@@ -102,7 +100,7 @@ namespace mCleaner.ViewModel
 
         public void Command_ScanMemory_Click()
         {
-            //this.ShowClamWinVirusUpdateWindow = true;
+            this.ShowClamWinVirusUpdateWindow = true;
             CommandLogic_Clam.I.LaunchScanner(SEARCH.clamscan_memory, string.Empty, true);
         }
     }

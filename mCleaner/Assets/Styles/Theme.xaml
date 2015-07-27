@@ -20,4 +20,5 @@
     <SolidColorBrush x:Key="ListView_Column_Header_Pressed"         Color="#FFACD1E9" />
     <SolidColorBrush x:Key="ListView_Item_MouseOver"                Color="#00E8D0A9" />
     <SolidColorBrush x:Key="ListView_Item_Selected"                 Color="#00E8D0A9" />
+    <SolidColorBrush x:Key="InfoTip_Background"                     Color="#FFFBFFA9" />
 </ResourceDictionary>

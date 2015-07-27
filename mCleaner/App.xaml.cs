@@ -1,11 +1,11 @@
-﻿using mCleaner.Helpers;
-using mCleaner.Logics.Clam;
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Windows;
+using mCleaner.Helpers;
+using mCleaner.Logics.Clam;
 
 namespace mCleaner
 {

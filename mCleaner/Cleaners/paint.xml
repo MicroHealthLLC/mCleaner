@@ -20,7 +20,7 @@
 
 -->
 <cleaner id="paint" os="windows">
-  <label>Paint</label>
+  <label>Microsoft Paint</label>
   <option id="mru">
     <label>Most recently used</label>
     <description>Delete the most recently used list</description>

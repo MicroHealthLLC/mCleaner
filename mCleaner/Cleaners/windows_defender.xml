@@ -20,7 +20,7 @@
 
 -->
 <cleaner id="windows_defender" os="windows">
-  <label>Windows Defender</label>
+  <label>Microsoft Windows Defender</label>
   <option id="history">
     <label>History</label>
     <description>Delete the files</description>

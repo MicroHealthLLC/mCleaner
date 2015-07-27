@@ -1,0 +1,21 @@
+Safe
+Temporary
+MRU
+.bak
+search history (considered as MRU)
+
+Moderate
+Cache
+Logs
+browser session
+browsing history
+browser search history
+
+Aggressive
+Cookies
+.db
+html5 cookies
+form history
+passwords
+search engines
+vacuum

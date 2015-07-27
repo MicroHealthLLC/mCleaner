@@ -142,6 +142,9 @@ namespace mCleaner.Logics.Enumerations
         [StringValue("clamscan.folder")]
         clamscan_folder,
 
+        [StringValue("clamscan.folderfile")]
+        clamscan_folderfile,
+
         [StringValue("clamscan.folder.recurse")]
         clamscan_folder_recurse,
 

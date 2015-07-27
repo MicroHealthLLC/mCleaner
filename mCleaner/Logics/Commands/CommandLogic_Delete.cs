@@ -34,7 +34,7 @@ namespace mCleaner.Logics.Commands
         private static CommandLogic_Delete _i = new CommandLogic_Delete();
         public static CommandLogic_Delete I { get { return _i; } }
 
-        public void Execute(bool apply = false)
+        public void Enqueue(bool apply = false)
         {
             this._apply = apply;
             SEARCH search = (SEARCH)StringEnum.Parse(typeof(SEARCH), Action.search);

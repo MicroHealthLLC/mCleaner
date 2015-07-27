@@ -22,7 +22,7 @@
 <cleaner id="flash">
   <label>Flash</label>
   <description>Multimedia viewer</description>
-  <option id="cache">
+  <option id="cache" level="2">
     <label>Cache</label>
     <description>Delete the cache</description>
     <!-- reference: http://helpx.adobe.com/x-productkb/multi/flash-player-11-problems-playing.html -->

@@ -71,12 +71,12 @@
     <SolidColorBrush x:Key="TreeViewItem.TreeArrow.Static.Stroke" Color="#FF818181"/>
     <Style x:Key="ExpandCollapseToggleStyle" TargetType="{x:Type ToggleButton}">
         <Setter Property="Focusable" Value="False"/>
-        <Setter Property="Width" Value="16"/>
-        <Setter Property="Height" Value="16"/>
+        <!--<Setter Property="Width" Value="16"/>-->
+        <!--<Setter Property="Height" Value="16"/>-->
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ToggleButton}">
-                    <Border Background="Transparent" Height="16" Padding="5,5,5,5" Width="16">
+                    <Border Background="Transparent" Padding="5,5,5,5" VerticalAlignment="Center">
                         <Path x:Name="ExpandPath" Data="{StaticResource TreeArrow}" Fill="{StaticResource TreeViewItem.TreeArrow.Static.Fill}" Stroke="{StaticResource TreeViewItem.TreeArrow.Static.Stroke}">
                             <Path.RenderTransform>
                                 <RotateTransform Angle="135" CenterY="3" CenterX="3"/>
@@ -127,29 +127,31 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TreeViewItem}">
-                    <Grid x:Name="GridNodeContainer" Margin="0,-1,0,0">
+                    <Grid x:Name="GridNodeContainer" Margin="5,-1,0,0">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
 
-                        <Border x:Name="ParentNodeContainer" Margin="0">
+                        <Grid x:Name="ParentNodeContainer" Margin="0">
                             <Grid x:Name="ParentNodeContainer2">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
                             
-                                <ToggleButton x:Name="Expander" ClickMode="Press" IsChecked="{Binding IsExpanded, RelativeSource={RelativeSource TemplatedParent}}" Style="{StaticResource ExpandCollapseToggleStyle}" Visibility="Collapsed"/>
+                                
                                 <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Grid.Column="1" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="true">
                                     <ContentPresenter x:Name="PART_Header" ContentSource="Header" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
                                 </Border>
                             </Grid>
-                        </Border>
+
+                            <ToggleButton x:Name="Expander" ClickMode="Press" IsChecked="{Binding IsExpanded, RelativeSource={RelativeSource TemplatedParent}}" Style="{StaticResource ExpandCollapseToggleStyle}" Visibility="Visible"/>
+                        </Grid>
 
                         <Path Data="{StaticResource DownArrow}" Width="20" Height="10" Stretch="Fill" Fill="{StaticResource TreeViewHeader_Background}" Grid.Row="1" x:Name="DownArrow" HorizontalAlignment="Left" Margin="7,-1,0,0"/>
-                        <ItemsPresenter x:Name="ItemsHost" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="2" Margin="0,0,0,0"/>
+                        <ItemsPresenter x:Name="ItemsHost" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="2" Margin="-5,0,0,0"/>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsExpanded" Value="false">
@@ -159,7 +161,6 @@
                         <Trigger Property="HasItems" Value="false">
                             <Setter Property="Visibility" TargetName="Expander" Value="Collapsed"/>
                             <Setter Property="Visibility" TargetName="DownArrow" Value="Collapsed" />
-                            
                         </Trigger>
                         <DataTrigger Binding="{Binding IsAccordionHeader}" Value="true">
                             <Setter Property="Margin" Value="5" TargetName="ParentNodeContainer2" />
@@ -213,17 +214,17 @@
             </Grid.ColumnDefinitions>
 
             <Border x:Name="border" Grid.Column="0" Margin="0,0,5,0">
-                <CheckBox Focusable="False" IsChecked="{Binding IsChecked}" VerticalAlignment="Center" />
+                <CheckBox x:Name="Checkbox" Focusable="False" IsChecked="{Binding IsChecked}" VerticalAlignment="Center" />
             </Border>
             
             <ContentPresenter Grid.Column="1" Content="{Binding Name, Mode=OneTime}"/>
         </Grid>
         
-        <!--<HierarchicalDataTemplate.Triggers>
-            <DataTrigger Binding="{Binding Tag}" Value="1">
-                <Setter Property="Background" TargetName="border" Value="Black" />
+        <HierarchicalDataTemplate.Triggers>
+            <DataTrigger Binding="{Binding IsAccordionHeader}" Value="True">
+                <Setter Property="Visibility" TargetName="Checkbox" Value="Collapsed" />
             </DataTrigger>
-        </HierarchicalDataTemplate.Triggers>-->
+        </HierarchicalDataTemplate.Triggers>
     </HierarchicalDataTemplate>
     
 

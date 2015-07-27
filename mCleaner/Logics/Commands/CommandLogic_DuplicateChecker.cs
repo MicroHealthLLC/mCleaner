@@ -12,6 +12,8 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Collections.Specialized;
+using System.Threading.Tasks;
 
 namespace mCleaner.Logics.Commands
 {
@@ -49,7 +51,7 @@ namespace mCleaner.Logics.Commands
         #endregion
 
         #region methods
-        public void Execute(bool apply = false)
+        public void Enqueue(bool apply = false)
         {
             SEARCH search = (SEARCH)StringEnum.Parse(typeof(SEARCH), Action.search);
 
@@ -76,6 +78,38 @@ namespace mCleaner.Logics.Commands
                 level = Action.level,
                 cleaner_name = Action.parent_option.label
             });
+        }
+
+        /// <summary>
+        ///  Check duplicates from custom paths. This will called from clicking the toolbar button "Duplicate Checker"
+        /// </summary>
+        public async Task CheckDuplicates()
+        {
+            this.DupChecker.DupplicateCollection.Clear();
+            int i = 0;
+            foreach (string path in Settings.Default.DupChecker_CustomPath)
+            {
+                //option o = new option()
+                //{
+                //    id = "duplicate_checker_" + (i++),
+                //    label = path.Substring(path.LastIndexOf("\\") + 1),
+                //    description = "Check for duplicate entries in " + path,
+                //    warning = "This option is slow!",
+                //    action = new List<action>()
+                //};
+
+                //this.Action = new action()
+                //{
+                //    command = "dupchecker",
+                //    search = "dupchecker.all",
+                //    path = path,
+                //    level = 2,
+                //    parent_option = o,
+                //};
+
+                //EnqueueCustomPath(path);
+                await Task.Run(() => ScanPath(path));
+            }
         }
 
         public void ScanPath(string path)
@@ -233,7 +267,6 @@ namespace mCleaner.Logics.Commands
             
             App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
             {
-                DupChecker.DupplicateCollection.Clear();
                 base.VMCleanerML.MaxProgress = files_with_same_hash.Count;
                 base.VMCleanerML.ProgressIndex = 0;
                 foreach (string entry in files_with_same_hash.Keys)
@@ -287,9 +320,13 @@ namespace mCleaner.Logics.Commands
                 {
                     FileInfo fi = new FileInfo(dc.FileDetails.Fullfilepath);
 
-                    string text = string.Format("{0} {1} {2}", operation == 0 ? "Delete" : "Move", Win32API.FormatByteSize(fi.Length), dc.FileDetails.Fullfilepath);
-                    // then report to the gui
-                    bgWorker.ReportProgress(-1, text);
+                    if (bgWorker != null)
+                    {
+                        string text = string.Format("{0} {1} {2}", operation == 0 ? "Delete" : "Move", Win32API.FormatByteSize(fi.Length), dc.FileDetails.Fullfilepath);
+                        // then report to the gui
+                        bgWorker.ReportProgress(-1, text);
+                    }
+
                     Worker.I.TotalSpecialOperations++;
                     
                     if (fi.Exists)

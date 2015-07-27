@@ -31,7 +31,7 @@ namespace mCleaner.Logics.Commands
         static CommandLogic_SQLiteVacuum _i = new CommandLogic_SQLiteVacuum();
         public static CommandLogic_SQLiteVacuum I { get { return _i; } }
 
-        public void Execute(bool apply = false)
+        public void Enqueue(bool apply = false)
         {
             this._apply = apply;
 

@@ -22,7 +22,7 @@
 <cleaner id="amule">
   <label>aMule</label>
   <description>File transfer client</description>
-  <option id="logs">
+  <option id="logs" level="1">
     <label>Logs</label>
     <description>Delete the logs</description>
     <action command="delete" search="file" path="~/.aMule/logfile" level="1"/>
@@ -30,7 +30,7 @@
     <action command="delete" search="file" path="$APPDATA\aMule\logfile" level="1"/>
     <action command="delete" search="file" path="$APPDATA\aMule\logfile.bak"/>
   </option>
-  <option id="tmp">
+  <option id="tmp" level="1">
     <label>Temporary files</label>
     <description>Delete the temporary files</description>
     <action command="delete" search="walk.files" path="~/.aMule/Temp/" level="1"/>

@@ -25,7 +25,7 @@
   <running type="exe">chrome.exe</running>
   <!-- Fedora 14 -->
   <running type="exe">chromium-browser</running>
-  <option id="cache">
+  <option id="cache" level="2">
     <label>Cache</label>
     <description>Delete the web cache, which reduces time to display revisited pages</description>
     <action command="delete" search="walk.files" path="$localappdata\Chromium\User Data\Default\Cache\" level="2"/>
@@ -64,7 +64,7 @@
     <action command="chrome.autofill" search="file" path="$localappdata\Chromium\User Data\Default\Web Data"/>
     <action command="chrome.autofill" search="file" path="~/.config/chromium/Default/Web Data"/>
   </option>
-  <option id="history">
+  <option id="history" level="2">
     <label>History</label>
     <description>Delete the history which includes visited sites, downloads, and thumbnails</description>
     <!-- keep /History before /Favicons -->
@@ -118,24 +118,24 @@
     <action command="delete" search="file" path="$localappdata\Chromium\User Data\Default\Login Data"/>
     <action command="delete" search="file" path="$localappdata\Chromium\User Data\Default\Login Data-journal"/>
   </option>
-  <option id="search_engines">
+  <option id="search_engines" level="2">
     <label>Search engines</label>
     <description>Reset the search engine usage history and delete non-factory search engines, some of which are added automatically</description>
     <action command="chrome.keywords" search="file" path="~/.config/chromium/Default/Web Data"/>
     <action command="chrome.keywords" search="file" path="$localappdata\Chromium\User Data\Default\Web Data"/>
   </option>
-  <option id="current_session">
+  <option id="current_session" level="2">
     <label>Current session</label>
     <description>Delete the current session</description>
-    <action command="delete" search="file" path="$localappdata\Chromium\User Data\Default\Current Session"/>
-    <action command="delete" search="file" path="$localappdata\Chromium\User Data\Default\Current Tabs"/>
-    <action command="delete" search="file" path="$localappdata\Chromium\User Data\Default\Last Session"/>
-    <action command="delete" search="file" path="$localappdata\Chromium\User Data\Default\Last Tabs"/>
-    <action command="delete" search="file" path="~/.cxchromium/chromium/drive_c/windows/profiles/crossover/Local Settings/Application Data/Google/Chrome/User Data/Default/Current Session"/>
-    <action command="delete" search="file" path="~/.config/chromium/Default/Current Session"/>
-    <action command="delete" search="file" path="~/.config/chromium/Default/Current Tabs"/>
-    <action command="delete" search="file" path="~/.config/chromium/Default/Last Session"/>
-    <action command="delete" search="file" path="~/.config/chromium/Default/Last Tabs"/>
+    <action command="delete" search="file" path="$localappdata\Chromium\User Data\Default\Current Session" level="2"/>
+    <action command="delete" search="file" path="$localappdata\Chromium\User Data\Default\Current Tabs" level="2"/>
+    <action command="delete" search="file" path="$localappdata\Chromium\User Data\Default\Last Session" level="2"/>
+    <action command="delete" search="file" path="$localappdata\Chromium\User Data\Default\Last Tabs" level="2"/>
+    <action command="delete" search="file" path="~/.cxchromium/chromium/drive_c/windows/profiles/crossover/Local Settings/Application Data/Google/Chrome/User Data/Default/Current Session" level="2"/>
+    <action command="delete" search="file" path="~/.config/chromium/Default/Current Session" level="2"/>
+    <action command="delete" search="file" path="~/.config/chromium/Default/Current Tabs" level="2"/>
+    <action command="delete" search="file" path="~/.config/chromium/Default/Last Session" level="2"/>
+    <action command="delete" search="file" path="~/.config/chromium/Default/Last Tabs" level="2"/>
   </option>
   <option id="vacuum">
     <label>Vacuum</label>

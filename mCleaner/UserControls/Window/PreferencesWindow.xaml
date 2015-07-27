@@ -29,7 +29,7 @@
             </Grid>
 
             <Grid Grid.Row="1">
-                <TabControl Margin="5,0,5,0">
+                <TabControl Margin="5,0,5,0" SelectedIndex="{Binding Prefs.SelectedTabIndex, Mode=TwoWay}">
                     <TabItem Header="General">
                         <StackPanel Margin="5">
                             <StackPanel.Resources>
@@ -45,10 +45,10 @@
                             </StackPanel>
                             <CheckBox x:Name="cbHideIrrelevantCleaner" Content="Hide irrelevant cleaners" IsChecked="{Binding Prefs.HideIrrelevantCleaners, Mode=TwoWay}" />
                             <CheckBox x:Name="cbOverwriteFiles" Content="Shred files to hide its contents" IsChecked="{Binding Prefs.ShredFiles, Mode=TwoWay}" />
-                            <CheckBox x:Name="cbStartBleachBitBoot" Content="Start BleachBit with computer" IsChecked="{Binding Prefs.StartWhenSystemStarts, Mode=TwoWay}" />
+                            <CheckBox x:Name="cbStartBleachBitBoot" Content="Start mCleaner when the computer starts" IsChecked="{Binding Prefs.StartWhenSystemStarts, Mode=TwoWay}" />
                         </StackPanel>
                     </TabItem>
-                    <TabItem IsEnabled="True" Header="Custom">
+                    <TabItem IsEnabled="True" Header="Custom Locations">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="auto" />
@@ -57,9 +57,18 @@
                                 <RowDefinition Height="auto" />
                             </Grid.RowDefinitions>
 
-                            <TextBlock Text="These locations can be selected for deletion." TextAlignment="Center" />
+                            <Border Padding="5" Background="{StaticResource InfoTip_Background}">
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Height="80" Source="/mCleaner;component/Assets/infotip_customloc.png" HorizontalAlignment="Left" Margin="0,0,5,0" />
+                                    <TextBlock Text="These files and folders will be included for deletion if 'Custom Location' is selected" TextWrapping="Wrap" TextAlignment="Left" Width="350" />
+                                    
+                                </StackPanel>
+                            </Border>
 
-                            <TextBlock Text="Path" Grid.Row="1" />
+                            <Border Padding="5" Grid.Row="1" Background="{StaticResource MainWindow_Toolbar_Backgruond}">
+                                <TextBlock Text="Paths" Foreground="{StaticResource MainWindow_Toolbar_Foreground}" />
+                            </Border>
+                            
                             <ListBox Grid.Row="2" BorderThickness="0" x:Name="lbCustom" ItemsSource="{Binding Prefs.CustomLocationList}">
 
                             </ListBox>
@@ -73,33 +82,8 @@
                             </StackPanel>
                         </Grid>
                     </TabItem>
-                    <TabItem  IsEnabled="True" Header="Whitelist">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="auto" />
-                                <RowDefinition Height="auto" />
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="auto" />
-                            </Grid.RowDefinitions>
-
-                            <TextBlock Text="These paths will not be deleted or modified" TextAlignment="Center" />
-
-                            <TextBlock Text="Path" Grid.Row="1" />
-                            <ListBox Grid.Row="2" BorderThickness="0" x:Name="lbWhitelist" ItemsSource="{Binding Prefs.Whitelist}">
-
-                            </ListBox>
-
-                            <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="3">
-                                <Button x:Name="Whitelist_btnAddFile" Content=" Add file " Style="{StaticResource ButtonStyle}" Command="{Binding Prefs.Command_Whitelist_AddFile}"/>
-                                <TextBlock Text=" " />
-                                <Button x:Name="Whitelist_btnAddFolder" Content=" Add folder " Style="{StaticResource ButtonStyle}" Command="{Binding Prefs.Command_Whitelist_AddFolder}"/>
-                                <TextBlock Text=" " />
-                                <Button x:Name="Whitelist_btnRemove" Content=" Remove " Style="{StaticResource ButtonStyle}" Command="{Binding Prefs.Command_Whitelist_RemoveSelected}" CommandParameter="{Binding SelectedItem, ElementName=lbWhitelist}"/>
-                            </StackPanel>
-                        </Grid>
-                    </TabItem>
-                    <TabItem Header="ClamAV">
-                        <TabControl Margin="5,0,5,0">
+                    <TabItem Header="Clam Anti Virus">
+                        <TabControl Margin="0,0,0,0">
                             <TabItem Header="Scan Locations">
                                 <Grid>
                                     <Grid.RowDefinitions>
@@ -109,9 +93,14 @@
                                         <RowDefinition Height="auto" />
                                     </Grid.RowDefinitions>
 
-                                    <TextBlock Text="These paths will be included in scanning" TextAlignment="Center" />
+                                    <Border Padding="5" Background="{StaticResource InfoTip_Background}">
+                                        <TextBlock Text="These files and folders will be included to scan for viruses" TextAlignment="Left" />
+                                    </Border>
 
-                                    <TextBlock Text="Path" Grid.Row="1" />
+                                    <Border Padding="5" Grid.Row="1" Background="{StaticResource MainWindow_Toolbar_Backgruond}">
+                                        <TextBlock Text="Paths" Foreground="{StaticResource MainWindow_Toolbar_Foreground}" />
+                                    </Border>
+
                                     <ListBox Grid.Row="2" BorderThickness="0" x:Name="lbClamAVCustomLocation" ItemsSource="{Binding Prefs.ClamWinScanLocations}">
 
                                     </ListBox>
@@ -136,8 +125,8 @@
                                         </Style>
                                     </StackPanel.Resources>
 
-                                    <CheckBox IsEnabled="False" x:Name="cbCLAMAV_automaticupdate" Content="Enable automatic virus database updates" />
-                                    <StackPanel Margin="10,0">
+                                    <CheckBox IsEnabled="False" x:Name="cbCLAMAV_automaticupdate" Content="Enable automatic virus database updates" Visibility="Collapsed" />
+                                    <StackPanel Margin="0,0">
                                         <CheckBox x:Name="cbCLAMAV_updatevirusdefdbatstartup" Content="Update virus definition database at startup" IsChecked="{Binding Prefs.AutoUpdateDBAtStartup, Mode=TwoWay}" />
                                         <Grid>
                                             <Grid.ColumnDefinitions>
@@ -145,7 +134,7 @@
                                                 <ColumnDefinition Width="*" />
                                             </Grid.ColumnDefinitions>
                                             <TextBlock Text="Download site" />
-                                            <TextBox Text="{Binding Prefs.DatabaseMirror, Mode=TwoWay}" Grid.Column="1" />
+                                            <TextBox Text="{Binding Prefs.DatabaseMirror, Mode=TwoWay}" Grid.Column="1" IsReadOnly="True" />
                                         </Grid>
                                     </StackPanel>
                                 </StackPanel>
@@ -217,9 +206,14 @@
                                         <RowDefinition Height="auto" />
                                     </Grid.RowDefinitions>
 
-                                    <TextBlock Text="These locations can be selected to scan for duplicate." TextAlignment="Center" />
+                                    <Border Padding="5" Background="{StaticResource InfoTip_Background}">
+                                        <TextBlock Text="These locations will be used to scan for duplicate files." TextAlignment="Left" />
+                                    </Border>
 
-                                    <TextBlock Text="Path" Grid.Row="1" />
+                                    <Border Padding="5" Grid.Row="1" Background="{StaticResource MainWindow_Toolbar_Backgruond}">
+                                        <TextBlock Text="Paths" Foreground="{StaticResource MainWindow_Toolbar_Foreground}" />
+                                    </Border>
+
                                     <ListBox Grid.Row="2" BorderThickness="0" x:Name="lbDupCheck" ItemsSource="{Binding Prefs.DupCheckerLocations}">
 
                                     </ListBox>
@@ -284,6 +278,36 @@
                                 </StackPanel>
                             </TabItem>
                         </TabControl>
+                    </TabItem>
+                    <TabItem  IsEnabled="True" Header="Whitelist">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="auto" />
+                            </Grid.RowDefinitions>
+
+                            <Border Padding="5" Background="{StaticResource InfoTip_Background}">
+                                <TextBlock Text="These files and folders will NOT be included for deletion" TextAlignment="Left" />
+                            </Border>
+
+                            <Border Padding="5" Grid.Row="1" Background="{StaticResource MainWindow_Toolbar_Backgruond}">
+                                <TextBlock Text="Paths" Foreground="{StaticResource MainWindow_Toolbar_Foreground}" />
+                            </Border>
+
+                            <ListBox Grid.Row="2" BorderThickness="0" x:Name="lbWhitelist" ItemsSource="{Binding Prefs.Whitelist}">
+
+                            </ListBox>
+
+                            <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="3">
+                                <Button x:Name="Whitelist_btnAddFile" Content=" Add file " Style="{StaticResource ButtonStyle}" Command="{Binding Prefs.Command_Whitelist_AddFile}"/>
+                                <TextBlock Text=" " />
+                                <Button x:Name="Whitelist_btnAddFolder" Content=" Add folder " Style="{StaticResource ButtonStyle}" Command="{Binding Prefs.Command_Whitelist_AddFolder}"/>
+                                <TextBlock Text=" " />
+                                <Button x:Name="Whitelist_btnRemove" Content=" Remove " Style="{StaticResource ButtonStyle}" Command="{Binding Prefs.Command_Whitelist_RemoveSelected}" CommandParameter="{Binding SelectedItem, ElementName=lbWhitelist}"/>
+                            </StackPanel>
+                        </Grid>
                     </TabItem>
                 </TabControl>
             </Grid>

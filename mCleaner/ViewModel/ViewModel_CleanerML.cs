@@ -21,6 +21,7 @@ using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Xml.Serialization;
+using mCleaner.Cleaners;
 
 namespace mCleaner.ViewModel
 {
@@ -66,6 +67,48 @@ namespace mCleaner.ViewModel
                 {
                     _Run = value;
                     base.RaisePropertyChanged("Run");
+                }
+            }
+        }
+
+        private bool _ShowFrontPage = false;
+        public bool ShowFrontPage
+        {
+            get { return _ShowFrontPage; }
+            set
+            {
+                if (_ShowFrontPage != value)
+                {
+                    _ShowFrontPage = value;
+                    base.RaisePropertyChanged("ShowFrontPage");
+                }
+            }
+        }
+
+        private bool _ShowCleanLogBox = false;
+        public bool ShowCleanLogBox
+        {
+            get { return _ShowCleanLogBox; }
+            set
+            {
+                if (_ShowCleanLogBox != value)
+                {
+                    _ShowCleanLogBox = value;
+                    base.RaisePropertyChanged("ShowCleanLogBox");
+                }
+            }
+        }
+
+        private bool _ShowCleanerDescription = false;
+        public bool ShowCleanerDescription
+        {
+            get { return _ShowCleanerDescription; }
+            set
+            {
+                if (_ShowCleanerDescription != value)
+                {
+                    _ShowCleanerDescription = value;
+                    base.RaisePropertyChanged("ShowCleanerDescription");
                 }
             }
         }
@@ -195,6 +238,20 @@ namespace mCleaner.ViewModel
                 }
             }
         }
+
+        private TreeNode _SelectedNode = new TreeNode();
+        public TreeNode SelectedNode
+        {
+            get { return _SelectedNode; }
+            set
+            {
+                if (_SelectedNode != value)
+                {
+                    _SelectedNode = value;
+                    base.RaisePropertyChanged("SelectedNode");
+                }
+            }
+        }
         #endregion
 
         #region ctor
@@ -204,10 +261,12 @@ namespace mCleaner.ViewModel
             GetCleaners();
 
             Run = false;
+            ShowFrontPage = true;
+            ShowCleanerDescription = false;
 
             if (base.IsInDesignMode)
             {
-                Run = true;
+                Run = false;
                 ProgressText = "Status goes here";
                 this.ProgressIsIndeterminate = true;
             }
@@ -219,7 +278,9 @@ namespace mCleaner.ViewModel
 
                 Command_Preview = new RelayCommand(Command_Preview_Click);
                 Command_Clean = new RelayCommand<string>(Command_Clean_Click);
+                Command_CleanNow = new RelayCommand(Command_CleanNow_Click);
                 Command_Quit = new RelayCommand(Command_Quit_Click);
+                Command_CloseCleanerDescription = new RelayCommand(Command_CloseCleanerDescription_Click);
                 //Command_CleanOption = new RelayCommand<string>(new Action<string>((i) =>
                 //{
                 //    /*
@@ -254,13 +315,18 @@ namespace mCleaner.ViewModel
         public ICommand Command_Quit { get; set; }
         public ICommand Command_Preview { get; internal set; }
         public ICommand Command_Clean { get; internal set; }
+        public ICommand Command_CleanNow { get; internal set; }
         public ICommand Command_CleanOption { get; internal set; }
+        public ICommand Command_CloseCleanerDescription { get; internal set; }
         #endregion
 
         #region command methods
         public async void Command_Preview_Click()
         {
             Worker.I.Preview = true;
+
+            this.ShowCleanerDescription = false;
+            this.ShowFrontPage = false;
             this.Run = true;
             this.ProgressIsIndeterminate = true;
 
@@ -269,7 +335,7 @@ namespace mCleaner.ViewModel
             await Worker.I.PreviewWork();
         }
 
-        public async void Command_Clean_Click(string i)
+        public void Command_Clean_Click(string i)
         {
             CleanOption_Safe = false;
             CleanOption_Moderate = false;
@@ -282,8 +348,36 @@ namespace mCleaner.ViewModel
             Properties.Settings.Default.CleanOption = int.Parse(i);
             Properties.Settings.Default.Save();
 
+            foreach (TreeNode tn in this.CleanersCollection)
+            {
+                foreach (TreeNode child in tn.Children)
+                {
+                    if (child.Tag is option)
+                    {
+                        foreach (action a in ((option)child.Tag).action)
+                        {
+                            child.IsChecked = false;
+                            child.SupressWarningMessage = true;
+                        }
+
+                        foreach (action a in ((option)child.Tag).action)
+                        {
+                            child.IsChecked = a.level <= Convert.ToInt16(i) ? true : false;
+                            break;
+                        }
+
+                        //if(((option)tn.Tag))
+                    }
+                }
+            }
+        }
+
+        public async void Command_CleanNow_Click()
+        {
             Worker.I.Preview = false;
             this.Run = true;
+            this.ShowCleanerDescription = false;
+            this.ShowFrontPage = false;
 
             await Start();
             Worker.I.DoWork();
@@ -294,6 +388,20 @@ namespace mCleaner.ViewModel
             // Disable needed privileges
             Permissions.SetPrivileges(false);
             Process.GetCurrentProcess().Kill();
+        }
+
+        public void Command_CloseCleanerDescription_Click()
+        {
+            this.ShowCleanerDescription = false;
+
+            if (Worker.I.TTD.Count == 0)
+            {
+                this.ShowFrontPage = true;
+            }
+            else
+            {
+                this.Run = true;
+            }
         }
         #endregion
 
@@ -339,7 +447,10 @@ namespace mCleaner.ViewModel
                 {
                     if (o.warning != string.Empty && o.warning != null)
                     {
-                        MessageBox.Show("Warning!\r\n" + o.warning, "mCleaner", MessageBoxButton.OK, MessageBoxImage.Information);
+                        if (!root.SupressWarningMessage)
+                        {
+                            MessageBox.Show("Warning!\r\n" + o.warning, "mCleaner", MessageBoxButton.OK, MessageBoxImage.Information);
+                        }
                     }
                 }
             }
@@ -365,23 +476,25 @@ namespace mCleaner.ViewModel
             if (base.IsInDesignMode)
             {
                 #region designer data
-                TreeNode root = new TreeNode("Chromium")
+                TreeNode root = new TreeNode("Chromium", "chrome")
                 {
                     IsInitiallySelected = true,
                     IsAccordionHeader = true,
+                    IsExpanded = true,
                     Tag = 1,
-                    //Children =
-                    //{
-                    //    new TreeNode("Cache") {},
-                    //    new TreeNode("Cookies") {}
-                    //}
+                    Children =
+                    {
+                        new TreeNode("Cache") {},
+                        new TreeNode("Cookies") {}
+                    }
                 };
                 root.Initialize();
-                this.CleanersCollection.Add(root);
+                this._nodes.Add(root);
 
-                TreeNode root2 = new TreeNode("Windows Explorer")
+                TreeNode root2 = new TreeNode("Windows Explorer", "win_exp")
                 {
                     IsAccordionHeader = true,
+                    IsExpanded = true,
                     Tag = 1,
                     Children =
                     {
@@ -393,7 +506,9 @@ namespace mCleaner.ViewModel
                     }
                 };
                 root2.Initialize();
-                this.CleanersCollection.Add(root2);
+                this._nodes.Add(root2);
+
+                SortCleanerCollection();
                 #endregion
             }
             else
@@ -458,7 +573,7 @@ namespace mCleaner.ViewModel
                             root.TreeNodeChecked += TeeNode_TreeNodeChecked;
                             root.TreeNodeSelected += TreeNode_TreeNodeSelected;
                             root.IsAccordionHeader = true;
-                            //root.IsExpanded = false;
+                            root.IsExpanded = true;
                             root.Children = new List<TreeNode>();
 
                             foreach (option o in clnr.option)
@@ -486,7 +601,7 @@ namespace mCleaner.ViewModel
                 }
 
                 AddSystemCleaner();
-                AddDuplicateCleaner();
+                //AddDuplicateCleaner();
             }
 
             SortCleanerCollection();
@@ -496,7 +611,7 @@ namespace mCleaner.ViewModel
 
         void SortCleanerCollection()
         {
-            this._nodes = this._nodes.OrderBy(p => p.Key).ToList();
+            this._nodes = this._nodes.OrderBy(p => p.Name).ToList();
             this.CleanersCollection.Clear();
             foreach (TreeNode t in this._nodes)
             {
@@ -521,7 +636,7 @@ namespace mCleaner.ViewModel
                     a.parent_option = o;
                 }
 
-                ExecuteOption(o);
+                EnqueueOption(o);
 
                 // do we have a new entry in TTD?
                 int total_queued_work = Worker.I.TTD.Count;
@@ -565,6 +680,13 @@ namespace mCleaner.ViewModel
                 p.Inlines.Add(label_bold);
                 p.Inlines.Add(new Run(o.description));
                 p.Inlines.Add(new LineBreak());
+                // insert actions?
+                p.Inlines.Add(string.Format("There {0} {1} actions in this option.", o.action.Count == 1 ? "is" : "are", o.action.Count));
+                //foreach (action a in o.action)
+                //{
+
+                //}
+                p.Inlines.Add(new LineBreak());
                 p.Inlines.Add(new LineBreak());
             }
 
@@ -592,7 +714,7 @@ namespace mCleaner.ViewModel
                             this.ProgressIsIndeterminate = true;
                             ProgressWorker.I.EnQ("Please wait. " + (Worker.I.Preview ? "Previewing" : "Working on") + " " + o.parent_cleaner.label);
 
-                            await Task.Run(() => ExecuteOption(o));
+                            await Task.Run(() => EnqueueOption(o));
                         }
                     }
                 }
@@ -603,7 +725,7 @@ namespace mCleaner.ViewModel
             //AddCustomLocationsToTTD();
         }
 
-        public void ExecuteOption(option o)
+        public void EnqueueOption(option o)
         {
             string last_Log = string.Empty;
 
@@ -721,7 +843,7 @@ namespace mCleaner.ViewModel
                 if (axn != null)
                 {
                     axn.Action = _a;
-                    axn.Execute(); // execute for queueing 
+                    axn.Enqueue(); // execute for queueing 
                 }
             }
         }
@@ -763,7 +885,7 @@ namespace mCleaner.ViewModel
             TreeNode root = new TreeNode();
             root = new TreeNode(c.label, c.id);
             root.IsAccordionHeader = true;
-            //root.IsExpanded = false;
+            root.IsExpanded = true;
             root.Tag = c;
             root.TreeNodeChecked += TeeNode_TreeNodeChecked;
             root.TreeNodeSelected += TreeNode_TreeNodeSelected;
@@ -800,31 +922,37 @@ namespace mCleaner.ViewModel
             cleaner c = new cleaner()
             {
                 id = "system",
-                label = "System",
-                description = "The system in general",
+                label = "Microsoft Windows System",
+                description = "General Windows system cleaners",
                 option = new List<option>()
             };
 
             TreeNode root = new TreeNode();
             root = new TreeNode(c.label, c.id);
             root.IsAccordionHeader = true;
-            //root.IsExpanded = false;
+            root.IsExpanded = true;
             root.Tag = c;
             root.TreeNodeChecked += TeeNode_TreeNodeChecked;
             root.TreeNodeSelected += TreeNode_TreeNodeSelected;
             root.Children = new List<TreeNode>();
 
-            c.option.Add(AddClipboardCleaner());
-            c.option.Add(AddClamAVCustomLocationsToTTD());
-            c.option.Add(AddCustomLocationsToTTD());
+            c.option.Add(MicrosoftWindows.AddClipboardCleaner());
+            //c.option.Add(AddClamAVCustomLocationsToTTD());
+            c.option.Add(MicrosoftWindows.AddCustomLocationsToTTD());
             //c.option.Add(AddDuplicateCheckerCleaner());
-            c.option.Add(AddWindowsLogsCleaner());
-            c.option.Add(AddMemoryDumpCleaner());
-            c.option.Add(AddMUICacheCleaner());
-            c.option.Add(AddPrefetchCleaner());
-            c.option.Add(AddRecycleBinCleaner());
-            c.option.Add(AddTemporaryFilesCleaner());
-            c.option.Add(AddUpdateUninstallersCleaner());
+
+            // deep scan options
+            c.option.Add(MicrosoftWindows.AddDeepScan_Backup_Cleaner());
+            c.option.Add(MicrosoftWindows.AddDeepScan_OfficeTemp_Cleaner());
+            c.option.Add(MicrosoftWindows.AddDeepScan_ThumbsDB_Cleaner());
+
+            c.option.Add(MicrosoftWindows.AddWindowsLogsCleaner());
+            c.option.Add(MicrosoftWindows.AddMemoryDumpCleaner());
+            c.option.Add(MicrosoftWindows.AddMUICacheCleaner());
+            c.option.Add(MicrosoftWindows.AddPrefetchCleaner());
+            c.option.Add(MicrosoftWindows.AddRecycleBinCleaner());
+            c.option.Add(MicrosoftWindows.AddTemporaryFilesCleaner());
+            c.option.Add(MicrosoftWindows.AddUpdateUninstallersCleaner());
 
             foreach (option o in c.option)
             {
@@ -849,369 +977,7 @@ namespace mCleaner.ViewModel
             this._nodes.Add(root);
         }
 
-        option AddCustomLocationsToTTD()
-        {
-            option o = new option()
-            {
-                id = "custom_locations",
-                label = "Custom Location",
-                description = "Delete user-specified files and folders",
-                action = new List<action>()
-            };
-
-            if (mCleaner.Properties.Settings.Default.CustomLocationForDeletion != null)
-            {
-                foreach (string filepath in mCleaner.Properties.Settings.Default.CustomLocationForDeletion)
-                {
-                    if (File.Exists(filepath))
-                    {
-                        o.action.Add(new action()
-                        {
-                            command = "delete",
-                            search = "file",
-                            path = filepath,
-                            level = 1,
-                            parent_option = o
-                        });
-                    }
-                    else if (Directory.Exists(filepath))
-                    {
-                        o.action.Add(new action()
-                        {
-                            command = "delete",
-                            search = "walk.all",
-                            path = filepath,
-                            level = 1,
-                            parent_option = o
-                        });
-                    }
-                }
-            }
-
-            return o;
-        }
-
-        option AddClamAVCustomLocationsToTTD()
-        {
-            option o = new option()
-            {
-                id = "clamav_custom_locations",
-                label = "ClamAV Custom Location",
-                description = "Scan user-specified files and folders",
-                action = new List<action>()
-            };
-
-            if (mCleaner.Properties.Settings.Default.ClamWin_ScanLocations != null)
-            {
-                foreach (string filepath in mCleaner.Properties.Settings.Default.ClamWin_ScanLocations)
-                {
-                    if (File.Exists(filepath))
-                    {
-                        o.action.Add(new action()
-                        {
-                            command = "clamscan",
-                            search = "clamscan.file",
-                            path = filepath,
-                            parent_option = o
-                        });
-                    }
-                    else if (Directory.Exists(filepath))
-                    {
-                        o.action.Add(new action()
-                        {
-                            command = "clamscan",
-                            search = "clamscan.folder",
-                            path = filepath,
-                            parent_option = o
-                        });
-                    }
-                }
-            }
-
-            return o;
-        }
-
-        option AddClipboardCleaner()
-        {
-            option o = new option()
-            {
-                id = "clipboard",
-                label = "Clipboard",
-                description = "The desktop environment's clipboard used for copy and paste operations",
-                action = new List<action>()
-            };
-
-            o.action.Add(new action()
-            {
-                command = "clipboard",
-                search = "clipboard.clear",
-                level = 1,
-                parent_option = o
-            });
-
-            return o;
-        }
-
-        option AddWindowsLogsCleaner()
-        {
-            option o = new option()
-            {
-                id = "windows_logs",
-                label = "Windows Logs",
-                description = "Delete the logs",
-                action = new List<action>()
-            };
-
-            string[] paths = new string[] {
-                "$ALLUSERSPROFILE\\Application Data\\Microsoft\\Dr Watson\\*.log",
-                "$ALLUSERSPROFILE\\Application Data\\Microsoft\\Dr Watson\\user.dmp",
-                "$LocalAppData\\Microsoft\\Windows\\WER\\ReportArchive\\*\\*",
-                "$LocalAppData\\Microsoft\\Windows\\WER\\ReportQueue\\*\\*",
-                "$programdata\\Microsoft\\Windows\\WER\\ReportArchive\\*\\*",
-                "$programdata\\Microsoft\\Windows\\WER\\ReportQueue\\*\\*",
-                "$localappdata\\Microsoft\\Internet Explorer\\brndlog.bak",
-                "$localappdata\\Microsoft\\Internet Explorer\\brndlog.txt",
-                "$windir\\*.log",
-                "$windir\\imsins.BAK",
-                "$windir\\OEWABLog.txt",
-                "$windir\\SchedLgU.txt",
-                "$windir\\ntbtlog.txt",
-                "$windir\\setuplog.txt",
-                "$windir\\REGLOCS.OLD",
-                "$windir\\Debug\\*.log",
-                "$windir\\Debug\\Setup\\UpdSh.log",
-                "$windir\\Debug\\UserMode\\*.log",
-                "$windir\\Debug\\UserMode\\ChkAcc.bak",
-                "$windir\\Debug\\UserMode\\userenv.bak",
-                "$windir\\Microsoft.NET\\Framework\\*\\*.log",
-                "$windir\\pchealth\\helpctr\\Logs\\hcupdate.log",
-                "$windir\\security\\logs\\*.log",
-                "$windir\\security\\logs\\*.old",
-                "$windir\\system32\\TZLog.log",
-                "$windir\\system32\\config\\systemprofile\\Application Data\\Microsoft\\Internet Explorer\\brndlog.bak",
-                "$windir\\system32\\config\\systemprofile\\Application Data\\Microsoft\\Internet Explorer\\brndlog.txt",
-                "$windir\\system32\\LogFiles\\AIT\\AitEventLog.etl.???",
-                "$windir\\system32\\LogFiles\\Firewall\\pfirewall.log*",
-                "$windir\\system32\\LogFiles\\Scm\\SCM.EVM*",
-                "$windir\\system32\\LogFiles\\WMI\\Terminal*.etl",
-                "$windir\\system32\\LogFiles\\WMI\\RTBackup\\EtwRT.*etl",
-                "$windir\\system32\\wbem\\Logs\\*.lo_",
-                "$windir\\system32\\wbem\\Logs\\*.log"
-            };
-
-            foreach (string path in paths)
-            {
-                o.action.Add(new action()
-                {
-                    command = "delete",
-                    search = "glob",
-                    path = path,
-                    parent_option = o,
-                    level = 1
-                });
-            }
-
-            return o;
-        }
-
-        option AddTemporaryFilesCleaner()
-        {
-            option o = new option()
-            {
-                id = "windows_temp_files",
-                label = "Temporary Files",
-                description = "Delete the temporary files",
-                action = new List<action>()
-            };
-
-            string[] paths = new string[] {
-                "$USERPROFILE\\Local Settings\\Temp\\",
-                "$windir\\temp\\"
-            };
-
-            foreach (string path in paths)
-            {
-                o.action.Add(new action()
-                {
-                    command = "delete",
-                    search = "walk.all",
-                    path = path,
-                    parent_option = o,
-                    level = 1
-                });
-            }
-
-            return o;
-        }
-
-        option AddMemoryDumpCleaner()
-        {
-            option o = new option()
-            {
-                id = "windows_memory_dump",
-                label = "Memory Dump",
-                description = "Delete the file memory.dmp",
-                action = new List<action>()
-            };
-
-            string[] paths = new string[] {
-                "$windir\\memory.dmp",
-                "$windir\\Minidump\\*.dmp"
-            };
-
-            foreach (string path in paths)
-            {
-                o.action.Add(new action()
-                {
-                    command = "delete",
-                    search = "walk.files",
-                    path = path,
-                    parent_option = o,
-                    level = 2
-                });
-            }
-
-            return o;
-        }
-
-        option AddMUICacheCleaner()
-        {
-            option o = new option()
-            {
-                id = "windows_muicache",
-                label = "MUICache",
-                description = "Delete the cache",
-                action = new List<action>()
-            };
-
-            string[] paths = new string[] {
-                "HKCU\\Software\\Microsoft\\Windows\\ShellNoRoam\\MUICache",
-                "HKCU\\Software\\Classes\\Local Settings\\Software\\Microsoft\\Windows\\Shell\\MuiCache"
-            };
-
-            foreach (string path in paths)
-            {
-                o.action.Add(new action()
-                {
-                    command = "winreg",
-                    path = path,
-                    parent_option = o,
-                    level = 2
-                });
-            }
-
-            return o;
-        }
-
-        option AddPrefetchCleaner()
-        {
-            option o = new option()
-            {
-                id = "windows_prefetch",
-                label = "Prefetch",
-                description = "Delete the cache",
-                action = new List<action>()
-            };
-
-            string[] paths = new string[] {
-                "$windir\\Prefetch\\*.pf"
-            };
-
-            foreach (string path in paths)
-            {
-                o.action.Add(new action()
-                {
-                    command = "delete",
-                    search = "glob",
-                    path = path,
-                    parent_option = o,
-                    level = 2
-                });
-            }
-
-            return o;
-        }
-
-        option AddUpdateUninstallersCleaner()
-        {
-            option o = new option()
-            {
-                id = "windows_update_uninstallers",
-                label = "Update uninstallers",
-                description = "Delete uninstallers for Microsoft updates including hotfixes, service packs, and Internet Explorer updates",
-                action = new List<action>()
-            };
-
-            string[] paths = new string[] {
-                "$windir\\SoftwareDistribution\\Download",
-                "$windir\\ie7updates",
-                "$windir\\ie8updates",
-            };
-
-            foreach (string path in paths)
-            {
-                o.action.Add(new action()
-                {
-                    command = "delete",
-                    search = "walk.files",
-                    path = path,
-                    parent_option = o,
-                    level = 3
-                });
-            }
-
-            return o;
-        }
-
-        option AddRecycleBinCleaner()
-        {
-            option o = new option()
-            {
-                id = "windows_recyclebin",
-                label = "Recycle bin",
-                description = "Empty the recycle bin",
-                action = new List<action>()
-            };
-
-            var drvs = DriveInfo.GetDrives();
-            List<string> drivenames = new List<string>();
-            foreach (var drv in drvs)
-            {
-                if (drv.DriveType == System.IO.DriveType.Fixed)
-                {
-                    drivenames.Add(drv.Name);
-                }
-            }
-
-            List<string> paths = new List<string>();
-
-            foreach (string drive in drivenames)
-            {
-                paths.Add(Path.Combine(drive, "$RECYCLE.BIN"));
-            }
-            
-            //string[] paths = new string[] {
-            //    "$windir\\SoftwareDistribution\\Download",
-            //    "$windir\\ie7updates",
-            //    "$windir\\ie8updates",
-            //};
-
-            foreach (string path in paths)
-            {
-                o.action.Add(new action()
-                {
-                    command = "delete",
-                    search = "walk.files",
-                    path = path,
-                    parent_option = o,
-                    level = 1
-                });
-            }
-
-            return o;
-        }
-
-        option[] AddDuplicateCheckerCleaner()
+        public static option[] AddDuplicateCheckerCleaner()
         {
             List<option> ret = new List<option>();
 

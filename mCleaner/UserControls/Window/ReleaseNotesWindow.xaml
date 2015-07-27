@@ -41,7 +41,7 @@
                     <TabControl.Items>
                         <TabItem Header="License">
                             <ScrollViewer>
-                                <ctl:RichTextBoxEx BorderThickness="0" IsReadOnly="True" IsDocumentEnabled="True">
+                                <RichTextBox BorderThickness="0" IsReadOnly="True" IsDocumentEnabled="True">
                                     <FlowDocument>
                                         <Paragraph>
                                             Copyright (C) 2015 MicroHealth, LLC
@@ -61,11 +61,11 @@
                                             <LineBreak />
                                             You should have received a copy of the GNU General Public License
                                             along with this program. If not, see
-                                            <Hyperlink NavigateUri="http://www.gnu.org/licenses">http://www.gnu.org/licenses.</Hyperlink>
+                                            <ctl:HyperlinkEx NavigateUri="http://www.gnu.org/licenses">http://www.gnu.org/licenses.</ctl:HyperlinkEx>
 
                                         </Paragraph>
                                     </FlowDocument>
-                                </ctl:RichTextBoxEx>
+                                </RichTextBox>
                             </ScrollViewer>
                         </TabItem>
                         <TabItem Header="Credits">
@@ -73,27 +73,27 @@
                                 <ctl:RichTextBoxEx x:Name="rtbCredits" BorderThickness="0" IsReadOnly="True" IsDocumentEnabled="True">
                                     <FlowDocument>
                                         <Paragraph>
-                                            Credits to the following open source applications
+                                            Credits to the following open source applications and resources
                                             <LineBreak />
                                             <LineBreak />
                                             BleachBit: Clean Your System and Free Disk Space
                                             <LineBreak />
-                                            <Hyperlink NavigateUri="http://bleachbit.sourceforge.net">http://bleachbit.sourceforge.net</Hyperlink>
+                                            <ctl:HyperlinkEx NavigateUri="http://bleachbit.sourceforge.net">http://bleachbit.sourceforge.net</ctl:HyperlinkEx>
                                             <LineBreak />
                                             <LineBreak />
                                             ClamWin
                                             <LineBreak />
-                                            <Hyperlink NavigateUri="http://www.clamwin.com">http://www.clamwin.com</Hyperlink>
+                                            <ctl:HyperlinkEx NavigateUri="http://www.clamwin.com">http://www.clamwin.com</ctl:HyperlinkEx>
                                             <LineBreak />
                                             <LineBreak />
                                             Little Registry Cleaner
                                             <LineBreak />
-                                            <Hyperlink NavigateUri="http://sourceforge.net/projects/littlecleaner">http://sourceforge.net/projects/littlecleaner</Hyperlink>
+                                            <ctl:HyperlinkEx NavigateUri="http://sourceforge.net/projects/littlecleaner">http://sourceforge.net/projects/littlecleaner</ctl:HyperlinkEx>
                                             <LineBreak />
                                             <LineBreak />
                                             FatCow Icons
                                             <LineBreak />
-                                            <Hyperlink NavigateUri="http://www.fatcow.com">http://www.fatcow.com/</Hyperlink>
+                                            <ctl:HyperlinkEx NavigateUri="http://www.fatcow.com">http://www.fatcow.com/</ctl:HyperlinkEx>
                                         </Paragraph>
                                     </FlowDocument>
                                 </ctl:RichTextBoxEx>

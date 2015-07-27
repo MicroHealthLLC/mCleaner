@@ -20,7 +20,7 @@
 
 -->
 <cleaner id="windows_explorer" os="windows">
-  <label>Windows Explorer</label>
+  <label>Microsoft Windows Explorer</label>
   <option id="mru">
     <label>Most recently used</label>
     <description>Delete the most recently used list</description>

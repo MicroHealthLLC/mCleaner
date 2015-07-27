@@ -9,6 +9,6 @@ namespace mCleaner.Logics.Commands
     public interface iActions
     {
         action Action { get; set; }
-        void Execute(bool apply = false);
+        void Enqueue(bool apply = false);
     }
 }

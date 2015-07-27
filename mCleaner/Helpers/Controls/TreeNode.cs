@@ -47,6 +47,19 @@ namespace mCleaner.Helpers.Controls
 
         public object IsAccordionHeader { get; set; }
 
+        private bool _SupressWarningMessage = false;
+        public bool SupressWarningMessage
+        {
+            get { return _SupressWarningMessage; }
+            set
+            {
+                if (_SupressWarningMessage != value)
+                {
+                    _SupressWarningMessage = value;
+                }
+            }
+        }
+
         private bool _IsExpanded = false;
         public bool IsExpanded
         {

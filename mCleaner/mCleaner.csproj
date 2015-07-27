@@ -179,6 +179,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Cleaners\WindowsSystem\MicrosoftWindows.cs" />
+    <Compile Include="Helpers\Controls\HyperLinkEx.cs" />
     <Compile Include="Helpers\Controls\RichTextBoxEx.cs" />
     <Compile Include="Helpers\Controls\TreeNode.cs" />
     <Compile Include="Helpers\Converters\Converter_BooleanToVisibility.cs" />
@@ -342,6 +344,13 @@
     <Resource Include="Assets\clean_safe.png" />
     <Resource Include="Assets\dupcheck.png" />
     <Resource Include="Assets\ReleaseNotesGNU.png" />
+    <Resource Include="Assets\MicroHealth_Logo_200.png" />
+    <Resource Include="Assets\infotip_customloc.png" />
+    <Resource Include="Assets\clean_aggressive_2.png" />
+    <Resource Include="Assets\clean_moderate_2.png" />
+    <Resource Include="Assets\cleam_safe_.png" />
+    <Resource Include="Assets\clean_safe_2.png" />
+    <Resource Include="Assets\Clean_now.png" />
     <Content Include="Clam\.clamwin\db\readme.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -406,9 +415,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Cleaners\chromium.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Cleaners\deepscan.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Cleaners\filezilla.xml">

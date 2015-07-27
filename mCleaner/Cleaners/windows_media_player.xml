@@ -20,7 +20,7 @@
 
 -->
 <cleaner id="windows_media_player" os="windows">
-  <label>Windows Media Player</label>
+  <label>Microsoft Windows Media Player</label>
   <option id="mru">
     <label>Most recently used</label>
     <description>Delete the most recently used list</description>

@@ -22,14 +22,14 @@
 <cleaner id="adobe_reader">
   <label>Adobe Reader</label>
   <running type="exe">acroread</running>
-  <option id="cache">
+  <option id="cache" level="2">
     <label>Cache</label>
     <description>Delete the cache</description>
     <action command="delete" search="walk.files" path="~/.adobe/Acrobat/*/Cache" level="2"/>
     <action command="delete" search="walk.files" path="$localappdata\Adobe\Acrobat\*\Cache" level="2"/>
     <action command="delete" search="glob" path="$USERPROFILE\AppData\LocalLow\Adobe\Acrobat\9.0\Search\*.idx" level="2"/>
   </option>
-  <option id="mru">
+  <option id="mru" level="1">
     <label>Most recently used</label>
     <description>Delete the list of recently used documents</description>
     <action command="delete" search="file" path="~/.adobe/Acrobat/*/Preferences/reader_prefs" level="1"/>
@@ -39,7 +39,7 @@
     <action command="winreg" path="HKCU\Software\Adobe\Acrobat Reader\8.0\AVGeneral\cRecentFiles" level="1"/>
     <action command="winreg" path="HKCU\Software\Adobe\Acrobat Reader\9.0\AVGeneral\cRecentFiles" level="1"/>
   </option>
-  <option id="tmp">
+  <option id="tmp" level="1">
     <label>Temporary files</label>
     <description>Delete the temporary files</description>
     <action command="delete" search="glob" path="/dev/shm/sem.ADBE_*_$LOGNAME" level="1"/>

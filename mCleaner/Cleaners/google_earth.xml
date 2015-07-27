@@ -21,13 +21,13 @@
 -->
 <cleaner id="google_earth">
   <label>Google Earth</label>
-  <option id="temporary_files">
-    <label>Temporary files</label>
-    <description>Delete the temporary files</description>
+  <option id="cache_files" level="2">
+    <label>Cache files</label>
+    <description>Delete the cache files</description>
     <!--<action command="delete" search="file" path="~/.googleearth/Cache/dbCache.dat"/>
     <action command="delete" search="file" path="~/.googleearth/Cache/dbCache.dat.index"/>
     <action command="delete" search="walk.files" path="~/.googleearth/Temp"/>-->
-    <action command="delete" search="file" path="$USERPROFILE\Application Data\Google\GoogleEarth\dbCache.dat" level="1"/>
-    <action command="delete" search="file" path="$USERPROFILE\Application Data\Google\GoogleEarth\dbCache.dat.index" level="1"/>
+    <action command="delete" search="file" path="$USERPROFILE\Application Data\Google\GoogleEarth\dbCache.dat" level="2"/>
+    <action command="delete" search="file" path="$USERPROFILE\Application Data\Google\GoogleEarth\dbCache.dat.index" level="2"/>
   </option>
 </cleaner>

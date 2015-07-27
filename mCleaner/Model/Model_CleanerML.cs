@@ -130,6 +130,17 @@ namespace mCleaner.Model
         [XmlElement("action")]
         public List<action> action { get; set; }
 
+        [XmlElement("level")]
+        // level of cleaning
+        // 0 - safe
+        // 1 - moderate
+        // 2 - aggressive
+        // when no level attribute, the default value is aggressive. Default cleaning option should be safe
+        /// <summary>
+        /// 
+        /// </summary>
+        public int level { get; set; }
+
         [XmlIgnore]
         public cleaner parent_cleaner { get; set; }
     }
@@ -207,6 +218,9 @@ namespace mCleaner.Model
         // 1 - moderate
         // 2 - aggressive
         // when no level attribute, the default value is aggressive. Default cleaning option should be safe
+        /// <summary>
+        /// 
+        /// </summary>
         [XmlAttribute("level")]
         public int level { get; set; }
 

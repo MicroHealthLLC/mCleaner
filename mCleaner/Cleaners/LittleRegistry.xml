@@ -4,7 +4,7 @@
 	DO NOT CHANGE THE PATH ATTRIBUTE VALUE
 -->
 <cleaner id="little_reg" os="windows">
-  <label>Registry Cleaner</label>
+  <label>Windows Registry Cleaner</label>
   <description>Registry Cleaner</description>
   <option id="activex">
     <label>ActiveX/Com</label>

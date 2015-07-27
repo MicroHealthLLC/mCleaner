@@ -1,10 +1,13 @@
-﻿using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
-using mCleaner.Logics.Commands;
-using mCleaner.Model;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
+using mCleaner.Logics.Commands;
+using mCleaner.Model;
+using mCleaner.Properties;
+using Microsoft.Practices.ServiceLocation;
 
 namespace mCleaner.ViewModel
 {
@@ -22,6 +25,22 @@ namespace mCleaner.ViewModel
                     _DupplicationCollection = value;
                     base.RaisePropertyChanged("DupplicateCollection");
                 }
+            }
+        }
+
+        public ViewModel_CleanerML CleanerML
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<ViewModel_CleanerML>();
+            }
+        }
+
+        public ViewModel_Preferences Prefs
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<ViewModel_Preferences>();
             }
         }
 
@@ -70,6 +89,9 @@ namespace mCleaner.ViewModel
 
         #region commands
         public ICommand Command_Start { get; internal set; }
+        public ICommand Command_CheckDuplicate { get; internal set; }
+        public ICommand Command_ShowDupTab { get; internal set; }
+        public ICommand Command_ShowPrefWindow { get; internal set; }
         #endregion
 
         #region ctor
@@ -105,6 +127,9 @@ namespace mCleaner.ViewModel
             else
             {
                 this.Command_Start = new RelayCommand(Command_Start_Click);
+                this.Command_CheckDuplicate = new RelayCommand(Command_CheckDuplicate_Click);
+                this.Command_ShowDupTab = new RelayCommand(Command_ShowDupTab_Click);
+                this.Command_ShowPrefWindow = new RelayCommand(Command_ShowPrefWindow_Click);
             }
         }
         #endregion
@@ -113,7 +138,26 @@ namespace mCleaner.ViewModel
         public async void Command_Start_Click()
         {
             await Task.Run(() => CommandLogic_DuplicateChecker.I.Start(this.DupplicateCollection, IsMove ? 1 : 0));
-            
+        }
+
+        public void Command_CheckDuplicate_Click()
+        {
+            CommandLogic_DuplicateChecker.I.CheckDuplicates();
+        }
+
+        public void Command_ShowDupTab_Click()
+        {
+            CleanerML.Run = true;
+            CleanerML.ShowFrontPage = false;
+            CleanerML.ShowCleanerDescription = false;
+            CleanerML.SelectedTabIndex = 1;
+            this.FileOperationPanelShow = true;
+        }
+
+        public void Command_ShowPrefWindow_Click()
+        {
+            this.Prefs.ShowWindow = true;
+            this.Prefs.SelectedTabIndex = 3;
         }
         #endregion
 

@@ -1,14 +1,12 @@
-﻿using mCleaner.Helpers.Controls;
+﻿using System.Windows;
+using System.Windows.Media;
+using mCleaner.Helpers.Controls;
 using mCleaner.Logics;
 using mCleaner.Logics.Clam;
 using mCleaner.Model;
 using mCleaner.Properties;
 using mCleaner.ViewModel;
 using Microsoft.Practices.ServiceLocation;
-using System.Windows;
-using System.Linq;
-using System.Windows.Controls;
-using System.Windows.Media;
 
 namespace mCleaner
 {
@@ -58,7 +56,12 @@ namespace mCleaner
 
         void tvCleaners_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            //((TreeNode)e.NewValue).IsExpanded = !((TreeNode)e.NewValue).IsExpanded;
+            TreeNode tn = (TreeNode)e.NewValue;
+
+            if (tn != null)
+            {
+                tn.IsExpanded = !tn.IsExpanded;
+            }
         }
 
         public static MainWindow I { get { return new MainWindow(); } }
@@ -70,9 +73,17 @@ namespace mCleaner
 
         void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            if (Settings.Default.ClamWin_UpdateDBAtStartup)
+            // check if an update is required after being prechecked at App.xaml.cs
+            if(Settings.Default.ClamWin_Update)
             {
                 CommandLogic_Clam.I.LaunchUpdater();
+            }
+            else // none
+            {   // then check if it requires an update at startup
+                if (Settings.Default.ClamWin_UpdateDBAtStartup)
+                {
+                    CommandLogic_Clam.I.LaunchUpdater();
+                }
             }
 
             ProgressWorker.I.Start();
@@ -87,12 +98,12 @@ namespace mCleaner
 
         void CleanerML_TreeNodeSelected(object sender, System.EventArgs e)
         {
-            logo.Visibility = System.Windows.Visibility.Collapsed;
-
             TreeNode node = sender as TreeNode;
             //node.IsExpanded = !node.IsExpanded;
 
             CleanerML.Run = false;
+            CleanerML.ShowFrontPage = false;
+            CleanerML.ShowCleanerDescription = true;
 
             rtbCleanerDetails.Document = CleanerML.BuildCleanerDetails(
                 node.Parent != null ? (cleaner)node.Parent.Tag : (cleaner)node.Tag

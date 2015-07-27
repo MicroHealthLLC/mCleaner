@@ -12,7 +12,6 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
-using System.Text.RegularExpressions;
 using System.Windows;
 
 namespace mCleaner.Logics.Clam
@@ -62,7 +61,7 @@ namespace mCleaner.Logics.Clam
         static CommandLogic_Clam _i = new CommandLogic_Clam();
         public static CommandLogic_Clam I { get { return _i; } }
 
-        public void Execute(bool apply = false)
+        public void Enqueue(bool apply = false)
         {
             SEARCH search = (SEARCH)StringEnum.Parse(typeof(SEARCH), Action.search);
 
@@ -193,6 +192,13 @@ namespace mCleaner.Logics.Clam
             update_process.Start();
             update_process.BeginOutputReadLine();
             update_process.WaitForExit();
+
+            if (exepath.Contains("freshclam.exe"))
+            {
+                Settings.Default.ClamWin_Update = false;
+                Settings.Default.ClamWin_LastDBUpdate = DateTime.Now;
+                Settings.Default.Save();
+            }
         }
 
         void bgWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -200,6 +206,8 @@ namespace mCleaner.Logics.Clam
             UpdateProgressLog("************************************");
             UpdateProgressLog("DONE                                ");
             UpdateProgressLog("************************************");
+
+            this.Clam.ShowClamWinVirusUpdateWindow = false;
         }
 
         void process_OutputDataReceived(object sender, DataReceivedEventArgs e)
@@ -208,6 +216,21 @@ namespace mCleaner.Logics.Clam
             {
                 UpdateProgressLog(e.Data);
             }
+        }
+
+        /// <summary>
+        /// Scan custom paths
+        /// </summary>
+        public void LaunchCleaner()
+        {
+            // get custom paths from settings
+            List<string> paths = new List<string>();
+            foreach (string path in Settings.Default.ClamWin_ScanLocations)
+            {
+                paths.Add(path);
+            }
+
+            LaunchScanner(SEARCH.clamscan_folderfile, string.Join("|", paths.ToArray()), true);
         }
 
         public void LaunchUpdater()
@@ -240,14 +263,15 @@ namespace mCleaner.Logics.Clam
         public void LaunchScanner(SEARCH search, string path, bool launchinbackground = false, string regex = null)
         {
             List<string> param = new List<string>() {
-                "--tempdir \"{0}\"",
-                "--keep-mbox",
-                "--stdout",
+                //"--tempdir \"{0}\"",
+                //"--keep-mbox",
+                //"--stdout",
                 "--database=\"{1}\"",
                 "--log=\"{2}\"",
                 "--infected",
                 "--show-progress",
-                "--kill"
+                "--kill",
+                //"--recursive"
             };
 
             // if max files are declared
@@ -292,6 +316,13 @@ namespace mCleaner.Logics.Clam
                 case SEARCH.clamscan_memory:
                     param.Add("--memory");
                     break;
+                case SEARCH.clamscan_folderfile:
+                    string[] locs = path.Split('|');
+                    foreach (string loc in locs)
+                    {
+                        param.Add("\"" + loc + "\"");
+                    }
+                    break;
             }
 
             string full_param = string.Join(" ", param.ToArray());
@@ -326,13 +357,20 @@ namespace mCleaner.Logics.Clam
                 update_process.Start();
                 update_process.BeginOutputReadLine();
                 update_process.WaitForExit();
+
+                this.Clam.ShowClamWinVirusUpdateWindow = false;
             }
             else
             {
-                bgWorker.RunWorkerAsync(Path.Combine(this._exec_clam, "clamscan.exe") + "|" + full_param);
+                if (!bgWorker.IsBusy)
+                {
+                    bgWorker.RunWorkerAsync(Path.Combine(this._exec_clam, "clamscan.exe") + "|" + full_param);
+                }
+                else
+                {
+                    MessageBox.Show("ClamAV is currently busy", "mCleaner", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
             }
-
-            this.Clam.ShowClamWinVirusUpdateWindow = false;
 
             //bgWorker.RunWorkerAsync(full_param);
         }
@@ -351,23 +389,44 @@ namespace mCleaner.Logics.Clam
             if (string.IsNullOrEmpty(Settings.Default.ClamWin_DB))
             {
                 // override setting first
-                Settings.Default.ClamWin_DB = Path.Combine(this._exec_clam, ".clamwin\\db");
+                Settings.Default.ClamWin_DB = Path.Combine(this._exec_clam, "db");
 
-                string default_db_path = ".clamwin\\db";
-                default_db_path = Path.Combine(Environment.GetEnvironmentVariable("ProgramData"), default_db_path);
-                if (Directory.Exists(default_db_path))
-                {
-                    MessageBoxResult mbr = MessageBox.Show("mCleaner detected you currently have ClamWin installed in your system. Do you want to use its current database?\r\n\r\nmCleaner strongly suggests that you use mClearner's database for ClamAV to have more control over over the virus definition database.", "mCleaner", MessageBoxButton.YesNo, MessageBoxImage.Information);
-                    if (mbr == MessageBoxResult.Yes)
-                    {
-                        Settings.Default.ClamWin_DB = default_db_path;
-                        this._exec_clam_db_path = Settings.Default.ClamWin_DB;
-                    }
-                }
+                //string default_db_path = "db";
+                //default_db_path = Path.Combine(Environment.GetEnvironmentVariable("ProgramData"), default_db_path);
+                //if (Directory.Exists(default_db_path))
+                //{
+                //    MessageBoxResult mbr = MessageBox.Show("mCleaner detected you currently have ClamWin installed in your system. Do you want to use its current database?\r\n\r\nmCleaner strongly suggests that you use mClearner's database for ClamAV to have more control over over the virus definition database.", "mCleaner", MessageBoxButton.YesNo, MessageBoxImage.Information);
+                //    if (mbr == MessageBoxResult.Yes)
+                //    {
+                //        Settings.Default.ClamWin_DB = default_db_path;
+                //        this._exec_clam_db_path = Settings.Default.ClamWin_DB;
+                //    }
+                //}
 
                 Settings.Default.ClamWin_SupressMessageAtStartup = true;
                 Settings.Default.Save();
                 this._exec_clam_db_path = Settings.Default.ClamWin_DB;
+            }
+
+            // check for .cvd files
+            string maincvd = Path.Combine(this._exec_clam_db_path, "main.cvd");
+            string dailycvd = Path.Combine(this._exec_clam_db_path, "daily.cvd");
+
+                                       // not sure if daily.cvd is necessary
+            if (!File.Exists(maincvd)) // && !File.Exists(dailycvd))
+            {
+                MessageBox.Show("mCleaner has to update the virus definitions.", "mCleaner", MessageBoxButton.OK, MessageBoxImage.Information);
+                Settings.Default.ClamWin_Update = true;
+            }
+            else
+            {
+                // if they exists then let's check how many days since the last update
+                TimeSpan timespan = DateTime.Now - Settings.Default.ClamWin_LastDBUpdate;
+                if (timespan.TotalDays >= Settings.Default.ClamWin_DaysBeforeNotifyToUpdate)
+                {
+                    MessageBox.Show(string.Format("It's been {0} days since the last time you updated the virus definitions.", timespan.TotalDays), "mCleaner", MessageBoxButton.OK, MessageBoxImage.Information);
+                    Settings.Default.ClamWin_Update = true;
+                }
             }
         }
 
@@ -377,15 +436,15 @@ namespace mCleaner.Logics.Clam
 
             // check if the first 5 character are the same
             // so we do not add that to our log collection.
-            if ((this.log.Count > 0 && text != null && text.Length > 5) && this.log[this.log.Count - 1].Substring(0, 5) == text.Substring(0, 5))
+            //if ((this.log.Count > 0 && text != null && text.Length > 5) && this.log[this.log.Count - 1].Substring(0, 5) == text.Substring(0, 5))
+            //{
+            //    // replace the last entry to the newest one
+            //    this.log[this.log.Count - 1] = text;
+            //    has_logged = true;
+            //}
+            //else
             {
-                // replace the last entry to the newest one
-                this.log[this.log.Count - 1] = text;
-                has_logged = true;
-            }
-            else
-            {
-                if (text.Length > 5 && text != null)
+                //if (text.Length > 5 && text != null)
                 {
                     has_logged = true;
                     this.log.Add(text);

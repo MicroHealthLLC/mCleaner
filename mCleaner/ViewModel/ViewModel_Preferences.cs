@@ -1,14 +1,14 @@
-﻿using GalaSoft.MvvmLight;
+﻿using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using System.Linq;
+using System.Windows;
+using System.Windows.Input;
+using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using mCleaner.Helpers;
 using mCleaner.Properties;
 using Microsoft.Practices.ServiceLocation;
 using Microsoft.Win32;
-using System.Collections.ObjectModel;
-using System.Collections.Specialized;
-using System.Linq;
-using System.Windows;
-using System.Windows.Input;
 
 namespace mCleaner.ViewModel
 {
@@ -37,6 +37,20 @@ namespace mCleaner.ViewModel
                 {
                     _ShowWindow = value;
                     base.RaisePropertyChanged("ShowWindow");
+                }
+            }
+        }
+
+        private int _TabIndex = 0;
+        public int SelectedTabIndex
+        {
+            get { return _TabIndex; }
+            set
+            {
+                if (_TabIndex != value)
+                {
+                    _TabIndex = value;
+                    base.RaisePropertyChanged("SelectedTabIndex");
                 }
             }
         }
@@ -592,7 +606,7 @@ namespace mCleaner.ViewModel
             {
                 Settings.Default.ClamWin_Proxy_Address = this.ClamWin_Proxy_Address + ":" + this.ProxyPort;
             }
-            else if (this.ClamWin_Proxy_Address != string.Empty && this.ProxyPort != string.Empty)
+            else if (this.ClamWin_Proxy_Address == string.Empty && this.ProxyPort == string.Empty)
             {
                 Settings.Default.ClamWin_Proxy_Address = string.Empty;
             }

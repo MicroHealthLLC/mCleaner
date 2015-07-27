@@ -21,7 +21,7 @@
 -->
 <cleaner id="gimp">
   <label>GIMP</label>
-  <option id="tmp">
+  <option id="tmp" level="1">
     <label>Temporary files</label>
     <description>Delete the temporary files</description>
     <action command="delete" search="walk.files" path="~/.gimp-2.4/tmp/" level="1"/>
