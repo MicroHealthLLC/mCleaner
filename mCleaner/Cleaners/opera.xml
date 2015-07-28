@@ -24,7 +24,7 @@
   <description>Web browser</description>
   <running type="exe">opera</running>
   <running type="exe">opera.exe</running>
-  <option id="cache">
+  <option id="cache" level="2">
     <label>Cache</label>
     <description>Delete the web cache, which reduces time to display revisited pages</description>
     <action command="delete" search="walk.files" path="$localappdata\Opera\Opera*\cache\" level="2"/>
@@ -37,7 +37,7 @@
     <action command="delete" search="walk.files" path="~/.opera/opcache/" level="2"/>
     <action command="delete" search="walk.files" path="~/.opera/thumbnails/" level="2"/>
   </option>
-  <option id="cookies">
+  <option id="cookies" level="3">
     <label>Cookies</label>
     <description>Delete cookies, which contain information such as web site preferences, authentication, and tracking identification</description>
     <!-- example: C:\Documents and Settings\user\Application Data\Opera\Opera\cookies.txt -->
@@ -46,7 +46,7 @@
     <action command="delete" search="glob" path="$appdata\Opera\Opera*\profile\cookies4.dat" level="2"/>
     <action command="delete" search="file" path="~/.opera/cookies4.dat" level="2"/>
   </option>
-  <option id="current_session">
+  <option id="current_session" level="2">
     <label>Current session</label>
     <description>Delete the current session</description>
     <action command="delete" search="glob" path="$appdata\Opera\Opera*\sessions\autosave.win" level="2"/>
@@ -54,26 +54,26 @@
     <action command="delete" search="file" path="~/.opera/sessions/autosave.win" level="2"/>
     <action command="delete" search="file" path="~/.opera/sessions/autosave.win.bak" level="2"/>
   </option>
-  <option id="dom">
+  <option id="dom" level="3">
     <label>DOM Storage</label>
     <description>Delete HTML5 cookies</description>
     <action command="delete" search="walk.all" path="$appdata\Opera\Opera*\pstorage\" level="2"/>
     <action command="delete" search="walk.all" path="~/.opera/pstorage/" level="2"/>
   </option>
-  <option id="download_history">
+  <option id="download_history" level="1">
     <label>Download history</label>
     <description>List of files downloaded</description>
     <action command="delete" search="glob" path="$appdata\Opera\Opera*\download.dat" level="1"/>
     <action command="delete" search="file" path="$appdata\Opera\Opera\profile\download.dat" level="1"/>
     <action command="delete" search="file" path="~/.opera/download.dat" level="1"/>
   </option>
-  <option id="search_history">
+  <option id="search_history" level="1">
     <label>Search history</label>
     <description>Delete the search history</description>
     <action command="delete" search="glob" path="$appdata\Opera\Opera*\search_field_history.dat" level="1"/>
     <action command="delete" search="glob" path="~/.opera/search_field_history.dat" level="1"/>
   </option>
-  <option id="url_history">
+  <option id="url_history" level="1">
     <label>URL history</label>
     <description>List of visited web pages</description>
     <!-- global.dat is in Opera 9, global_history.dat is in Opera 10 -->

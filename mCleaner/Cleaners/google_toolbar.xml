@@ -21,7 +21,7 @@
 -->
 <cleaner id="google_toolbar">
   <label>Google Toolbar</label>
-  <option id="search_history">
+  <option id="search_history" level="1">
     <label>Search history</label>
     <description>Delete the search history</description>
     <action command="delete" search="walk.files" path="$APPDATA\Google\Local Search History\" level="1"/>

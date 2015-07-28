@@ -24,7 +24,7 @@
   <description>Web browser</description>
   <running type="exe">seamonkey.exe</running>
   <running type="exe">seamonkey</running>
-  <option id="cache">
+  <option id="cache" level="2">
     <label>Cache</label>
     <description>Delete the web cache, which reduces time to display revisited pages</description>
     <!--
@@ -45,7 +45,7 @@
     <action command="delete" search="walk.files" path="$localappdata\Mozilla\SeaMonkey\Profiles\*\Cache\" level="2"/>
     <action command="delete" search="walk.files" path="$localappdata\Mozilla\SeaMonkey\Profiles\*\startupCache\" level="2"/>
   </option>
-  <option id="chat_logs">
+  <option id="chat_logs" level="2">
     <label>Chat logs</label>
     <description>Delete the chat logs</description>
     <!-- example: /home/bob/.mozilla/default/1oq1wrww.slt/chatzilla/logs/client.2009-07-03.log -->
@@ -56,7 +56,7 @@
     <action command="delete" search="glob" path="~/.mozilla/*/????????.slt/chatzilla/logs/*log" level="1"/>
     <action command="delete" search="walk.files" path="$APPDATA\Mozilla\SeaMonkey\Profiles\*\chatzilla\logs\" level="1"/>
   </option>
-  <option id="cookies">
+  <option id="cookies" level="3">
     <label>Cookies</label>
     <description>Delete cookies, which contain information such as web site preferences, authentication, and tracking identification</description>
     <!-- example: /home/bob/.mozilla/default/1oq1wrww.slt/cookies.txt -->
@@ -68,13 +68,13 @@
     <action command="delete" search="glob" path="$APPDATA\Mozilla\SeaMonkey\Profiles\*\cookies.sqlite"/>
     <action command="delete" search="glob" path="$APPDATA\Mozilla\Profiles\default\????????.slt\cookies.txt"/>
   </option>
-  <option id="download_history">
+  <option id="download_history" level="1">
     <label>Download history</label>
     <description>List of files downloaded</description>
     <action command="delete" search="glob" path="~/.mozilla/seamonkey/*.default/downloads.sqlite" level="1"/>
     <action command="delete" search="glob" path="$APPDATA\Mozilla\SeaMonkey\Profiles\*\downloads.sqlite" level="1"/>
   </option>
-  <option id="history">
+  <option id="history" level="1">
     <label>History</label>
     <description>Delete the list of visited web pages</description>
     <action command="delete" search="glob" path="$APPDATA\Mozilla\Profiles\default\????????.slt\history.dat" level="1"/>

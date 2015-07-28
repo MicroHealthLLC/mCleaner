@@ -22,7 +22,7 @@
 <cleaner id="vim">
   <label>VIM</label>
   <description>Editor</description>
-  <option id="history">
+  <option id="history" level="2">
     <label>History</label>
     <description>Delete ~/.viminfo which includes file history, command history, and buffers</description>
     <!--<action command="delete" search="file" path="~/.viminfo"/>-->

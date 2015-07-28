@@ -21,7 +21,7 @@
 -->
 <cleaner id="winrar" os="windows">
   <label>WinRAR</label>
-  <option id="mru">
+  <option id="mru" level="1">
     <label>Most recently used</label>
     <description>Delete the most recently used list</description>
     <action command="winreg" path="HKCU\Software\WinRAR\ArcHistory" level="1"/>

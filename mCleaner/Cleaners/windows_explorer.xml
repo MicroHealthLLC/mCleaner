@@ -21,7 +21,7 @@
 -->
 <cleaner id="windows_explorer" os="windows">
   <label>Microsoft Windows Explorer</label>
-  <option id="mru">
+  <option id="mru" level="1">
     <label>Most recently used</label>
     <description>Delete the most recently used list</description>
     <!-- applications executed including date and time -->
@@ -44,7 +44,7 @@
     <!--  printer ports -->
     <action command="winreg" path="HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\PrnPortsMRU" level="1"/>
   </option>
-  <option id="recent_documents">
+  <option id="recent_documents" level="1">
     <label>Recent documents list</label>
     <description>Delete the list of recently used documents</description>
     <!-- Windows XP -->
@@ -57,18 +57,18 @@
     <action command="delete" search="glob" path="$APPDATA\Microsoft\Windows\Recent\AutomaticDestinations\*.automaticDestinations-ms" level="2"/>
     <action command="delete" search="glob" path="$APPDATA\Microsoft\Windows\Recent\CustomDestinations\*customDestinations-ms" level="2"/>
   </option>
-  <option id="run">
+  <option id="run" level="1">
     <label translators="In Windows 'Run' is the dialog in the Start menu">Run</label>
     <description>Delete the most recently used list</description>
     <!--  run command -->
     <action command="winreg" path="HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU" level="1"/>
   </option>
-  <option id="search_history">
+  <option id="search_history" level="1">
     <label>Search history</label>
     <description>Delete the search history</description>
     <action command="winreg" path="HKCU\Software\Microsoft\Search Assistant\ACMru" level="1"/>
   </option>
-  <option id="thumbnails">
+  <option id="thumbnails" level="3">
     <label>Thumbnails</label>
     <description>Delete the cache</description>
     <action command="delete" search="glob" path="$LOCALAPPDATA\Microsoft\Windows\Explorer\thumbcache*.db" level="1"/>

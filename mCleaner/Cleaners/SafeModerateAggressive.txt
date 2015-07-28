@@ -3,6 +3,8 @@ Temporary
 MRU
 .bak
 search history (considered as MRU)
+crash reportss
+download history
 
 Moderate
 Cache
@@ -10,6 +12,8 @@ Logs
 browser session
 browsing history
 browser search history
+index
+thumbnails
 
 Aggressive
 Cookies

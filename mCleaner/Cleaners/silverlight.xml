@@ -21,7 +21,7 @@
 -->
 <cleaner id="silverlight" os="windows">
   <label>Silverlight</label>
-  <option id="cookies">
+  <option id="cookies" level="3">
     <label>Cookies</label>
     <description>Delete cookies, which contain information such as web site preferences, authentication, and tracking identification</description>
     <action command="delete" search="walk.all" path="$localappdata\Microsoft\Silverlight\is\" level="2"/>

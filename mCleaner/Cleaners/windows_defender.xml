@@ -21,7 +21,7 @@
 -->
 <cleaner id="windows_defender" os="windows">
   <label>Microsoft Windows Defender</label>
-  <option id="history">
+  <option id="history" level="2">
     <label>History</label>
     <description>Delete the files</description>
     <action command="delete" search="walk.files" path="$commonappdata\Microsoft\Windows Defender\Scans\History\Results\Quick" level="1"/>

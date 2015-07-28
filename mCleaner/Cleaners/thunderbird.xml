@@ -23,7 +23,7 @@
   <label>Thunderbird</label>
   <running type="exe">thunderbird.exe</running>
   <running type="exe">thunderbird-bin</running>
-  <option id="cache">
+  <option id="cache" level="2">
     <label>Cache</label>
     <description>Delete the web cache, which reduces time to display revisited pages</description>
     <action command="delete" search="walk.all" path="$localappdata\Thunderbird\Profiles\????????.default\Cache\" level="2"/>
@@ -33,7 +33,7 @@
     <!-- openSUSE 11.3 Thunderbird 3 has ~/.thunderbird/Profiles/????????.default/Cache/ -->
     <!--<action command="delete" search="glob" path="~/.thunderbird/Profiles/????????.default/Cache/*"-->/>
   </option>
-  <option id="cookies">
+  <option id="cookies" level="3">
     <label>Cookies</label>
     <description>Delete cookies, which contain information such as web site preferences, authentication, and tracking identification</description>
     <action command="delete" search="glob" path="$APPDATA\Thunderbird\Profiles\????????.default\cookies.sqlite" level="2"/>
@@ -43,7 +43,7 @@
     <!-- openSUSE 11.3 Thunderbird 3 has ~/.thunderbird/Profiles/????????.default/ -->
     <!--<action command="delete" search="glob" path="~/.thunderbird/Profiles/????????.default/cookies.sqlite"/>-->
   </option>
-  <option id="index">
+  <option id="index" level="2">
     <label>Index</label>
     <description>Delete the files</description>
     <action command="delete" search="walk.files" path="$APPDATA\Thunderbird\Profiles\????????.default" regex="\.msf$" level="2"/>
@@ -52,7 +52,7 @@
     <!-- Fedora 16 Thunderbird 17 has ~/.thunderbird/default/ -->
     <!--<action command="delete" search="walk.files" path="~/.thunderbird/" regex="\.msf$"/>-->
   </option>
-  <option id="passwords">
+  <option id="passwords" level="3">
     <label>Passwords</label>
     <description>A database of usernames and passwords as well as a list of sites that should not store passwords</description>
     <action command="delete" search="glob" path="$APPDATA\Thunderbird\Profiles\????????.default\signons.sqlite"/>
@@ -67,7 +67,7 @@
     <!-- openSUSE 11.3 Thunderbird 3 has ~/.thunderbird/Profiles/????????.default/ -->
     <!--<action command="delete" search="glob" path="~/.thunderbird/Profiles/????????.default/signons.sqlite"/>-->
   </option>
-  <option id="vacuum">
+  <option id="vacuum" level="3">
     <label>Vacuum</label>
     <description>Clean database fragmentation to reduce space and improve speed without removing any data</description>
     <action command="sqlite.vacuum" search="glob" path="$APPDATA\Thunderbird\Profiles\????????.default\*.sqlite"/>

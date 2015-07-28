@@ -22,14 +22,14 @@
 <cleaner id="miro">
   <label>Miro</label>
   <description>Multimedia viewer</description>
-  <option id="cache">
+  <option id="cache" level="2">
     <label>Cache</label>
     <description>Delete the cache</description>
     <action command="delete" search="walk.files" path="~/.miro/icon-cache/"/>
     <action command="delete" search="walk.files" path="~/.miro/mozilla/Cache/"/>
     <action command="delete" search="walk.files" path="$APPDATA\Participatory Culture Foundation\Miro\Support\icon-cache\" level="2"/>
   </option>
-  <option id="logs">
+  <option id="logs" level="2">
     <label>Logs</label>
     <description>Delete the logs</description>
     <action command="delete" search="file" path="~/.miro/miro-downloader-log" level="1"/>

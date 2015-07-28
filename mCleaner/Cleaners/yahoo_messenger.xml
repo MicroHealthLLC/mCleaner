@@ -22,17 +22,17 @@
 <cleaner id="yahoo_messenger" os="windows">
   <label>Yahoo! Messenger</label>
   <description>Chat client</description>
-  <option id="cache">
+  <option id="cache" level="2">
     <label>Cache</label>
     <description>Delete the cache</description>
     <action command="delete" search="walk.files" path="$PROGRAMFILES\Yahoo!\Messenger\Cache\" level="2"/>
   </option>
-  <option id="chat_logs">
+  <option id="chat_logs" level="2">
     <label>Chat logs</label>
     <description>Delete the chat logs</description>
     <action command="delete" search="glob" path="$PROGRAMFILES\Yahoo!\Messenger\Profiles\*\Archive\Messages\*\*.dat" level="1"/>
   </option>
-  <option id="logs">
+  <option id="logs" level="2">
     <label>Logs</label>
     <description>Delete the logs</description>
     <action command="delete" search="walk.files" path="$PROGRAMFILES\Yahoo!\Messenger\logs\" level="1"/>

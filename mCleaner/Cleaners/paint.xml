@@ -21,7 +21,7 @@
 -->
 <cleaner id="paint" os="windows">
   <label>Microsoft Paint</label>
-  <option id="mru">
+  <option id="mru" level="1">
     <label>Most recently used</label>
     <description>Delete the most recently used list</description>
     <action command="winreg" path="HKCU\Software\Microsoft\Windows\CurrentVersion\Applets\Paint\Recent File List" level="1"/>

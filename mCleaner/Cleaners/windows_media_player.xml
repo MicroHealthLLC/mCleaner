@@ -21,7 +21,7 @@
 -->
 <cleaner id="windows_media_player" os="windows">
   <label>Microsoft Windows Media Player</label>
-  <option id="mru">
+  <option id="mru" level="1">
     <label>Most recently used</label>
     <description>Delete the most recently used list</description>
     <action command="winreg" path="HKCU\Software\Microsoft\MediaPlayer\Player\RecentFileList" level="1"/>

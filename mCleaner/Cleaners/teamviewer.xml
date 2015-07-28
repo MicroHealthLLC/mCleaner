@@ -21,12 +21,12 @@
 -->
 <cleaner id="teamviewer" os="windows">
   <label>TeamViewer</label>
-  <option id="logs">
+  <option id="logs" level="2">
     <label>Logs</label>
     <description>Delete the logs</description>
     <action command="delete" search="file" path="$APPDATA\TeamViewer\TeamViewer4_Logfile.log" level="1"/>
   </option>
-  <option id="mru">
+  <option id="mru" level="1">
     <label>Most recently used</label>
     <description>Delete the most recently used list</description>
     <action command="delete" search="file" path="$APPDATA\TeamViewer\Connections.txt" level="1"/>

@@ -29,7 +29,7 @@
   <label>VLC media player</label>
   <running type="exe">vlc.exe</running>
   <running type="exe">vlc</running>
-  <option id="mru">
+  <option id="mru" level="1">
     <label>Most recently used</label>
     <description>Delete the most recently used list</description>
     <action search="file" path="$APPDATA\vlc\vlc-qt-interface.ini" command="ini" section="General" parameter="filedialog-path" level="1"/>

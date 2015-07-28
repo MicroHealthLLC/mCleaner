@@ -21,13 +21,13 @@
 -->
 <cleaner id="realplayer">
   <label>RealPlayer</label>
-  <option id="cookies">
+  <option id="cookies" level="3">
     <label>Cookies</label>
     <description>Delete cookies, which contain information such as web site preferences, authentication, and tracking identification</description>
     <action command="delete" search="file" path="~/.config/real/rpcookies.txt"/>
     <action command="delete" search="file" path="$APPDATA\Real\RealPlayer\cookies.txt"/>
   </option>
-  <option id="history">
+  <option id="history" level="1">
     <label>History</label>
     <description>Delete the usage history</description>
     <!-- FIXME: RealPlayer uses a special .ini format which isn't currently compatible -->
@@ -35,7 +35,7 @@
     <action command="delete" search="file" path="$APPDATA\Real\RealPlayer\realplayer.ste" level="1"/>
     <action command="delete" search="glob" path="$APPDATA\Real\RealPlayer\History\*.lnk" level="1"/>
   </option>
-  <option id="logs">
+  <option id="logs" level="2">
     <label>Logs</label>
     <description>Delete the logs</description>
     <action command="delete" search="file" path="$APPDATA\Real\RealPlayer\RealPlayer-log.txt" level="1"/>

@@ -22,14 +22,14 @@
 <cleaner id="pidgin">
   <label>Pidgin</label>
   <description>Chat client</description>
-  <option id="cache">
+  <option id="cache" level="2">
     <label>Cache</label>
     <description>Delete the cache</description>
     <!-- avatars -->
     <action command="delete" search="walk.all" path="~/.purple/icons/" level="2"/>
     <action command="delete" search="walk.all" path="$APPDATA\.purple\icons\" level="2"/>
   </option>
-  <option id="logs">
+  <option id="logs" level="2">
     <label>Chat logs</label>
     <description>Delete the chat logs</description>
     <action command="delete" search="walk.all" path="~/.purple/logs/" level="1"/>

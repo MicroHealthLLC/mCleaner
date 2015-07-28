@@ -21,7 +21,7 @@
 -->
 <cleaner id="tortoisesvn" os="windows">
   <label>TortoiseSVN</label>
-  <option id="history">
+  <option id="history" level="1">
     <label>History</label>
     <description>Delete the usage history</description>
     <action command="winreg" path="HKCU\Software\TortoiseSVN\History" level="1"/>

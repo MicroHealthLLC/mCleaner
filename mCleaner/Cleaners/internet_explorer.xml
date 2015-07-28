@@ -22,7 +22,7 @@
 <cleaner id="internet_explorer" os="windows">
   <label>Microsoft Internet Explorer</label>
   <description>Web browser</description>
-  <option id="cookies">
+  <option id="cookies" level="2">
     <label>Cookies</label>
     <description>Delete cookies, which contain information such as web site preferences, authentication, and tracking identification</description>
     <action command="delete" search="walk.files" path="$USERPROFILE\Cookies\" level="2"/>
@@ -30,14 +30,14 @@
     <action command="delete" search="walk.files" path="$localappdata\Microsoft\Internet Explorer\DOMStore\" level="2"/>
     <action command="delete" search="walk.files" path="$USERPROFILE\AppData\LocalLow\Microsoft\Internet Explorer\DOMStore\" level="2"/>
   </option>
-  <option id="forms">
+  <option id="forms" level="3">
     <label>Form history</label>
     <!-- Internet Explorer 7 and 8 -->
     <description>A history of forms entered in web sites and in the Search bar</description>
     <action command="winreg" path="HKCU\Software\Microsoft\Internet Explorer\IntelliForms\Storage1"/>
     <action command="winreg" path="HKCU\Software\Microsoft\Internet Explorer\IntelliForms\Storage2"/>
   </option>
-  <option id="history">
+  <option id="history" level="1">
     <label>History</label>
     <description>List of visited web pages</description>
     <action command="delete" search="walk.files" path="$USERPROFILE\AppData\Local\Microsoft\Windows\History\"/>
@@ -48,7 +48,7 @@
     <!-- "How to clear the History entries in Internet Explorer", http://support.microsoft.com/kb/157729 -->
     <action command="winreg" path="HKCU\Software\Microsoft\Internet Explorer\TypedURLs"/>
   </option>
-  <option id="temporary_files">
+  <option id="temporary_files" level="1">
     <label>Temporary files</label>
     <description>Delete the temporary files</description>
     <action command="delete" search="walk.files" path="$APPDATA\Microsoft\Windows\IETldCache\" level="1"/>

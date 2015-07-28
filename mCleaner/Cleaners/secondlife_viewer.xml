@@ -22,13 +22,13 @@
 <cleaner id="secondlife_viewer">
   <label>Second Life Viewer</label>
   <description>Game</description>
-  <option id="Cache">
+  <option id="Cache" level="2">
     <label>Cache</label>
     <description>Delete the cache</description>
     <action command="delete" search="walk.files" path="~/.secondlife/cache/"/>
     <action command="delete" search="walk.files" path="$USERPROFILE\Application Data\SecondLife\cache\" level="2"/>
   </option>
-  <option id="Logs">
+  <option id="Logs" level="2">
     <label>Debug logs</label>
     <description>Delete the debug logs</description>
     <action command="delete" search="walk.files" path="~/.secondlife/logs/"/>
