@@ -13,6 +13,7 @@ namespace mCleaner.Cleaners
                 id = "custom_locations",
                 label = "Custom Location",
                 description = "Delete user-specified files and folders.\r\nTo set it up, click Edit > Preferences > Custom Locations",
+                level = 1,
                 action = new List<action>()
             };
 
@@ -27,7 +28,6 @@ namespace mCleaner.Cleaners
                             command = "delete",
                             search = "file",
                             path = filepath,
-                            level = 1,
                             parent_option = o
                         });
                     }
@@ -38,7 +38,6 @@ namespace mCleaner.Cleaners
                             command = "delete",
                             search = "walk.all",
                             path = filepath,
-                            level = 1,
                             parent_option = o
                         });
                     }
@@ -95,6 +94,7 @@ namespace mCleaner.Cleaners
                 id = "clipboard",
                 label = "Clipboard",
                 description = "The desktop environment's clipboard used for copy and paste operations",
+                level = 1,
                 action = new List<action>()
             };
 
@@ -102,7 +102,6 @@ namespace mCleaner.Cleaners
             {
                 command = "clipboard",
                 search = "clipboard.clear",
-                level = 1,
                 parent_option = o
             });
 
@@ -116,6 +115,7 @@ namespace mCleaner.Cleaners
                 id = "windows_logs",
                 label = "Windows Logs",
                 description = "Delete the logs",
+                level = 1,
                 action = new List<action>()
             };
 
@@ -163,8 +163,7 @@ namespace mCleaner.Cleaners
                     command = "delete",
                     search = "glob",
                     path = path,
-                    parent_option = o,
-                    level = 1
+                    parent_option = o
                 });
             }
 
@@ -178,6 +177,7 @@ namespace mCleaner.Cleaners
                 id = "windows_temp_files",
                 label = "Temporary Files",
                 description = "Delete the temporary files",
+                level = 1,
                 action = new List<action>()
             };
 
@@ -193,8 +193,7 @@ namespace mCleaner.Cleaners
                     command = "delete",
                     search = "walk.all",
                     path = path,
-                    parent_option = o,
-                    level = 1
+                    parent_option = o
                 });
             }
 
@@ -208,6 +207,7 @@ namespace mCleaner.Cleaners
                 id = "windows_memory_dump",
                 label = "Memory Dump",
                 description = "Delete the file memory.dmp",
+                level = 1,
                 action = new List<action>()
             };
 
@@ -223,8 +223,7 @@ namespace mCleaner.Cleaners
                     command = "delete",
                     search = "walk.files",
                     path = path,
-                    parent_option = o,
-                    level = 2
+                    parent_option = o
                 });
             }
 
@@ -240,6 +239,7 @@ namespace mCleaner.Cleaners
                 label = "Backup Files",
                 description = "It will scan the entire system drive and look for .bak files",
                 warning = "This option will be very slow.",
+                level = 1,
                 action = new List<action>()
             };
 
@@ -249,7 +249,6 @@ namespace mCleaner.Cleaners
                 search = "walk.all",
                 path = "C:\\",
                 regex = "\\.[Bb][Aa][Kk]$",
-                level = 2
             });
 
             return o;
@@ -263,6 +262,7 @@ namespace mCleaner.Cleaners
                 label = "Thumbs.db Files",
                 description = "It will scan the entire system drive and look for Thumbs.db files",
                 warning = "This option will be very slow.",
+                level = 2,
                 action = new List<action>()
             };
 
@@ -271,8 +271,7 @@ namespace mCleaner.Cleaners
                 command = "delete",
                 search = "walk.all",
                 path = "C:\\",
-                regex = "Thumbs\\.db",
-                level = 2
+                regex = "Thumbs\\.db"
             });
 
             return o;
@@ -286,6 +285,7 @@ namespace mCleaner.Cleaners
                 label = "Office Temporary Files",
                 description = "It will scan the entire system drive and look for Microsoft Office temporary files",
                 warning = "This option will be very slow.",
+                level = 1,
                 action = new List<action>()
             };
 
@@ -295,8 +295,7 @@ namespace mCleaner.Cleaners
                 command = "delete",
                 search = "walk.all",
                 path = "C:\\",
-                regex = "~wr[a-z][0-9]{4}\\.tmp$",
-                level = 1
+                regex = "~wr[a-z][0-9]{4}\\.tmp$"
             });
 
             // http://support.microsoft.com/kb/826810
@@ -305,8 +304,7 @@ namespace mCleaner.Cleaners
                 command = "delete",
                 search = "walk.all",
                 path = "C:\\",
-                regex = "ppt[0-9]{4}\\.tmp",
-                level = 1
+                regex = "ppt[0-9]{4}\\.tmp"
             });
 
             return o;
@@ -320,6 +318,7 @@ namespace mCleaner.Cleaners
                 id = "windows_muicache",
                 label = "MUICache",
                 description = "Delete the cache",
+                level = 2,
                 action = new List<action>()
             };
 
@@ -334,8 +333,7 @@ namespace mCleaner.Cleaners
                 {
                     command = "winreg",
                     path = path,
-                    parent_option = o,
-                    level = 2
+                    parent_option = o
                 });
             }
 
@@ -349,6 +347,7 @@ namespace mCleaner.Cleaners
                 id = "windows_prefetch",
                 label = "Prefetch",
                 description = "Delete the cache",
+                level = 2,
                 action = new List<action>()
             };
 
@@ -363,8 +362,7 @@ namespace mCleaner.Cleaners
                     command = "delete",
                     search = "glob",
                     path = path,
-                    parent_option = o,
-                    level = 2
+                    parent_option = o
                 });
             }
 
@@ -378,6 +376,7 @@ namespace mCleaner.Cleaners
                 id = "windows_update_uninstallers",
                 label = "Update uninstallers",
                 description = "Delete uninstallers for Microsoft updates including hotfixes, service packs, and Internet Explorer updates",
+                level = 3,
                 action = new List<action>()
             };
 
@@ -394,8 +393,7 @@ namespace mCleaner.Cleaners
                     command = "delete",
                     search = "walk.files",
                     path = path,
-                    parent_option = o,
-                    level = 3
+                    parent_option = o
                 });
             }
 
@@ -409,6 +407,7 @@ namespace mCleaner.Cleaners
                 id = "windows_recyclebin",
                 label = "Recycle bin",
                 description = "Empty the recycle bin",
+                level = 1,
                 action = new List<action>()
             };
 
@@ -442,8 +441,7 @@ namespace mCleaner.Cleaners
                     command = "delete",
                     search = "walk.files",
                     path = path,
-                    parent_option = o,
-                    level = 1
+                    parent_option = o
                 });
             }
 

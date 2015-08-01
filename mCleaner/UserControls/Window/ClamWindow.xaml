@@ -34,16 +34,16 @@
                 </StackPanel>
             </Grid>
 
-            <!-- text area -->
+            <!-- text area for updating the database -->
             <Grid Grid.Row="1" Margin="5">
-                <ScrollViewer>
+                <ScrollViewer x:Name="scrollviewer">
                     <TextBlock Text="{Binding Clam.VirusDefUpdateLog}" FontFamily="Consolas" TextWrapping="Wrap" />
                 </ScrollViewer>
             </Grid>
 
             <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="2">
-                <Button x:Name="btnCancel" Content="_Cancel" Margin="5,5" Command="{Binding Clam.Command_CancelUpdate}" Style="{StaticResource ButtonStyle}" Background="#FF1578D6" BorderBrush="#FF1578D6" />
-                <Button x:Name="btnClose" Content="C_lose" Margin="5,5" Command="{Binding Clam.Command_CloseWindow}" Style="{StaticResource ButtonStyle}" />
+                <Button x:Name="btnCancel" Content="_Cancel" Margin="5,5" Command="{Binding Clam.Command_CancelUpdate}" Style="{StaticResource ButtonStyle}" IsEnabled="{Binding Clam.EnableCancelButton}" />
+                <Button x:Name="btnClose" Content="C_lose" Margin="5,5" Command="{Binding Clam.Command_CloseWindow}" Style="{StaticResource ButtonStyle}" IsEnabled="{Binding Clam.EnableCloseButton}" />
             </StackPanel>
         </Grid>
     </Border>

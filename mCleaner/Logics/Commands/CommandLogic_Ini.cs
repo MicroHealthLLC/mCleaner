@@ -95,7 +95,7 @@ namespace mCleaner.Logics.Commands
 
                         section = section,
                         key = key,
-                        level = Action.level,
+                        level = Action.parent_option.level,
                         cleaner_name = Action.parent_option.label
                     });
                 }

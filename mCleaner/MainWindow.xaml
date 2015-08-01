@@ -4,7 +4,7 @@
         xmlns:local="clr-namespace:mCleaner"
         xmlns:ucw="clr-namespace:mCleaner.UserControls.Window"
         x:Class="mCleaner.MainWindow"
-        Title="mCleaner" Height="480" Width="850" Icon="appicon.ico" WindowStartupLocation="CenterScreen"
+        Title="mCleaner" Height="510" Width="850" Icon="appicon.ico" WindowStartupLocation="CenterScreen"
         xmlns:ctl="clr-namespace:mCleaner.Helpers.Controls"
     >
 
@@ -137,25 +137,25 @@
                         </StackPanel>
                     </Button>
                     <Separator />
-                    <Button Width="70" Command="{Binding Clam.Command_UpdateVirusDefinition}" ToolTip="Update virus definitions"  VerticalAlignment="Top">
+                    <Button Width="80" Command="{Binding Clam.Command_UpdateVirusDefinition}" ToolTip="Update virus definitions"  VerticalAlignment="Top">
                         <StackPanel>
                             <Image Width="32" Height="32" Source="Assets/dl_vir_def.png" HorizontalAlignment="Center" />
-                            <TextBlock Text="Update" HorizontalAlignment="Center" />
-                            <TextBlock Text="" />
+                            <TextBlock Text="Update Virus" HorizontalAlignment="Center" />
+                            <TextBlock Text="Definitions" HorizontalAlignment="Center" />
                         </StackPanel>
                     </Button>
-                    <Button Width="70" Command="{Binding Clam.Command_ScanForVirus}" ToolTip="Scan system for virus"  VerticalAlignment="Top">
+                    <Button Width="80" Command="{Binding Clam.Command_ScanForVirus}" ToolTip="Scan system for virus"  VerticalAlignment="Top">
                         <StackPanel>
                             <Image Width="32" Height="32" Source="Assets/scan_for_virus.png" HorizontalAlignment="Center" />
-                            <TextBlock Text="Scan" HorizontalAlignment="Center" />
-                            <TextBlock Text="" />
+                            <TextBlock Text="Scan PC" HorizontalAlignment="Center" />
+                            <TextBlock Text="for Viruses" HorizontalAlignment="Center" />
                         </StackPanel>
                     </Button>
-                    <Button Width="70" Command="{Binding Clam.Command_ScanMemory}" ToolTip="Scan system memory for virus" VerticalAlignment="Top">
+                    <Button Width="80" Command="{Binding Clam.Command_ScanMemory}" ToolTip="Scan system memory for virus" VerticalAlignment="Top">
                         <StackPanel>
                             <Image Width="32" Height="32" Source="Assets/scan_for_memory.png" HorizontalAlignment="Center" />
-                            <TextBlock Text="Memory" HorizontalAlignment="Center" />
-                            <TextBlock Text="" />
+                            <TextBlock Text="Scan Memory" HorizontalAlignment="Center" />
+                            <TextBlock Text="for Viruses" HorizontalAlignment="Center" />
                         </StackPanel>
                     </Button>
                     <Separator />
@@ -170,173 +170,76 @@
 
             <!-- main content -->
             <Grid Grid.Row="2">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="5" />
-                    <ColumnDefinition Width="auto" />
-                </Grid.ColumnDefinitions>
+                <TabControl SelectedIndex="{Binding CleanerML.SelectedTabIndex}">
+                    <TabItem Header="Main">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="5" />
+                                <ColumnDefinition Width="auto" />
+                            </Grid.ColumnDefinitions>
 
-                <Grid Grid.Column="2">
-                    <TreeView Style="{StaticResource TreeViewStyle}" 
+                            <Grid Grid.Column="2">
+                                <TreeView Style="{StaticResource TreeViewStyle}" 
 						ItemContainerStyle="{StaticResource TreeViewItemStyleStandard}"
 						ItemTemplate="{StaticResource CheckBoxItemTemplate}" 
 						ItemsSource="{Binding CleanerML.CleanersCollection, Mode=OneTime}"
                         BorderThickness="0"
 						x:Name="tvCleaners"
                               />
-                </Grid>
-                
-                <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" />
+                            </Grid>
 
-                <Grid>
-                    <!-- Cleaner Details -->
-                    <Grid Visibility="{Binding CleanerML.ShowCleanerDescription, Converter={StaticResource boolTovis}}">
-                        <Image Source="Assets/MicroHealth_Logo_800.png" Margin="50" Opacity="0.02" />
-                        <RichTextBox x:Name="rtbCleanerDetails" BorderThickness="0" IsReadOnly="True" Background="Transparent" ScrollViewer.VerticalScrollBarVisibility="Auto" />
-                        <Button Content="Close" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,10,20,0" Style="{StaticResource ButtonStyle}" Command="{Binding CleanerML.Command_CloseCleanerDescription}" />
-                    </Grid>
+                            <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" />
 
-                    <!-- Cleaner logs -->
-                    <Grid Visibility="{Binding CleanerML.Run, Converter={StaticResource boolTovis}}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="auto" />
-                            <RowDefinition Height="*" />
-                        </Grid.RowDefinitions>
+                            <Grid>
+                                <!-- Cleaner Details -->
+                                <Grid Visibility="{Binding CleanerML.ShowCleanerDescription, Converter={StaticResource boolTovis}}">
+                                    <Image Source="Assets/MicroHealth_Logo_800.png" Margin="50" Opacity="0.02" />
+                                    <RichTextBox x:Name="rtbCleanerDetails" BorderThickness="0" IsReadOnly="True" Background="Transparent" ScrollViewer.VerticalScrollBarVisibility="Auto" />
+                                    <Button Content="Close" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,10,20,0" Style="{StaticResource ButtonStyle}" Command="{Binding CleanerML.Command_CloseCleanerDescription}" />
+                                </Grid>
 
-                        <Grid Grid.Row="0">
-                            <Border BorderThickness="1" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}">
-                                <ProgressBar Height="25" Maximum="{Binding CleanerML.MaxProgress}" Value="{Binding CleanerML.ProgressIndex}" VerticalAlignment="Center" IsHitTestVisible="False" Margin="1" IsIndeterminate="{Binding CleanerML.ProgressIsIndeterminate}" Style="{DynamicResource ProgressBarStyle}"/>
-                            </Border>
-                            <TextBlock Text="{Binding CleanerML.ProgressText}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{StaticResource MainWindow_ProgressBar_Progress_Text}" >
-                                <TextBlock.Effect>
-                                    <DropShadowEffect ShadowDepth="2" BlurRadius="3" Color="{DynamicResource {x:Static SystemColors.ActiveCaptionTextColorKey}}" Opacity="0.2"/>
-                                </TextBlock.Effect>
-                            </TextBlock>
-                        </Grid>
-                        <Border Grid.Row="1" Background="White">
-                            <TabControl Grid.Row="1" SelectedIndex="{Binding CleanerML.SelectedTabIndex}">
-                                <TabItem Header="Main">
-                                    <TextBox IsReadOnly="True" BorderThickness="0" Text="{Binding CleanerML.TextLog}" AllowDrop="False" IsTabStop="False" ScrollViewer.VerticalScrollBarVisibility="Auto" />
-                                </TabItem>
-                                <TabItem Header="Duplicates">
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="auto" />
-                                            <ColumnDefinition Width="*" />
-                                        </Grid.ColumnDefinitions>
+                                <!-- Cleaner logs -->
+                                <Grid Visibility="{Binding CleanerML.Run, Converter={StaticResource boolTovis}}">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
 
-                                        <Grid Grid.Column="0" Background="{StaticResource DupChecker_Panel_FileOperation}" Visibility="{Binding DupChecker.FileOperationPanelShow, Converter={StaticResource boolTovis}}" Width="160">
-                                            <StackPanel Margin="5">
-                                                <StackPanel.Resources>
-                                                    <Style TargetType="{x:Type TextBlock}">
-                                                        <Setter Property="Foreground" Value="{StaticResource DupChecker_Panel_FileOperation_Texts}" />
-                                                    </Style>
-                                                    <Style TargetType="{x:Type RadioButton}">
-                                                        <Setter Property="Foreground" Value="{StaticResource DupChecker_Panel_FileOperation_Texts}" />
-                                                    </Style>
-                                                </StackPanel.Resources>
-
-                                                <Button Content="Select Folders" Style="{StaticResource ButtonStyle}" Command="{Binding DupChecker.Command_ShowPrefWindow}" Visibility="Visible"/>
-                                                <TextBlock Text=" " />
-                                                <Button Content="Scan Folders" Style="{StaticResource ButtonStyle}" Command="{Binding DupChecker.Command_CheckDuplicate}" Visibility="Visible"/>
-                                                <TextBlock Text=" " />
-                                                <TextBlock Text="Select what to do with duplicate files" TextWrapping="Wrap" />
-                                                <TextBlock Text=" " />
-                                                <RadioButton IsChecked="{Binding DupChecker.IsMove, Mode=TwoWay}" Content="Move files" Tag="Move" x:Name="rbMoveFiles" GroupName="DupCheck_FileOperation" />
-                                                <RadioButton IsChecked="{Binding DupChecker.IsDelete, Mode=TwoWay}" Content="Delete files" Tag="Delete" x:Name="rbDeleteFiles" GroupName="DupCheck_FileOperation" />
-                                                <TextBlock Text=" " />
-                                                <Button x:Name="btnOK" Content="Remove Duplicates" Style="{StaticResource ButtonStyle}" Command="{Binding DupChecker.Command_Start}" Visibility="Visible"/>
-                                            </StackPanel>
-                                        </Grid>
-
-                                        <Grid Grid.Column="1">
-                                            <ListView ItemsSource="{Binding Source={StaticResource ListViewSource}}" 
-                                                      ItemContainerStyle="{StaticResource ListViewItemStyle}"
-                                                      x:Name="lvDuplicateFiles">
-                                                <ListView.View>
-                                                    <GridView>                                                        
-                                                        <GridViewColumn Header="File" Width="200">
-                                                            <GridViewColumn.CellTemplate>
-                                                                <DataTemplate>
-                                                                    <StackPanel Orientation="Horizontal">
-                                                                        <CheckBox IsChecked="{Binding Selected, Mode=TwoWay}" />
-                                                                        <TextBlock Text=" " />
-                                                                        <TextBlock Text="{Binding FileDetails.Filename}" />
-                                                                    </StackPanel>
-                                                                </DataTemplate>
-                                                            </GridViewColumn.CellTemplate>
-                                                        </GridViewColumn>
-                                                        <GridViewColumn Header="Path" Width="300" DisplayMemberBinding="{Binding FileDetails.ParentDirectory}" />
-                                                    </GridView>
-                                                </ListView.View>
-
-                                                <ListView.GroupStyle>
-                                                    <GroupStyle>
-                                                        <GroupStyle.ContainerStyle>
-                                                            <Style TargetType="{x:Type GroupItem}">
-                                                                <Setter Property="Template">
-                                                                    <Setter.Value>
-                                                                        <ControlTemplate>
-                                                                            <Expander IsExpanded="True">
-                                                                                <Expander.Header>
-                                                                                    <StackPanel Orientation="Horizontal">
-                                                                                        <TextBlock Text="{Binding Name}" VerticalAlignment="Center" FontWeight="Bold" />
-                                                                                        <TextBlock Text=" (" />
-                                                                                        <TextBlock Text="{Binding ItemCount}" VerticalAlignment="Center" />
-                                                                                        <TextBlock Text=") items" VerticalAlignment="Center" />
-                                                                                    </StackPanel>
-                                                                                </Expander.Header>
-                                                                                <ItemsPresenter />
-                                                                            </Expander>
-                                                                        </ControlTemplate>
-                                                                    </Setter.Value>
-                                                                </Setter>
-                                                            </Style>
-                                                        </GroupStyle.ContainerStyle>
-                                                    </GroupStyle>
-                                                </ListView.GroupStyle>
-
-                                                <!--<ListView.ItemContainerStyle>
-                                                    <Style>
-                                                        <Style.Triggers>
-                                                            <Trigger Property="Control.IsMouseOver" Value="True">
-                                                                <Setter Property="Control.BorderThickness" Value="0" />
-                                                                <Setter Property="Control.Background" Value="Transparent" />
-                                                            </Trigger>
-                                                            <Trigger Property="Control.IsSelected" Value="True">
-                                                                <Setter Property="Control.BorderThickness" Value="0" />
-                                                                <Setter Property="Control.Background" Value="Transparent" />
-                                                            </Trigger>
-                                                        </Style.Triggers>
-                                                    </Style>
-                                                </ListView.ItemContainerStyle>-->
-                                            </ListView>
-                                        </Grid>
+                                    <Grid Grid.Row="0">
+                                        <Border BorderThickness="1" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}">
+                                            <ProgressBar Height="25" Maximum="{Binding CleanerML.MaxProgress}" Value="{Binding CleanerML.ProgressIndex}" VerticalAlignment="Center" IsHitTestVisible="False" Margin="1" IsIndeterminate="{Binding CleanerML.ProgressIsIndeterminate}" Style="{DynamicResource ProgressBarStyle}"/>
+                                        </Border>
+                                        <TextBlock Text="{Binding CleanerML.ProgressText}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{StaticResource MainWindow_ProgressBar_Progress_Text}" >
+                                            <TextBlock.Effect>
+                                                <DropShadowEffect ShadowDepth="2" BlurRadius="3" Color="{DynamicResource {x:Static SystemColors.ActiveCaptionTextColorKey}}" Opacity="0.2"/>
+                                            </TextBlock.Effect>
+                                        </TextBlock>
                                     </Grid>
-                                </TabItem>
-                            </TabControl>
-                        </Border>
-                    </Grid>
+                                    <Border Grid.Row="1" Background="White">
+                                        <TextBox IsReadOnly="True" BorderThickness="0" Text="{Binding CleanerML.TextLog}" AllowDrop="False" IsTabStop="False" ScrollViewer.VerticalScrollBarVisibility="Auto" />
+                                    </Border>
+                                </Grid>
 
-                    <!-- front page -->
-                    <Border x:Name="gridMain" Margin="0" Visibility="{Binding CleanerML.ShowFrontPage, Converter={StaticResource boolTovis}}">
-                        <Grid Margin="10">
-                            <Grid.Resources>
-                                <Style TargetType="TextBlock">
-                                    <Setter Property="FontFamily" Value="Segoe UI" />
-                                </Style>
-                            </Grid.Resources>
+                                <!-- front page -->
+                                <Border x:Name="gridMain" Margin="0" Visibility="{Binding CleanerML.ShowFrontPage, Converter={StaticResource boolTovis}}">
+                                    <Grid Margin="10">
+                                        <Grid.Resources>
+                                            <Style TargetType="TextBlock">
+                                                <Setter Property="FontFamily" Value="Segoe UI" />
+                                            </Style>
+                                        </Grid.Resources>
 
-                            <Image x:Name="logo" Source="Assets/MicroHealth_Logo_200.png" Opacity="1" Width="200"  Stretch="Uniform" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,13,0,0"/>
+                                        <Image x:Name="logo" Source="Assets/MicroHealth_Logo_200.png" Opacity="1" Width="200"  Stretch="Uniform" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,13,0,0"/>
 
-                            <StackPanel>
-                                <TextBlock Text="mCleaner" Foreground="Black" FontSize="30"/>
-                                <TextBlock Text="A complete system cleaner for Windows!" />
-                                <TextBlock>Copyright© <ctl:HyperlinkEx NavigateUri="http://www.microhealthllc.com">MicroHealth, LLC</ctl:HyperlinkEx> 2015</TextBlock>
-                                <TextBlock Text=" " />
-                            </StackPanel>
+                                        <StackPanel>
+                                            <TextBlock Text="mCleaner" Foreground="Black" FontSize="30"/>
+                                            <TextBlock Text="A complete system cleaner for Windows!" />
+                                            <TextBlock>Copyright© <ctl:HyperlinkEx NavigateUri="http://www.microhealthllc.com">MicroHealth, LLC</ctl:HyperlinkEx> 2015</TextBlock>
+                                            <TextBlock Text=" " />
+                                        </StackPanel>
 
-                            <TextBlock VerticalAlignment="Bottom" HorizontalAlignment="Left">
+                                        <TextBlock VerticalAlignment="Bottom" HorizontalAlignment="Left">
                                 This program is licensed under GPL v3.
                                 <LineBreak />
                                 <ctl:HyperlinkEx NavigateUri="http://www.gnu.org/licenses/gpl-3.0.html">http://www.gnu.org/licenses/gpl-3.0.html</ctl:HyperlinkEx>
@@ -344,84 +247,183 @@
                                 Please send your feedback at
                                 <LineBreak />
                                 <ctl:HyperlinkEx NavigateUri="mailto:feedback@microhealthllc.com">feedback@microhealthllc.com</ctl:HyperlinkEx>
-                            </TextBlock>
+                                        </TextBlock>
 
-                            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                                <TextBlock Text="Start cleaning now!" FontSize="20" TextAlignment="Left" Background="{StaticResource MainWindow_Toolbar_Backgruond}" Foreground="{StaticResource MainWindow_Toolbar_Foreground}" Padding="5" Margin="0,0,0,3" />
-                                <StackPanel Orientation="Horizontal">
-                                    <Button Style="{StaticResource ButtonStyle}" Command="{Binding CleanerML.Command_Clean}" Background="#FFA8CD5E">
-                                        <Button.ContentTemplate>
-                                            <DataTemplate>
-                                                <Grid Width="150" Height="120">
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="auto" />
-                                                        <ColumnDefinition Width="10" />
-                                                        <ColumnDefinition Width="*" />
-                                                    </Grid.ColumnDefinitions>
+                                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                                            <TextBlock Text="Start cleaning now!" FontSize="20" TextAlignment="Left" Background="{StaticResource MainWindow_Toolbar_Backgruond}" Foreground="{StaticResource MainWindow_Toolbar_Foreground}" Padding="5" Margin="0,0,0,3" />
+                                            <StackPanel Orientation="Horizontal">
+                                                <Button Style="{StaticResource ButtonStyle}" Command="{Binding CleanerML.Command_Clean}" CommandParameter="4" Background="#FFA8CD5E">
+                                                    <Button.ContentTemplate>
+                                                        <DataTemplate>
+                                                            <Grid Width="150" Height="120">
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="auto" />
+                                                                    <ColumnDefinition Width="10" />
+                                                                    <ColumnDefinition Width="*" />
+                                                                </Grid.ColumnDefinitions>
 
-                                                    <Image Width="32" Height="32" Source="Assets/clean_safe.png" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                                <Image Width="32" Height="32" Source="Assets/clean_safe.png" HorizontalAlignment="Center" VerticalAlignment="Center" />
 
-                                                    <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Foreground="White" Grid.Column="2" VerticalAlignment="Top" FontSize="20">
+                                                                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Foreground="White" Grid.Column="2" VerticalAlignment="Top" FontSize="20">
                                                     Safe Cleaning
                                                     <LineBreak />
                                                     <Run Text="Cleans temporary files and recently openned documents" FontSize="12" />
-                                                    </TextBlock>
-                                                </Grid>
-                                            </DataTemplate>
-                                        </Button.ContentTemplate>
-                                    </Button>
-                                    <TextBlock Text=" " />
-                                    <Button Style="{StaticResource ButtonStyle}" Background="#FFCDB45E" Command="{Binding CleanerML.Command_Clean}">
-                                        <Button.ContentTemplate>
-                                            <DataTemplate>
-                                                <Grid Width="150" Height="120">
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="auto" />
-                                                        <ColumnDefinition Width="10" />
-                                                        <ColumnDefinition Width="*" />
-                                                    </Grid.ColumnDefinitions>
+                                                                </TextBlock>
+                                                            </Grid>
+                                                        </DataTemplate>
+                                                    </Button.ContentTemplate>
+                                                </Button>
+                                                <TextBlock Text=" " />
+                                                <Button Style="{StaticResource ButtonStyle}" Background="#FFCDB45E" Command="{Binding CleanerML.Command_Clean}" CommandParameter="5">
+                                                    <Button.ContentTemplate>
+                                                        <DataTemplate>
+                                                            <Grid Width="150" Height="120">
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="auto" />
+                                                                    <ColumnDefinition Width="10" />
+                                                                    <ColumnDefinition Width="*" />
+                                                                </Grid.ColumnDefinitions>
 
-                                                    <Image Width="32" Height="32" Source="Assets/clean_moderate.png" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                                <Image Width="32" Height="32" Source="Assets/clean_moderate.png" HorizontalAlignment="Center" VerticalAlignment="Center" />
 
-                                                    <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Foreground="White" Grid.Column="2" VerticalAlignment="Top" FontSize="20">
+                                                                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Foreground="White" Grid.Column="2" VerticalAlignment="Top" FontSize="20">
                                                     Moderate Cleaning
                                                     <LineBreak />
                                                     <Run Text="Like Safe Cleaning, it also cleans caches, browser cookies, and logs" FontSize="12" />
-                                                    </TextBlock>
-                                                </Grid>
-                                            </DataTemplate>
-                                        </Button.ContentTemplate>
-                                    </Button>
-                                    <TextBlock Text=" " />
-                                    <Button Style="{StaticResource ButtonStyle}" Background="#FFCD5E5E" Command="{Binding CleanerML.Command_Clean}">
-                                        <Button.ContentTemplate>
-                                            <DataTemplate>
-                                                <Grid Width="150" Height="120">
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="auto" />
-                                                        <ColumnDefinition Width="10" />
-                                                        <ColumnDefinition Width="*" />
-                                                    </Grid.ColumnDefinitions>
+                                                                </TextBlock>
+                                                            </Grid>
+                                                        </DataTemplate>
+                                                    </Button.ContentTemplate>
+                                                </Button>
+                                                <TextBlock Text=" " />
+                                                <Button Style="{StaticResource ButtonStyle}" Background="#FFCD5E5E" Command="{Binding CleanerML.Command_Clean}" CommandParameter="6">
+                                                    <Button.ContentTemplate>
+                                                        <DataTemplate>
+                                                            <Grid Width="150" Height="120">
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="auto" />
+                                                                    <ColumnDefinition Width="10" />
+                                                                    <ColumnDefinition Width="*" />
+                                                                </Grid.ColumnDefinitions>
 
-                                                    <Image Width="32" Height="32" Source="Assets/clean_aggresive.png" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                                <Image Width="32" Height="32" Source="Assets/clean_aggresive.png" HorizontalAlignment="Center" VerticalAlignment="Center" />
 
-                                                    <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Foreground="White" Grid.Column="2" VerticalAlignment="Top" FontSize="20">
+                                                                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Foreground="White" Grid.Column="2" VerticalAlignment="Top" FontSize="20">
                                                     Aggressive Cleaning
                                                     <LineBreak />
                                                     <Run Text="Cleans everything from temporary files to browser databases" FontSize="12" />
-                                                    </TextBlock>
-                                                </Grid>
-                                            </DataTemplate>
-                                        </Button.ContentTemplate>
-                                    </Button>
-                                </StackPanel>
-                            </StackPanel>
+                                                                </TextBlock>
+                                                            </Grid>
+                                                        </DataTemplate>
+                                                    </Button.ContentTemplate>
+                                                </Button>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </Grid>
+                                </Border>
+                            </Grid>
                         </Grid>
-                    </Border>
-                </Grid>
+                    </TabItem>
+                    <TabItem Header="Duplicate Checker">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            
+                            <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
+                                <Border Padding="5" Background="{StaticResource InfoTip_Background}">
+                                    <TextBlock>
+                                        <Run Text="This will scan the folders you selected for duplicate file entries." />
+                                    </TextBlock>
+                                </Border>
+                            </Grid>
+
+                            <Grid Grid.Row="1" Grid.Column="0" Background="{StaticResource DupChecker_Panel_FileOperation}" Visibility="{Binding DupChecker.FileOperationPanelShow, Converter={StaticResource boolTovis}}" Width="160">
+                                <StackPanel Margin="5">
+                                    <StackPanel.Resources>
+                                        <Style TargetType="{x:Type TextBlock}">
+                                            <Setter Property="Foreground" Value="{StaticResource DupChecker_Panel_FileOperation_Texts}" />
+                                        </Style>
+                                        <Style TargetType="{x:Type RadioButton}">
+                                            <Setter Property="Foreground" Value="{StaticResource DupChecker_Panel_FileOperation_Texts}" />
+                                        </Style>
+                                    </StackPanel.Resources>
+
+                                    <Button Content="Select Folders" Style="{StaticResource ButtonStyle}" Command="{Binding DupChecker.Command_ShowPrefWindow}" Visibility="Visible" IsEnabled="{Binding DupChecker.EnableSelectFolder}"/>
+                                    <TextBlock Text=" " />
+                                    <Button Content="Scan Folders" Style="{StaticResource ButtonStyle}" Command="{Binding DupChecker.Command_CheckDuplicate}" Visibility="Visible" IsEnabled="{Binding DupChecker.EnableScanFolder}"/>
+                                    <ProgressBar Height="10" Maximum="{Binding DupChecker.ProgressMax}" Value="{Binding DupChecker.ProgressIndex}" Style="{StaticResource ProgressBarStyle}" />
+                                    <TextBlock Text=" " />
+                                    <TextBlock Text="Select what to do with duplicate files" TextWrapping="Wrap" />
+                                    <TextBlock Text=" " />
+                                    <RadioButton IsChecked="{Binding DupChecker.IsMove, Mode=TwoWay}" Content="Move files" Tag="Move" x:Name="rbMoveFiles" GroupName="DupCheck_FileOperation" />
+                                    <RadioButton IsChecked="{Binding DupChecker.IsDelete, Mode=TwoWay}" Content="Delete files" Tag="Delete" x:Name="rbDeleteFiles" GroupName="DupCheck_FileOperation" />
+                                    <TextBlock Text=" " />
+                                    <Button x:Name="btnOK" Content="Remove Duplicates" Style="{StaticResource ButtonStyle}" Command="{Binding DupChecker.Command_Start}" Visibility="Visible" IsEnabled="{Binding DupChecker.EnableRemoveDuplicates}" />
+                                </StackPanel>
+                            </Grid>
+
+                            <Grid Grid.Column="1" Grid.Row="1">
+                                <ListView ItemsSource="{Binding Source={StaticResource ListViewSource}}" 
+                                                      ItemContainerStyle="{StaticResource ListViewItemStyle}"
+                                                      x:Name="lvDuplicateFiles">
+                                    <ListView.View>
+                                        <GridView>
+                                            <GridViewColumn Header="File" Width="200">
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <CheckBox IsChecked="{Binding Selected, Mode=TwoWay}" />
+                                                            <TextBlock Text=" " />
+                                                            <TextBlock Text="{Binding FileDetails.Filename}" />
+                                                        </StackPanel>
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                            <GridViewColumn Header="Path" Width="300" DisplayMemberBinding="{Binding FileDetails.ParentDirectory}" />
+                                        </GridView>
+                                    </ListView.View>
+
+                                    <ListView.GroupStyle>
+                                        <GroupStyle>
+                                            <GroupStyle.ContainerStyle>
+                                                <Style TargetType="{x:Type GroupItem}">
+                                                    <Setter Property="Template">
+                                                        <Setter.Value>
+                                                            <ControlTemplate>
+                                                                <Expander IsExpanded="True">
+                                                                    <Expander.Header>
+                                                                        <StackPanel Orientation="Horizontal">
+                                                                            <TextBlock Text="{Binding Name}" VerticalAlignment="Center" FontWeight="Bold" />
+                                                                            <TextBlock Text=" (" />
+                                                                            <TextBlock Text="{Binding ItemCount}" VerticalAlignment="Center" />
+                                                                            <TextBlock Text=") items" VerticalAlignment="Center" />
+                                                                        </StackPanel>
+                                                                    </Expander.Header>
+                                                                    <ItemsPresenter />
+                                                                </Expander>
+                                                            </ControlTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </Style>
+                                            </GroupStyle.ContainerStyle>
+                                        </GroupStyle>
+                                    </ListView.GroupStyle>
+                                </ListView>
+                            </Grid>
+                        </Grid>
+                    </TabItem>
+                </TabControl>
             </Grid>
         </Grid>
 
+        <ucw:ClamWindowVirusScan Visibility="{Binding Clam.ShowClamWinVirusScanner, Converter={StaticResource boolTovis}}" />
         <ucw:ClamWindow Visibility="{Binding Clam.ShowClamWinVirusUpdateWindow, Converter={StaticResource boolTovis}}"/>
         <ucw:PreferencesWindow Visibility="{Binding Prefs.ShowWindow, Converter={StaticResource boolTovis}}"/>
         <ucw:ShredWindow Visibility="{Binding ShredWindow.ShowWindow, Converter={StaticResource boolTovis}}" />

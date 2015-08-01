@@ -85,6 +85,76 @@ namespace mCleaner.ViewModel
                 }
             }
         }
+
+        private int _ProgressMax = 0;
+        public int ProgressMax
+        {
+            get { return _ProgressMax; }
+            set
+            {
+                if (_ProgressMax != value)
+                {
+                    _ProgressMax = value;
+                    base.RaisePropertyChanged("ProgressMax");
+                }
+            }
+        }
+
+        private int _ProgressIndex = 0;
+        public int ProgressIndex
+        {
+            get { return _ProgressIndex; }
+            set
+            {
+                if (_ProgressIndex != value)
+                {
+                    _ProgressIndex = value;
+                    base.RaisePropertyChanged("ProgressIndex");
+                }
+            }
+        }
+
+        private bool _EnableSelectFolder = false;
+        public bool EnableSelectFolder
+        {
+            get { return _EnableSelectFolder; }
+            set
+            {
+                if (_EnableSelectFolder != value)
+                {
+                    _EnableSelectFolder = value;
+                    base.RaisePropertyChanged("EnableSelectFolder");
+                }
+            }
+        }
+
+        private bool _EnableScanFolder = false;
+        public bool EnableScanFolder
+        {
+            get { return _EnableScanFolder; }
+            set
+            {
+                if (_EnableScanFolder != value)
+                {
+                    _EnableScanFolder = value;
+                    base.RaisePropertyChanged("EnableScanFolder");
+                }
+            }
+        }
+
+        private bool _EnableRemoveDuplicates = false;
+        public bool EnableRemoveDuplicates
+        {
+            get { return _EnableRemoveDuplicates; }
+            set
+            {
+                if (_EnableRemoveDuplicates != value)
+                {
+                    _EnableRemoveDuplicates = value;
+                    base.RaisePropertyChanged("EnableRemoveDuplicates");
+                }
+            }
+        }
         #endregion
 
         #region commands
@@ -126,6 +196,11 @@ namespace mCleaner.ViewModel
             }
             else
             {
+                this.EnableSelectFolder = true;
+                this.EnableScanFolder = true;
+                this.EnableRemoveDuplicates = true;
+
+                FileOperationPanelShow = true;
                 this.Command_Start = new RelayCommand(Command_Start_Click);
                 this.Command_CheckDuplicate = new RelayCommand(Command_CheckDuplicate_Click);
                 this.Command_ShowDupTab = new RelayCommand(Command_ShowDupTab_Click);
@@ -143,15 +218,20 @@ namespace mCleaner.ViewModel
         public void Command_CheckDuplicate_Click()
         {
             CommandLogic_DuplicateChecker.I.CheckDuplicates();
+
+            this.EnableRemoveDuplicates = false;
+            this.EnableScanFolder = false;
+            this.EnableSelectFolder = false;
         }
 
         public void Command_ShowDupTab_Click()
         {
-            CleanerML.Run = true;
-            CleanerML.ShowFrontPage = false;
-            CleanerML.ShowCleanerDescription = false;
+            //CleanerML.Run = true;
+            //CleanerML.ShowFrontPage = false;
+            //CleanerML.ShowCleanerDescription = false;
             CleanerML.SelectedTabIndex = 1;
-            this.FileOperationPanelShow = true;
+            //this.CleanerML.TextLog = "Check duplicates";
+            //this.FileOperationPanelShow = true;
         }
 
         public void Command_ShowPrefWindow_Click()

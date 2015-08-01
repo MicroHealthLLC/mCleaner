@@ -21,4 +21,8 @@
     <SolidColorBrush x:Key="ListView_Item_MouseOver"                Color="#00E8D0A9" />
     <SolidColorBrush x:Key="ListView_Item_Selected"                 Color="#00E8D0A9" />
     <SolidColorBrush x:Key="InfoTip_Background"                     Color="#FFFBFFA9" />
+    <SolidColorBrush x:Key="TabItem.Static.Background"              Color="#F5FaFa" />
+    <SolidColorBrush x:Key="TabItem.Static.Border"                  Color="#F5FaFa"/>
+    <SolidColorBrush x:Key="TabItem.MouseOver.Background"           Color="#acd1e9" />
+    <SolidColorBrush x:Key="TabItem.MouseOver.Border"               Color="#acd1e9"/>
 </ResourceDictionary>

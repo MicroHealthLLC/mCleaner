@@ -83,7 +83,7 @@ namespace mCleaner.Logics.Commands
                             WhatKind = THINGS_TO_DELETE.registry_name,
                             command = COMMANDS.winreg,
                             search = SEARCH.winreg_delete_entries,
-                            level = Action.level,
+                            level = Action.parent_option.level,
                             cleaner_name = Action.parent_option.label
                         });
                     }
@@ -112,7 +112,7 @@ namespace mCleaner.Logics.Commands
                         WhatKind = THINGS_TO_DELETE.registry_key,
                         command = COMMANDS.winreg,
                         search = SEARCH.none,
-                        level = Action.level,
+                        level = Action.parent_option.level,
                         cleaner_name = Action.parent_option.label
                     });
                 }

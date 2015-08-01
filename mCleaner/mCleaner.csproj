@@ -225,9 +225,13 @@
     <Compile Include="Model\Model_CleanerML.cs" />
     <Compile Include="Model\Model_DuplicateChecker.cs" />
     <Compile Include="Model\Model_ThingsToDelete.cs" />
+    <Compile Include="Model\Model_VirusDetails.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="UserControls\Window\ClamWindow.xaml.cs">
       <DependentUpon>ClamWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Window\ClamWindowVirusScan.xaml.cs">
+      <DependentUpon>ClamWindowVirusScan.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Window\PreferencesWindow.xaml.cs">
       <DependentUpon>PreferencesWindow.xaml</DependentUpon>
@@ -255,6 +259,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Assets\Styles\ListViewStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Assets\Styles\TabControlStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -292,6 +300,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\Window\ClamWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Window\ClamWindowVirusScan.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -351,7 +363,7 @@
     <Resource Include="Assets\cleam_safe_.png" />
     <Resource Include="Assets\clean_safe_2.png" />
     <Resource Include="Assets\Clean_now.png" />
-    <Content Include="Clam\.clamwin\db\readme.txt">
+    <Content Include="Clam\db\readme.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Clam\Microsoft.VC80.CRT.manifest">
@@ -386,6 +398,7 @@
     <Resource Include="Assets\Preview.png" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Clam\.clamwin\db\" />
     <Folder Include="Logics\Structs\" />
     <Folder Include="SQLite\" />
   </ItemGroup>

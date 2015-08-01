@@ -60,7 +60,7 @@ namespace mCleaner.Logics.Commands
                     WhatKind = THINGS_TO_DELETE.clamwin,
                     command = command,
                     search = SEARCH.file,
-                    level = Action.level,
+                    level = Action.parent_option.level,
                     cleaner_name = Action.parent_option.label
                 });
             }

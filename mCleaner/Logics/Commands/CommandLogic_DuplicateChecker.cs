@@ -1,19 +1,18 @@
-﻿using CodeBureau;
-using mCleaner.Helpers;
-using mCleaner.Logics.Enumerations;
-using mCleaner.Model;
-using mCleaner.Properties;
-using mCleaner.ViewModel;
-using Microsoft.Practices.ServiceLocation;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Collections.Specialized;
 using System.Threading.Tasks;
+using CodeBureau;
+using mCleaner.Helpers;
+using mCleaner.Logics.Enumerations;
+using mCleaner.Model;
+using mCleaner.Properties;
+using mCleaner.ViewModel;
+using Microsoft.Practices.ServiceLocation;
 
 namespace mCleaner.Logics.Commands
 {
@@ -75,7 +74,7 @@ namespace mCleaner.Logics.Commands
                 command = COMMANDS.dupchecker,
                 search = SEARCH.dupchecker_all,
                 path = string.Empty,
-                level = Action.level,
+                level = Action.parent_option.level,
                 cleaner_name = Action.parent_option.label
             });
         }
@@ -110,6 +109,10 @@ namespace mCleaner.Logics.Commands
                 //EnqueueCustomPath(path);
                 await Task.Run(() => ScanPath(path));
             }
+
+            this.DupChecker.EnableRemoveDuplicates = true;
+            this.DupChecker.EnableScanFolder = true;
+            this.DupChecker.EnableSelectFolder = true;
         }
 
         public void ScanPath(string path)
@@ -122,8 +125,10 @@ namespace mCleaner.Logics.Commands
             //Dictionary<string, List<string>> files_with_same_size = new Dictionary<string,List<string>>();
             Dictionary<long, List<string>> files_with_same_size = new Dictionary<long,List<string>>();
             ProgressWorker.I.EnQ("Checking for same file size. This may take a while"); // to minimize work load looking for duplicate files
-            base.VMCleanerML.MaxProgress = files.Count;
-            base.VMCleanerML.ProgressIndex = 0;
+            //base.VMCleanerML.MaxProgress = files.Count;
+            //base.VMCleanerML.ProgressIndex = 0;
+            this.DupChecker.ProgressMax = files.Count;
+            this.DupChecker.ProgressIndex = 0;
             foreach (string file in files)
             {
                 bool add = true;
@@ -159,10 +164,10 @@ namespace mCleaner.Logics.Commands
                     }
                 }
 
-                base.VMCleanerML.ProgressIndex++;
+                this.DupChecker.ProgressIndex++;
             }
 
-            base.VMCleanerML.ProgressIndex = 0;
+            this.DupChecker.ProgressIndex = 0;
 
             ProgressWorker.I.EnQ("Please wait while hashing files. This may take a while");
             // get all the files we need to hash
@@ -174,12 +179,12 @@ namespace mCleaner.Logics.Commands
                     files_to_hash.AddRange(files_with_same_size[filesize].ToArray());
                 }
 
-                base.VMCleanerML.ProgressIndex++;
+                this.DupChecker.ProgressIndex++;
             }
 
             List<string> hashed_files = new List<string>();
-            base.VMCleanerML.MaxProgress = files_to_hash.Count;
-            base.VMCleanerML.ProgressIndex = 0;
+            this.DupChecker.ProgressMax = files_to_hash.Count;
+            this.DupChecker.ProgressIndex = 0;
 
             //if (files_to_hash.Count / 5 > 50)
             //{
@@ -222,15 +227,15 @@ namespace mCleaner.Logics.Commands
                         Debug.WriteLine(ex.Message);
                     }
 
-                    base.VMCleanerML.ProgressIndex++;
+                    this.DupChecker.ProgressIndex++;
                 }
             }
             
 
             ProgressWorker.I.EnQ("Finalizing ...");
             Dictionary<string, List<string>> files_with_same_hash = new Dictionary<string, List<string>>();
-            base.VMCleanerML.MaxProgress = hashed_files.Count;
-            base.VMCleanerML.ProgressIndex = 0;
+            this.DupChecker.ProgressMax = hashed_files.Count;
+            this.DupChecker.ProgressIndex = 0;
 
             foreach (string hashedfile in hashed_files)
             {
@@ -250,7 +255,7 @@ namespace mCleaner.Logics.Commands
                     files_with_same_hash.Add(hash, new List<string>());
                     files_with_same_hash[hash].Add(file);
                 }
-                base.VMCleanerML.ProgressIndex++;
+                this.DupChecker.ProgressIndex++;
             }
 
             List<string> teremove = new List<string>();
@@ -267,8 +272,8 @@ namespace mCleaner.Logics.Commands
             
             App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
             {
-                base.VMCleanerML.MaxProgress = files_with_same_hash.Count;
-                base.VMCleanerML.ProgressIndex = 0;
+                this.DupChecker.ProgressMax = files_with_same_hash.Count;
+                this.DupChecker.ProgressIndex = 0;
                 foreach (string entry in files_with_same_hash.Keys)
                 {
                     for (int i = 0; i < files_with_same_hash[entry].ToArray().Length; i++)
@@ -312,8 +317,8 @@ namespace mCleaner.Logics.Commands
             List<Model_DuplicateChecker> errors = new List<Model_DuplicateChecker>();
             List<Model_DuplicateChecker> done = new List<Model_DuplicateChecker>();
 
-            base.VMCleanerML.MaxProgress = (from a in files where a.Selected select a).ToList().Count;
-            base.VMCleanerML.ProgressIndex = 0;
+            this.DupChecker.ProgressMax = (from a in files where a.Selected select a).ToList().Count;
+            this.DupChecker.ProgressIndex = 0;
             foreach (Model_DuplicateChecker dc in files)
             {
                 if (dc.Selected)
@@ -377,7 +382,7 @@ namespace mCleaner.Logics.Commands
                         }
                     }
 
-                    base.VMCleanerML.ProgressIndex++;
+                    this.DupChecker.ProgressIndex++;
                 }
             }
         }

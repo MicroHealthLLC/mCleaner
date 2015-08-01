@@ -147,7 +147,7 @@ namespace mCleaner.Logics.Commands
                             command = COMMANDS.delete,
                             search = SEARCH.file,
                             path = string.Empty,
-                            level = Action.level,
+                            level = Action.parent_option.level,
                             cleaner_name = Action.parent_option.label
                         });
                     }
@@ -213,7 +213,7 @@ namespace mCleaner.Logics.Commands
                                 command = COMMANDS.delete,
                                 search = include_dir ? SEARCH.walk_all : SEARCH.walk_files,
                                 path = di.FullName,
-                                level = Action.level,
+                                level = Action.parent_option.level,
                                 cleaner_name = Action.parent_option.label
                             });
                         }
@@ -262,7 +262,7 @@ namespace mCleaner.Logics.Commands
                                 command = COMMANDS.delete,
                                 search = SEARCH.glob,
                                 path = di.FullName,
-                                level = Action.level,
+                                level = Action.parent_option.level,
                                 cleaner_name = Action.parent_option.label
                             });
                         }
@@ -288,7 +288,7 @@ namespace mCleaner.Logics.Commands
                                 command = COMMANDS.delete,
                                 search = SEARCH.glob,
                                 path = fi.Directory.FullName,
-                                level = Action.level,
+                                level = Action.parent_option.level,
                                 cleaner_name = Action.parent_option.label
                             });
                         }

@@ -13,6 +13,7 @@
                 <ResourceDictionary Source="Assets\Styles\ToolbarStyle.xaml" />
                 <ResourceDictionary Source="Assets\Styles\ListViewStyle.xaml" />
                 <ResourceDictionary Source="Assets\Styles\ProgressBarStyle.xaml" />
+                <ResourceDictionary Source="Assets\Styles\TabControlStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

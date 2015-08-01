@@ -1,12 +1,4 @@
-﻿using CodeBureau;
-using mCleaner.Helpers;
-using mCleaner.Logics.Commands;
-using mCleaner.Logics.Enumerations;
-using mCleaner.Model;
-using mCleaner.Properties;
-using mCleaner.ViewModel;
-using Microsoft.Practices.ServiceLocation;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
@@ -14,10 +6,22 @@ using System.Diagnostics;
 using System.IO;
 using System.Windows;
 
+using CodeBureau;
+
+using mCleaner.Helpers;
+using mCleaner.Logics.Commands;
+using mCleaner.Logics.Enumerations;
+using mCleaner.Model;
+using mCleaner.Properties;
+using mCleaner.ViewModel;
+
+using Microsoft.Practices.ServiceLocation;
+
 namespace mCleaner.Logics.Clam
 {
     public class CommandLogic_Clam : iActions
     {
+        #region local vars
         BackgroundWorker bgWorker = new BackgroundWorker();
         Process update_process = new Process();
 
@@ -27,11 +31,23 @@ namespace mCleaner.Logics.Clam
         string _exec_clam_db_path= string.Empty;
         List<string> log = new List<string>();
 
+        public bool isUpdate = false;
+        bool IsRemove = false;
+        #endregion
+
+        #region properties
         public ViewModel_Clam Clam
         {
             get
             {
                 return ServiceLocator.Current.GetInstance<ViewModel_Clam>();
+            }
+        }
+        public ViewModel_Preferences Prefs
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<ViewModel_Preferences>();
             }
         }
 
@@ -47,7 +63,9 @@ namespace mCleaner.Logics.Clam
                 }
             }
         }
+        #endregion
 
+        #region ctor
         public CommandLogic_Clam()
         {
             this._exec_path = System.AppDomain.CurrentDomain.BaseDirectory;
@@ -60,7 +78,87 @@ namespace mCleaner.Logics.Clam
         }
         static CommandLogic_Clam _i = new CommandLogic_Clam();
         public static CommandLogic_Clam I { get { return _i; } }
+        #endregion
 
+        #region events
+        void bgWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            // oh that's just lame
+            string exepath = e.Argument.ToString().Split('|')[0];
+            string args = e.Argument.ToString().Split('|')[1];
+
+            //ProcessStartInfo startInfo = new ProcessStartInfo(Path.Combine(this._exec_clam, "freshclam.exe"), e.Argument.ToString())
+            ProcessStartInfo startInfo = new ProcessStartInfo(exepath, args)
+            {
+                WindowStyle = ProcessWindowStyle.Hidden,
+                UseShellExecute = false,
+                RedirectStandardOutput = true,
+                CreateNoWindow = true,
+            };
+
+            update_process = new Process()
+            {
+                StartInfo = startInfo
+            };
+            update_process.OutputDataReceived += process_OutputDataReceived;
+            update_process.Start();
+            update_process.BeginOutputReadLine();
+            update_process.WaitForExit();
+
+            // check if we ran freshclam to update virus definition database
+            if (exepath.Contains("freshclam.exe"))
+            {
+                // se we can save the date
+                Settings.Default.ClamWin_Update = false;
+                Settings.Default.ClamWin_LastDBUpdate = DateTime.Now;
+                Settings.Default.Save();
+            }
+        }
+
+        void bgWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            UpdateProgressLog("************************************");
+            UpdateProgressLog("DONE                                ");
+            UpdateProgressLog("************************************");
+
+            this.Clam.ShowClamWinVirusUpdateWindow = false;
+
+            if (this.Clam.InfectedFilesCollection.Count == 0)
+            {
+                UpdateProgressLog("No virus found");
+                this.Clam.EnableCleanNowButton = false;
+                this.Clam.EnableCancelButton = false;
+                this.Clam.EnableCloseButton = true;
+            }
+            else
+            {
+                // if virus found
+                this.Clam.EnableCleanNowButton = true;
+                this.Clam.EnableCancelButton = false;
+                this.Clam.EnableCloseButton = true;
+
+                if (this.IsRemove)
+                {
+                    UpdateProgressLog(string.Format("{0} virus removed", this.Clam.InfectedFilesCollection.Count));
+                }
+                else
+                {
+                    UpdateProgressLog(string.Format("{0} virus found! Click 'Clean Now'!", this.Clam.InfectedFilesCollection.Count));
+                }
+            }
+        }
+
+        void process_OutputDataReceived(object sender, DataReceivedEventArgs e)
+        {
+
+            if (!this.update_process.HasExited)
+            {
+                UpdateProgressLog(e.Data);
+            }
+        }
+        #endregion
+
+        #region methods
         public void Enqueue(bool apply = false)
         {
             SEARCH search = (SEARCH)StringEnum.Parse(typeof(SEARCH), Action.search);
@@ -169,68 +267,30 @@ namespace mCleaner.Logics.Clam
             }
         }
 
-        void bgWorker_DoWork(object sender, DoWorkEventArgs e)
-        {
-                                // oh that's just lame
-            string exepath      = e.Argument.ToString().Split('|')[0];
-            string args         = e.Argument.ToString().Split('|')[1];
-
-            //ProcessStartInfo startInfo = new ProcessStartInfo(Path.Combine(this._exec_clam, "freshclam.exe"), e.Argument.ToString())
-            ProcessStartInfo startInfo = new ProcessStartInfo(exepath, args)
-            {
-                WindowStyle = ProcessWindowStyle.Hidden,
-                UseShellExecute = false,
-                RedirectStandardOutput = true,
-                CreateNoWindow = true,
-            };
-
-            update_process = new Process()
-            {
-                StartInfo = startInfo
-            };
-            update_process.OutputDataReceived += process_OutputDataReceived;
-            update_process.Start();
-            update_process.BeginOutputReadLine();
-            update_process.WaitForExit();
-
-            if (exepath.Contains("freshclam.exe"))
-            {
-                Settings.Default.ClamWin_Update = false;
-                Settings.Default.ClamWin_LastDBUpdate = DateTime.Now;
-                Settings.Default.Save();
-            }
-        }
-
-        void bgWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            UpdateProgressLog("************************************");
-            UpdateProgressLog("DONE                                ");
-            UpdateProgressLog("************************************");
-
-            this.Clam.ShowClamWinVirusUpdateWindow = false;
-        }
-
-        void process_OutputDataReceived(object sender, DataReceivedEventArgs e)
-        {
-            if (!this.update_process.HasExited)
-            {
-                UpdateProgressLog(e.Data);
-            }
-        }
-
         /// <summary>
         /// Scan custom paths
         /// </summary>
-        public void LaunchCleaner()
+        public void LaunchCleaner(bool remove = false)
         {
-            // get custom paths from settings
-            List<string> paths = new List<string>();
-            foreach (string path in Settings.Default.ClamWin_ScanLocations)
+            if (Settings.Default.ClamWin_ScanLocations.Count != 0)
             {
-                paths.Add(path);
-            }
+                this.Clam.ShowClamWinVirusScanner = true;
+                // get custom paths from settings
+                List<string> paths = new List<string>();
+                foreach (string path in Settings.Default.ClamWin_ScanLocations)
+                {
+                    paths.Add(path);
+                }
 
-            LaunchScanner(SEARCH.clamscan_folderfile, string.Join("|", paths.ToArray()), true);
+                this.IsRemove = remove;
+                LaunchScanner(SEARCH.clamscan_folderfile, string.Join("|", paths.ToArray()), true, remove: remove);
+            }
+            else
+            {
+                MessageBox.Show("You do not have folder selected where to scan for a virus.", "mCleaner", MessageBoxButton.OK, MessageBoxImage.Information);
+                this.Prefs.ShowWindow = true;
+                this.Prefs.SelectedTabIndex = 2;
+            }
         }
 
         public void LaunchUpdater()
@@ -239,6 +299,8 @@ namespace mCleaner.Logics.Clam
 
             this.log.Clear();
             this.Clam.ShowClamWinVirusUpdateWindow = true;
+            this.Clam.EnableCancelButton = true;
+            this.Clam.EnableCloseButton = true;
             this.Clam.WindowTitle = "Update Virus Definition Database";
             UpdateProgressLog("╔═══════════════════════════════════════════════╗");
             UpdateProgressLog("║ Starting to update virus definition database. ║");
@@ -260,8 +322,16 @@ namespace mCleaner.Logics.Clam
             bgWorker.RunWorkerAsync(Path.Combine(this._exec_clam, "freshclam.exe") + "|" + fullparam);
         }
 
-        public void LaunchScanner(SEARCH search, string path, bool launchinbackground = false, string regex = null)
+        public void LaunchScanner(SEARCH search, string path, bool launchinbackground = false, string regex = null, bool remove = false)
         {
+            this.Clam.InfectedFilesCollection.Clear();
+            this.Clam.WindowTitle = "Scan custom locations for viruses";
+            this.Clam.EnableCleanNowButton = false;
+            this.Clam.EnableCancelButton = true;
+            this.Clam.EnableCloseButton = true;
+
+            this.WriteConfig();
+
             List<string> param = new List<string>() {
                 //"--tempdir \"{0}\"",
                 //"--keep-mbox",
@@ -271,12 +341,17 @@ namespace mCleaner.Logics.Clam
                 "--infected",
                 "--show-progress",
                 "--kill",
-                //"--recursive"
+                "--recursive=yes"
             };
+
+            if (remove)
+            {
+                param.Add("--remove=yes");
+            }
 
             // if max files are declared
             StringCollection max = Settings.Default.ClamWin_Max;
-            string[] limits = {
+            string[] limits  = {
                                   "--max-files=" + max[0],
                                   "--max-scansize=" + max[1],
                                   "--max-recursion=" + max[2],
@@ -314,6 +389,7 @@ namespace mCleaner.Logics.Clam
                     param.Add("\"" + path + "\"");
                     break;
                 case SEARCH.clamscan_memory:
+                    this.Clam.WindowTitle = "Scan memory for viruses";
                     param.Add("--memory");
                     break;
                 case SEARCH.clamscan_folderfile:
@@ -333,8 +409,6 @@ namespace mCleaner.Logics.Clam
             );
 
             this.log.Clear();
-            this.Clam.WindowTitle = "Scan for virus";
-            this.Clam.ShowClamWinVirusUpdateWindow = true;
             UpdateProgressLog("╔═══════════════════════════════════════════════╗");
             UpdateProgressLog("║ Starting to scan files and folders for virus. ║");
             UpdateProgressLog("╚═══════════════════════════════════════════════╝");
@@ -421,44 +495,122 @@ namespace mCleaner.Logics.Clam
             else
             {
                 // if they exists then let's check how many days since the last update
-                TimeSpan timespan = DateTime.Now - Settings.Default.ClamWin_LastDBUpdate;
-                if (timespan.TotalDays >= Settings.Default.ClamWin_DaysBeforeNotifyToUpdate)
+
+                if (Settings.Default.ClamWin_LastDBUpdate.Ticks > 0)
                 {
-                    MessageBox.Show(string.Format("It's been {0} days since the last time you updated the virus definitions.", timespan.TotalDays), "mCleaner", MessageBoxButton.OK, MessageBoxImage.Information);
-                    Settings.Default.ClamWin_Update = true;
+                    TimeSpan timespan = DateTime.Now - Settings.Default.ClamWin_LastDBUpdate;
+                    if (timespan.TotalDays >= Settings.Default.ClamWin_DaysBeforeNotifyToUpdate)
+                    {
+                        MessageBox.Show(string.Format("It's been {0} days since the last time you updated the virus definitions.", (int)timespan.TotalDays), "mCleaner", MessageBoxButton.OK, MessageBoxImage.Information);
+                        Settings.Default.ClamWin_Update = true;
+                    }
+                }
+                else
+                {
+                    //MessageBox.Show(string.Format("mCleaner was not able to get the date ", ""), "mCleaner", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
         }
 
-        void UpdateProgressLog(string text)
+        void UpdateProgressLog(string data)
         {
-            bool has_logged = false;
-
-            // check if the first 5 character are the same
-            // so we do not add that to our log collection.
-            //if ((this.log.Count > 0 && text != null && text.Length > 5) && this.log[this.log.Count - 1].Substring(0, 5) == text.Substring(0, 5))
-            //{
-            //    // replace the last entry to the newest one
-            //    this.log[this.log.Count - 1] = text;
-            //    has_logged = true;
-            //}
-            //else
+            if (this.isUpdate == false)
             {
-                //if (text.Length > 5 && text != null)
+                #region virus scanner
+                // check for infected files
+                if (!string.IsNullOrEmpty(data))
                 {
-                    has_logged = true;
-                    this.log.Add(text);
+                    if (data.Length > 10) // make sure we have enough string to look for "FOUND" string
+                    {
+                        if (data.Substring(data.Length - 5, 5) == "FOUND")
+                        {
+                            string file = data.Substring(0, data.IndexOf(": "));
+                            string virus = data.Substring(data.IndexOf(": ") + 2).Replace(" FOUND", null);
+
+                            Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+                            {
+                                this.Clam.InfectedFilesCollection.Add(new Model_VirusDetails()
+                                {
+                                    File = file,
+                                    VirusName = virus,
+                                    ColWidth = -1,
+                                    Status = this.IsRemove ? "Removed" : "Infected!"
+                                });
+                            }));
+                        }
+                    }
                 }
+
+                this.Clam.ProgressText = data;
+                Debug.WriteLine(data);
+                #endregion
             }
-
-            if (has_logged)
+            else
             {
-                _preview_log = string.Join("\r\n", this.log.ToArray());
+                #region update
+                bool has_logged = false;
 
-                Help.RunInBackground(() =>
+                if (data == null) return;
+
+                if (log.Count > 0)
                 {
-                    Clam.VirusDefUpdateLog = _preview_log;
-                }, false);
+                    string last_text = log[log.Count - 1];
+                    string new_text = data;
+
+                    if (last_text.Length != new_text.Length) // if they are not in the same lenght, obviously the new text is different
+                    {
+                        log.Add(new_text);
+                    }
+                    else
+                    {
+                        if (!string.IsNullOrEmpty(new_text))
+                        {
+                            if (last_text[0] != new_text[0]) // if both 1st character were not the same, obiosuly the new text is different
+                            {
+                                log.Add(new_text);
+                            }
+                            else
+                            {
+                                string temp = string.Empty;
+                                string diff = string.Empty;
+
+                                for (int i = 0; i < last_text.Length; i++)
+                                {
+                                    if (last_text[i] != new_text[i])
+                                    {
+                                        temp = new_text.Substring(0, i);
+                                        diff = new_text.Substring(i);
+                                        break;
+                                    }
+                                }
+
+                                if (temp == last_text.Substring(0, temp.Length))
+                                {
+                                    log[log.Count - 1] = new_text;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            log.Add(new_text);
+                        }
+                    }
+                }
+                else
+                {
+                    log.Add(data);
+                }
+
+                //if (has_logged)
+                {
+                    _preview_log = string.Join("\r\n", this.log.ToArray());
+
+                    Help.RunInBackground(() =>
+                    {
+                        Clam.VirusDefUpdateLog = _preview_log;
+                    }, false);
+                }
+                #endregion
             }
         }
 
@@ -495,5 +647,6 @@ namespace mCleaner.Logics.Clam
                 a.Write(string.Join("\r\n", config.ToArray()));
             }
         }
+        #endregion
     }
 }

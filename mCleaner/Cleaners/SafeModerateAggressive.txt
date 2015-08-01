@@ -5,6 +5,8 @@ MRU
 search history (considered as MRU)
 crash reportss
 download history
+Clipboard
+dump files
 
 Moderate
 Cache

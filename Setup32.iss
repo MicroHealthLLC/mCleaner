@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "mCleaner"
-#define MyAppVersion "1.0"
+#define MyAppVersion "1.2"
 #define MyAppPublisher "MicroHealth, LLC"
 #define MyAppURL "https://www.microhealthllc.com/"
 #define MyAppExeName "mCleaner.exe"

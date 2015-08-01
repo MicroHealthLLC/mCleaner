@@ -32,7 +32,7 @@ namespace mCleaner.Logics.Commands
                         WhatKind = THINGS_TO_DELETE.system,
                         command = COMMANDS.clipboard,
                         search = SEARCH.clipboard_clear,
-                        level = Action.level,
+                        level = Action.parent_option.level,
                         cleaner_name = Action.parent_option.label
                     });
 

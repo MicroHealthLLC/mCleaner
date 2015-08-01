@@ -267,6 +267,7 @@ namespace mCleaner.ViewModel
             if (base.IsInDesignMode)
             {
                 Run = false;
+                ShowFrontPage = true;
                 ProgressText = "Status goes here";
                 this.ProgressIsIndeterminate = true;
             }
@@ -337,23 +338,30 @@ namespace mCleaner.ViewModel
 
         public void Command_Clean_Click(string i)
         {
-            CleanOption_Safe = false;
-            CleanOption_Moderate = false;
-            CleanOption_Aggressive = false;
+            int level = int.Parse(i);
 
-            CleanOption_Safe = i == "1" ? true : false;
-            CleanOption_Moderate = i == "2" ? true : false;
-            CleanOption_Aggressive = i == "3" ? true : false;
+            if (level <= 3)
+            {
+                CleanOption_Safe = false;
+                CleanOption_Moderate = false;
+                CleanOption_Aggressive = false;
 
-            Properties.Settings.Default.CleanOption = int.Parse(i);
-            Properties.Settings.Default.Save();
+                CleanOption_Safe = (level == 1) ? true : false;
+                CleanOption_Moderate = (level == 2) ? true : false;
+                CleanOption_Aggressive = (level == 3) ? true : false;
 
+                Properties.Settings.Default.CleanOption = level;
+                Properties.Settings.Default.Save();
+            }
+
+            #region check what needs to be checked
             foreach (TreeNode tn in this.CleanersCollection)
             {
                 foreach (TreeNode child in tn.Children)
                 {
                     if (child.Tag is option)
                     {
+                        // reset check status
                         foreach (action a in ((option)child.Tag).action)
                         {
                             child.IsChecked = false;
@@ -362,13 +370,29 @@ namespace mCleaner.ViewModel
 
                         foreach (action a in ((option)child.Tag).action)
                         {
-                            child.IsChecked = a.level <= Convert.ToInt16(i) ? true : false;
+                            if (a.parent_option.level == 0) a.parent_option.level = 3;
+
+                            if (level <= 3)
+                            {
+                                child.IsChecked = a.parent_option.level <= level ? true : false;
+                            }
+                            else
+                            {
+                                child.IsChecked = a.parent_option.level <= level - 3 ? true : false;
+                            }
+#if DEBUG
+                            Console.WriteLine(tn.Name + ", " + ((option)child.Tag).label + ", " + a.parent_option.level);
+#endif
                             break;
                         }
-
-                        //if(((option)tn.Tag))
                     }
                 }
+            }
+            #endregion
+
+            if (level >= 4)
+            {
+                Command_CleanNow_Click();
             }
         }
 
@@ -535,6 +559,7 @@ namespace mCleaner.ViewModel
                         bool isSupported = CleanerML.isSupported;
                         Debug.WriteLine(clnr.label + "> " + isSupported.ToString());
 
+#if !DEBUG
                         if (isSupported)
                         {
                             if (Settings.Default.HideIrrelevantCleaners)
@@ -563,6 +588,7 @@ namespace mCleaner.ViewModel
                                 }
                             }
                         }
+#endif
 
                         if (isSupported)
                         {
@@ -737,13 +763,13 @@ namespace mCleaner.ViewModel
                     int level = 3; // let it be the default
                     int curlevel = Properties.Settings.Default.CleanOption;
 
-                    if (_a.level == 0)
+                    if (_a.parent_option.level == 0)
                     {
                         level = 3;
                     }
                     else
                     {
-                        level = _a.level;
+                        level = _a.parent_option.level;
                     }
 
                     if (level > curlevel)
@@ -994,6 +1020,7 @@ namespace mCleaner.ViewModel
                             label = filepath.Substring(filepath.LastIndexOf("\\") + 1),
                             description = "Check for duplicate entries in " + filepath,
                             warning = "This option is slow!",
+                            level = 2,
                             action = new List<action>()
                         };
 
@@ -1002,7 +1029,6 @@ namespace mCleaner.ViewModel
                             command = "dupchecker",
                             search = "dupchecker.all",
                             path = filepath,
-                            level = 2,
                             parent_option = o,
                         });
 

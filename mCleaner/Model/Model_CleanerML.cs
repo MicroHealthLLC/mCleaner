@@ -130,7 +130,7 @@ namespace mCleaner.Model
         [XmlElement("action")]
         public List<action> action { get; set; }
 
-        [XmlElement("level")]
+        [XmlAttribute("level")]
         // level of cleaning
         // 0 - safe
         // 1 - moderate
@@ -221,8 +221,8 @@ namespace mCleaner.Model
         /// <summary>
         /// 
         /// </summary>
-        [XmlAttribute("level")]
-        public int level { get; set; }
+        //[XmlAttribute("level")]
+        //public int level { get; set; }
 
         [XmlIgnore]
         public option parent_option { get; set; }
