@@ -298,6 +298,7 @@ namespace mCleaner.Logics.Clam
             this.WriteConfig();
 
             this.log.Clear();
+            this.isUpdate = true;
             this.Clam.ShowClamWinVirusUpdateWindow = true;
             this.Clam.EnableCancelButton = true;
             this.Clam.EnableCloseButton = true;
