@@ -114,6 +114,20 @@ namespace mCleaner.ViewModel
             }
         }
 
+        private string _ProgressText = string.Empty;
+        public string ProgressText
+        {
+            get { return _ProgressText; }
+            set
+            {
+                if (_ProgressText != value)
+                {
+                    _ProgressText = value;
+                    base.RaisePropertyChanged("ProgressText");
+                }
+            }
+        }
+
         private bool _EnableSelectFolder = false;
         public bool EnableSelectFolder
         {
@@ -155,6 +169,20 @@ namespace mCleaner.ViewModel
                 }
             }
         }
+
+        private bool _ShowWindow = false;
+        public bool ShowWindow
+        {
+            get { return _ShowWindow; }
+            set
+            {
+                if (_ShowWindow != value)
+                {
+                    _ShowWindow = value;
+                    base.RaisePropertyChanged("ShowWindow");
+                }
+            }
+        }
         #endregion
 
         #region commands
@@ -162,6 +190,7 @@ namespace mCleaner.ViewModel
         public ICommand Command_CheckDuplicate { get; internal set; }
         public ICommand Command_ShowDupTab { get; internal set; }
         public ICommand Command_ShowPrefWindow { get; internal set; }
+        public ICommand Command_CloseWindow { get; internal set; }
         #endregion
 
         #region ctor
@@ -193,6 +222,8 @@ namespace mCleaner.ViewModel
                     FileDetails = new Model_DuplicateChecker_FileDetails() { Filename = "com.com", Fullfilepath = "c:\\windows\\com.com", ParentDirectory = "c:\\windows\\system32" },
                     Hash = "67890"
                 });
+
+                ProgressText = "Status Text";
             }
             else
             {
@@ -205,6 +236,7 @@ namespace mCleaner.ViewModel
                 this.Command_CheckDuplicate = new RelayCommand(Command_CheckDuplicate_Click);
                 this.Command_ShowDupTab = new RelayCommand(Command_ShowDupTab_Click);
                 this.Command_ShowPrefWindow = new RelayCommand(Command_ShowPrefWindow_Click);
+                this.Command_CloseWindow = new RelayCommand(Command_CloseWindow_Click);
             }
         }
         #endregion
@@ -229,15 +261,22 @@ namespace mCleaner.ViewModel
             //CleanerML.Run = true;
             //CleanerML.ShowFrontPage = false;
             //CleanerML.ShowCleanerDescription = false;
-            CleanerML.SelectedTabIndex = 1;
+            //CleanerML.SelectedTabIndex = 1;
             //this.CleanerML.TextLog = "Check duplicates";
             //this.FileOperationPanelShow = true;
+
+            this.ShowWindow = true;
         }
 
         public void Command_ShowPrefWindow_Click()
         {
             this.Prefs.ShowWindow = true;
             this.Prefs.SelectedTabIndex = 3;
+        }
+
+        public void Command_CloseWindow_Click()
+        {
+            this.ShowWindow = false;
         }
         #endregion
 

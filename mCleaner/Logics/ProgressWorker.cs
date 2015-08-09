@@ -1,9 +1,8 @@
-﻿using mCleaner.ViewModel;
-using Microsoft.Practices.ServiceLocation;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
+using mCleaner.ViewModel;
+using Microsoft.Practices.ServiceLocation;
 
 namespace mCleaner.Logics
 {
@@ -15,12 +14,21 @@ namespace mCleaner.Logics
         int _interval_s = 0; // interval when to show the progress text
         DateTime _start = DateTime.Now;
         DateTime _end = DateTime.Now;
+        int _progress_type = 0;
 
         public ViewModel_CleanerML CleanerML
         {
             get
             {
                 return ServiceLocator.Current.GetInstance<ViewModel_CleanerML>();
+            }
+        }
+
+        public ViewModel_DuplicateChecker DupChecker
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<ViewModel_DuplicateChecker>();
             }
         }
 
@@ -72,7 +80,28 @@ namespace mCleaner.Logics
             {
                 if (e.UserState != null)
                 {
-                    this.CleanerML.ProgressText = e.UserState.ToString();
+                    string status = e.UserState.ToString();
+
+                    string[] s = status.Split('|');
+
+                    if (s.Length > 1)
+                    {
+                        this._progress_type = int.Parse(s[1]);
+                    }
+                    else
+                    {
+                        this._progress_type = 0;
+                    }
+
+                    switch (this._progress_type)
+                    {
+                        case 0:
+                            this.CleanerML.ProgressText = s[0];
+                            break;
+                        case 1:
+                            this.DupChecker.ProgressText = s[0];
+                            break;
+                    }
                 }
             }
         }

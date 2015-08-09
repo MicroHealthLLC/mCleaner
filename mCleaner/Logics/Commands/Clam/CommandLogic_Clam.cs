@@ -122,6 +122,7 @@ namespace mCleaner.Logics.Clam
             UpdateProgressLog("************************************");
 
             this.Clam.ShowClamWinVirusUpdateWindow = false;
+            this.Clam.ProgressIsIndeterminate = false;
 
             if (this.Clam.InfectedFilesCollection.Count == 0)
             {
@@ -270,7 +271,7 @@ namespace mCleaner.Logics.Clam
         /// <summary>
         /// Scan custom paths
         /// </summary>
-        public void LaunchCleaner(bool remove = false)
+        public void LaunchCleaner(bool remove = false, Action callback = null)
         {
             if (Settings.Default.ClamWin_ScanLocations.Count != 0)
             {
@@ -283,7 +284,7 @@ namespace mCleaner.Logics.Clam
                 }
 
                 this.IsRemove = remove;
-                LaunchScanner(SEARCH.clamscan_folderfile, string.Join("|", paths.ToArray()), true, remove: remove);
+                LaunchScanner(SEARCH.clamscan_folderfile, string.Join("|", paths.ToArray()), true, remove: remove, callback: callback);
             }
             else
             {
@@ -323,7 +324,7 @@ namespace mCleaner.Logics.Clam
             bgWorker.RunWorkerAsync(Path.Combine(this._exec_clam, "freshclam.exe") + "|" + fullparam);
         }
 
-        public void LaunchScanner(SEARCH search, string path, bool launchinbackground = false, string regex = null, bool remove = false)
+        public void LaunchScanner(SEARCH search, string path, bool launchinbackground = false, string regex = null, bool remove = false, Action callback = null)
         {
             this.Clam.InfectedFilesCollection.Clear();
             this.Clam.WindowTitle = "Scan custom locations for viruses";

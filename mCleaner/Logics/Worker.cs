@@ -1,4 +1,10 @@
-﻿using mCleaner.Helpers;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+using mCleaner.Helpers;
 using mCleaner.Helpers.Data;
 using mCleaner.Logics.Clam;
 using mCleaner.Logics.Commands;
@@ -7,12 +13,6 @@ using mCleaner.Logics.Enumerations;
 using mCleaner.Model;
 using mCleaner.ViewModel;
 using Microsoft.Practices.ServiceLocation;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace mCleaner.Logics
 {
@@ -144,7 +144,7 @@ namespace mCleaner.Logics
 
             while (this.TTD.Count != 0)
             {
-                if (bgWorker.CancellationPending) break;
+                if (bgWorker.CancellationPending || this.VMCleanerML.Cancel) break;
 
                 if (!this.Preview)
                 {
@@ -235,6 +235,12 @@ namespace mCleaner.Logics
 
             foreach (Model_ThingsToDelete ttd in this.TTD)
             {
+                if (this.VMCleanerML.Cancel)
+                {
+                    ProgressWorker.I.EnQ("Operation Canceled");
+                    break;
+                }
+
                 #region execute preview commands
                 switch (ttd.command)
                 {

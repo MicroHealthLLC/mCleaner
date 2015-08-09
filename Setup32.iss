@@ -25,6 +25,9 @@ OutputBaseFilename=setup32
 Compression=lzma
 SolidCompression=yes
 PrivilegesRequired=admin
+LicenseFile=mCleaner\Terms_of_service.txt
+InfoBeforeFile=mCleaner\Terms_of_use.txt
+InfoAfterFile=mCleaner\Privacy_policy.txt
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"

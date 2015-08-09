@@ -29,9 +29,7 @@ namespace mCleaner.ViewModel
     public class ViewModel_CleanerML : ViewModelBase
     {
         public event OnTreeNodeSelected TreeNodeSelected;
-
         string _exec_path = string.Empty;
-
         List<TreeNode> _nodes = new List<TreeNode>();
 
         #region properties
@@ -225,6 +223,20 @@ namespace mCleaner.ViewModel
             }
         }
 
+        private bool _CleanOption_Custom = false;
+        public bool CleanOption_Custom
+        {
+            get { return _CleanOption_Custom; }
+            set
+            {
+                if (_CleanOption_Custom != value)
+                {
+                    _CleanOption_Custom = value;
+                    base.RaisePropertyChanged("CleanOption_Custom");
+                }
+            }
+        }
+
         private int _SelectedTabIndex = 0;
         public int SelectedTabIndex
         {
@@ -252,6 +264,19 @@ namespace mCleaner.ViewModel
                 }
             }
         }
+
+        private bool _Cancel = false;
+        public bool Cancel
+        {
+            get { return _Cancel; }
+            set
+            {
+                if (_Cancel != value)
+                {
+                    _Cancel = value;
+                }
+            }
+        }
         #endregion
 
         #region ctor
@@ -266,8 +291,8 @@ namespace mCleaner.ViewModel
 
             if (base.IsInDesignMode)
             {
-                Run = false;
-                ShowFrontPage = true;
+                Run = true;
+                ShowFrontPage = false;
                 ProgressText = "Status goes here";
                 this.ProgressIsIndeterminate = true;
             }
@@ -279,9 +304,11 @@ namespace mCleaner.ViewModel
 
                 Command_Preview = new RelayCommand(Command_Preview_Click);
                 Command_Clean = new RelayCommand<string>(Command_Clean_Click);
+                Command_CustomCleaningSelection = new RelayCommand(Command_CustomCleaningSelection_Click);
                 Command_CleanNow = new RelayCommand(Command_CleanNow_Click);
                 Command_Quit = new RelayCommand(Command_Quit_Click);
                 Command_CloseCleanerDescription = new RelayCommand(Command_CloseCleanerDescription_Click);
+                Command_Cancel = new RelayCommand(Command_Cancel_Click);
                 //Command_CleanOption = new RelayCommand<string>(new Action<string>((i) =>
                 //{
                 //    /*
@@ -316,9 +343,11 @@ namespace mCleaner.ViewModel
         public ICommand Command_Quit { get; set; }
         public ICommand Command_Preview { get; internal set; }
         public ICommand Command_Clean { get; internal set; }
+        public ICommand Command_CustomCleaningSelection { get; internal set; }
         public ICommand Command_CleanNow { get; internal set; }
         public ICommand Command_CleanOption { get; internal set; }
         public ICommand Command_CloseCleanerDescription { get; internal set; }
+        public ICommand Command_Cancel { get; internal set; }
         #endregion
 
         #region command methods
@@ -326,6 +355,7 @@ namespace mCleaner.ViewModel
         {
             Worker.I.Preview = true;
 
+            this.Cancel = false;
             this.ShowCleanerDescription = false;
             this.ShowFrontPage = false;
             this.Run = true;
@@ -334,11 +364,19 @@ namespace mCleaner.ViewModel
             await Start();
 
             await Worker.I.PreviewWork();
+
+            // some time, user may have cancel the operation
+            if (this.Cancel)
+            {
+                ProgressWorker.I.EnQ("Operation Canceled");
+            }
         }
 
         public void Command_Clean_Click(string i)
         {
+            this.Cancel = false;
             int level = int.Parse(i);
+            this.CleanOption_Custom = false;
 
             if (level <= 3)
             {
@@ -396,14 +434,64 @@ namespace mCleaner.ViewModel
             }
         }
 
+        public void Command_CustomCleaningSelection_Click()
+        {
+            this.CleanOption_Custom = true;
+
+            // uncheck everything first
+            foreach (TreeNode tn in this.CleanersCollection)
+            {
+                foreach (TreeNode child in tn.Children)
+                {
+                    if (child.Tag is option)
+                    {
+                        option o = (option)child.Tag;
+                        child.IsChecked = false;
+                    }
+                }
+            }
+
+            if (Properties.Settings.Default.CustomCleanerSelections == null) return;
+
+            // do we have anything to restore?
+            if (Properties.Settings.Default.CustomCleanerSelections.Count > 0)
+            {
+                List<string> ids = new List<string>();
+                foreach (string id in Properties.Settings.Default.CustomCleanerSelections) ids.Add(id);
+
+                // then restore selection
+                #region check what needs to be checked
+                foreach (TreeNode tn in this.CleanersCollection)
+                {
+                    foreach (TreeNode child in tn.Children)
+                    {
+                        if (child.Tag is option)
+                        {
+                            option o = (option)child.Tag;
+                            child.IsChecked = ids.Contains(o.id + "|" + o.parent_cleaner.id);
+                        }
+                    }
+                }
+                #endregion
+            }
+        }
+
         public async void Command_CleanNow_Click()
         {
+            this.Cancel = false;
             Worker.I.Preview = false;
             this.Run = true;
             this.ShowCleanerDescription = false;
             this.ShowFrontPage = false;
 
             await Start();
+
+            // some time, user may have cancel the operation
+            if (this.Cancel)
+            {
+                ProgressWorker.I.EnQ("Operation Canceled");
+            }
+
             Worker.I.DoWork();
         }
 
@@ -427,13 +515,18 @@ namespace mCleaner.ViewModel
                 this.Run = true;
             }
         }
+
+        public void Command_Cancel_Click()
+        {
+            this.Cancel = true;
+        }
         #endregion
 
         #region Events
         void TreeNode_TreeNodeSelected(object sender, EventArgs e)
         {
             TreeNode root = sender as TreeNode;
-            
+
             //if (root.Parent != null)
             {
                 if (TreeNodeSelected != null)
@@ -477,20 +570,36 @@ namespace mCleaner.ViewModel
                         }
                     }
                 }
+
+                // if the user selected custom cleaning
+                if (this.CleanOption_Custom)
+                {
+                    if (root.IsChecked.Value == true)
+                    {
+                        if (Properties.Settings.Default.CustomCleanerSelections == null) Properties.Settings.Default.CustomCleanerSelections = new System.Collections.Specialized.StringCollection();
+
+                        // then save it
+                        Properties.Settings.Default.CustomCleanerSelections.Add(o.id + "|" + o.parent_cleaner.id);
+                        Properties.Settings.Default.Save();
+                    }
+                }
             }
             else if (root.Tag is cleaner)
             {
 
             }
 
-            if (root.Key.Contains("duplicate_checker"))
-            {
-                SelectedTabIndex = 1;
-            }
-            else
-            {
-                SelectedTabIndex = 0;
-            }
+            // get checked nodes and save it its custom selection
+
+
+            //if (root.Key.Contains("duplicate_checker"))
+            //{
+            //    SelectedTabIndex = 1;
+            //}
+            //else
+            //{
+            //    SelectedTabIndex = 0;
+            //}
         }
         #endregion
 
@@ -544,7 +653,7 @@ namespace mCleaner.ViewModel
                 string[] files = Directory.GetFiles(cleaners_folder, "*.xml");
                 Array.Sort(files);
                 this._nodes.Clear();
-                
+
                 foreach (string filename in files)
                 {
                     TreeNode root = new TreeNode();
@@ -728,8 +837,20 @@ namespace mCleaner.ViewModel
 
             foreach (TreeNode node in this.CleanersCollection)
             {
+                if (this.Cancel)
+                {
+                    ProgressWorker.I.EnQ("Operation Canceled");
+                    break;
+                }
+
                 foreach (TreeNode child in node.Children)
                 {
+                    if (this.Cancel)
+                    {
+                        ProgressWorker.I.EnQ("Operation Canceled");
+                        break;
+                    }
+
                     if (child.IsChecked != null)
                     {
                         if (child.IsChecked.Value)
@@ -759,40 +880,44 @@ namespace mCleaner.ViewModel
             {
                 if (!Worker.I.Preview) // check only when not in preview mode
                 {
-                    #region // check cleaning level
-                    int level = 3; // let it be the default
-                    int curlevel = Properties.Settings.Default.CleanOption;
-
-                    if (_a.parent_option.level == 0)
+                    // if not in custom, check for cleaning level
+                    if (!this.CleanOption_Custom)
                     {
-                        level = 3;
-                    }
-                    else
-                    {
-                        level = _a.parent_option.level;
-                    }
+                        #region // check cleaning level
+                        int level = 3; // let it be the default
+                        int curlevel = Properties.Settings.Default.CleanOption;
 
-                    if (level > curlevel)
-                    {
-                        // do not execute the cleaner when the level set is greater than
-                        // what is in current setting.
-
-                        string level_name = "Aggressive";
-                        if (level == 1) level_name = "Safe";
-                        else if (level == 2) level_name = "Moderate";
-
-                        string text = string.Format("\"{0}\" cleaner skipped because it is set for {1} cleaning level", _a.parent_option.label, level_name);
-
-                        if (last_Log != text)
+                        if (_a.parent_option.level == 0)
                         {
-                            last_Log = text;
-
-                            this.TextLog += text;
+                            level = 3;
+                        }
+                        else
+                        {
+                            level = _a.parent_option.level;
                         }
 
-                        continue;
+                        if (level > curlevel)
+                        {
+                            // do not execute the cleaner when the level set is greater than
+                            // what is in current setting.
+
+                            string level_name = "Aggressive";
+                            if (level == 1) level_name = "Safe";
+                            else if (level == 2) level_name = "Moderate";
+
+                            string text = string.Format("\"{0}\" cleaner skipped because it is set for {1} cleaning level", _a.parent_option.label, level_name);
+
+                            if (last_Log != text)
+                            {
+                                last_Log = text;
+
+                                this.TextLog += text;
+                            }
+
+                            continue;
+                        }
+                        #endregion
                     }
-                    #endregion
                 }
 
                 Console.WriteLine("Executing '{0}' action from '{3}' option in '{4}' cleaner, command with '{1}' search parameter in '{2}' path", _a.command, _a.search, _a.path, _a.parent_option.label, _a.parent_option.parent_cleaner.label);
@@ -874,7 +999,7 @@ namespace mCleaner.ViewModel
             }
         }
 
-        #region System cleaner 
+        #region System cleaner
         public void RefreshSystemCleaners()
         {
             List<TreeNode> nodes_to_remove = new List<TreeNode>();

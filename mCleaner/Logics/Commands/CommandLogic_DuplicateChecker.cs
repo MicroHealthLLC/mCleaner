@@ -119,12 +119,12 @@ namespace mCleaner.Logics.Commands
         {
             List<string> files = FileOperations.I.GetFilesRecursive(path, null, new Action<string>((s) =>
             {
-                ProgressWorker.I.EnQ("Retreiving files in: " + s);
+                ProgressWorker.I.EnQ("Retreiving files in: " + s + "|1");
             }));
 
             //Dictionary<string, List<string>> files_with_same_size = new Dictionary<string,List<string>>();
             Dictionary<long, List<string>> files_with_same_size = new Dictionary<long,List<string>>();
-            ProgressWorker.I.EnQ("Checking for same file size. This may take a while"); // to minimize work load looking for duplicate files
+            ProgressWorker.I.EnQ("Checking for same file size. This may take a while" + "|1"); // to minimize work load looking for duplicate files
             //base.VMCleanerML.MaxProgress = files.Count;
             //base.VMCleanerML.ProgressIndex = 0;
             this.DupChecker.ProgressMax = files.Count;
@@ -169,7 +169,7 @@ namespace mCleaner.Logics.Commands
 
             this.DupChecker.ProgressIndex = 0;
 
-            ProgressWorker.I.EnQ("Please wait while hashing files. This may take a while");
+            ProgressWorker.I.EnQ("Please wait while hashing files. This may take a while" + "|1");
             // get all the files we need to hash
             List<string> files_to_hash = new List<string>();
             foreach (long filesize in files_with_same_size.Keys)
@@ -200,7 +200,7 @@ namespace mCleaner.Logics.Commands
             //                if (j < files_to_hash.Count)
             //                {
             //                    string hash = FileOperations.I.HashFile(files_to_hash[j]);
-            //                    ProgressWorker.I.EnQ("Hashing: " + files_to_hash[j] + " > " + hash);
+            //                    ProgressWorker.I.EnQ("Hashing: " + files_to_hash[j] + " > " + hash + "|1");
             //                    hashed_files.Add(files_to_hash[j] + "|" + hash);
             //                }
             //            }
@@ -219,7 +219,7 @@ namespace mCleaner.Logics.Commands
                     try
                     {
                         string hash = FileOperations.I.HashFile(filename);
-                        ProgressWorker.I.EnQ("Hashing: " + filename + " > " + hash);
+                        ProgressWorker.I.EnQ("Hashing: " + filename + " > " + hash + "|1");
                         hashed_files.Add(filename + "|" + hash);
                     }
                     catch (Exception ex)
@@ -230,9 +230,9 @@ namespace mCleaner.Logics.Commands
                     this.DupChecker.ProgressIndex++;
                 }
             }
-            
 
-            ProgressWorker.I.EnQ("Finalizing ...");
+
+            ProgressWorker.I.EnQ("Finalizing ..." + "|1");
             Dictionary<string, List<string>> files_with_same_hash = new Dictionary<string, List<string>>();
             this.DupChecker.ProgressMax = hashed_files.Count;
             this.DupChecker.ProgressIndex = 0;
@@ -268,7 +268,7 @@ namespace mCleaner.Logics.Commands
                 files_with_same_hash.Remove(key);
             }
 
-            ProgressWorker.I.EnQ("Adding to collection for previewing");
+            ProgressWorker.I.EnQ("Adding to collection for previewing" + "|1");
             
             App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
             {
@@ -343,12 +343,12 @@ namespace mCleaner.Logics.Commands
                             {
                                 if (Properties.Settings.Default.ShredFiles)
                                 {
-                                    ProgressWorker.I.EnQ("Shredding file: " + fi.FullName);
+                                    ProgressWorker.I.EnQ("Shredding file: " + fi.FullName + "|1");
                                     FileOperations.WipeFile(fi.FullName, 5);
                                 }
                                 else
                                 {
-                                    ProgressWorker.I.EnQ("Deleting file: " + fi.FullName);
+                                    ProgressWorker.I.EnQ("Deleting file: " + fi.FullName + "|1");
                                     fi.Delete();
                                 }
 
@@ -357,7 +357,7 @@ namespace mCleaner.Logics.Commands
                             }
                             else if (operation == 1)
                             {
-                                ProgressWorker.I.EnQ("Moving file: " + fi.FullName);
+                                ProgressWorker.I.EnQ("Moving file: " + fi.FullName + "|1");
                                 string moveDir = Properties.Settings.Default.DupChecker_DuplicateFolderPath;
                                 moveDir = Path.Combine(moveDir, fi.Name);
                                 FileInfo fi_moveDir = new FileInfo(moveDir);

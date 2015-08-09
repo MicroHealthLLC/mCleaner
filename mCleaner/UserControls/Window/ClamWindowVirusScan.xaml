@@ -43,7 +43,7 @@
                 </Grid.RowDefinitions>
                 
                 <Grid Grid.Row="0">
-                    <ProgressBar IsIndeterminate="True" Style="{StaticResource ProgressBarStyle}" />
+                    <ProgressBar IsIndeterminate="{Binding Clam.ProgressIsIndeterminate}" Style="{StaticResource ProgressBarStyle}" />
                     <TextBlock Text="{Binding Clam.ProgressText}" Margin="0,5" TextAlignment="Center" />
                 </Grid>
 

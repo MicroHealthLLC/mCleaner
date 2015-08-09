@@ -233,6 +233,9 @@
     <Compile Include="UserControls\Window\ClamWindowVirusScan.xaml.cs">
       <DependentUpon>ClamWindowVirusScan.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\Window\DuplicateScannerWindow.xaml.cs">
+      <DependentUpon>DuplicateScannerWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\Window\PreferencesWindow.xaml.cs">
       <DependentUpon>PreferencesWindow.xaml</DependentUpon>
     </Compile>
@@ -250,35 +253,35 @@
     <Compile Include="ViewModel\ViewModel_Preferences.cs" />
     <Compile Include="ViewModel\ViewModel_ReleaseNotes.cs" />
     <Compile Include="ViewModel\ViewModel_Shred.cs" />
-    <Page Include="Assets\Styles\CleanMenuStyle.xaml">
+    <Page Include="Styles\CleanMenuStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Assets\Styles\ProgressBarStyle.xaml">
+    <Page Include="Styles\ProgressBarStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Assets\Styles\ListViewStyle.xaml">
+    <Page Include="Styles\ListViewStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Assets\Styles\TabControlStyle.xaml">
+    <Page Include="Styles\TabControlStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Assets\Styles\ToolbarStyle.xaml">
+    <Page Include="Styles\ToolbarStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Assets\Styles\Theme.xaml">
+    <Page Include="Styles\Theme.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Assets\Styles\TreeViewStyle.xaml">
+    <Page Include="Styles\TreeViewStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Assets\Styles\ButtonStyle.xaml">
+    <Page Include="Styles\ButtonStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -304,6 +307,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\Window\ClamWindowVirusScan.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Window\DuplicateScannerWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -363,6 +370,9 @@
     <Resource Include="Assets\cleam_safe_.png" />
     <Resource Include="Assets\clean_safe_2.png" />
     <Resource Include="Assets\Clean_now.png" />
+    <Resource Include="Assets\ShredFile.png" />
+    <Resource Include="Assets\ShredFolder.png" />
+    <Resource Include="Assets\clean_custom.png" />
     <Content Include="Clam\db\readme.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

@@ -136,6 +136,20 @@ namespace mCleaner.ViewModel
                 }
             }
         }
+
+        private bool _ProgressIsIndeterminate = false;
+        public bool ProgressIsIndeterminate
+        {
+            get { return _ProgressIsIndeterminate; }
+            set
+            {
+                if (_ProgressIsIndeterminate != value)
+                {
+                    _ProgressIsIndeterminate = value;
+                    base.RaisePropertyChanged("ProgressIsIndeterminate");
+                }
+            }
+        }
         #endregion
 
         #region ctor
@@ -192,6 +206,7 @@ namespace mCleaner.ViewModel
         #region command methods
         public void Command_UpdateVirusDefinition_Click()
         {
+            this.ProgressIsIndeterminate = true;
             this.ShowClamWinVirusUpdateWindow = true;
             CommandLogic_Clam.I.isUpdate = true;
             CommandLogic_Clam.I.LaunchUpdater();
@@ -201,7 +216,8 @@ namespace mCleaner.ViewModel
         {
             //MessageBox.Show("Scheduled for Sprint 3");
             //this.ShowClamWinVirusUpdateWindow = true;;
-            
+
+            this.ProgressIsIndeterminate = true;
             CommandLogic_Clam.I.isUpdate = false;
             CommandLogic_Clam.I.LaunchCleaner();
         }
@@ -221,6 +237,7 @@ namespace mCleaner.ViewModel
         public void Command_ScanMemory_Click()
         {
             //this.ShowClamWinVirusUpdateWindow = true;
+            this.ProgressIsIndeterminate = true;
             this.ShowClamWinVirusScanner = true;
             CommandLogic_Clam.I.isUpdate = false;
             CommandLogic_Clam.I.LaunchScanner(SEARCH.clamscan_memory, string.Empty, true);
