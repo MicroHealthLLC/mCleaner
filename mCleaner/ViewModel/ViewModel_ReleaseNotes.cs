@@ -38,6 +38,16 @@ namespace mCleaner.ViewModel
                 }
             }
         }
+
+        private int _SelectedIndex = 0;
+        public int SelectedIndex
+        {
+            get { return _SelectedIndex; }
+            set
+            {
+                _SelectedIndex = value;
+            }
+        }
         #endregion
 
         #region commands

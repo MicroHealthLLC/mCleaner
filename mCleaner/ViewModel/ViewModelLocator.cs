@@ -49,6 +49,7 @@ namespace mCleaner.ViewModel
             SimpleIoc.Default.Register<ViewModel_Shred>();
             SimpleIoc.Default.Register<ViewModel_DuplicateChecker>();
             SimpleIoc.Default.Register<ViewModel_ReleaseNotes>();
+            SimpleIoc.Default.Register<ViewModel_PrivacyPolicy>();
         }
 
         public MainViewModel Main
@@ -104,6 +105,14 @@ namespace mCleaner.ViewModel
             get
             {
                 return ServiceLocator.Current.GetInstance<ViewModel_ReleaseNotes>();
+            }
+        }
+
+        public ViewModel_PrivacyPolicy PrivacyPolicy
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<ViewModel_PrivacyPolicy>();
             }
         }
 

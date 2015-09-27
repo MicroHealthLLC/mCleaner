@@ -37,7 +37,7 @@
 
             <!-- text area -->
             <Grid Grid.Row="1" Margin="5">
-                <TabControl>
+                <TabControl SelectedIndex="{Binding SelectedIndex}">
                     <TabControl.Items>
                         <TabItem Header="License">
                             <ScrollViewer>

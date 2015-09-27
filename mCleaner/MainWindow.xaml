@@ -67,6 +67,21 @@
                             <Image Width="16" Height="16" Source="Assets/Release Notes.png" />
                         </MenuItem.Icon>
                     </MenuItem>
+                    <MenuItem IsEnabled="True" Header="Privacy Policy" Command="{Binding PrivacyPolicy.Command_Menu_PrivacyPolicy}">
+                        <MenuItem.Icon>
+                            <Image Width="16" Height="16" Source="Assets/Release Notes.png" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem IsEnabled="True" Header="Terms of Use" Command="{Binding PrivacyPolicy.Command_Menu_TermsOfUse}">
+                        <MenuItem.Icon>
+                            <Image Width="16" Height="16" Source="Assets/Release Notes.png" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem IsEnabled="True" Header="Terms of Service" Command="{Binding PrivacyPolicy.Command_Menu_TermsOfService}">
+                        <MenuItem.Icon>
+                            <Image Width="16" Height="16" Source="Assets/Release Notes.png" />
+                        </MenuItem.Icon>
+                    </MenuItem>
                     <MenuItem IsEnabled="True" Header="System Information" Visibility="Collapsed" />
                     <MenuItem IsEnabled="True" Header="About" Visibility="Collapsed">
                         <MenuItem.Icon>
@@ -348,6 +363,7 @@
         <ucw:PreferencesWindow      Visibility="{Binding Prefs.ShowWindow,                  Converter={StaticResource boolTovis}}" />
         <ucw:ShredWindow            Visibility="{Binding ShredWindow.ShowWindow,            Converter={StaticResource boolTovis}}" />
         <ucw:ReleaseNotesWindow     Visibility="{Binding ReleaseNote.ShowWindow,            Converter={StaticResource boolTovis}}" />
+        <ucw:PrivacyPolicy     Visibility="{Binding PrivacyPolicy.ShowWindow,            Converter={StaticResource boolTovis}}" />
 
 
 
