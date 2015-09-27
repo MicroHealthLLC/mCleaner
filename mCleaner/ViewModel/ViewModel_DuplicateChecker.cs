@@ -188,6 +188,9 @@ namespace mCleaner.ViewModel
         #region commands
         public ICommand Command_Start { get; internal set; }
         public ICommand Command_CheckDuplicate { get; internal set; }
+
+        public ICommand Command_Cancel { get; internal set; }
+
         public ICommand Command_ShowDupTab { get; internal set; }
         public ICommand Command_ShowPrefWindow { get; internal set; }
         public ICommand Command_CloseWindow { get; internal set; }
@@ -237,6 +240,7 @@ namespace mCleaner.ViewModel
                 this.Command_ShowDupTab = new RelayCommand(Command_ShowDupTab_Click);
                 this.Command_ShowPrefWindow = new RelayCommand(Command_ShowPrefWindow_Click);
                 this.Command_CloseWindow = new RelayCommand(Command_CloseWindow_Click);
+                this.Command_Cancel = new RelayCommand(Command_Cancel_Click);
             }
         }
         #endregion
@@ -278,10 +282,28 @@ namespace mCleaner.ViewModel
         {
             this.ShowWindow = false;
         }
+
+        public void Command_Cancel_Click()
+        {
+            this.Cancel = true;
+        }
         #endregion
 
         #region methods
 
         #endregion
+
+        private bool _Cancel = false;
+        public bool Cancel
+        {
+            get { return _Cancel; }
+            set
+            {
+                if (_Cancel != value)
+                {
+                    _Cancel = value;
+                }
+            }
+        }
     }
 }

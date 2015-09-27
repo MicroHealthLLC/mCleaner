@@ -11,7 +11,7 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <SolidColorBrush x:Key="Button.Static.Background" Color="#FFACD1E9"/>
+    <SolidColorBrush x:Key="Button.Static.Background" Color="#bfedee"/>
     <SolidColorBrush x:Key="Button.Static.Border" Color="#FFACD1E9"/>
     <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FF0a80e3"/>
     <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF0a80e3"/>
@@ -23,9 +23,7 @@
     <Style x:Key="ButtonStyle" TargetType="{x:Type Button}">
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
         <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
-        <Setter Property="Foreground" Value="White"/>
-        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Foreground" Value="Black"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="Padding" Value="20,5"/>

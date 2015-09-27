@@ -119,7 +119,12 @@ namespace mCleaner.Logics.Commands
         {
             List<string> files = FileOperations.I.GetFilesRecursive(path, null, new Action<string>((s) =>
             {
-                ProgressWorker.I.EnQ("Retreiving files in: " + s + "|1");
+                if (this.DupChecker.Cancel)
+                {
+                    ProgressWorker.I.EnQ("Operation Cancelled");
+                }
+                else
+                    ProgressWorker.I.EnQ("Retreiving files in: " + s + "|1");
             }));
 
             //Dictionary<string, List<string>> files_with_same_size = new Dictionary<string,List<string>>();
@@ -131,6 +136,11 @@ namespace mCleaner.Logics.Commands
             this.DupChecker.ProgressIndex = 0;
             foreach (string file in files)
             {
+                if (this.DupChecker.Cancel)
+                {
+                    ProgressWorker.I.EnQ("Operation Cancelled");
+                    break;
+                }
                 bool add = true;
 
                 FileInfo fi = new FileInfo(file);
@@ -174,6 +184,11 @@ namespace mCleaner.Logics.Commands
             List<string> files_to_hash = new List<string>();
             foreach (long filesize in files_with_same_size.Keys)
             {
+                if (this.DupChecker.Cancel)
+                {
+                    ProgressWorker.I.EnQ("Operation Cancelled");
+                    break;
+                }
                 if (files_with_same_size[filesize].Count > 1)
                 {
                     files_to_hash.AddRange(files_with_same_size[filesize].ToArray());
@@ -316,11 +331,16 @@ namespace mCleaner.Logics.Commands
         {
             List<Model_DuplicateChecker> errors = new List<Model_DuplicateChecker>();
             List<Model_DuplicateChecker> done = new List<Model_DuplicateChecker>();
-
             this.DupChecker.ProgressMax = (from a in files where a.Selected select a).ToList().Count;
             this.DupChecker.ProgressIndex = 0;
+            
             foreach (Model_DuplicateChecker dc in files)
             {
+                if (!this.DupChecker.Cancel)
+                {
+                    ProgressWorker.I.EnQ("Operation Cancelled");
+                    break;
+                }
                 if (dc.Selected)
                 {
                     FileInfo fi = new FileInfo(dc.FileDetails.Fullfilepath);

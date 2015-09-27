@@ -344,23 +344,23 @@
 		<row><td>GalaSoft.MvvmLight.Extras.dll</td><td>{8A16700A-E15B-4DB7-AA08-2CEE372B6A62}</td><td>INSTALLDIR</td><td>2</td><td/><td>galasoft.mvvmlight.extras.dl</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>GalaSoft.MvvmLight.Platform.dll</td><td>{7675FF21-32D8-4B3C-92EB-148373ACDCB9}</td><td>INSTALLDIR</td><td>2</td><td/><td>galasoft.mvvmlight.platform.</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>GalaSoft.MvvmLight.dll</td><td>{36F11E9F-69AA-4148-9776-A18EE0DBB2D3}</td><td>INSTALLDIR</td><td>2</td><td/><td>galasoft.mvvmlight.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>ISX_DEFAULTCOMPONENT</td><td>{7FF7A496-3E38-46A8-BFD6-04E84A4B7AE8}</td><td>CLAM</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>ISX_DEFAULTCOMPONENT1</td><td>{78DAB35B-5FF8-4382-8D07-AF36A1250430}</td><td>DB</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>ISX_DEFAULTCOMPONENT2</td><td>{1BB3D36C-4E47-4A40-A5C8-C2883586AADE}</td><td>CLAMAV_1C11575C7B0A6C0B0EB273ECEA528C6B.000001C4.CLAMTMP</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>ISX_DEFAULTCOMPONENT</td><td>{778A8540-5AAE-4F93-AEE7-D52A427A7472}</td><td>CLAM</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>ISX_DEFAULTCOMPONENT1</td><td>{08FA35DF-4BC7-42CD-A8C8-20FCFCE27409}</td><td>DB</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>ISX_DEFAULTCOMPONENT3</td><td>{F986549C-AE01-440B-BA6F-7754E1591610}</td><td>CLEANERS</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>ISX_DEFAULTCOMPONENT4</td><td>{CDEBFFC9-BDEE-4D1D-A8EE-661F85FC8BB0}</td><td>INSTALLDIR</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>MahApps.Metro.dll</td><td>{0C1AC65B-62C4-4025-B5E5-5B9DD508BBE3}</td><td>INSTALLDIR</td><td>2</td><td/><td>mahapps.metro.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>Microsoft.Practices.ServiceLocation.dll</td><td>{C5EF8ED5-255A-4103-A0F4-0F7800743C78}</td><td>INSTALLDIR</td><td>2</td><td/><td>microsoft.practices.servicel</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>Newtonsoft.Json.dll</td><td>{F6EEB5A1-C036-4C31-8839-6D4BD230560F}</td><td>INSTALLDIR</td><td>2</td><td/><td>newtonsoft.json.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>SQLite.Interop.dll</td><td>{B5CF4708-D057-472C-B22B-C43B7B6570E1}</td><td>INSTALLDIR</td><td>2</td><td/><td>sqlite.interop.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>System.Data.SQLite.dll</td><td>{DE523051-5D52-428D-B34C-81AE0C072690}</td><td>INSTALLDIR</td><td>2</td><td/><td>system.data.sqlite.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>System.Windows.Interactivity.dll</td><td>{42B6E0B5-519F-4470-A676-5AD5E4FA494D}</td><td>INSTALLDIR</td><td>2</td><td/><td>system.windows.interactivity</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>clamscan.exe</td><td>{A49E9B78-8771-4F9F-A44E-085EE6DC63DD}</td><td>CLAM</td><td>2</td><td/><td>clamscan.exe</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>freshclam.exe</td><td>{09E6C809-FC5A-49F6-8F3B-73E21E26EB8B}</td><td>CLAM</td><td>2</td><td/><td>freshclam.exe</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>libclamav.dll</td><td>{7437AEF2-5675-4D31-8636-0ADA03874487}</td><td>CLAM</td><td>2</td><td/><td>libclamav.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>clamscan.exe</td><td>{ED4FC58C-9FC4-4BB3-A683-C6FA436568B8}</td><td>CLAM</td><td>2</td><td/><td>clamscan.exe</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>freshclam.exe</td><td>{3EDDD33F-9132-4CEC-A5C9-DDEEDA497ED0}</td><td>CLAM</td><td>2</td><td/><td>freshclam.exe</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>libclamav.dll</td><td>{45DD5EA8-8421-45D4-9585-97B869599834}</td><td>CLAM</td><td>2</td><td/><td>libclamav.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>mCleaner.exe</td><td>{C90DA6AE-EABB-4152-B672-FCD5889B1F13}</td><td>INSTALLDIR</td><td>2</td><td/><td>mcleaner.exe</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>msvcm80.dll</td><td>{9C78DB74-9E3F-4F07-A399-2ABCCC1E92F8}</td><td>CLAM</td><td>2</td><td/><td>msvcm80.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>msvcp80.dll</td><td>{51170B4C-F401-46DE-835E-2AC8B652E917}</td><td>CLAM</td><td>2</td><td/><td>msvcp80.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>msvcr80.dll</td><td>{4B08FD41-AE0D-4876-9D29-DD564D7820CE}</td><td>CLAM</td><td>2</td><td/><td>msvcr80.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>msvcm80.dll</td><td>{67C94940-F5CF-4414-B246-0F0076991086}</td><td>CLAM</td><td>2</td><td/><td>msvcm80.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>msvcp80.dll</td><td>{69D1EAFB-9276-4E4C-A6AD-4A761EB5A574}</td><td>CLAM</td><td>2</td><td/><td>msvcp80.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>msvcr80.dll</td><td>{57CEE0B0-3FA3-409C-84B9-061377060EFF}</td><td>CLAM</td><td>2</td><td/><td>msvcr80.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>sqlite3.dll</td><td>{B9B7E419-2E91-4013-979D-CA7748F38E37}</td><td>INSTALLDIR</td><td>2</td><td/><td>sqlite3.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 	</table>
 
@@ -1078,7 +1078,6 @@
 		<row><td>CLAM</td><td>msvcm80.dll</td></row>
 		<row><td>CLAM</td><td>msvcp80.dll</td></row>
 		<row><td>CLAM</td><td>msvcr80.dll</td></row>
-		<row><td>CLAMAV_1C11575C7B0A6C0B0EB273ECEA528C6B.000001C4.CLAMTMP</td><td>ISX_DEFAULTCOMPONENT2</td></row>
 		<row><td>CLEANERS</td><td>ISX_DEFAULTCOMPONENT3</td></row>
 		<row><td>DB</td><td>ISX_DEFAULTCOMPONENT1</td></row>
 		<row><td>INSTALLDIR</td><td>GalaSoft.MvvmLight.Extras.dll</td></row>
@@ -1086,9 +1085,9 @@
 		<row><td>INSTALLDIR</td><td>GalaSoft.MvvmLight.dll</td></row>
 		<row><td>INSTALLDIR</td><td>ISX_DEFAULTCOMPONENT</td></row>
 		<row><td>INSTALLDIR</td><td>ISX_DEFAULTCOMPONENT1</td></row>
-		<row><td>INSTALLDIR</td><td>ISX_DEFAULTCOMPONENT2</td></row>
 		<row><td>INSTALLDIR</td><td>ISX_DEFAULTCOMPONENT3</td></row>
 		<row><td>INSTALLDIR</td><td>ISX_DEFAULTCOMPONENT4</td></row>
+		<row><td>INSTALLDIR</td><td>MahApps.Metro.dll</td></row>
 		<row><td>INSTALLDIR</td><td>Microsoft.Practices.ServiceLocation.dll</td></row>
 		<row><td>INSTALLDIR</td><td>Newtonsoft.Json.dll</td></row>
 		<row><td>INSTALLDIR</td><td>SQLite.Interop.dll</td></row>
@@ -1185,7 +1184,6 @@
 		<row><td>AdminToolsFolder</td><td>TARGETDIR</td><td>.:Admint~1|AdminTools</td><td/><td>0</td><td/></row>
 		<row><td>AppDataFolder</td><td>TARGETDIR</td><td>.:APPLIC~1|Application Data</td><td/><td>0</td><td/></row>
 		<row><td>CLAM</td><td>INSTALLDIR</td><td>Clam</td><td/><td>0</td><td/></row>
-		<row><td>CLAMAV_1C11575C7B0A6C0B0EB273ECEA528C6B.000001C4.CLAMTMP</td><td>DB</td><td>CLAMAV~1|clamav-1c11575c7b0a6c0b0eb273ecea528c6b.000001c4.clamtmp</td><td/><td>0</td><td/></row>
 		<row><td>CLEANERS</td><td>INSTALLDIR</td><td>Cleaners</td><td/><td>0</td><td/></row>
 		<row><td>CommonAppDataFolder</td><td>TARGETDIR</td><td>.:Common~1|CommonAppData</td><td/><td>0</td><td/></row>
 		<row><td>CommonFiles64Folder</td><td>TARGETDIR</td><td>.:Common64</td><td/><td>0</td><td/></row>
@@ -1924,9 +1922,9 @@
 		<row><td>AlwaysInstall</td><td>GalaSoft.MvvmLight.dll</td></row>
 		<row><td>AlwaysInstall</td><td>ISX_DEFAULTCOMPONENT</td></row>
 		<row><td>AlwaysInstall</td><td>ISX_DEFAULTCOMPONENT1</td></row>
-		<row><td>AlwaysInstall</td><td>ISX_DEFAULTCOMPONENT2</td></row>
 		<row><td>AlwaysInstall</td><td>ISX_DEFAULTCOMPONENT3</td></row>
 		<row><td>AlwaysInstall</td><td>ISX_DEFAULTCOMPONENT4</td></row>
+		<row><td>AlwaysInstall</td><td>MahApps.Metro.dll</td></row>
 		<row><td>AlwaysInstall</td><td>Microsoft.Practices.ServiceLocation.dll</td></row>
 		<row><td>AlwaysInstall</td><td>Newtonsoft.Json.dll</td></row>
 		<row><td>AlwaysInstall</td><td>SQLite.Interop.dll</td></row>
@@ -1957,7 +1955,6 @@
 		<row><td>adobe_reader.xml</td><td>ISX_DEFAULTCOMPONENT3</td><td>ADOBE_~1.XML|adobe_reader.xml</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release32\Cleaners\adobe_reader.xml</td><td>1</td><td/></row>
 		<row><td>amule.xml</td><td>ISX_DEFAULTCOMPONENT3</td><td>amule.xml</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release32\Cleaners\amule.xml</td><td>1</td><td/></row>
 		<row><td>chromium.xml</td><td>ISX_DEFAULTCOMPONENT3</td><td>chromium.xml</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release32\Cleaners\chromium.xml</td><td>1</td><td/></row>
-		<row><td>clamav_029c45616fe3d5eb26c21</td><td>ISX_DEFAULTCOMPONENT2</td><td>CLAMAV~1.CLA|clamav-029c45616fe3d5eb26c2186fd12c1d0e.000001c4.clamtmp</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release32\Clam\db\clamav-1c11575c7b0a6c0b0eb273ecea528c6b.000001c4.clamtmp\clamav-029c45616fe3d5eb26c2186fd12c1d0e.000001c4.clamtmp</td><td>1</td><td/></row>
 		<row><td>clamscan.exe</td><td>clamscan.exe</td><td>clamscan.exe</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release32\Clam\clamscan.exe</td><td>1</td><td/></row>
 		<row><td>filezilla.xml</td><td>ISX_DEFAULTCOMPONENT3</td><td>FILEZI~1.XML|filezilla.xml</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release32\Cleaners\filezilla.xml</td><td>1</td><td/></row>
 		<row><td>flash.xml</td><td>ISX_DEFAULTCOMPONENT3</td><td>flash.xml</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release32\Cleaners\flash.xml</td><td>1</td><td/></row>
@@ -1977,13 +1974,13 @@
 		<row><td>libclamav.dll</td><td>libclamav.dll</td><td>LIBCLA~1.DLL|libclamav.dll</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release32\Clam\libclamav.dll</td><td>1</td><td/></row>
 		<row><td>liferea.xml</td><td>ISX_DEFAULTCOMPONENT3</td><td>liferea.xml</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release32\Cleaners\liferea.xml</td><td>1</td><td/></row>
 		<row><td>littleregistry.xml</td><td>ISX_DEFAULTCOMPONENT3</td><td>LITTLE~1.XML|LittleRegistry.xml</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release32\Cleaners\LittleRegistry.xml</td><td>1</td><td/></row>
+		<row><td>mahapps.metro.dll</td><td>MahApps.Metro.dll</td><td>MAHAPP~1.DLL|MahApps.Metro.dll</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release32\MahApps.Metro.dll</td><td>1</td><td/></row>
 		<row><td>mcleaner.exe</td><td>mCleaner.exe</td><td>mCleaner.exe</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release32\mCleaner.exe</td><td>1</td><td/></row>
 		<row><td>mcleaner.exe.config</td><td>ISX_DEFAULTCOMPONENT4</td><td>MCLEAN~1.CON|mCleaner.exe.config</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release32\mCleaner.exe.config</td><td>1</td><td/></row>
 		<row><td>microsoft.practices.servicel</td><td>Microsoft.Practices.ServiceLocation.dll</td><td>MICROS~1.DLL|Microsoft.Practices.ServiceLocation.dll</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release32\Microsoft.Practices.ServiceLocation.dll</td><td>1</td><td/></row>
 		<row><td>microsoft.vc80.crt.manifest</td><td>ISX_DEFAULTCOMPONENT</td><td>MICROS~1.MAN|Microsoft.VC80.CRT.manifest</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release32\Clam\Microsoft.VC80.CRT.manifest</td><td>1</td><td/></row>
 		<row><td>microsoft_office.xml</td><td>ISX_DEFAULTCOMPONENT3</td><td>MICROS~1.XML|microsoft_office.xml</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release32\Cleaners\microsoft_office.xml</td><td>1</td><td/></row>
 		<row><td>miro.xml</td><td>ISX_DEFAULTCOMPONENT3</td><td>miro.xml</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release32\Cleaners\miro.xml</td><td>1</td><td/></row>
-		<row><td>mirrors.dat</td><td>ISX_DEFAULTCOMPONENT1</td><td>mirrors.dat</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release32\Clam\db\mirrors.dat</td><td>1</td><td/></row>
 		<row><td>mozilla_firefox.xml</td><td>ISX_DEFAULTCOMPONENT3</td><td>MOZILL~1.XML|mozilla_firefox.xml</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release32\Cleaners\mozilla_firefox.xml</td><td>1</td><td/></row>
 		<row><td>msvcm80.dll</td><td>msvcm80.dll</td><td>msvcm80.dll</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release32\Clam\msvcm80.dll</td><td>1</td><td/></row>
 		<row><td>msvcp80.dll</td><td>msvcp80.dll</td><td>msvcp80.dll</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release32\Clam\msvcp80.dll</td><td>1</td><td/></row>
@@ -2163,23 +2160,23 @@
 		<row><td>GalaSoft.MvvmLight.Extras.dll</td><td/><td/><td>_040B5C61_F2B9_4EAE_BB8C_32FF37C2E502_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>GalaSoft.MvvmLight.Platform.dll</td><td/><td/><td>_825C25CD_73F6_4355_8542_C1199CE01B00_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>GalaSoft.MvvmLight.dll</td><td/><td/><td>_43474DA6_ED00_422F_9B17_3328A64B74A2_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>ISX_DEFAULTCOMPONENT</td><td/><td/><td>_B0761A75_A143_4746_9E11_2C1D53C2167D_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>ISX_DEFAULTCOMPONENT1</td><td/><td/><td>_F3C52329_FC4F_40B8_99AD_F117EEB310A8_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>ISX_DEFAULTCOMPONENT2</td><td/><td/><td>_1C548A6D_90DE_4F38_91EA_CB0A12758AAB_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>ISX_DEFAULTCOMPONENT</td><td/><td/><td>_EAB65B3A_77B3_44CA_B94D_01C6F84442D8_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>ISX_DEFAULTCOMPONENT1</td><td/><td/><td>_8638AB91_D070_4177_83F2_C5D1FB0C9FA1_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>ISX_DEFAULTCOMPONENT3</td><td/><td/><td>_FB295119_ED84_4598_9FE0_C329797D1211_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>ISX_DEFAULTCOMPONENT4</td><td/><td/><td>_65CC9F1F_32BE_4455_AB34_E553B95DAFEE_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>MahApps.Metro.dll</td><td/><td/><td>_30DE3DFB_024F_4F7A_98A3_E1239A81F041_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>Microsoft.Practices.ServiceLocation.dll</td><td/><td/><td>_98B1022A_4C64_44C6_B793_1C6357242E9E_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>Newtonsoft.Json.dll</td><td/><td/><td>_1694281C_A01D_48C1_8C3B_A3C0E8EDD475_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>SQLite.Interop.dll</td><td/><td/><td>_09011AF5_A7C5_45E4_A824_440D2CC3B0E4_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>System.Data.SQLite.dll</td><td/><td/><td>_0FED4640_E57F_42CE_9F52_4215FE27D656_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>System.Windows.Interactivity.dll</td><td/><td/><td>_E07B08BF_8F1A_4BC0_8418_89C05D7820C3_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>clamscan.exe</td><td/><td/><td>_9B3FFA1A_D859_4C9E_BE0B_666843741BDD_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>freshclam.exe</td><td/><td/><td>_EC6134D7_E55E_4475_8BE7_CD2699E91A94_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>libclamav.dll</td><td/><td/><td>_F5DDDB6A_FA91_4CC0_922C_912E7E19E183_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>clamscan.exe</td><td/><td/><td>_DBF864F1_6AB4_42F2_BE88_3C9CCD66A4BC_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>freshclam.exe</td><td/><td/><td>_B9506CDF_20C9_430F_8C0B_D6DF776D942E_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>libclamav.dll</td><td/><td/><td>_569BD3A4_E453_4EDE_983E_85745F72E147_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>mCleaner.exe</td><td/><td/><td>_3E1B50D6_ACA6_4D33_8037_D1F685E0E4B3_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>msvcm80.dll</td><td/><td/><td>_4E0DE845_F9E7_440B_92D0_C50507497143_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>msvcp80.dll</td><td/><td/><td>_F03F5B59_A618_431B_AAE6_9C740D92B1B9_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>msvcr80.dll</td><td/><td/><td>_149A3D72_1932_49EE_ACF5_CEDF6F55C3F9_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>msvcm80.dll</td><td/><td/><td>_AD9375AB_47CE_458B_99D6_41ABE76AFF19_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>msvcp80.dll</td><td/><td/><td>_42622BEB_0D30_4E03_A86A_20840693E304_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>msvcr80.dll</td><td/><td/><td>_428BB1F4_A820_4801_A49C_77F0C1D96F86_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>sqlite3.dll</td><td/><td/><td>_47A64276_B102_4795_BF7E_AF1B54228332_FILTER</td><td/><td/><td/><td/></row>
 	</table>
 
@@ -3585,6 +3582,8 @@
 		<row><td>IDS_SHORTCUT_DISPLAY_NAME1</td><td>1033</td><td>LAUNCH~1.EXE|Launch clamscan.exe</td><td>0</td><td/><td>-995933674</td></row>
 		<row><td>IDS_SHORTCUT_DISPLAY_NAME2</td><td>1033</td><td>LAUNCH~1.EXE|Launch freshclam.exe</td><td>0</td><td/><td>-995933674</td></row>
 		<row><td>IDS_SHORTCUT_DISPLAY_NAME3</td><td>1033</td><td>mCleaner</td><td>0</td><td/><td>-995933130</td></row>
+		<row><td>IDS_SHORTCUT_DISPLAY_NAME4</td><td>1033</td><td>LAUNCH~1.EXE|Launch clamscan.exe</td><td>0</td><td/><td>-593261459</td></row>
+		<row><td>IDS_SHORTCUT_DISPLAY_NAME5</td><td>1033</td><td>LAUNCH~1.EXE|Launch freshclam.exe</td><td>0</td><td/><td>-593261459</td></row>
 		<row><td>IDS_SQLBROWSE_INTRO</td><td>1033</td><td>From the list of servers below, select the database server you would like to target.</td><td>0</td><td/><td>-995909162</td></row>
 		<row><td>IDS_SQLBROWSE_INTRO_DB</td><td>1033</td><td>From the list of catalog names below, select the database catalog you would like to target.</td><td>0</td><td/><td>-995909162</td></row>
 		<row><td>IDS_SQLBROWSE_INTRO_TEMPLATE</td><td>1033</td><td>[IS_SQLBROWSE_INTRO]</td><td>0</td><td/><td>-995909162</td></row>
@@ -3990,6 +3989,8 @@
 		<col def="S255">ISBuildSourcePath</col>
 		<col def="I2">ISIconIndex</col>
 		<row><td>ARPPRODUCTICON.exe</td><td/><td>&lt;ISProductFolder&gt;\redist\Language Independent\OS Independent\setupicon.ico</td><td>0</td></row>
+		<row><td>clamscan.exe_B6E10377E68D4CAE9E2AEED8D8B69B18.exe</td><td/><td>C:\Code\Mcleaner\mCleaner\bin\Release32\Clam\clamscan.exe</td><td>0</td></row>
+		<row><td>freshclam.exe_32C9304AEBCA4964BD4B80517FDA314F.exe</td><td/><td>C:\Code\Mcleaner\mCleaner\bin\Release32\Clam\freshclam.exe</td><td>0</td></row>
 		<row><td>mCleaner.exe1_267886012AEA4FF8B5D8FED85421CCD2.exe</td><td/><td>C:\Code\Mcleaner\mCleaner\bin\Release32\mCleaner.exe</td><td>0</td></row>
 		<row><td>mCleaner.exe_B19FAC5E6F7B4EE6A52138DD195F5996.exe</td><td/><td>C:\Code\Mcleaner\mCleaner\bin\Release32\mCleaner.exe</td><td>0</td></row>
 	</table>
@@ -4579,8 +4580,8 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<col def="L255">FileName</col>
 		<col def="s72">DirProperty</col>
 		<col def="i2">InstallMode</col>
-		<row><td>FileKey1</td><td>clamscan.exe</td><td/><td>microh_1_microhealth__llc</td><td>2</td></row>
-		<row><td>FileKey2</td><td>clamscan.exe</td><td/><td>mcleaner</td><td>2</td></row>
+		<row><td>clamscan.exe</td><td>clamscan.exe</td><td/><td>mcleaner</td><td>2</td></row>
+		<row><td>freshclam.exe</td><td>freshclam.exe</td><td/><td>mcleaner</td><td>2</td></row>
 		<row><td>mCleaner.exe</td><td>mCleaner.exe</td><td/><td>mcleaner</td><td>2</td></row>
 	</table>
 
@@ -4667,6 +4668,8 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<col def="S255">ISComments</col>
 		<col def="S255">ISShortcutName</col>
 		<col def="I4">ISAttributes</col>
+		<row><td>clamscan.exe</td><td>mcleaner</td><td>##IDS_SHORTCUT_DISPLAY_NAME4##</td><td>clamscan.exe</td><td>AlwaysInstall</td><td/><td/><td/><td>clamscan.exe_B6E10377E68D4CAE9E2AEED8D8B69B18.exe</td><td>1</td><td>1</td><td>CLAM</td><td/><td/><td/><td/><td/><td/><td/></row>
+		<row><td>freshclam.exe</td><td>mcleaner</td><td>##IDS_SHORTCUT_DISPLAY_NAME5##</td><td>freshclam.exe</td><td>AlwaysInstall</td><td/><td/><td/><td>freshclam.exe_32C9304AEBCA4964BD4B80517FDA314F.exe</td><td>1</td><td>1</td><td>CLAM</td><td/><td/><td/><td/><td/><td/><td/></row>
 		<row><td>mCleaner.exe</td><td>mcleaner</td><td>##IDS_SHORTCUT_DISPLAY_NAME3##</td><td>mCleaner.exe</td><td>AlwaysInstall</td><td/><td/><td/><td>mCleaner.exe_B19FAC5E6F7B4EE6A52138DD195F5996.exe</td><td>1</td><td>1</td><td>INSTALLDIR</td><td/><td/><td/><td/><td/><td/><td/></row>
 		<row><td>mCleaner.exe1</td><td>DesktopFolder</td><td>##IDS_SHORTCUT_DISPLAY_NAME3##</td><td>mCleaner.exe</td><td>AlwaysInstall</td><td/><td/><td/><td>mCleaner.exe1_267886012AEA4FF8B5D8FED85421CCD2.exe</td><td>1</td><td>1</td><td>INSTALLDIR</td><td/><td/><td/><td/><td/><td/><td/></row>
 	</table>

@@ -1,12 +1,12 @@
-﻿<Window
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:local="clr-namespace:mCleaner"
-        xmlns:ucw="clr-namespace:mCleaner.UserControls.Window"
-        x:Class="mCleaner.MainWindow"
-        Title="mCleaner" Height="510" Width="1000" Icon="appicon.ico" WindowStartupLocation="CenterScreen"
-        xmlns:ctl="clr-namespace:mCleaner.Helpers.Controls"
-    >
+﻿<controls:MetroWindow x:Class="mCleaner.MainWindow"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+                      xmlns:ucw="clr-namespace:mCleaner.UserControls.Window"
+                      Title="mCleaner"
+                      xmlns:ctl="clr-namespace:mCleaner.Helpers.Controls"
+                      ShowTitleBar="False"
+                     Height="510" Width="1000" Icon="appicon.ico" WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
         <CollectionViewSource x:Key="ListViewSource" Source="{Binding DupChecker.DupplicateCollection}">
@@ -19,8 +19,9 @@
     <Window.DataContext>
         <Binding Source="{StaticResource Locator}"/>
     </Window.DataContext>
+    <Grid>
+        <!-- now your content -->
 
-    <Grid>        
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto" />
@@ -29,10 +30,18 @@
             </Grid.RowDefinitions>
 
             <!-- menu bar -->
-            <Menu IsMainMenu="True" Grid.Row="0" Background="{StaticResource MainWindow_Toolbar_Backgruond}" Foreground="{StaticResource MainWindow_Toolbar_Foreground}">
-                <MenuItem Header="_File" Style="{DynamicResource MenuItemStyle}">
-                    <MenuItem IsEnabled="True" Header="_Shred Files" Command="{Binding ShredWindow.Command_ShredFile}" />
-                    <MenuItem IsEnabled="True" Header="Sh_red Folders" Command="{Binding ShredWindow.Command_ShredFolder}" />
+            <Menu IsMainMenu="True" Grid.Row="0">
+                <MenuItem Header="_File">
+                    <MenuItem IsEnabled="True" Header="_Shred Files" Command="{Binding ShredWindow.Command_ShredFile}">
+                        <MenuItem.Icon>
+                            <Image Width="16" Height="16" Source="Assets/ShredFile.png" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem IsEnabled="True" Header="Sh_red Folders" Command="{Binding ShredWindow.Command_ShredFolder}">
+                        <MenuItem.Icon>
+                            <Image Width="16" Height="16" Source="Assets/ShredFolder.png" />
+                        </MenuItem.Icon>
+                    </MenuItem>
                     <MenuItem IsEnabled="False" Header="S_hred Settings and Quit" Visibility="Collapsed" />
                     <MenuItem Header="_Quit" Command="{Binding CleanerML.Command_Quit}">
                         <MenuItem.Icon>
@@ -68,49 +77,49 @@
             </Menu>
 
             <!-- toolbar -->
-            <ToolBarTray Grid.Row="1" Background="{StaticResource MainWindow_Toolbar_Backgruond}">
-                <ToolBar Background="Transparent" Style="{DynamicResource ToolBarStyle}" ToolBarTray.IsLocked="True">
+            <ToolBarTray Grid.Row="1" >
+                <ToolBar Background="Transparent" ToolBarTray.IsLocked="True">
                     <ToolBar.Resources>
                         <Style TargetType="{x:Type TextBlock}">
-                            <Setter Property="Foreground" Value="{StaticResource MainWindow_Toolbar_Foreground}" />
+                            <Setter Property="Foreground" Value="AliceBlue" />
                         </Style>
                     </ToolBar.Resources>
-                    
-                    <Button Width="70" ToolTip="Start cleaning!" Command="{Binding CleanerML.Command_Clean}" CommandParameter="1"  VerticalAlignment="Top">
+
+                    <Button Width="70" ToolTip="Start cleaning!" Command="{Binding CleanerML.Command_Clean}" BorderBrush="Black" CommandParameter="1"  VerticalAlignment="Top">
                         <StackPanel>
                             <Image Width="32" Height="32" Source="Assets/clean_safe_2.png" HorizontalAlignment="Center" />
-                            <TextBlock Text="Safe Cleaning" HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" />
+                            <TextBlock Text="Safe Cleaning" HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" Foreground="Black"/>
                         </StackPanel>
                     </Button>
                     <Button Width="70" ToolTip="Start cleaning!" Command="{Binding CleanerML.Command_Clean}" CommandParameter="2"  VerticalAlignment="Top">
                         <StackPanel>
                             <Image Width="32" Height="32" Source="Assets/clean_moderate_2.png" HorizontalAlignment="Center" />
-                            <TextBlock Text="Moderate Cleaning" HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" />
+                            <TextBlock Text="Moderate Cleaning" HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" Foreground="Black" />
                         </StackPanel>
                     </Button>
                     <Button Width="70" ToolTip="Start cleaning!" Command="{Binding CleanerML.Command_Clean}" CommandParameter="3"  VerticalAlignment="Top">
                         <StackPanel>
                             <Image Width="32" Height="32" Source="Assets/clean_aggressive_2.png" HorizontalAlignment="Center" />
-                            <TextBlock Text="Aggressive Cleaning" HorizontalAlignment="Center"  TextWrapping="Wrap" TextAlignment="Center"/>
+                            <TextBlock Text="Aggressive Cleaning" HorizontalAlignment="Center"  TextWrapping="Wrap" TextAlignment="Center" Foreground="Black"/>
                         </StackPanel>
                     </Button>
                     <Button Width="70" ToolTip="Start cleaning!" Command="{Binding CleanerML.Command_CustomCleaningSelection}" CommandParameter="3"  VerticalAlignment="Top">
                         <StackPanel>
                             <Image Width="32" Height="32" Source="Assets/clean_custom.png" HorizontalAlignment="Center" />
-                            <TextBlock Text="Custom Selection" HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center"/>
+                            <TextBlock Text="Custom Selection" HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" Foreground="Black"/>
                         </StackPanel>
                     </Button>
                     <Button Width="70" Command="{Binding CleanerML.Command_Preview}" ToolTip="Preview work" VerticalAlignment="Top">
                         <StackPanel>
                             <Image Width="32" Height="32" Source="Assets/Preview.png" HorizontalAlignment="Center" />
-                            <TextBlock Text="Preview" HorizontalAlignment="Center" />
+                            <TextBlock Text="Preview" HorizontalAlignment="Center" Foreground="Black" />
                             <TextBlock Text="" />
                         </StackPanel>
                     </Button>
                     <Button Width="70" ToolTip="Start cleaning" VerticalAlignment="Top" Command="{Binding CleanerML.Command_CleanNow}">
                         <StackPanel>
                             <Image Width="32" Height="32" Source="Assets/Clean_now.png" HorizontalAlignment="Center" />
-                            <TextBlock Text="Clean Now" HorizontalAlignment="Center" />
+                            <TextBlock Text="Clean Now" HorizontalAlignment="Center" Foreground="Black" />
                             <TextBlock Text="" />
                         </StackPanel>
                     </Button>
@@ -118,36 +127,36 @@
                     <Button Width="80" Command="{Binding Clam.Command_UpdateVirusDefinition}" ToolTip="Update virus definitions"  VerticalAlignment="Top">
                         <StackPanel>
                             <Image Width="32" Height="32" Source="Assets/dl_vir_def.png" HorizontalAlignment="Center" />
-                            <TextBlock Text="Update Virus" HorizontalAlignment="Center" />
-                            <TextBlock Text="Definitions" HorizontalAlignment="Center" />
+                            <TextBlock Text="Update Virus" HorizontalAlignment="Center" Foreground="Black" />
+                            <TextBlock Text="Definitions" HorizontalAlignment="Center" Foreground="Black"/>
                         </StackPanel>
                     </Button>
                     <Button Width="80" Command="{Binding Clam.Command_ScanForVirus}" ToolTip="Scan system for virus"  VerticalAlignment="Top">
                         <StackPanel>
                             <Image Width="32" Height="32" Source="Assets/scan_for_virus.png" HorizontalAlignment="Center" />
-                            <TextBlock Text="Scan PC" HorizontalAlignment="Center" />
-                            <TextBlock Text="for Viruses" HorizontalAlignment="Center" />
+                            <TextBlock Text="Scan PC" HorizontalAlignment="Center" Foreground="Black"/>
+                            <TextBlock Text="for Viruses" HorizontalAlignment="Center" Foreground="Black"/>
                         </StackPanel>
                     </Button>
                     <Button Width="80" Command="{Binding Clam.Command_ScanMemory}" ToolTip="Scan system memory for virus" VerticalAlignment="Top">
                         <StackPanel>
                             <Image Width="32" Height="32" Source="Assets/scan_for_memory.png" HorizontalAlignment="Center" />
-                            <TextBlock Text="Scan Memory" HorizontalAlignment="Center" />
-                            <TextBlock Text="for Viruses" HorizontalAlignment="Center" />
+                            <TextBlock Text="Scan Memory" HorizontalAlignment="Center" Foreground="Black"/>
+                            <TextBlock Text="for Viruses" HorizontalAlignment="Center" Foreground="Black"/>
                         </StackPanel>
                     </Button>
                     <Separator />
                     <Button Width="70" ToolTip="Scan system memory for virus" Visibility="Visible" Command="{Binding DupChecker.Command_ShowDupTab}">
                         <StackPanel>
                             <Image Width="32" Height="32" Source="Assets/dupcheck.png" HorizontalAlignment="Center" />
-                            <TextBlock Text="Clean Duplicates" HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" />
+                            <TextBlock Text="Clean Duplicates" HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" Foreground="Black" />
                         </StackPanel>
                     </Button>
                     <Separator />
                     <Button Width="70" ToolTip="Scan system memory for virus" Visibility="Visible" Command="{Binding DupChecker.Command_ShowDupTab}">
                         <StackPanel>
                             <Image Width="32" Height="32" Source="Assets/ShredFile.png" HorizontalAlignment="Center" />
-                            <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center">
+                            <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" Foreground="Black">
                                 <Run Text="Shred" />
                                 <LineBreak />
                                 <Run Text="Files" />
@@ -157,7 +166,7 @@
                     <Button Width="70" ToolTip="Scan system memory for virus" Visibility="Visible" Command="{Binding DupChecker.Command_ShowDupTab}">
                         <StackPanel>
                             <Image Width="32" Height="32" Source="Assets/ShredFolder.png" HorizontalAlignment="Center" />
-                            <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center">
+                            <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" Foreground="Black">
                                 <Run Text="Shred" />
                                 <LineBreak />
                                 <Run Text="Folders" />
@@ -193,7 +202,7 @@
                         <Grid Visibility="{Binding CleanerML.ShowCleanerDescription, Converter={StaticResource boolTovis}}">
                             <Image Source="Assets/MicroHealth_Logo_800.png" Margin="50" Opacity="0.02" />
                             <RichTextBox x:Name="rtbCleanerDetails" BorderThickness="0" IsReadOnly="True" Background="Transparent" ScrollViewer.VerticalScrollBarVisibility="Auto" />
-                            <Button Content="Close" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,10,20,0" Style="{StaticResource ButtonStyle}" Command="{Binding CleanerML.Command_CloseCleanerDescription}" />
+                            <Button Content="Close" VerticalAlignment="Top" HorizontalAlignment="Right" Style="{StaticResource ButtonStyle}" Margin="0,0,10,0" Command="{Binding CleanerML.Command_CloseCleanerDescription}" />
                         </Grid>
 
                         <!-- Cleaner logs -->
@@ -228,10 +237,9 @@
                                 <TextBox IsReadOnly="True" BorderThickness="0" Text="{Binding CleanerML.TextLog}" AllowDrop="False" IsTabStop="False" ScrollViewer.VerticalScrollBarVisibility="Auto" />
                             </Border>
                         </Grid>
-
-                        <!-- front page -->
+                    <!-- front page -->
                         <Border x:Name="gridMain" Margin="0" Visibility="{Binding CleanerML.ShowFrontPage, Converter={StaticResource boolTovis}}">
-                            <Grid Margin="10">
+                            <Grid Margin="10"  Background="#f0f7fe">
                                 <Grid.Resources>
                                     <Style TargetType="TextBlock">
                                         <Setter Property="FontFamily" Value="Segoe UI" />
@@ -258,9 +266,8 @@
                                             <LineBreak />
                                             <ctl:HyperlinkEx NavigateUri="mailto:feedback@microhealthllc.com">feedback@microhealthllc.com</ctl:HyperlinkEx>
                                 </TextBlock>
-
                                 <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                                    <TextBlock Text="Start cleaning now!" FontSize="20" TextAlignment="Left" Background="{StaticResource MainWindow_Toolbar_Backgruond}" Foreground="{StaticResource MainWindow_Toolbar_Foreground}" Padding="5" Margin="0,0,0,3" />
+                                    <TextBlock Text="Start cleaning now!" FontSize="20" TextAlignment="Left"  Padding="5" Margin="0,0,0,3" />
                                     <StackPanel Orientation="Horizontal">
                                         <Button Style="{StaticResource ButtonStyle}" Command="{Binding CleanerML.Command_Clean}" CommandParameter="4" Background="#FFA8CD5E">
                                             <Button.ContentTemplate>
@@ -335,13 +342,15 @@
                 </Grid>
             </Grid>
         </Grid>
-
-        <!-- popup windows -->
         <ucw:DuplicateScannerWindow Visibility="{Binding DupChecker.ShowWindow,             Converter={StaticResource boolTovis}}" />
         <ucw:ClamWindowVirusScan    Visibility="{Binding Clam.ShowClamWinVirusScanner,      Converter={StaticResource boolTovis}}" />
         <ucw:ClamWindow             Visibility="{Binding Clam.ShowClamWinVirusUpdateWindow, Converter={StaticResource boolTovis}}" />
         <ucw:PreferencesWindow      Visibility="{Binding Prefs.ShowWindow,                  Converter={StaticResource boolTovis}}" />
         <ucw:ShredWindow            Visibility="{Binding ShredWindow.ShowWindow,            Converter={StaticResource boolTovis}}" />
         <ucw:ReleaseNotesWindow     Visibility="{Binding ReleaseNote.ShowWindow,            Converter={StaticResource boolTovis}}" />
+
+
+
+
     </Grid>
-</Window>
+</controls:MetroWindow>

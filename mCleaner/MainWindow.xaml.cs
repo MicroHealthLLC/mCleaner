@@ -1,5 +1,5 @@
-﻿using System.Windows;
-using System.Windows.Media;
+﻿using MahApps.Metro.Controls;
+using MahApps.Metro.Controls.Dialogs;
 using mCleaner.Helpers.Controls;
 using mCleaner.Logics;
 using mCleaner.Logics.Clam;
@@ -7,15 +7,30 @@ using mCleaner.Model;
 using mCleaner.Properties;
 using mCleaner.ViewModel;
 using Microsoft.Practices.ServiceLocation;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
 
 namespace mCleaner
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : MetroWindow
     {
+
         TreeNode _SelectedNode;// = new TreeNode();
+        
 
         public ViewModel_CleanerML CleanerML
         {
@@ -32,26 +47,22 @@ namespace mCleaner
                 return ServiceLocator.Current.GetInstance<ViewModel_DuplicateChecker>();
             }
         }
-
         public MainWindow()
         {
             InitializeComponent();
-
-            //System.Windows.Input.ApplicationCommands.Close
-
             CleanerML.TreeNodeSelected += CleanerML_TreeNodeSelected;
             tvCleaners.SelectedItemChanged += tvCleaners_SelectedItemChanged;
             tvCleaners.MouseDown += tvCleaners_MouseDown;
-            
+
             //CleanerML.TreeNodeSelected
-             
+
             this.Loaded += MainWindow_Loaded;
             
         }
 
         void tvCleaners_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            
+
         }
 
         void tvCleaners_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
@@ -74,7 +85,7 @@ namespace mCleaner
         void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             // check if an update is required after being prechecked at App.xaml.cs
-            if(Settings.Default.ClamWin_Update)
+            if (Settings.Default.ClamWin_Update)
             {
                 CommandLogic_Clam.I.LaunchUpdater();
             }

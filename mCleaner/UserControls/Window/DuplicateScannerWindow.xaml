@@ -10,7 +10,7 @@
              DataContext="{Binding Source={StaticResource Locator}}"
              
              >
-    
+
     <UserControl.Resources>
         <CollectionViewSource x:Key="ListViewSource" Source="{Binding DupChecker.DupplicateCollection}">
             <CollectionViewSource.GroupDescriptions>
@@ -29,7 +29,7 @@
                 <RowDefinition Height="*" />
                 <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
-            
+
             <Grid Grid.Row="0" Margin="5">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -42,7 +42,7 @@
                         <RowDefinition Height="auto" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    
+
                     <!-- progress bar -->
                     <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,0,5">
                         <ProgressBar Height="25" Maximum="{Binding DupChecker.ProgressMax}" Value="{Binding DupChecker.ProgressIndex}" Style="{StaticResource ProgressBarStyle}" />
@@ -76,12 +76,14 @@
                             <TextBlock Text=" " />
                             <Button Content="Scan Folders" Style="{StaticResource ButtonStyle}" Command="{Binding DupChecker.Command_CheckDuplicate}" Visibility="Visible" IsEnabled="{Binding DupChecker.EnableScanFolder}"/>
                             <TextBlock Text=" " />
+                            <Button Content="Cancel" Style="{StaticResource ButtonStyle}" Command="{Binding CleanerML.Command_Cancel}" Height="28" Width="143" Margin="4,0"/>
+                            <TextBlock Text=" " />
                             <TextBlock Text="Select what to do with duplicate files" TextWrapping="Wrap" />
                             <TextBlock Text=" " />
                             <RadioButton IsChecked="{Binding DupChecker.IsMove, Mode=TwoWay}" Content="Move files" Tag="Move" x:Name="rbMoveFiles" GroupName="DupCheck_FileOperation" />
                             <RadioButton IsChecked="{Binding DupChecker.IsDelete, Mode=TwoWay}" Content="Delete files" Tag="Delete" x:Name="rbDeleteFiles" GroupName="DupCheck_FileOperation" />
                             <TextBlock Text=" " />
-                            <Button x:Name="btnOK" Content="Remove Duplicates" Style="{StaticResource ButtonStyle}" Command="{Binding DupChecker.Command_Start}" Visibility="Visible" IsEnabled="{Binding DupChecker.EnableRemoveDuplicates}" />
+                            <Button x:Name="btnOK" Content="Remove Duplicates" Style="{DynamicResource ButtonStyle}" Command="{Binding DupChecker.Command_Start}" Visibility="Visible" IsEnabled="{Binding DupChecker.EnableRemoveDuplicates}" />
                         </StackPanel>
                     </Grid>
 
@@ -138,7 +140,7 @@
 
             <Grid Grid.Row="2">
                 <StackPanel Orientation="Horizontal" Margin="2" HorizontalAlignment="Right">
-                    <Button x:Name="btnClose" Content="Close" Margin="5,5" Style="{StaticResource ButtonStyle}" Background="#FF6D929B" BorderBrush="#FF6D929B" Command="{Binding DupChecker.Command_CloseWindow}" />
+                    <Button x:Name="btnClose" Content="Close" Margin="5,5"  Style="{DynamicResource ButtonStyle}" Command="{Binding DupChecker.Command_CloseWindow}" />
                 </StackPanel>
             </Grid>
         </Grid>
