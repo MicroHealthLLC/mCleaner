@@ -92,7 +92,7 @@
             </Menu>
 
             <!-- toolbar -->
-            <ToolBarTray Grid.Row="1" >
+            <ToolBarTray Grid.Row="1">
                 <ToolBar Background="Transparent" ToolBarTray.IsLocked="True">
                     <ToolBar.Resources>
                         <Style TargetType="{x:Type TextBlock}">
@@ -161,14 +161,14 @@
                         </StackPanel>
                     </Button>
                     <Separator />
-                    <Button Width="70" ToolTip="Scan system memory for virus" Visibility="Visible" Command="{Binding DupChecker.Command_ShowDupTab}">
+                    <Button Width="70" ToolTip="Clean duplicates from directory" Visibility="Visible" Command="{Binding DupChecker.Command_ShowDupTab}">
                         <StackPanel>
                             <Image Width="32" Height="32" Source="Assets/dupcheck.png" HorizontalAlignment="Center" />
                             <TextBlock Text="Clean Duplicates" HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" Foreground="Black" />
                         </StackPanel>
                     </Button>
                     <Separator />
-                    <Button Width="70" ToolTip="Scan system memory for virus" Visibility="Visible" Command="{Binding DupChecker.Command_ShowDupTab}">
+                    <Button Width="70" ToolTip="Shred Files" Visibility="Visible" Command="{Binding DupChecker.Command_ShowDupTab}">
                         <StackPanel>
                             <Image Width="32" Height="32" Source="Assets/ShredFile.png" HorizontalAlignment="Center" />
                             <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" Foreground="Black">
@@ -178,7 +178,7 @@
                             </TextBlock>
                         </StackPanel>
                     </Button>
-                    <Button Width="70" ToolTip="Scan system memory for virus" Visibility="Visible" Command="{Binding DupChecker.Command_ShowDupTab}">
+                    <Button Width="70" ToolTip="Shred Folder" Visibility="Visible" Command="{Binding DupChecker.Command_ShowDupTab}">
                         <StackPanel>
                             <Image Width="32" Height="32" Source="Assets/ShredFolder.png" HorizontalAlignment="Center" />
                             <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" Foreground="Black">
@@ -200,7 +200,7 @@
                         <ColumnDefinition Width="auto" />
                     </Grid.ColumnDefinitions>
 
-                    <Grid Grid.Column="2">
+                    <Grid Grid.Column="2" Background="#fefbfb">
                         <TreeView Style="{StaticResource TreeViewStyle}" 
 						ItemContainerStyle="{StaticResource TreeViewItemStyleStandard}"
 						ItemTemplate="{StaticResource CheckBoxItemTemplate}" 
@@ -254,7 +254,8 @@
                         </Grid>
                     <!-- front page -->
                         <Border x:Name="gridMain" Margin="0" Visibility="{Binding CleanerML.ShowFrontPage, Converter={StaticResource boolTovis}}">
-                            <Grid Margin="10"  Background="#f0f7fe">
+                            <!--Background="#f0f7fe"-->
+                            <Grid Margin="10" Background="#fff8f8" >
                                 <Grid.Resources>
                                     <Style TargetType="TextBlock">
                                         <Setter Property="FontFamily" Value="Segoe UI" />
@@ -284,7 +285,7 @@
                                 <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                                     <TextBlock Text="Start cleaning now!" FontSize="20" TextAlignment="Left"  Padding="5" Margin="0,0,0,3" />
                                     <StackPanel Orientation="Horizontal">
-                                        <Button Style="{StaticResource ButtonStyle}" Command="{Binding CleanerML.Command_Clean}" CommandParameter="4" Background="#FFA8CD5E">
+                                        <Button Style="{StaticResource ButtonStyle}" Command="{Binding CleanerML.Command_Clean}" CommandParameter="4" Background="#fbd63e">
                                             <Button.ContentTemplate>
                                                 <DataTemplate>
                                                     <Grid Width="150" Height="120">
@@ -294,9 +295,9 @@
                                                             <ColumnDefinition Width="*" />
                                                         </Grid.ColumnDefinitions>
 
-                                                        <Image Width="32" Height="32" Source="Assets/clean_safe.png" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                        <!--<Image Width="32" Height="32" Source="Assets/clean_safe.png" HorizontalAlignment="Center" VerticalAlignment="Center" />-->
 
-                                                        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Foreground="White" Grid.Column="2" VerticalAlignment="Top" FontSize="20">
+                                                        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Foreground="Black" Grid.Column="2" VerticalAlignment="Top" FontSize="20">
                                                     Safe Cleaning
                                                     <LineBreak />
                                                     <Run Text="Cleans temporary files and recently openned documents" FontSize="12" />
@@ -306,7 +307,7 @@
                                             </Button.ContentTemplate>
                                         </Button>
                                         <TextBlock Text=" " />
-                                        <Button Style="{StaticResource ButtonStyle}" Background="#FFCDB45E" Command="{Binding CleanerML.Command_Clean}" CommandParameter="5">
+                                        <Button Style="{StaticResource ButtonStyle}" Background="#f4760d" Command="{Binding CleanerML.Command_Clean}" CommandParameter="5">
                                             <Button.ContentTemplate>
                                                 <DataTemplate>
                                                     <Grid Width="150" Height="120">
@@ -316,9 +317,9 @@
                                                             <ColumnDefinition Width="*" />
                                                         </Grid.ColumnDefinitions>
 
-                                                        <Image Width="32" Height="32" Source="Assets/clean_moderate.png" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                        <!--<Image Width="32" Height="32" Source="Assets/clean_moderate.png" HorizontalAlignment="Center" VerticalAlignment="Center" />-->
 
-                                                        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Foreground="White" Grid.Column="2" VerticalAlignment="Top" FontSize="20">
+                                                        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Foreground="Black" Grid.Column="2" VerticalAlignment="Top" FontSize="20">
                                                     Moderate Cleaning
                                                     <LineBreak />
                                                     <Run Text="Like Safe Cleaning, it also cleans caches, browser cookies, and logs" FontSize="12" />
@@ -328,7 +329,7 @@
                                             </Button.ContentTemplate>
                                         </Button>
                                         <TextBlock Text=" " />
-                                        <Button Style="{StaticResource ButtonStyle}" Background="#FFCD5E5E" Command="{Binding CleanerML.Command_Clean}" CommandParameter="6">
+                                        <Button Style="{StaticResource ButtonStyle}" Background="#e1410a" Command="{Binding CleanerML.Command_Clean}" CommandParameter="6">
                                             <Button.ContentTemplate>
                                                 <DataTemplate>
                                                     <Grid Width="150" Height="120">
@@ -338,9 +339,9 @@
                                                             <ColumnDefinition Width="*" />
                                                         </Grid.ColumnDefinitions>
 
-                                                        <Image Width="32" Height="32" Source="Assets/clean_aggresive.png" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                        <!--<Image Width="32" Height="32" Source="Assets/clean_aggresive.png" HorizontalAlignment="Center" VerticalAlignment="Center" />-->
 
-                                                        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Foreground="White" Grid.Column="2" VerticalAlignment="Top" FontSize="20">
+                                                        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Foreground="Black" Grid.Column="2" VerticalAlignment="Top" FontSize="20">
                                                     Aggressive Cleaning
                                                     <LineBreak />
                                                     <Run Text="Cleans everything from temporary files to browser databases" FontSize="12" />
