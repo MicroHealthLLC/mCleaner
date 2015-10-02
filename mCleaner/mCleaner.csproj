@@ -204,6 +204,7 @@
     <Compile Include="Logics\Commands\CommandLogic_Chrome.cs" />
     <Compile Include="Logics\Commands\CommandLogic_Clipboard.cs" />
     <Compile Include="Logics\Commands\CommandLogic_Delete.cs" />
+    <Compile Include="Logics\Commands\CommandLogic_WindowsUninstaller.cs" />
     <Compile Include="Logics\Commands\CommandLogic_DuplicateChecker.cs" />
     <Compile Include="Logics\Commands\CommandLogic_Ini.cs" />
     <Compile Include="Logics\Commands\CommandLogic_JSON.cs" />
@@ -230,6 +231,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\Model_CleanerML.cs" />
+    <Compile Include="Model\Model_WindowsUninstaller.cs" />
     <Compile Include="Model\Model_DuplicateChecker.cs" />
     <Compile Include="Model\Model_ThingsToDelete.cs" />
     <Compile Include="Model\Model_VirusDetails.cs" />
@@ -239,6 +241,9 @@
     </Compile>
     <Compile Include="UserControls\Window\ClamWindowVirusScan.xaml.cs">
       <DependentUpon>ClamWindowVirusScan.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Window\ProgramUninstallerWindow.xaml.cs">
+      <DependentUpon>ProgramUninstallerWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Window\DuplicateScannerWindow.xaml.cs">
       <DependentUpon>DuplicateScannerWindow.xaml</DependentUpon>
@@ -259,6 +264,7 @@
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="ViewModel\ViewModel_Clam.cs" />
     <Compile Include="ViewModel\ViewModel_CleanerML.cs" />
+    <Compile Include="ViewModel\ViewModel_Uninstaller.cs" />
     <Compile Include="ViewModel\ViewModel_DuplicateChecker.cs" />
     <Compile Include="ViewModel\ViewModel_Preferences.cs" />
     <Compile Include="ViewModel\ViewModel_PrivacyPolicy.cs" />
@@ -320,6 +326,10 @@
     <Page Include="UserControls\Window\ClamWindowVirusScan.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Window\ProgramUninstallerWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="UserControls\Window\DuplicateScannerWindow.xaml">
       <SubType>Designer</SubType>
@@ -389,6 +399,8 @@
     <Resource Include="Assets\ShredFile.png" />
     <Resource Include="Assets\ShredFolder.png" />
     <Resource Include="Assets\clean_custom.png" />
+    <Resource Include="Assets\UninstallLarge.png" />
+    <Resource Include="Assets\UninstallSmall.png" />
     <Content Include="Clam\db\readme.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

@@ -32,16 +32,21 @@
             <!-- menu bar -->
             <Menu IsMainMenu="True" Grid.Row="0">
                 <MenuItem Header="_File">
-                    <MenuItem IsEnabled="True" Header="_Shred Files" Command="{Binding ShredWindow.Command_ShredFile}">
+                    <!--<MenuItem IsEnabled="True" Header="_Shred Files" Command="{Binding ShredWindow.Command_ShredFile}">
                         <MenuItem.Icon>
                             <Image Width="16" Height="16" Source="Assets/ShredFile.png" />
                         </MenuItem.Icon>
+                    </MenuItem>-->
+                    <MenuItem IsEnabled="True" Header="Clean Duplicates" Command="{Binding DupChecker.Command_ShowDupTab}">
+                        <MenuItem.Icon>
+                            <Image Width="16" Height="16" Source="Assets/dupcheck.png" />
+                        </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem IsEnabled="True" Header="Sh_red Folders" Command="{Binding ShredWindow.Command_ShredFolder}">
+                    <!--<MenuItem IsEnabled="True" Header="Sh_red Folders" Command="{Binding ShredWindow.Command_ShredFolder}">
                         <MenuItem.Icon>
                             <Image Width="16" Height="16" Source="Assets/ShredFolder.png" />
                         </MenuItem.Icon>
-                    </MenuItem>
+                    </MenuItem>-->
                     <MenuItem IsEnabled="False" Header="S_hred Settings and Quit" Visibility="Collapsed" />
                     <MenuItem Header="_Quit" Command="{Binding CleanerML.Command_Quit}">
                         <MenuItem.Icon>
@@ -168,7 +173,13 @@
                         </StackPanel>
                     </Button>
                     <Separator />
-                    <Button Width="70" ToolTip="Shred Files" Visibility="Visible" Command="{Binding DupChecker.Command_ShowDupTab}">
+                    <Button Width="70" ToolTip="Unistall installed programs" Visibility="Visible" Command="{Binding Uninstaller.Command_ShowUninstaller}">
+                        <StackPanel>
+                            <Image Width="32" Height="32" Source="Assets/UninstallSmall.png" HorizontalAlignment="Center" />
+                            <TextBlock Text="Uninstall Programs" HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" Foreground="Black" />
+                        </StackPanel>
+                    </Button>
+                    <!--<Button Width="70" ToolTip="Shred Files" Visibility="Visible" Command="{Binding DupChecker.Command_ShowDupTab}">
                         <StackPanel>
                             <Image Width="32" Height="32" Source="Assets/ShredFile.png" HorizontalAlignment="Center" />
                             <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" Foreground="Black">
@@ -187,7 +198,7 @@
                                 <Run Text="Folders" />
                             </TextBlock>
                         </StackPanel>
-                    </Button>
+                    </Button>-->
                 </ToolBar>
             </ToolBarTray>
 
@@ -234,7 +245,7 @@
                                 </Grid.ColumnDefinitions>
 
                                 <Grid Grid.Column="0">
-                                    <Button Style="{StaticResource ButtonStyle}" Content="Cancel" Command="{Binding CleanerML.Command_Cancel}"/>
+                                    <Button Style="{StaticResource ButtonStyle}" Background="#e1410a" Foreground="White" Content="Cancel" Command="{Binding CleanerML.Command_Cancel}"/>
                                 </Grid>
 
                                 <Grid Grid.Column="1">
@@ -365,6 +376,7 @@
         <ucw:ShredWindow            Visibility="{Binding ShredWindow.ShowWindow,            Converter={StaticResource boolTovis}}" />
         <ucw:ReleaseNotesWindow     Visibility="{Binding ReleaseNote.ShowWindow,            Converter={StaticResource boolTovis}}" />
         <ucw:PrivacyPolicy     Visibility="{Binding PrivacyPolicy.ShowWindow,            Converter={StaticResource boolTovis}}" />
+        <ucw:ProgramUninstallerWindow     Visibility="{Binding Uninstaller.ShowWindow,            Converter={StaticResource boolTovis}}" />
 
 
 
