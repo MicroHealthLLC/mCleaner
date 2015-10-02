@@ -244,7 +244,7 @@ namespace mCleaner.Logics.Commands
                     // get the following files.
                     List<string> files = FileOperations.I.GetFilesRecursive(currPath, regex, (s) =>
                     {
-                        ProgressWorker.I.EnQ("Scanning directory " + s);
+                            ProgressWorker.I.EnQ("Scanning directory " + s);
                     });
                     files.Reverse();
 
