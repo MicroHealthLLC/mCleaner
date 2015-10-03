@@ -91,9 +91,9 @@
                                             <ctl:HyperlinkEx NavigateUri="http://sourceforge.net/projects/littlecleaner">http://sourceforge.net/projects/littlecleaner</ctl:HyperlinkEx>
                                             <LineBreak />
                                             <LineBreak />
-                                            FatCow Icons
+                                            Flat Icons
                                             <LineBreak />
-                                            <ctl:HyperlinkEx NavigateUri="http://www.fatcow.com">http://www.fatcow.com/</ctl:HyperlinkEx>
+                                            <ctl:HyperlinkEx NavigateUri="http://www.flaticon.com/">http://www.flaticon.com/</ctl:HyperlinkEx>
                                         </Paragraph>
                                     </FlowDocument>
                                 </ctl:RichTextBoxEx>

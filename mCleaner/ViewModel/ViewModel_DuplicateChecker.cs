@@ -262,9 +262,9 @@ namespace mCleaner.ViewModel
 
         public void Command_ShowDupTab_Click()
         {
-            //CleanerML.Run = true;
+            CleanerML.Run = false;
             //CleanerML.ShowFrontPage = false;
-            //CleanerML.ShowCleanerDescription = false;
+            CleanerML.ShowCleanerDescription = false;
             //CleanerML.SelectedTabIndex = 1;
             //this.CleanerML.TextLog = "Check duplicates";
             //this.FileOperationPanelShow = true;
@@ -281,6 +281,7 @@ namespace mCleaner.ViewModel
         public void Command_CloseWindow_Click()
         {
             this.ShowWindow = false;
+            CleanerML.Run = false;
             CleanerML.ShowFrontPage = true;
         }
 

@@ -193,10 +193,16 @@ namespace mCleaner.Logics.Commands
                 if (di.Exists)
                 {
                     // get the following files.
+
                     List<string> files = FileOperations.I.GetFilesRecursive(currPath, regex, (s) =>
                     {
+                        //if (!this.VMCleanerML.Cancel)
                         ProgressWorker.I.EnQ("Scanning directory " + s);
+                        //else
+                        //  ProgressWorker.I.EnQ("Operation Cancelled.");
                     });
+
+               
                     files.Reverse();
 
                     foreach (string file in files)

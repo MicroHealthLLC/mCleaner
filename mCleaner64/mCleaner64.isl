@@ -3865,7 +3865,7 @@
 		<row><td>IDS__TargetReq_DESC_RAM</td><td>1033</td><td>The amount of RAM is not adequate for running [ProductName].</td><td>0</td><td/><td>-995910411</td></row>
 		<row><td>IDS__TargetReq_DESC_RESOLUTION</td><td>1033</td><td>The screen resolution is not adequate for running [ProductName].</td><td>0</td><td/><td>-995910411</td></row>
 		<row><td>ID_STRING1</td><td>1033</td><td/><td>0</td><td/><td>-995908363</td></row>
-		<row><td>ID_STRING2</td><td>1033</td><td>http://www.MicroHealth,LLC.com</td><td>0</td><td/><td>-861704397</td></row>
+		<row><td>ID_STRING2</td><td>1033</td><td>https://www.microhealthllc.com</td><td>0</td><td/><td>488850348</td></row>
 		<row><td>ID_STRING3</td><td>1033</td><td>MicroHealth, LLC</td><td>0</td><td/><td>-861704397</td></row>
 		<row><td>ID_STRING4</td><td>1033</td><td>LAUNCH~1.EXE|Launch mCleaner.exe</td><td>0</td><td/><td>-995920203</td></row>
 		<row><td>IIDS_UITEXT_FeatureUninstalled</td><td>1033</td><td>This feature will remain uninstalled.</td><td>0</td><td/><td>-995910411</td></row>
@@ -3981,7 +3981,7 @@
 		<col def="V0">Data</col>
 		<col def="S255">ISBuildSourcePath</col>
 		<col def="I2">ISIconIndex</col>
-		<row><td>ARPPRODUCTICON.exe</td><td/><td>&lt;ISProductFolder&gt;\redist\Language Independent\OS Independent\setupicon.ico</td><td>0</td></row>
+		<row><td>ARPPRODUCTICON.exe</td><td/><td>&lt;VSSolutionFolder&gt;\mCleaner\appicon.ico</td><td>0</td></row>
 		<row><td>mCleaner.exe1_49C0CEB788EF4F95A9AE3DFD665A1695.exe</td><td/><td>C:\Code\Mcleaner\mCleaner\bin\Release64\mCleaner.exe</td><td>0</td></row>
 		<row><td>mCleaner.exe_53EE527D6B734060B89964276830A455.exe</td><td/><td>C:\Code\Mcleaner\mCleaner\bin\Release64\mCleaner.exe</td><td>0</td></row>
 	</table>

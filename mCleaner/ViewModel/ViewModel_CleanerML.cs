@@ -69,6 +69,51 @@ namespace mCleaner.ViewModel
             }
         }
 
+
+        private int _GridWidth =150;
+        public int GridWidth
+        {
+            get { return _GridWidth; }
+            set
+            {
+                if (_GridWidth != value)
+                {
+                    _GridWidth = value;
+                    base.RaisePropertyChanged("GridWidth");
+                }
+            }
+        }
+
+        private int _GridHeight = 120;
+        public int GridHeight
+        {
+            get { return _GridHeight; }
+            set
+            {
+                if (_GridHeight != value)
+                {
+                    _GridHeight = value;
+                    base.RaisePropertyChanged("GridHeight");
+                }
+            }
+        }
+
+        
+
+        private bool _btnPreviewCleanEnable = false;
+        public bool btnPreviewCleanEnable
+        {
+            get { return _btnPreviewCleanEnable; }
+            set
+            {
+                if (_btnPreviewCleanEnable != value)
+                {
+                    _btnPreviewCleanEnable = value;
+                    base.RaisePropertyChanged("btnPreviewCleanEnable");
+                }
+            }
+        }
+
         private bool _ShowFrontPage = false;
         public bool ShowFrontPage
         {
@@ -265,6 +310,21 @@ namespace mCleaner.ViewModel
             }
         }
 
+
+        private bool _BtnCancel = false;
+        public bool BtnCancel
+        {
+            get { return _BtnCancel; }
+            set
+            {
+                if (_BtnCancel != value)
+                {
+                    _BtnCancel = value;
+                }
+            }
+        }
+        
+
         private bool _Cancel = false;
         public bool Cancel
         {
@@ -307,6 +367,7 @@ namespace mCleaner.ViewModel
                 Command_CustomCleaningSelection = new RelayCommand(Command_CustomCleaningSelection_Click);
                 Command_CleanNow = new RelayCommand(Command_CleanNow_Click);
                 Command_Quit = new RelayCommand(Command_Quit_Click);
+                Command_CloseWindow = new RelayCommand(Command_CloseWindow_Click);
                 Command_CloseCleanerDescription = new RelayCommand(Command_CloseCleanerDescription_Click);
                 Command_Cancel = new RelayCommand(Command_Cancel_Click);
                 //Command_CleanOption = new RelayCommand<string>(new Action<string>((i) =>
@@ -337,10 +398,19 @@ namespace mCleaner.ViewModel
                 //}));
             }
         }
+
+        private void Command_CloseWindow_Click()
+        {
+            this.Run = false;
+            this.Cancel = true;
+            this.ShowFrontPage = true;
+        }
         #endregion
 
         #region commands
         public ICommand Command_Quit { get; set; }
+
+        public ICommand Command_CloseWindow { get; set; }
         public ICommand Command_Preview { get; internal set; }
         public ICommand Command_Clean { get; internal set; }
         public ICommand Command_CustomCleaningSelection { get; internal set; }
@@ -362,6 +432,11 @@ namespace mCleaner.ViewModel
             this.ProgressIsIndeterminate = true;
 
             await Start();
+
+            if (this.Cancel)
+            {
+                ProgressWorker.I.EnQ("Operation Canceled");
+            }
 
             await Worker.I.PreviewWork();
 
@@ -390,6 +465,7 @@ namespace mCleaner.ViewModel
 
                 Properties.Settings.Default.CleanOption = level;
                 Properties.Settings.Default.Save();
+                btnPreviewCleanEnable = true;
             }
 
             #region check what needs to be checked
@@ -437,6 +513,7 @@ namespace mCleaner.ViewModel
         public void Command_CustomCleaningSelection_Click()
         {
             this.CleanOption_Custom = true;
+            btnPreviewCleanEnable = true;
 
             // uncheck everything first
             foreach (TreeNode tn in this.CleanersCollection)
@@ -519,6 +596,8 @@ namespace mCleaner.ViewModel
         public void Command_Cancel_Click()
         {
             this.Cancel = true;
+            ProgressWorker.I.EnQ("Please wait while operation is being canceled its in its in middle of sommething when it finishes it will be automatically cancelled.");
+            MessageBox.Show("Please wait while operation is being canceled its in its in middle of sommething when it finishes it will be automatically cancelled.","mCleaner",MessageBoxButton.OK,MessageBoxImage.Information);
         }
         #endregion
 

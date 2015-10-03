@@ -1,6 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Windows.Media.Imaging;
 
 namespace mCleaner.Model
 {
@@ -35,6 +36,20 @@ namespace mCleaner.Model
                 }
             }
         }
+
+        private BitmapImage _IconImage = null;
+        public BitmapImage IconImage
+        {
+            get { return _IconImage; }
+            set
+            {
+                if (_IconImage != value)
+                {
+                    _IconImage = value;
+                }
+            }
+        }
+        
 
         private string _PublisherName = string.Empty;
         public string PublisherName

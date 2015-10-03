@@ -136,5 +136,22 @@ namespace mCleaner
 
             return source;
         }
+
+        private void MetroWindow_StateChanged(object sender, EventArgs e)
+        {
+           
+            if (this.WindowState == System.Windows.WindowState.Maximized)
+            {
+                btnPreviewLarge.Width=btnAggresiveLarge.Width=btnMorderateLarge.Width=btnSafeCleaningLarge.Width=btnCustomLarge.Width=btnCleanNowLarge.Width = 300;
+                btnPreviewLarge.Height  = btnAggresiveLarge.Height = btnMorderateLarge.Height = btnSafeCleaningLarge.Height = btnCustomLarge.Height = btnCleanNowLarge.Height = 200;
+               
+            }
+            else if (this.WindowState == System.Windows.WindowState.Normal)
+            {
+                btnPreviewLarge.Width = btnAggresiveLarge.Width = btnMorderateLarge.Width = btnSafeCleaningLarge.Width = btnCustomLarge.Width = btnCleanNowLarge.Width = 192;
+                btnPreviewLarge.Height = btnAggresiveLarge.Height = btnMorderateLarge.Height = btnSafeCleaningLarge.Height = btnCustomLarge.Height = btnCleanNowLarge.Height = 130;
+               
+            }
+        }
     }
 }

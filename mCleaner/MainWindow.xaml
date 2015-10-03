@@ -6,7 +6,8 @@
                       Title="mCleaner"
                       xmlns:ctl="clr-namespace:mCleaner.Helpers.Controls"
                       ShowTitleBar="False"
-                     Height="510" Width="1000" Icon="appicon.ico" WindowStartupLocation="CenterScreen">
+                      StateChanged="MetroWindow_StateChanged"
+                     Height="610" Width="1000" Icon="appicon.ico" WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
         <CollectionViewSource x:Key="ListViewSource" Source="{Binding DupChecker.DupplicateCollection}">
@@ -117,7 +118,7 @@
                             <TextBlock Text="Moderate Cleaning" HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" Foreground="Black" />
                         </StackPanel>
                     </Button>
-                    <Button Width="70" ToolTip="Start cleaning!" Command="{Binding CleanerML.Command_Clean}" CommandParameter="3"  VerticalAlignment="Top">
+                    <Button Width="70" ToolTip="Start cleaning!" Command="{Binding CleanerML.Command_Clean}" CommandParameter="3"  VerticalAlignment="Top" >
                         <StackPanel>
                             <Image Width="32" Height="32" Source="Assets/clean_aggressive_2.png" HorizontalAlignment="Center" />
                             <TextBlock Text="Aggressive Cleaning" HorizontalAlignment="Center"  TextWrapping="Wrap" TextAlignment="Center" Foreground="Black"/>
@@ -129,17 +130,24 @@
                             <TextBlock Text="Custom Selection" HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" Foreground="Black"/>
                         </StackPanel>
                     </Button>
-                    <Button Width="70" Command="{Binding CleanerML.Command_Preview}" ToolTip="Preview work" VerticalAlignment="Top">
+                    <Button Width="70" Command="{Binding CleanerML.Command_Preview}" ToolTip="Preview work" VerticalAlignment="Top"  IsEnabled="{Binding CleanerML.Run, Converter={StaticResource Not}}">
                         <StackPanel>
                             <Image Width="32" Height="32" Source="Assets/Preview.png" HorizontalAlignment="Center" />
                             <TextBlock Text="Preview" HorizontalAlignment="Center" Foreground="Black" />
                             <TextBlock Text="" />
                         </StackPanel>
                     </Button>
-                    <Button Width="70" ToolTip="Start cleaning" VerticalAlignment="Top" Command="{Binding CleanerML.Command_CleanNow}">
+                    <Button Width="70" ToolTip="Start cleaning" VerticalAlignment="Top" Command="{Binding CleanerML.Command_CleanNow}" IsEnabled="{Binding CleanerML.Run, Converter={StaticResource Not}}">
                         <StackPanel>
                             <Image Width="32" Height="32" Source="Assets/Clean_now.png" HorizontalAlignment="Center" />
                             <TextBlock Text="Clean Now" HorizontalAlignment="Center" Foreground="Black" />
+                            <TextBlock Text="" />
+                        </StackPanel>
+                    </Button>
+                    <Button Width="70" ToolTip="Start cleaning" VerticalAlignment="Top" Command="{Binding CleanerML.Command_Cancel}" IsEnabled="{Binding CleanerML.Run}">
+                        <StackPanel>
+                            <Image Width="32" Height="32" Source="Assets/cancel32.png" HorizontalAlignment="Center" />
+                            <TextBlock Text="Cancel" HorizontalAlignment="Center" Foreground="Black" />
                             <TextBlock Text="" />
                         </StackPanel>
                     </Button>
@@ -362,14 +370,12 @@
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
 
-                                <Grid Grid.Column="0">
-                                    <Button Style="{StaticResource ButtonStyle}" Background="#e1410a" Foreground="White" Content="Cancel" Command="{Binding CleanerML.Command_Cancel}"/>
-                                </Grid>
-
                                 <Grid Grid.Column="1">
                                     <Border BorderThickness="1" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}">
                                         <ProgressBar Height="25" Maximum="{Binding CleanerML.MaxProgress}" Value="{Binding CleanerML.ProgressIndex}" VerticalAlignment="Center" IsHitTestVisible="False" Margin="1" IsIndeterminate="{Binding CleanerML.ProgressIsIndeterminate}" Style="{DynamicResource ProgressBarStyle}"/>
                                     </Border>
+                                    <Button Content="Close" VerticalAlignment="Top" HorizontalAlignment="Right" Style="{StaticResource ButtonStyle}" Margin="0,0,10,0" Command="{Binding CleanerML.Command_CloseWindow}" />
+
                                     <TextBlock Text="{Binding CleanerML.ProgressText}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{StaticResource MainWindow_ProgressBar_Progress_Text}" >
                                         <TextBlock.Effect>
                                             <DropShadowEffect ShadowDepth="2" BlurRadius="3" Color="{DynamicResource {x:Static SystemColors.ActiveCaptionTextColorKey}}" Opacity="0.2"/>
@@ -414,18 +420,15 @@
                                 <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                                     <TextBlock Text="Start cleaning now!" FontSize="20" TextAlignment="Left"  Padding="5" Margin="0,0,0,3" />
                                     <StackPanel Orientation="Horizontal">
-                                        <Button Style="{StaticResource ButtonStyle}" Command="{Binding CleanerML.Command_Clean}" CommandParameter="4" Background="#fbd63e">
+                                        <Button Style="{StaticResource ButtonStyle}" Name="btnSafeCleaningLarge" Width="192" Height="130" Command="{Binding CleanerML.Command_Clean}" CommandParameter="1" Background="#fbd63e">
                                             <Button.ContentTemplate>
                                                 <DataTemplate>
-                                                    <Grid Width="150" Height="120">
+                                                    <Grid >
                                                         <Grid.ColumnDefinitions>
                                                             <ColumnDefinition Width="auto" />
                                                             <ColumnDefinition Width="10" />
                                                             <ColumnDefinition Width="*" />
                                                         </Grid.ColumnDefinitions>
-
-                                                        <!--<Image Width="32" Height="32" Source="Assets/clean_safe.png" HorizontalAlignment="Center" VerticalAlignment="Center" />-->
-
                                                         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Foreground="Black" Grid.Column="2" VerticalAlignment="Top" FontSize="20">
                                                     Safe Cleaning
                                                     <LineBreak />
@@ -436,18 +439,15 @@
                                             </Button.ContentTemplate>
                                         </Button>
                                         <TextBlock Text=" " />
-                                        <Button Style="{StaticResource ButtonStyle}" Background="#f4760d" Command="{Binding CleanerML.Command_Clean}" CommandParameter="5">
+                                        <Button Style="{StaticResource ButtonStyle}" Name="btnMorderateLarge" Width="192" Height="130" Background="#f4760d" Command="{Binding CleanerML.Command_Clean}" CommandParameter="2">
                                             <Button.ContentTemplate>
                                                 <DataTemplate>
-                                                    <Grid Width="150" Height="120">
+                                                    <Grid>
                                                         <Grid.ColumnDefinitions>
                                                             <ColumnDefinition Width="auto" />
                                                             <ColumnDefinition Width="10" />
                                                             <ColumnDefinition Width="*" />
                                                         </Grid.ColumnDefinitions>
-
-                                                        <!--<Image Width="32" Height="32" Source="Assets/clean_moderate.png" HorizontalAlignment="Center" VerticalAlignment="Center" />-->
-
                                                         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Foreground="Black" Grid.Column="2" VerticalAlignment="Top" FontSize="20">
                                                     Moderate Cleaning
                                                     <LineBreak />
@@ -458,18 +458,15 @@
                                             </Button.ContentTemplate>
                                         </Button>
                                         <TextBlock Text=" " />
-                                        <Button Style="{StaticResource ButtonStyle}" Background="#e1410a" Command="{Binding CleanerML.Command_Clean}" CommandParameter="6">
+                                        <Button Style="{StaticResource ButtonStyle}" Name="btnAggresiveLarge" Width="192" Height="130" Background="#e1410a" Command="{Binding CleanerML.Command_Clean}" CommandParameter="3">
                                             <Button.ContentTemplate>
                                                 <DataTemplate>
-                                                    <Grid Width="150" Height="120">
+                                                    <Grid>
                                                         <Grid.ColumnDefinitions>
                                                             <ColumnDefinition Width="auto" />
                                                             <ColumnDefinition Width="10" />
                                                             <ColumnDefinition Width="*" />
                                                         </Grid.ColumnDefinitions>
-
-                                                        <!--<Image Width="32" Height="32" Source="Assets/clean_aggresive.png" HorizontalAlignment="Center" VerticalAlignment="Center" />-->
-
                                                         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Foreground="Black" Grid.Column="2" VerticalAlignment="Top" FontSize="20">
                                                     Aggressive Cleaning
                                                     <LineBreak />
@@ -479,6 +476,66 @@
                                                 </DataTemplate>
                                             </Button.ContentTemplate>
                                         </Button>
+                                        <TextBlock Text=" " />
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Button Style="{StaticResource ButtonStyle}" Background="#2aa668" Name="btnCustomLarge" Width="192" Height="130" Command="{Binding CleanerML.Command_CustomCleaningSelection}" CommandParameter="3">
+                                            <Button.ContentTemplate>
+                                                <DataTemplate>
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="auto" />
+                                                            <ColumnDefinition Width="10" />
+                                                            <ColumnDefinition Width="*" />
+                                                        </Grid.ColumnDefinitions>
+                                                        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Foreground="Black" Grid.Column="2" VerticalAlignment="Top" FontSize="20">
+                                                    Custom Selection
+                                                    <LineBreak />
+                                                    <Run Text="Cleans the files which you have selected in the right bar." FontSize="12" />
+                                                        </TextBlock>
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </Button.ContentTemplate>
+                                        </Button>
+                                        <TextBlock Text=" " />
+                                        <Button Style="{StaticResource ButtonStyle}" Name="btnPreviewLarge" Width="192" Height="130" Command="{Binding CleanerML.Command_Preview}" CommandParameter="4" Background="#ffaff8" IsEnabled="{Binding CleanerML.btnPreviewCleanEnable}">
+                                            <Button.ContentTemplate>
+                                                <DataTemplate>
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="auto" />
+                                                            <ColumnDefinition Width="10" />
+                                                            <ColumnDefinition Width="*" />
+                                                        </Grid.ColumnDefinitions>
+                                                        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Foreground="Black" Grid.Column="2" VerticalAlignment="Top" FontSize="20">
+                                                   Preview
+                                                    <LineBreak />
+                                                    <Run Text="Shows the preview of the list of files that is going to affect when you do clean now." FontSize="12" />
+                                                        </TextBlock>
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </Button.ContentTemplate>
+                                        </Button>
+                                        <TextBlock Text=" " />
+                                        <Button Style="{StaticResource ButtonStyle}" Background="#d1e71e" Name="btnCleanNowLarge" Width="192" Height="130" Command="{Binding CleanerML.Command_CleanNow}" IsEnabled="{Binding CleanerML.btnPreviewCleanEnable}">
+                                            <Button.ContentTemplate>
+                                                <DataTemplate>
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="auto" />
+                                                            <ColumnDefinition Width="10" />
+                                                            <ColumnDefinition Width="*" />
+                                                        </Grid.ColumnDefinitions>
+                                                        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Foreground="Black" Grid.Column="2" VerticalAlignment="Top" FontSize="20">
+                                                    Clean Now
+                                                    <LineBreak />
+                                                    <Run Text="Starts cleaning based on which option you set like safe cleaning, morderate cleaning, aggressive cleaning." FontSize="12" />
+                                                        </TextBlock>
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </Button.ContentTemplate>
+                                        </Button>
+
                                     </StackPanel>
                                 </StackPanel>
                             </Grid>

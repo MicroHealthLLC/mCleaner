@@ -3872,8 +3872,8 @@
 		<row><td>IDS__TargetReq_DESC_PROCESSOR</td><td>1033</td><td>The processor is not adequate for running [ProductName].</td><td>0</td><td/><td>-995909162</td></row>
 		<row><td>IDS__TargetReq_DESC_RAM</td><td>1033</td><td>The amount of RAM is not adequate for running [ProductName].</td><td>0</td><td/><td>-995909162</td></row>
 		<row><td>IDS__TargetReq_DESC_RESOLUTION</td><td>1033</td><td>The screen resolution is not adequate for running [ProductName].</td><td>0</td><td/><td>-995909162</td></row>
-		<row><td>ID_STRING1</td><td>1033</td><td>http://www.MicroHealth,LLC.com</td><td>0</td><td/><td>-861718124</td></row>
-		<row><td>ID_STRING2</td><td>1033</td><td>MicroHealth, LLC</td><td>0</td><td/><td>-861718124</td></row>
+		<row><td>ID_STRING1</td><td>1033</td><td>https://www.microhealthllc.com</td><td>0</td><td/><td>488864620</td></row>
+		<row><td>ID_STRING2</td><td>1033</td><td>https://www.microhealthllc.com</td><td>0</td><td/><td>488885100</td></row>
 		<row><td>ID_STRING3</td><td>1033</td><td>LAUNCH~1.EXE|Launch mCleaner.exe</td><td>0</td><td/><td>-995904970</td></row>
 		<row><td>IIDS_UITEXT_FeatureUninstalled</td><td>1033</td><td>This feature will remain uninstalled.</td><td>0</td><td/><td>-995909162</td></row>
 	</table>
@@ -3988,7 +3988,7 @@
 		<col def="V0">Data</col>
 		<col def="S255">ISBuildSourcePath</col>
 		<col def="I2">ISIconIndex</col>
-		<row><td>ARPPRODUCTICON.exe</td><td/><td>&lt;ISProductFolder&gt;\redist\Language Independent\OS Independent\setupicon.ico</td><td>0</td></row>
+		<row><td>ARPPRODUCTICON.exe</td><td/><td>&lt;VSSolutionFolder&gt;\mCleaner\appicon.ico</td><td>0</td></row>
 		<row><td>clamscan.exe_B6E10377E68D4CAE9E2AEED8D8B69B18.exe</td><td/><td>C:\Code\Mcleaner\mCleaner\bin\Release32\Clam\clamscan.exe</td><td>0</td></row>
 		<row><td>freshclam.exe_32C9304AEBCA4964BD4B80517FDA314F.exe</td><td/><td>C:\Code\Mcleaner\mCleaner\bin\Release32\Clam\freshclam.exe</td><td>0</td></row>
 		<row><td>mCleaner.exe1_267886012AEA4FF8B5D8FED85421CCD2.exe</td><td/><td>C:\Code\Mcleaner\mCleaner\bin\Release32\mCleaner.exe</td><td>0</td></row>

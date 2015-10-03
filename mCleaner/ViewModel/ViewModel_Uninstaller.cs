@@ -11,11 +11,23 @@ using Microsoft.Practices.ServiceLocation;
 using Microsoft.Win32;
 using System;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
+using System.Text;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.IO;
+using System.Windows.Controls;
 
 namespace mCleaner.ViewModel
 {
     public class ViewModel_Uninstaller : ViewModelBase
     {
+        [DllImport("shell32.dll")]
+        private static extern IntPtr ExtractAssociatedIcon(IntPtr hInst, StringBuilder lpIconPath,
+           out ushort lpiIcon);
+        [DllImport("shell32.dll")]
+        private static extern IntPtr ExtractIcon(IntPtr hInst, string lpszExeFileName, int nIconIndex);
+
         #region properties
         private ObservableCollection<Model_WindowsUninstaller> _ProgramCollection = new ObservableCollection<Model_WindowsUninstaller>();
         public ObservableCollection<Model_WindowsUninstaller> ProgramCollection
@@ -133,48 +145,70 @@ namespace mCleaner.ViewModel
 
         public void Command_ShowUninstaller_Click()
         {
+            BtnUninstall = false;
             this.ShowWindow = true;
-            ListOfWindowsPorgrams();
+            GetInstalledPrograms();
         }
 
-        public void ListOfWindowsPorgrams()
+         const string registry_key = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall";
+
+         public void GetInstalledPrograms()
+         {
+             ProgramCollection.Clear();
+             GetInstalledProgramsFromRegistry(RegistryView.Registry32);
+             GetInstalledProgramsFromRegistry(RegistryView.Registry64);
+         }
+
+    private void GetInstalledProgramsFromRegistry(RegistryView registryView)
+    {
+
+        using (RegistryKey key = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, registryView).OpenSubKey(registry_key))
         {
-            ProgramCollection.Clear();
-            string uninstallKey = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall";
-            using (RegistryKey rk = Registry.LocalMachine.OpenSubKey(uninstallKey))
+            foreach (string subkey_name in key.GetSubKeyNames())
             {
-                foreach (string skName in rk.GetSubKeyNames())
+                using (RegistryKey sk = key.OpenSubKey(subkey_name))
                 {
-                    using (RegistryKey sk = rk.OpenSubKey(skName))
+                    if (IsProgramVisible(sk))
                     {
-                        try
+                        var displayName = sk.GetValue("DisplayName");
+                        var size = sk.GetValue("EstimatedSize",string.Empty);
+                        var Publisher = sk.GetValue("Publisher", string.Empty);
+                        var strUninstallString = sk.GetValue("UninstallString", string.Empty);
+                        var strVersion = sk.GetValue("DisplayVersion", string.Empty);
+                        if (!string.IsNullOrEmpty(Convert.ToString(displayName)) && !string.IsNullOrEmpty(Convert.ToString(strUninstallString)))
                         {
-                            var displayName = sk.GetValue("DisplayName");
-                            var size = sk.GetValue("EstimatedSize");
-                            var Publisher = sk.GetValue("Publisher",string.Empty);
-                            var strUninstallString=sk.GetValue("UninstallString",string.Empty);
-                           var strVersion=sk.GetValue("DisplayVersion", string.Empty); 
-                            
-                            if (!string.IsNullOrEmpty(Convert.ToString( displayName)) && !string.IsNullOrEmpty(Convert.ToString(strUninstallString)))
+                            Model_WindowsUninstaller e = new Model_WindowsUninstaller();
+                            e.ProgramDetails = new Model_Uninstaller_ProgramDetails()
                             {
-                                Model_WindowsUninstaller e = new Model_WindowsUninstaller();
-                                e.ProgramDetails = new Model_Uninstaller_ProgramDetails()
-                                {
-                                    ProgramName = displayName.ToString(),
-                                    EstimatedSize=size.ToString(),
-                                    PublisherName = Publisher.ToString(),
-                                    Version=strVersion.ToString(),
-                                    UninstallString = strUninstallString.ToString(),
-                                };
-                                ProgramCollection.Add(e);
-                            }
+                                ProgramName = displayName.ToString(),
+                                EstimatedSize = size.ToString(),
+                                PublisherName = Publisher.ToString(),
+                                Version = strVersion.ToString(),
+                                UninstallString = strUninstallString.ToString(),
+                            };
+                            ProgramCollection.Add(e);
                         }
-                        catch (Exception ex)
-                        { }
                     }
                 }
             }
         }
+    }
+
+    
+
+    private static bool IsProgramVisible(RegistryKey subkey)
+    {
+        var name = (string)subkey.GetValue("DisplayName");
+        var releaseType = (string)subkey.GetValue("ReleaseType");
+        var systemComponent = subkey.GetValue("SystemComponent");
+        var parentName = (string)subkey.GetValue("ParentDisplayName");
+
+        return
+            !string.IsNullOrEmpty(name)
+            && string.IsNullOrEmpty(releaseType)
+            && string.IsNullOrEmpty(parentName)
+            && (systemComponent == null);
+    }
 
         public void Command_CloseWindow_Click()
         {
@@ -183,9 +217,29 @@ namespace mCleaner.ViewModel
 
         public void Command_Refresh_Click()
         {
-            ListOfWindowsPorgrams();
+            GetInstalledPrograms();
             BtnUninstall = false;
         }
+
+        private static BitmapImage LoadImage(byte[] imageData)
+        {
+            if (imageData == null || imageData.Length == 0) return null;
+            var image = new BitmapImage();
+            using (var mem = new MemoryStream(imageData))
+            {
+                mem.Position = 0;
+                image.BeginInit();
+                image.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
+                image.CacheOption = BitmapCacheOption.OnLoad;
+                image.UriSource = null;
+                image.StreamSource = mem;
+                image.EndInit();
+            }
+            image.Freeze();
+            return image;
+        }
+
+
         #endregion
 
         #region methods

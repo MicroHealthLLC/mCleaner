@@ -3,7 +3,8 @@
     <ResourceDictionary>
       <vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True" xmlns:vm="clr-namespace:mCleaner.ViewModel" />
       <cv:Converter_BooleanToVisibility x:Key="boolTovis" />
-      <ResourceDictionary.MergedDictionaries>
+            <cv:InverseBooleanConverter x:Key="Not" />
+            <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="Styles\Theme.xaml" />
         <ResourceDictionary Source="Styles\ButtonStyle.xaml" />
         <ResourceDictionary Source="Styles\TreeViewStyle.xaml" />

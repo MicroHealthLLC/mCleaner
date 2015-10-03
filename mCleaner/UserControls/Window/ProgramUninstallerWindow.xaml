@@ -60,6 +60,7 @@
                   TextOptions.TextFormattingMode="Display"
                   HeadersVisibility="All"
                   Margin="5"
+                  SelectionMode="Single"
                   SelectionUnit="FullRow"
                   SelectionChanged="AzureDataGrid_Selected"
                   ItemsSource="{Binding Path=Uninstaller.ProgramCollection}"
