@@ -402,6 +402,13 @@
     <Resource Include="Assets\UninstallLarge.png" />
     <Resource Include="Assets\UninstallSmall.png" />
     <Resource Include="Assets\cancel32.png" />
+    <Resource Include="Assets\PreviewLarge.png" />
+    <Resource Include="Assets\Scan_Memory.png" />
+    <Resource Include="Assets\CleanDuplicates_large.png" />
+    <Resource Include="Assets\UninstallPrograms_large.png" />
+    <Resource Include="Assets\RegistryCleaner.png" />
+    <Resource Include="Assets\ClearSelection.png" />
+    <Resource Include="Assets\clean_safe_2_large.png" />
     <Content Include="Clam\db\readme.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

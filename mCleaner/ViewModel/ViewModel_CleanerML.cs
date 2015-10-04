@@ -365,6 +365,8 @@ namespace mCleaner.ViewModel
                 Command_Preview = new RelayCommand(Command_Preview_Click);
                 Command_Clean = new RelayCommand<string>(Command_Clean_Click);
                 Command_CustomCleaningSelection = new RelayCommand(Command_CustomCleaningSelection_Click);
+                Command_RegistrySelection= new RelayCommand(Command_RegitryClearner_Click);
+                CommandClearSelection = new RelayCommand(Command_ClearSelection_Click);
                 Command_CleanNow = new RelayCommand(Command_CleanNow_Click);
                 Command_Quit = new RelayCommand(Command_Quit_Click);
                 Command_CloseWindow = new RelayCommand(Command_CloseWindow_Click);
@@ -414,6 +416,8 @@ namespace mCleaner.ViewModel
         public ICommand Command_Preview { get; internal set; }
         public ICommand Command_Clean { get; internal set; }
         public ICommand Command_CustomCleaningSelection { get; internal set; }
+        public ICommand Command_RegistrySelection { get; internal set; }
+        public ICommand CommandClearSelection { get; internal set; }
         public ICommand Command_CleanNow { get; internal set; }
         public ICommand Command_CleanOption { get; internal set; }
         public ICommand Command_CloseCleanerDescription { get; internal set; }
@@ -553,6 +557,57 @@ namespace mCleaner.ViewModel
             }
         }
 
+        //little_reg;
+
+        public void Command_RegitryClearner_Click()
+        {
+            btnPreviewCleanEnable = true;
+            // uncheck everything first
+            foreach (TreeNode tn in this.CleanersCollection)
+            {
+                foreach (TreeNode child in tn.Children)
+                {
+                    if (child.Tag is option)
+                    {
+                        option o = (option)child.Tag;
+                        child.IsChecked = false;
+                    }
+                }
+            }
+
+            #region check what needs to be checked
+            foreach (TreeNode tn in this.CleanersCollection)
+            {
+                foreach (TreeNode child in tn.Children)
+                {
+                    if (child.Tag is option)
+                    {
+                        option o = (option)child.Tag;
+                        if (o.parent_cleaner.id == "little_reg")
+                            child.IsChecked = true;
+                    }
+                }
+            }
+            #endregion
+        }
+
+        public void Command_ClearSelection_Click()
+        {
+            btnPreviewCleanEnable = true;
+            // uncheck everything first
+            foreach (TreeNode tn in this.CleanersCollection)
+            {
+                foreach (TreeNode child in tn.Children)
+                {
+                    if (child.Tag is option)
+                    {
+                        option o = (option)child.Tag;
+                        child.IsChecked = false;
+                    }
+                }
+            }
+        }
+
         public async void Command_CleanNow_Click()
         {
             this.Cancel = false;
@@ -596,8 +651,8 @@ namespace mCleaner.ViewModel
         public void Command_Cancel_Click()
         {
             this.Cancel = true;
-            ProgressWorker.I.EnQ("Please wait while operation is being canceled its in its in middle of sommething when it finishes it will be automatically cancelled.");
-            MessageBox.Show("Please wait while operation is being canceled its in its in middle of sommething when it finishes it will be automatically cancelled.","mCleaner",MessageBoxButton.OK,MessageBoxImage.Information);
+            ProgressWorker.I.EnQ("Please wait while operation is being canceled its in middle of sommething when it finishes it will be automatically cancelled.");
+            MessageBox.Show("Please wait while operation is being canceled its in middle of sommething when it finishes it will be automatically cancelled.","mCleaner",MessageBoxButton.OK,MessageBoxImage.Information);
         }
         #endregion
 
