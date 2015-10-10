@@ -7,7 +7,7 @@
                       xmlns:ctl="clr-namespace:mCleaner.Helpers.Controls"
                       ShowTitleBar="False"
                       StateChanged="MetroWindow_StateChanged"
-                     Height="700" Width="1100" Icon="appicon.ico" WindowStartupLocation="CenterScreen">
+                     Height="700" Width="1150" Icon="appicon.ico" WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
         <CollectionViewSource x:Key="ListViewSource" Source="{Binding DupChecker.DupplicateCollection}">
@@ -15,25 +15,6 @@
                 <PropertyGroupDescription PropertyName="Hash" />
             </CollectionViewSource.GroupDescriptions>
         </CollectionViewSource>
-        <Style x:Key="LargeTileStyle"
-                   TargetType="controls:Tile">
-            <Setter Property="Width"
-                        Value="300" />
-            <Setter Property="Height"
-                        Value="125" />
-            <Setter Property="TitleFontSize"
-                        Value="12" />
-        </Style>
-
-        <Style x:Key="SmallTileStyle"
-                   TargetType="controls:Tile">
-            <Setter Property="Width"
-                        Value="147" />
-            <Setter Property="Height"
-                        Value="125" />
-            <Setter Property="TitleFontSize"
-                        Value="12" />
-        </Style>
     </Window.Resources>
 
     <Window.DataContext>
@@ -125,134 +106,302 @@
                         </Style>
                     </ToolBar.Resources>
 
-                    <Button Width="70" ToolTip="Start cleaning!" Command="{Binding CleanerML.Command_Clean}" BorderBrush="Black" CommandParameter="1"  VerticalAlignment="Top">
-                        <StackPanel>
-                            <Image Width="32" Height="32" Source="Assets/clean_safe_2.png" HorizontalAlignment="Center" />
-                            <TextBlock Text="Safe Cleaning" HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" Foreground="Black"/>
-                        </StackPanel>
-                    </Button>
-                    <Button Width="70" ToolTip="Start cleaning!" Command="{Binding CleanerML.Command_Clean}" CommandParameter="2"  VerticalAlignment="Top">
-                        <StackPanel>
-                            <Image Width="32" Height="32" Source="Assets/clean_moderate_2.png" HorizontalAlignment="Center" />
-                            <TextBlock Text="Moderate Cleaning" HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" Foreground="Black" />
-                        </StackPanel>
-                    </Button>
-                    <Button Width="70" ToolTip="Start cleaning!" Command="{Binding CleanerML.Command_Clean}" CommandParameter="3"  VerticalAlignment="Top" >
-                        <StackPanel>
-                            <Image Width="32" Height="32" Source="Assets/clean_aggressive_2.png" HorizontalAlignment="Center" />
-                            <TextBlock Text="Aggressive Cleaning" HorizontalAlignment="Center"  TextWrapping="Wrap" TextAlignment="Center" Foreground="Black"/>
-                        </StackPanel>
-                    </Button>
-                    <Button Width="70" ToolTip="Start cleaning!" Command="{Binding CleanerML.Command_RegistrySelection}" CommandParameter="3"  VerticalAlignment="Top" >
-                        <StackPanel>
-                            <Image Width="32" Height="32" Source="Assets/RegistryCleaner.png" HorizontalAlignment="Center" />
-                            <TextBlock Text="Registry Cleaning" HorizontalAlignment="Center"  TextWrapping="Wrap" TextAlignment="Center" Foreground="Black"/>
-                        </StackPanel>
-                    </Button>
-                    <Button Width="70" ToolTip="Start cleaning!" Command="{Binding CleanerML.Command_CustomCleaningSelection}" CommandParameter="3"  VerticalAlignment="Top">
-                        <StackPanel>
-                            <Image Width="32" Height="32" Source="Assets/clean_custom.png" HorizontalAlignment="Center" />
-                            <TextBlock Text="Custom Selection" HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" Foreground="Black"/>
-                        </StackPanel>
-                    </Button>
                     <Button Width="70" ToolTip="Clear the selection" VerticalAlignment="Top" Command="{Binding CleanerML.CommandClearSelection}">
                         <StackPanel>
-                            <Image Width="32" Height="32" Source="Assets/ClearSelection.png" HorizontalAlignment="Center" />
+                            <Rectangle Fill="#7481A6" Height="32" Width="32">
+                                <Rectangle.OpacityMask>
+                                    <VisualBrush>
+                                        <VisualBrush.Visual>
+                                            <Image Source="Assets/ClearSelection.png" HorizontalAlignment="Center" />
+                                        </VisualBrush.Visual>
+                                    </VisualBrush>
+                                </Rectangle.OpacityMask>
+                            </Rectangle>
                             <TextBlock Text="Clear" HorizontalAlignment="Center" Foreground="Black"/>
                             <TextBlock Text="Selection" HorizontalAlignment="Center" Foreground="Black"/>
                             <TextBlock Text="" />
                         </StackPanel>
                     </Button>
-                    <Button Width="70" Command="{Binding CleanerML.Command_Preview}" ToolTip="Preview work" VerticalAlignment="Top"  IsEnabled="{Binding CleanerML.Run, Converter={StaticResource Not}}">
+
+                    <Button Width="70" ToolTip="Start cleaning!" Command="{Binding CleanerML.Command_Clean}" BorderBrush="Black" CommandParameter="1"  VerticalAlignment="Top">
                         <StackPanel>
-                            <Image Width="32" Height="32" Source="Assets/Preview.png" HorizontalAlignment="Center" />
+                            <Rectangle Fill="#4B5B88" Height="32" Width="32">
+                                <Rectangle.OpacityMask>
+                                    <VisualBrush>
+                                        <VisualBrush.Visual>
+                                            <Image  Width="32" Height="32" Source="Assets/clean_safe_2.png" HorizontalAlignment="Center" />
+                                        </VisualBrush.Visual>
+                                    </VisualBrush>
+                                </Rectangle.OpacityMask>
+                            </Rectangle>
+                            <TextBlock Text="Safe Cleaning" HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" Foreground="Black"/>
+                        </StackPanel>
+                    </Button>
+                    <Button Width="70" ToolTip="Start cleaning!" Command="{Binding CleanerML.Command_Clean}" CommandParameter="2"  VerticalAlignment="Top">
+                        <StackPanel>
+                            <Rectangle Fill="#2F3F6F" Height="32" Width="32">
+                                <Rectangle.OpacityMask>
+                                    <VisualBrush>
+                                        <VisualBrush.Visual>
+                                            <Image Width="32" Height="32" Source="Assets/clean_moderate_2.png" HorizontalAlignment="Center" />
+                                        </VisualBrush.Visual>
+                                    </VisualBrush>
+                                </Rectangle.OpacityMask>
+                            </Rectangle>
+                            <TextBlock Text="Moderate Cleaning" HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" Foreground="Black" />
+                        </StackPanel>
+                    </Button>
+                    <Button Width="70" ToolTip="Start cleaning!" Command="{Binding CleanerML.Command_Clean}" CommandParameter="3"  VerticalAlignment="Top" >
+                        <StackPanel>
+                            <Rectangle Fill="#192855" Height="32" Width="32">
+                                <Rectangle.OpacityMask>
+                                    <VisualBrush>
+                                        <VisualBrush.Visual>
+                                            <Image Width="32" Height="32" Source="Assets/clean_aggressive_2.png" HorizontalAlignment="Center" />
+                                        </VisualBrush.Visual>
+                                    </VisualBrush>
+                                </Rectangle.OpacityMask>
+                            </Rectangle>
+                            <TextBlock Text="Aggressive Cleaning" HorizontalAlignment="Center"  TextWrapping="Wrap" TextAlignment="Center" Foreground="Black"/>
+                        </StackPanel>
+                    </Button>
+                    <Button Width="70" ToolTip="Start cleaning!" Command="{Binding CleanerML.Command_RegistrySelection}" CommandParameter="3"  VerticalAlignment="Top" >
+                        <StackPanel>
+                            <Rectangle Fill="#7E4719" Height="32" Width="32">
+                                <Rectangle.OpacityMask>
+                                    <VisualBrush>
+                                        <VisualBrush.Visual>
+                                            <Image Width="32" Height="32" Source="Assets/RegistryCleaner.png" HorizontalAlignment="Center" />
+                                        </VisualBrush.Visual>
+                                    </VisualBrush>
+                                </Rectangle.OpacityMask>
+                            </Rectangle>
+                            <TextBlock Text="Registry Cleaning" HorizontalAlignment="Center"  TextWrapping="Wrap" TextAlignment="Center" Foreground="Black"/>
+                        </StackPanel>
+                    </Button>
+                    <Button Width="70" ToolTip="Start cleaning!" Command="{Binding CleanerML.Command_CustomCleaningSelection}" CommandParameter="3"  VerticalAlignment="Top">
+                        <StackPanel>
+                            <Rectangle Fill="#230538" Height="32" Width="32">
+                                <Rectangle.OpacityMask>
+                                    <VisualBrush>
+                                        <VisualBrush.Visual>
+                                            <Image Width="32" Height="32" Source="Assets/clean_custom.png" HorizontalAlignment="Center" />
+                                        </VisualBrush.Visual>
+                                    </VisualBrush>
+                                </Rectangle.OpacityMask>
+                            </Rectangle>
+                            <TextBlock Text="Custom Selection" HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" Foreground="Black"/>
+                        </StackPanel>
+                    </Button>
+                    <Button Width="70" x:Name="btnPreviewMenu" Command="{Binding CleanerML.Command_Preview}" ToolTip="Preview work" VerticalAlignment="Top"  IsEnabled="{Binding CleanerML.Run, Converter={StaticResource Not}}">
+                        <StackPanel>
+                            <Rectangle Fill="#5AA552" Height="32" Width="32">
+                                <Rectangle.OpacityMask>
+                                    <VisualBrush>
+                                        <VisualBrush.Visual>
+                                            <Image Width="32" Height="32" Source="Assets/Preview.png" HorizontalAlignment="Center" />
+                                        </VisualBrush.Visual>
+                                    </VisualBrush>
+                                </Rectangle.OpacityMask>
+                                <Rectangle.Style>
+                                    <Style TargetType="Rectangle">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding ElementName=btnPreviewMenu, Path=IsEnabled}"
+                                     Value="False">
+                                                <Setter Property="Opacity"
+                                    Value="0.3" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Rectangle.Style>
+                            </Rectangle>
                             <TextBlock Text="Preview" HorizontalAlignment="Center" Foreground="Black" />
                             <TextBlock Text="" />
                         </StackPanel>
                     </Button>
-                    <Button Width="70" ToolTip="Start cleaning" VerticalAlignment="Top" Command="{Binding CleanerML.Command_CleanNow}" IsEnabled="{Binding CleanerML.Run, Converter={StaticResource Not}}">
+                    <Button Width="70" ToolTip="Start cleaning" x:Name="btnCleanNowMenu" VerticalAlignment="Top" Command="{Binding CleanerML.Command_CleanNow}" IsEnabled="{Binding CleanerML.Run, Converter={StaticResource Not}}">
                         <StackPanel>
-                            <Image Width="32" Height="32" Source="Assets/Clean_now.png" HorizontalAlignment="Center" />
+                            <Rectangle Fill="#084502" Height="32" Width="32">
+                                <Rectangle.OpacityMask>
+                                    <VisualBrush>
+                                        <VisualBrush.Visual>
+                                            <Image Width="32" Height="32" Source="Assets/Clean_now.png" HorizontalAlignment="Center" />
+                                        </VisualBrush.Visual>
+                                    </VisualBrush>
+                                </Rectangle.OpacityMask>
+                                <Rectangle.Style>
+                                    <Style TargetType="Rectangle">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding ElementName=btnCleanNowMenu, Path=IsEnabled}"
+                                     Value="False">
+                                                <Setter Property="Opacity"
+                                    Value="0.3" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Rectangle.Style>
+                            </Rectangle>
                             <TextBlock Text="Clean Now" HorizontalAlignment="Center" Foreground="Black" />
                             <TextBlock Text="" />
                         </StackPanel>
                     </Button>
-                    <Button Width="70" ToolTip="Start cleaning" VerticalAlignment="Top" Command="{Binding CleanerML.Command_Cancel}" IsEnabled="{Binding CleanerML.Run}">
+                    <Button Width="70" x:Name="btnCancelProcessMenu" ToolTip="Cancel the current process!" VerticalAlignment="Top" Command="{Binding CleanerML.Command_Cancel}" IsEnabled="{Binding CleanerML.Run}">
                         <StackPanel>
-                            <Image Width="32" Height="32" Source="Assets/cancel32.png" HorizontalAlignment="Center" />
+                            <Rectangle Fill="#B81A1A" Height="32" Width="32">
+                                <Rectangle.OpacityMask>
+                                    <VisualBrush>
+                                        <VisualBrush.Visual>
+                                            <Image Width="32" Height="32" Source="Assets/cancel32.png" HorizontalAlignment="Center" />
+                                        </VisualBrush.Visual>
+                                    </VisualBrush>
+                                </Rectangle.OpacityMask>
+                                <Rectangle.Style>
+                                    <Style TargetType="Rectangle">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding ElementName=btnCancelProcessMenu, Path=IsEnabled}"
+                                     Value="False">
+                                                <Setter Property="Opacity"
+                                    Value="0.3" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Rectangle.Style>
+                            </Rectangle>
                             <TextBlock Text="Cancel" HorizontalAlignment="Center" Foreground="Black" />
                             <TextBlock Text="" />
                         </StackPanel>
                     </Button>
                     <Separator />
+                    <Button Width="70" ToolTip="Clean duplicates from directory" x:Name="btnCleanDuplicatesMenu" Visibility="Visible" Command="{Binding DupChecker.Command_ShowDupTab}" IsEnabled="{Binding CleanerML.Run, Converter={StaticResource Not}}">
+                        <StackPanel>
+                            <Rectangle Fill="#37862F" Height="32" Width="32">
+                                <Rectangle.OpacityMask>
+                                    <VisualBrush>
+                                        <VisualBrush.Visual>
+                                            <Image Width="32" Height="32" Source="Assets/dupcheck.png" HorizontalAlignment="Center" />
+                                        </VisualBrush.Visual>
+                                    </VisualBrush>
+                                </Rectangle.OpacityMask>
+                                <Rectangle.Style>
+                                    <Style TargetType="Rectangle">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding ElementName=btnCleanDuplicatesMenu, Path=IsEnabled}"
+                                     Value="False">
+                                                <Setter Property="Opacity"
+                                    Value="0.3" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Rectangle.Style>
+                            </Rectangle>
+                            <TextBlock Text="Clean Duplicates" HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" Foreground="Black" />
+                        </StackPanel>
+                    </Button>
+                    <Separator />
                     <Button Width="80" Command="{Binding Clam.Command_UpdateVirusDefinition}" ToolTip="Update virus definitions"  VerticalAlignment="Top">
                         <StackPanel>
-                            <Image Width="32" Height="32" Source="Assets/dl_vir_def.png" HorizontalAlignment="Center" />
+                            <Rectangle Fill="#DE5F1E" Height="32" Width="32">
+                                <Rectangle.OpacityMask>
+                                    <VisualBrush>
+                                        <VisualBrush.Visual>
+                                            <Image Width="32" Height="32" Source="Assets/dl_vir_def.png" HorizontalAlignment="Center" />
+                                        </VisualBrush.Visual>
+                                    </VisualBrush>
+                                </Rectangle.OpacityMask>
+                            </Rectangle>
                             <TextBlock Text="Update Virus" HorizontalAlignment="Center" Foreground="Black" />
                             <TextBlock Text="Definitions" HorizontalAlignment="Center" Foreground="Black"/>
                         </StackPanel>
                     </Button>
                     <Button Width="80" Command="{Binding Clam.Command_ScanForVirus}" ToolTip="Scan system for virus"  VerticalAlignment="Top">
                         <StackPanel>
-                            <Image Width="32" Height="32" Source="Assets/scan_for_virus.png" HorizontalAlignment="Center" />
+                            <Rectangle Fill="#8F71A5" Height="32" Width="32">
+                                <Rectangle.OpacityMask>
+                                    <VisualBrush>
+                                        <VisualBrush.Visual>
+                                            <Image Width="32" Height="32" Source="Assets/scan_for_virus.png" HorizontalAlignment="Center" />
+                                        </VisualBrush.Visual>
+                                    </VisualBrush>
+                                </Rectangle.OpacityMask>
+                            </Rectangle>
                             <TextBlock Text="Scan PC" HorizontalAlignment="Center" Foreground="Black"/>
                             <TextBlock Text="for Viruses" HorizontalAlignment="Center" Foreground="Black"/>
                         </StackPanel>
                     </Button>
                     <Button Width="80" Command="{Binding Clam.Command_ScanMemory}" ToolTip="Scan system memory for virus" VerticalAlignment="Top">
                         <StackPanel>
-                            <Image Width="32" Height="32" Source="Assets/scan_for_memory.png" HorizontalAlignment="Center" />
+                            <Rectangle Fill="#522B6E" Height="32" Width="32">
+                                <Rectangle.OpacityMask>
+                                    <VisualBrush>
+                                        <VisualBrush.Visual>
+                                            <Image Width="32" Height="32" Source="Assets/scan_for_memory.png" HorizontalAlignment="Center" />
+                                        </VisualBrush.Visual>
+                                    </VisualBrush>
+                                </Rectangle.OpacityMask>
+                            </Rectangle>
                             <TextBlock Text="Scan Memory" HorizontalAlignment="Center" Foreground="Black"/>
                             <TextBlock Text="for Viruses" HorizontalAlignment="Center" Foreground="Black"/>
                         </StackPanel>
                     </Button>
                     <Separator />
-                    <Button Width="70" ToolTip="Clean duplicates from directory" Visibility="Visible" Command="{Binding DupChecker.Command_ShowDupTab}">
+                    <Button Width="70" ToolTip="Shred Files and folder" x:Name="btnShredFilesMenu" Visibility="Visible" Command="{Binding DupChecker.Command_ShowDupTab}" IsEnabled="{Binding CleanerML.Run, Converter={StaticResource Not}}">
                         <StackPanel>
-                            <Image Width="32" Height="32" Source="Assets/dupcheck.png" HorizontalAlignment="Center" />
-                            <TextBlock Text="Clean Duplicates" HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" Foreground="Black" />
+                            <Rectangle Fill="#081439" Height="32" Width="32">
+                                <Rectangle.OpacityMask>
+                                    <VisualBrush>
+                                        <VisualBrush.Visual>
+                                            <Image Width="32" Height="32" Source="Assets/ShredFolder.png" HorizontalAlignment="Center" />
+                                        </VisualBrush.Visual>
+                                    </VisualBrush>
+                                </Rectangle.OpacityMask>
+                                <Rectangle.Style>
+                                    <Style TargetType="Rectangle">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding ElementName=btnShredFilesMenu, Path=IsEnabled}"
+                                     Value="False">
+                                                <Setter Property="Opacity"
+                                    Value="0.3" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Rectangle.Style>
+                            </Rectangle>
+
+                            <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" Foreground="Black">
+                                <Run Text="Shred" />
+                                <LineBreak />
+                                <Run Text="Files/Folder" />
+                            </TextBlock>
                         </StackPanel>
                     </Button>
                     <Separator />
                     <Button Width="70" ToolTip="Unistall installed programs" Visibility="Visible" Command="{Binding Uninstaller.Command_ShowUninstaller}">
                         <StackPanel>
-                            <Image Width="32" Height="32" Source="Assets/UninstallSmall.png" HorizontalAlignment="Center" />
+                            <Rectangle Fill="#542702" Height="32" Width="32">
+                                <Rectangle.OpacityMask>
+                                    <VisualBrush>
+                                        <VisualBrush.Visual>
+                                            <Image Width="32" Height="32" Source="Assets/UninstallSmall.png" HorizontalAlignment="Center" />
+                                        </VisualBrush.Visual>
+                                    </VisualBrush>
+                                </Rectangle.OpacityMask>
+                            </Rectangle>
                             <TextBlock Text="Uninstall Programs" HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" Foreground="Black" />
                         </StackPanel>
                     </Button>
-                    <!--<Button Width="70" ToolTip="Shred Files" Visibility="Visible" Command="{Binding DupChecker.Command_ShowDupTab}">
-                        <StackPanel>
-                            <Image Width="32" Height="32" Source="Assets/ShredFile.png" HorizontalAlignment="Center" />
-                            <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" Foreground="Black">
-                                <Run Text="Shred" />
-                                <LineBreak />
-                                <Run Text="Files" />
-                            </TextBlock>
-                        </StackPanel>
-                    </Button>
-                    <Button Width="70" ToolTip="Shred Folder" Visibility="Visible" Command="{Binding DupChecker.Command_ShowDupTab}">
-                        <StackPanel>
-                            <Image Width="32" Height="32" Source="Assets/ShredFolder.png" HorizontalAlignment="Center" />
-                            <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" Foreground="Black">
-                                <Run Text="Shred" />
-                                <LineBreak />
-                                <Run Text="Folders" />
-                            </TextBlock>
-                        </StackPanel>
-                    </Button>-->
                 </ToolBar>
             </ToolBarTray>
 
             <!-- main content -->
             <Grid Grid.Row="2">
-                <Grid>
+                <Grid FlowDirection="RightToLeft">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="5" />
                         <ColumnDefinition Width="auto" />
                     </Grid.ColumnDefinitions>
 
-                    <Grid Grid.Column="2" Background="#fefbfb">
+                    <Grid Grid.Column="2" Background="#fefbfb" FlowDirection="LeftToRight">
                         <TreeView Style="{StaticResource TreeViewStyle}" 
 						ItemContainerStyle="{StaticResource TreeViewItemStyleStandard}"
 						ItemTemplate="{StaticResource CheckBoxItemTemplate}" 
@@ -264,7 +413,7 @@
 
                     <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" />
 
-                    <Grid>
+                    <Grid FlowDirection="LeftToRight">
                         <!-- Cleaner Details -->
                         <Grid Visibility="{Binding CleanerML.ShowCleanerDescription, Converter={StaticResource boolTovis}}">
                             <Image Source="Assets/MicroHealth_Logo_800.png" Margin="50" Opacity="0.02" />
@@ -272,6 +421,7 @@
                             <Button Content="Close" VerticalAlignment="Top" HorizontalAlignment="Right" Style="{StaticResource ButtonStyle}" Margin="0,0,10,0" Command="{Binding CleanerML.Command_CloseCleanerDescription}" />
                         </Grid>
 
+                        <!-- Duplicate Checker -->
                         <Grid Visibility="{Binding DupChecker.ShowWindow, Converter={StaticResource boolTovis}}">
                             <Grid Visibility="{Binding DupChecker.ShowWindow, Converter={StaticResource boolTovis}}" Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}">
                                 <Grid.RowDefinitions>
@@ -326,7 +476,7 @@
                                                 <TextBlock Text=" " />
                                                 <Button Content="Scan Folders" Style="{StaticResource ButtonStyle}" Command="{Binding DupChecker.Command_CheckDuplicate}" Visibility="Visible" IsEnabled="{Binding DupChecker.EnableScanFolder}"/>
                                                 <TextBlock Text=" " />
-                                                <Button Content="Cancel" Style="{StaticResource ButtonStyle}" Command="{Binding CleanerML.Command_Cancel}" Height="28" Width="143" Margin="4,0"/>
+                                                <Button Content="Cancel" Style="{StaticResource ButtonStyle}" Command="{Binding DupChecker.Command_Cancel}" Height="28" Width="143" Margin="4,0"/>
                                                 <TextBlock Text=" " />
                                                 <TextBlock Text="Select what to do with duplicate files" TextWrapping="Wrap" />
                                                 <TextBlock Text=" " />
@@ -419,10 +569,11 @@
                                 <TextBox IsReadOnly="True" BorderThickness="0" Text="{Binding CleanerML.TextLog}" AllowDrop="False" IsTabStop="False" ScrollViewer.VerticalScrollBarVisibility="Auto" />
                             </Border>
                         </Grid>
-                    <!-- front page -->
+
+                        <!-- front page -->
                         <Border x:Name="gridMain" Margin="0" Visibility="{Binding CleanerML.ShowFrontPage, Converter={StaticResource boolTovis}}">
                             <!--Background="#f0f7fe"-->
-                            <Grid Margin="10" Background="#fff8f8" >
+                            <Grid Margin="10">
                                 <Grid.Resources>
                                     <Style TargetType="TextBlock">
                                         <Setter Property="FontFamily" Value="Segoe UI" />
@@ -449,13 +600,13 @@
                                             <LineBreak />
                                             <ctl:HyperlinkEx NavigateUri="mailto:feedback@microhealthllc.com">feedback@microhealthllc.com</ctl:HyperlinkEx>
                                 </TextBlock>
-                                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                                    <TextBlock Text="Start cleaning now!" FontSize="20" TextAlignment="Left"  Padding="5" Margin="0,0,0,3" />
+                                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Left"   Margin="50,0,0,0" >
+                                    <TextBlock Text="Start cleaning now!" FontSize="20" TextAlignment="Center"  Padding="5" Margin="0,0,0,3" />
                                     <StackPanel Orientation="Horizontal">
                                         <controls:Tile Title="Safe Cleaning"
                                Style="{StaticResource SmallTileStyle}" TiltFactor="2" Command="{Binding CleanerML.Command_Clean}" HorizontalAlignment="Center"
-                                                       HorizontalContentAlignment="Center" CommandParameter="1" Background="#ff7575" Foreground="Black" Margin="3">
-                                            <Rectangle Fill="#424242" Height="64" Width="64">
+                                                       HorizontalContentAlignment="Center" CommandParameter="1" Background="#4B5B88" Foreground="White" Margin="3">
+                                            <Rectangle Fill="White" Height="64" Width="64">
                                                 <Rectangle.OpacityMask>
                                                     <VisualBrush>
                                                         <VisualBrush.Visual>
@@ -467,8 +618,8 @@
                                         </controls:Tile>
                                         <controls:Tile Title="Moderate Cleaning"
                                Style="{StaticResource SmallTileStyle}" TiltFactor="2" Command="{Binding CleanerML.Command_Clean}" HorizontalAlignment="Center" HorizontalContentAlignment="Center" CommandParameter="2"
-                                                       Background="#f4760d" Foreground="Black" Margin="3">
-                                            <Rectangle Fill="#931d4a" Height="64" Width="64">
+                                                       Background="#2F3F6F" Foreground="White" Margin="3">
+                                            <Rectangle Fill="White" Height="64" Width="64">
                                                 <Rectangle.OpacityMask>
                                                     <VisualBrush>
                                                         <VisualBrush.Visual>
@@ -480,8 +631,8 @@
                                         </controls:Tile>
                                         <controls:Tile Title="Aggressive Cleaning"
                                Style="{StaticResource SmallTileStyle}" TiltFactor="2" Command="{Binding CleanerML.Command_Clean}" HorizontalAlignment="Center" HorizontalContentAlignment="Center" CommandParameter="3"
-                                                       Background="#e1410a" Foreground="Black" Margin="3">
-                                            <Rectangle Fill="#244166" Height="64" Width="64">
+                                                       Background="#192855" Foreground="White" Margin="3">
+                                            <Rectangle Fill="White" Height="64" Width="64">
                                                 <Rectangle.OpacityMask>
                                                     <VisualBrush>
                                                         <VisualBrush.Visual>
@@ -491,102 +642,95 @@
                                                 </Rectangle.OpacityMask>
                                             </Rectangle>
                                         </controls:Tile>
-                                        <controls:Tile Title="Custom Selection"
-                               Style="{StaticResource SmallTileStyle}" TiltFactor="2" Command="{Binding CleanerML.Command_CustomCleaningSelection}" HorizontalAlignment="Center" HorizontalContentAlignment="Center" CommandParameter="3"
-                                                       Background="#2aa668" Foreground="Black" Margin="3">
-                                            <Rectangle Fill="#d1e71e" Height="64" Width="64">
+                                        <controls:Tile Title="Clean Duplicates"
+                               Style="{StaticResource LargeTileStyle}" TiltFactor="2" Command="{Binding DupChecker.Command_ShowDupTab}" HorizontalAlignment="Center" HorizontalContentAlignment="Center"
+                                                       Background="#37862F" Foreground="White" Margin="3">
+                                            <Rectangle Fill="White" Height="60" Width="60">
                                                 <Rectangle.OpacityMask>
                                                     <VisualBrush>
                                                         <VisualBrush.Visual>
-                                                            <Image Source="Assets/clean_safe_2_large.png" ></Image>
+                                                            <Image Source="Assets/CleanDuplicates_large.png" ></Image>
                                                         </VisualBrush.Visual>
                                                     </VisualBrush>
                                                 </Rectangle.OpacityMask>
                                             </Rectangle>
                                         </controls:Tile>
-                                        
-                                        <!--<Button Style="{StaticResource ButtonStyle}" Name="btnSafeCleaningLarge" Width="192" Height="130" Command="{Binding CleanerML.Command_Clean}" CommandParameter="1" Background="#fbd63e">
-                                            <Button.ContentTemplate>
-                                                <DataTemplate>
-                                                    <Grid >
-                                                        <Grid.ColumnDefinitions>
-                                                            <ColumnDefinition Width="auto" />
-                                                            <ColumnDefinition Width="10" />
-                                                            <ColumnDefinition Width="*" />
-                                                        </Grid.ColumnDefinitions>
-                                                        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Foreground="Black" Grid.Column="2" VerticalAlignment="Top" FontSize="20">
-                                                    Safe Cleaning
-                                                    <LineBreak />
-                                                    <Run Text="Cleans temporary files and recently openned documents" FontSize="12" />
-                                                        </TextBlock>
-                                                    </Grid>
-                                                </DataTemplate>
-                                            </Button.ContentTemplate>
-                                        </Button>
-                                        <TextBlock Text=" " />
-                                        <Button Style="{StaticResource ButtonStyle}" Name="btnMorderateLarge" Width="192" Height="130" Background="#f4760d" Command="{Binding CleanerML.Command_Clean}" CommandParameter="2">
-                                            <Button.ContentTemplate>
-                                                <DataTemplate>
-                                                    <Grid>
-                                                        <Grid.ColumnDefinitions>
-                                                            <ColumnDefinition Width="auto" />
-                                                            <ColumnDefinition Width="10" />
-                                                            <ColumnDefinition Width="*" />
-                                                        </Grid.ColumnDefinitions>
-                                                        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Foreground="Black" Grid.Column="2" VerticalAlignment="Top" FontSize="20">
-                                                    Moderate Cleaning
-                                                    <LineBreak />
-                                                    <Run Text="Like Safe Cleaning, it also cleans caches, browser cookies, and logs" FontSize="12" />
-                                                        </TextBlock>
-                                                    </Grid>
-                                                </DataTemplate>
-                                            </Button.ContentTemplate>
-                                        </Button>
-                                        <TextBlock Text=" " />-->
-                                        <!--<Button Style="{StaticResource ButtonStyle}" Name="btnAggresiveLarge" Width="192" Height="130" Background="#e1410a" Command="{Binding CleanerML.Command_Clean}" CommandParameter="3">
-                                            <Button.ContentTemplate>
-                                                <DataTemplate>
-                                                    <Grid>
-                                                        <Grid.ColumnDefinitions>
-                                                            <ColumnDefinition Width="auto" />
-                                                            <ColumnDefinition Width="10" />
-                                                            <ColumnDefinition Width="*" />
-                                                        </Grid.ColumnDefinitions>
-                                                        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Foreground="Black" Grid.Column="2" VerticalAlignment="Top" FontSize="20">
-                                                    Aggressive Cleaning
-                                                    <LineBreak />
-                                                    <Run Text="Cleans everything from temporary files to browser databases" FontSize="12" />
-                                                        </TextBlock>
-                                                    </Grid>
-                                                </DataTemplate>
-                                            </Button.ContentTemplate>
-                                        </Button>
-                                        <TextBlock Text=" " />-->
+
+
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal">
-                                        <!--<Button Style="{StaticResource ButtonStyle}" Background="#2aa668" Name="btnCustomLarge" Width="192" Height="130" Command="{Binding CleanerML.Command_CustomCleaningSelection}" CommandParameter="3">
-                                            <Button.ContentTemplate>
-                                                <DataTemplate>
-                                                    <Grid>
-                                                        <Grid.ColumnDefinitions>
-                                                            <ColumnDefinition Width="auto" />
-                                                            <ColumnDefinition Width="10" />
-                                                            <ColumnDefinition Width="*" />
-                                                        </Grid.ColumnDefinitions>
-                                                        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Foreground="Black" Grid.Column="2" VerticalAlignment="Top" FontSize="20">
-                                                    Custom Selection
-                                                    <LineBreak />
-                                                    <Run Text="Cleans the files which you have selected in the right bar." FontSize="12" />
-                                                        </TextBlock>
-                                                    </Grid>
-                                                </DataTemplate>
-                                            </Button.ContentTemplate>
-                                        </Button>
-                                        <TextBlock Text=" " />-->
+                                        <controls:Tile Title="Custom Selection"
+                               Style="{StaticResource SmallTileStyle}" TiltFactor="2" Command="{Binding CleanerML.Command_CustomCleaningSelection}" HorizontalAlignment="Center" HorizontalContentAlignment="Center" CommandParameter="3"
+                                                       Background="#230538" Foreground="White" Margin="3">
+                                            <Rectangle Fill="White" Height="64" Width="64">
+                                                <Rectangle.OpacityMask>
+                                                    <VisualBrush>
+                                                        <VisualBrush.Visual>
+                                                            <Image Source="Assets/clean_safe_2_large.png" ></Image>
+                                                        </VisualBrush.Visual>
+                                                    </VisualBrush>
+                                                </Rectangle.OpacityMask>
+                                            </Rectangle>
+                                        </controls:Tile>
+                                        <controls:Tile Title="Registry Selection"
+                               Style="{StaticResource SmallTileStyle}" TiltFactor="2" Command="{Binding CleanerML.Command_RegistrySelection}" HorizontalAlignment="Center" HorizontalContentAlignment="Center" CommandParameter="3"
+                                                       Background="#7E4719" Foreground="White" Margin="3">
+                                            <Rectangle Fill="White" Height="64" Width="64">
+                                                <Rectangle.OpacityMask>
+                                                    <VisualBrush>
+                                                        <VisualBrush.Visual>
+                                                            <Image Source="Assets/clean_safe_2_large.png" ></Image>
+                                                        </VisualBrush.Visual>
+                                                    </VisualBrush>
+                                                </Rectangle.OpacityMask>
+                                            </Rectangle>
+                                        </controls:Tile>
+                                        <controls:Tile Title="Clear Selection"
+                               Style="{StaticResource SmallTileStyle}" TiltFactor="2" Command="{Binding CleanerML.CommandClearSelection}" HorizontalAlignment="Center" HorizontalContentAlignment="Center" CommandParameter="3"
+                                                       Background="#7481A6" Foreground="White" Margin="3">
+                                            <Rectangle Fill="White" Height="64" Width="64">
+                                                <Rectangle.OpacityMask>
+                                                    <VisualBrush>
+                                                        <VisualBrush.Visual>
+                                                            <Image Source="Assets/ClearSelectionLarge.png" ></Image>
+                                                        </VisualBrush.Visual>
+                                                    </VisualBrush>
+                                                </Rectangle.OpacityMask>
+                                            </Rectangle>
+                                        </controls:Tile>
+                                        <controls:Tile Title="Uninstall Programs"
+                               Style="{StaticResource SmallTileStyle}" TiltFactor="2" Command="{Binding Uninstaller.Command_ShowUninstaller}" HorizontalAlignment="Center" HorizontalContentAlignment="Center"
+                                                       Background="#542702" Foreground="White" Margin="3">
+                                            <Rectangle Fill="White" Height="60" Width="60">
+                                                <Rectangle.OpacityMask>
+                                                    <VisualBrush>
+                                                        <VisualBrush.Visual>
+                                                            <Image Source="Assets/UninstallPrograms_large.png" ></Image>
+                                                        </VisualBrush.Visual>
+                                                    </VisualBrush>
+                                                </Rectangle.OpacityMask>
+                                            </Rectangle>
+                                        </controls:Tile>
+                                        <controls:Tile Title="Shred File/Folder"
+                               Style="{StaticResource SmallTileStyle}" TiltFactor="2" Command="{Binding DupChecker.Command_ShowDupTab}" HorizontalAlignment="Center" HorizontalContentAlignment="Center"
+                                                       Background="#081439" Foreground="White" Margin="3">
+                                            <Rectangle Fill="White" Height="60" Width="60">
+                                                <Rectangle.OpacityMask>
+                                                    <VisualBrush>
+                                                        <VisualBrush.Visual>
+                                                            <Image Source="Assets/ShredFolder.png" ></Image>
+                                                        </VisualBrush.Visual>
+                                                    </VisualBrush>
+                                                </Rectangle.OpacityMask>
+                                            </Rectangle>
+                                        </controls:Tile>
+
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
                                         <controls:Tile Title="Preview"
                                Style="{StaticResource SmallTileStyle}" TiltFactor="2" Command="{Binding CleanerML.Command_Preview}" HorizontalAlignment="Center" HorizontalContentAlignment="Center" CommandParameter="3"
-                                                       Background="#ffaff8" IsEnabled="{Binding CleanerML.btnPreviewCleanEnable}" Foreground="Black" Margin="3">
-                                            <Rectangle Fill="Black" Height="60" Width="60">
+                                                       Background="#5AA552" IsEnabled="{Binding CleanerML.btnPreviewCleanEnable}" Foreground="White" Margin="3">
+                                            <Rectangle Fill="White" Height="60" Width="60">
                                                 <Rectangle.OpacityMask>
                                                     <VisualBrush>
                                                         <VisualBrush.Visual>
@@ -596,28 +740,10 @@
                                                 </Rectangle.OpacityMask>
                                             </Rectangle>
                                         </controls:Tile>
-                                        <!--<Button Style="{StaticResource ButtonStyle}" Name="btnPreviewLarge" Width="192" Height="130" Command="{Binding CleanerML.Command_Preview}" CommandParameter="4" Background="#ffaff8" IsEnabled="{Binding CleanerML.btnPreviewCleanEnable}">
-                                            <Button.ContentTemplate>
-                                                <DataTemplate>
-                                                    <Grid>
-                                                        <Grid.ColumnDefinitions>
-                                                            <ColumnDefinition Width="auto" />
-                                                            <ColumnDefinition Width="10" />
-                                                            <ColumnDefinition Width="*" />
-                                                        </Grid.ColumnDefinitions>
-                                                        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Foreground="Black" Grid.Column="2" VerticalAlignment="Top" FontSize="20">
-                                                   Preview
-                                                    <LineBreak />
-                                                    <Run Text="Shows the preview of the list of files that is going to affect when you do clean now." FontSize="12" />
-                                                        </TextBlock>
-                                                    </Grid>
-                                                </DataTemplate>
-                                            </Button.ContentTemplate>
-                                        </Button>-->
                                         <controls:Tile Title="Clean Now"
                                Style="{StaticResource SmallTileStyle}" TiltFactor="2" Command="{Binding CleanerML.Command_CleanNow}" HorizontalAlignment="Center" HorizontalContentAlignment="Center" CommandParameter="3"
-                                                       Background="#2aa4df" IsEnabled="{Binding CleanerML.btnPreviewCleanEnable}" Foreground="Black" Margin="3">
-                                            <Rectangle Fill="Black" Height="60" Width="60">
+                                                       Background="#084502" IsEnabled="{Binding CleanerML.btnPreviewCleanEnable}" Foreground="White" Margin="3">
+                                            <Rectangle Fill="White" Height="60" Width="60">
                                                 <Rectangle.OpacityMask>
                                                     <VisualBrush>
                                                         <VisualBrush.Visual>
@@ -627,29 +753,10 @@
                                                 </Rectangle.OpacityMask>
                                             </Rectangle>
                                         </controls:Tile>
-                                        <!--<TextBlock Text=" " />
-                                        <Button Style="{StaticResource ButtonStyle}" Background="#d1e71e" Name="btnCleanNowLarge" Width="192" Height="130" Command="{Binding CleanerML.Command_CleanNow}" IsEnabled="{Binding CleanerML.btnPreviewCleanEnable}">
-                                            <Button.ContentTemplate>
-                                                <DataTemplate>
-                                                    <Grid>
-                                                        <Grid.ColumnDefinitions>
-                                                            <ColumnDefinition Width="auto" />
-                                                            <ColumnDefinition Width="10" />
-                                                            <ColumnDefinition Width="*" />
-                                                        </Grid.ColumnDefinitions>
-                                                        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Foreground="Black" Grid.Column="2" VerticalAlignment="Top" FontSize="20">
-                                                    Clean Now
-                                                    <LineBreak />
-                                                    <Run Text="Starts cleaning based on which option you set like safe cleaning, morderate cleaning, aggressive cleaning." FontSize="12" />
-                                                        </TextBlock>
-                                                    </Grid>
-                                                </DataTemplate>
-                                            </Button.ContentTemplate>
-                                        </Button>-->
                                         <controls:Tile Title="Scan PC for virus"
-                               Style="{StaticResource SmallTileStyle}" TiltFactor="2" Command="{Binding Clam.Command_ScanForVirus}" HorizontalAlignment="Center" HorizontalContentAlignment="Center"
-                                                       Background="#c1b648" Foreground="Black" Margin="3">
-                                            <Rectangle Fill="Black " Height="60" Width="60">
+                               Style="{StaticResource LargeTileStyle}" TiltFactor="2" Command="{Binding Clam.Command_ScanForVirus}" HorizontalAlignment="Center" HorizontalContentAlignment="Center"
+                                                       Background="#8F71A5" Foreground="White" Margin="3">
+                                            <Rectangle Fill="White" Height="60" Width="60">
                                                 <Rectangle.OpacityMask>
                                                     <VisualBrush>
                                                         <VisualBrush.Visual>
@@ -662,41 +769,12 @@
 
                                         <controls:Tile Title="Scan Memory for virus"
                                Style="{StaticResource SmallTileStyle}" TiltFactor="2" Command="{Binding Clam.Command_ScanMemory}" HorizontalAlignment="Center" HorizontalContentAlignment="Center"
-                                                       Background="#ff8d00" Foreground="Black" Margin="3">
+                                                       Background="#522B6E" Foreground="White" Margin="3">
                                             <Rectangle Fill="White" Height="60" Width="60">
                                                 <Rectangle.OpacityMask>
                                                     <VisualBrush>
                                                         <VisualBrush.Visual>
                                                             <Image Source="Assets/Scan_Memory.png" ></Image>
-                                                        </VisualBrush.Visual>
-                                                    </VisualBrush>
-                                                </Rectangle.OpacityMask>
-                                            </Rectangle>
-                                        </controls:Tile>
-                                    </StackPanel>
-                                    <StackPanel Orientation="Horizontal">
-                                        <controls:Tile Title="Clean Duplicates"
-                               Style="{StaticResource LargeTileStyle}" TiltFactor="2" Command="{Binding DupChecker.Command_ShowDupTab}" HorizontalAlignment="Center" HorizontalContentAlignment="Center"
-                                                       Background="#eed2b5" Foreground="Black " Margin="3">
-                                            <Rectangle Fill="#ff0027" Height="60" Width="60">
-                                                <Rectangle.OpacityMask>
-                                                    <VisualBrush>
-                                                        <VisualBrush.Visual>
-                                                            <Image Source="Assets/CleanDuplicates_large.png" ></Image>
-                                                        </VisualBrush.Visual>
-                                                    </VisualBrush>
-                                                </Rectangle.OpacityMask>
-                                            </Rectangle>
-                                        </controls:Tile>
-
-                                        <controls:Tile Title="Uninstall Programs"
-                               Style="{StaticResource LargeTileStyle}" TiltFactor="2" Command="{Binding Uninstaller.Command_ShowUninstaller}" HorizontalAlignment="Center" HorizontalContentAlignment="Center"
-                                                       Background="#d1e71e" Foreground="Black" Margin="3">
-                                            <Rectangle Fill="Black" Height="60" Width="60">
-                                                <Rectangle.OpacityMask>
-                                                    <VisualBrush>
-                                                        <VisualBrush.Visual>
-                                                            <Image Source="Assets/UninstallPrograms_large.png" ></Image>
                                                         </VisualBrush.Visual>
                                                     </VisualBrush>
                                                 </Rectangle.OpacityMask>

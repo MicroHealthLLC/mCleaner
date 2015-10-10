@@ -282,6 +282,20 @@ namespace mCleaner.ViewModel
             }
         }
 
+        private bool _SaveCustom_Options = false;
+        public bool SaveCustom_Options
+        {
+            get { return _SaveCustom_Options; }
+            set
+            {
+                if (_SaveCustom_Options != value)
+                {
+                    _SaveCustom_Options = value;
+                    base.RaisePropertyChanged("SaveCustom_Options");
+                }
+            }
+        }
+
         private int _SelectedTabIndex = 0;
         public int SelectedTabIndex
         {
@@ -456,6 +470,7 @@ namespace mCleaner.ViewModel
             this.Cancel = false;
             int level = int.Parse(i);
             this.CleanOption_Custom = false;
+            this.SaveCustom_Options = false;
 
             if (level <= 3)
             {
@@ -517,6 +532,7 @@ namespace mCleaner.ViewModel
         public void Command_CustomCleaningSelection_Click()
         {
             this.CleanOption_Custom = true;
+            this.SaveCustom_Options = true;
             btnPreviewCleanEnable = true;
 
             // uncheck everything first
@@ -562,6 +578,8 @@ namespace mCleaner.ViewModel
         public void Command_RegitryClearner_Click()
         {
             btnPreviewCleanEnable = true;
+            this.CleanOption_Custom = true;
+            this.SaveCustom_Options = false;
             // uncheck everything first
             foreach (TreeNode tn in this.CleanersCollection)
             {
@@ -593,8 +611,7 @@ namespace mCleaner.ViewModel
 
         public void Command_ClearSelection_Click()
         {
-            btnPreviewCleanEnable = true;
-            // uncheck everything first
+            btnPreviewCleanEnable = false;
             foreach (TreeNode tn in this.CleanersCollection)
             {
                 foreach (TreeNode child in tn.Children)
@@ -651,8 +668,8 @@ namespace mCleaner.ViewModel
         public void Command_Cancel_Click()
         {
             this.Cancel = true;
-            ProgressWorker.I.EnQ("Please wait while operation is being canceled its in middle of sommething when it finishes it will be automatically cancelled.");
-            MessageBox.Show("Please wait while operation is being canceled its in middle of sommething when it finishes it will be automatically cancelled.","mCleaner",MessageBoxButton.OK,MessageBoxImage.Information);
+            ProgressWorker.I.EnQ("Please wait while operation is being canceled.");
+            MessageBox.Show("Please wait while operation is being canceled.", "mCleaner", MessageBoxButton.OK, MessageBoxImage.Information);
         }
         #endregion
 
@@ -706,7 +723,7 @@ namespace mCleaner.ViewModel
                 }
 
                 // if the user selected custom cleaning
-                if (this.CleanOption_Custom)
+                if (this.SaveCustom_Options)
                 {
                     if (root.IsChecked.Value == true)
                     {
