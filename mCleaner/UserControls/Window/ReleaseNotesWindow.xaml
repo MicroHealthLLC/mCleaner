@@ -86,6 +86,11 @@
                                             <ctl:HyperlinkEx NavigateUri="http://www.clamwin.com">http://www.clamwin.com</ctl:HyperlinkEx>
                                             <LineBreak />
                                             <LineBreak />
+                                            Eraser
+                                            <LineBreak />
+                                            <ctl:HyperlinkEx NavigateUri="http://eraser.heidi.ie/">http://eraser.heidi.ie</ctl:HyperlinkEx>
+                                            <LineBreak />
+                                            <LineBreak />
                                             Little Registry Cleaner
                                             <LineBreak />
                                             <ctl:HyperlinkEx NavigateUri="http://sourceforge.net/projects/littlecleaner">http://sourceforge.net/projects/littlecleaner</ctl:HyperlinkEx>

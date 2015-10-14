@@ -1,44 +1,103 @@
 ﻿<UserControl x:Class="mCleaner.UserControls.Window.ShredWindow"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" 
-             
+             mc:Ignorable="d"
+             Margin="10"
+             Width="750"
+             Height="450"
              DataContext="{Binding Source={StaticResource Locator}}"
              
-             d:DesignHeight="300" d:DesignWidth="500">
-    
-    <Border Width="500" Height="300" VerticalAlignment="Center" HorizontalAlignment="Center" BorderThickness="1" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}">
+             >
+
+    <UserControl.Resources>
+        <CollectionViewSource x:Key="ListViewSource" Source="{Binding ShredWindow.ShredFilesCollection}">
+        </CollectionViewSource>
+    </UserControl.Resources>
+
+    <Border VerticalAlignment="Center" HorizontalAlignment="Center" Width="750"
+             Height="450" BorderThickness="1" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}">
         <Border.Effect>
             <DropShadowEffect Opacity="0.2" BlurRadius="10"/>
         </Border.Effect>
 
         <Grid Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}">
             <Grid.RowDefinitions>
-                <RowDefinition Height="auto" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
 
-            <!-- header -->
             <Grid Grid.Row="0" Margin="5">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
 
-                <Image Width="32" Height="32" Source="/mCleaner;component/Assets/document_shred.png" Grid.Column="0" VerticalAlignment="Center" />
-                <StackPanel Grid.Column="1" Margin="10,0,0,0" VerticalAlignment="Top">
-                    <TextBlock Text="{Binding ShredWindow.WindowTitle}" FontSize="18" FontWeight="Bold" />
-                </StackPanel>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <!-- progress bar -->
+                    <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,0,5">
+                        <ProgressBar Height="25" Maximum="{Binding ShredWindow.ProgressMax}" Value="{Binding ShredWindow.ProgressIndex}" Style="{StaticResource ProgressBarStyle}" />
+                        <TextBlock Text="{Binding ShredWindow.ProgressText}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{StaticResource MainWindow_ProgressBar_Progress_Text}" >
+                            <TextBlock.Effect>
+                                <DropShadowEffect ShadowDepth="2" BlurRadius="3" Color="{DynamicResource {x:Static SystemColors.ActiveCaptionTextColorKey}}" Opacity="0.2"/>
+                            </TextBlock.Effect>
+                        </TextBlock>
+                    </Grid>
+
+                    <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,0,5">
+                        <Border Padding="5" Background="{StaticResource InfoTip_Background}">
+                            <TextBlock>
+                                        <Run Text="This will Shred Files and Folder that you have selected." />
+                            </TextBlock>
+                        </Border>
+                    </Grid>
+
+                    <Grid Grid.Row="2" Grid.Column="0" Background="{StaticResource DupChecker_Panel_FileOperation}" Visibility="{Binding DupChecker.FileOperationPanelShow, Converter={StaticResource boolTovis}}" Width="160">
+                        <StackPanel Margin="5">
+                            <StackPanel.Resources>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Foreground" Value="{StaticResource DupChecker_Panel_FileOperation_Texts}" />
+                                </Style>
+                                <Style TargetType="{x:Type RadioButton}">
+                                    <Setter Property="Foreground" Value="{StaticResource DupChecker_Panel_FileOperation_Texts}" />
+                                </Style>
+                            </StackPanel.Resources>
+
+                            <Button Content="Select Files" Style="{StaticResource ButtonStyle}" Command="{Binding ShredWindow.Command_SelectFiles}" Visibility="Visible" IsEnabled="{Binding DupChecker.EnableScanFolder}"/>
+                            <TextBlock Text=" " />
+                            <Button Content="Select Folders" Style="{StaticResource ButtonStyle}" Command="{Binding ShredWindow.Command_SelectFolders}" Visibility="Visible" IsEnabled="{Binding DupChecker.EnableSelectFolder}"/>
+                            <TextBlock Text=" " />
+                            <Button x:Name="btnOK" Content="Shred Selected" Style="{DynamicResource ButtonStyle}" Command="{Binding ShredWindow.Command_ShredStart}" Visibility="Visible" IsEnabled="{Binding DupChecker.EnableRemoveDuplicates}" />
+                        </StackPanel>
+                    </Grid>
+
+                    <Grid Grid.Column="1" Grid.Row="2">
+                        <ListView Margin="5"
+                          BorderThickness="0"
+                          ItemsSource="{Binding ShredWindow.ShredFilesCollection}"
+                          SelectedIndex="0">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn DisplayMemberBinding="{Binding FilePath }"
+                                            Header="File\Folder Path" />
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </Grid>
+                </Grid>
             </Grid>
 
-            <!-- text area -->
-            <Grid Grid.Row="1" Margin="5">
-                <ScrollViewer>
-                    <TextBlock Text="{Binding ShredWindow.Log}" FontFamily="Consolas" TextWrapping="Wrap" />
-                </ScrollViewer>
+            <Grid Grid.Row="2">
+                <StackPanel Orientation="Horizontal" Margin="2" HorizontalAlignment="Right">
+                    <Button x:Name="btnClose" Content="Close" Margin="5,5"  Style="{DynamicResource ButtonStyle}" Command="{Binding ShredWindow.Command_CloseWindow}" />
+                </StackPanel>
             </Grid>
         </Grid>
     </Border>

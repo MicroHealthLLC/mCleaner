@@ -113,7 +113,7 @@ namespace mCleaner.ViewModel
 
         }
 
-        private void Command_UninstallProgram_Click()
+        public void Command_UninstallProgram_Click()
         {
             if (SelectedProgramDetails != null)
             {

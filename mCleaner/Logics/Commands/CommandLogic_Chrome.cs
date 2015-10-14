@@ -427,5 +427,22 @@ namespace mCleaner.Logics.Commands
             }
             return ret;
         }
+
+        public static bool IsFirefoxRunning()
+        {
+            bool ret = false;
+            foreach (Process proc in Process.GetProcesses())
+            {
+                if (proc.ProcessName.ToLower().Contains("firefox"))
+                {
+                    if (proc.MainWindowTitle != string.Empty)
+                    {
+                        ret = true;
+                        break;
+                    }
+                }
+            }
+            return ret;
+        }
     }
 }

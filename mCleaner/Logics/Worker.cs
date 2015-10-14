@@ -125,6 +125,7 @@ namespace mCleaner.Logics
             this.TotalFileDelete = 0;
             this.TotalFileSize = 0;
             this.TotalSpecialOperations = 0;
+            VMCleanerML.btnCloseEnable = true;
         }
 
         void bgWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)

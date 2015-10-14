@@ -142,14 +142,16 @@ namespace mCleaner
            
             if (this.WindowState == System.Windows.WindowState.Maximized)
             {
-                //btnPreviewLarge.Width=btnAggresiveLarge.Width=btnMorderateLarge.Width=btnSafeCleaningLarge.Width=btnCustomLarge.Width=btnCleanNowLarge.Width = 300;
-//                btnPreviewLarge.Height  = btnAggresiveLarge.Height = btnMorderateLarge.Height = btnSafeCleaningLarge.Height = btnCustomLarge.Height = btnCleanNowLarge.Height = 200;
+                TileSafeCleaning.Width = TileMordrateCleaning.Width = TileAggressiveCleaning.Width = TIleCustomSelection.Width = TileRegistrySelection.Width = TilePreview.Width = TileCleanNow.Width = TileClearSelection.Width = TileUninstall.Width = TileShredFileFolder.Width = TileScanMemory.Width =  197;
+                TileCleanDuplicates.Width = TileScanPC.Width = 400;
+                TileSafeCleaning.Height = TileMordrateCleaning.Height = TileAggressiveCleaning.Height = TileCleanDuplicates.Height = TIleCustomSelection.Height = TileRegistrySelection.Height = TilePreview.Height = TileCleanNow.Height = TileClearSelection.Height = TileUninstall.Height = TileShredFileFolder.Height = TileScanMemory.Height = TileScanPC.Height = 150;
                
             }
             else if (this.WindowState == System.Windows.WindowState.Normal)
             {
-               // btnPreviewLarge.Width = btnAggresiveLarge.Width = btnMorderateLarge.Width = btnSafeCleaningLarge.Width = btnCustomLarge.Width = btnCleanNowLarge.Width = 192;
-               // btnPreviewLarge.Height = btnAggresiveLarge.Height = btnMorderateLarge.Height = btnSafeCleaningLarge.Height = btnCustomLarge.Height = btnCleanNowLarge.Height = 130;
+                TileSafeCleaning.Width = TileMordrateCleaning.Width = TileAggressiveCleaning.Width = TIleCustomSelection.Width = TileRegistrySelection.Width = TilePreview.Width = TileCleanNow.Width = TileClearSelection.Width = TileUninstall.Width = TileShredFileFolder.Width = TileScanMemory.Width =147;
+                TileCleanDuplicates.Width = TileScanPC.Width = 300;
+                TileSafeCleaning.Height = TileMordrateCleaning.Height = TileAggressiveCleaning.Height = TileCleanDuplicates.Height = TIleCustomSelection.Height = TileRegistrySelection.Height = TilePreview.Height = TileCleanNow.Height = TileClearSelection.Height = TileUninstall.Height = TileShredFileFolder.Height = TileScanMemory.Height = TileScanPC.Height = 125;
                
             }
         }

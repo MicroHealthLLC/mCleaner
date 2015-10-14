@@ -12,9 +12,9 @@
     <SolidColorBrush x:Key="MainWindow_MainMenu_SubMenus_Text"      Color="#FFFFFFFF" />
     <SolidColorBrush x:Key="MainWindow_ProgressBar_Progress"        Color="#FFB7AFA3" />
     <SolidColorBrush x:Key="MainWindow_ProgressBar_Progress_Text"   Color="#FF4D4D4D" />
-    <SolidColorBrush x:Key="TreeViewHeader_Background"              Color="#FFD4EEFF" />
-    <SolidColorBrush x:Key="TreeViewItem_Select"                    Color="#7FD4EEFF" />
-    <SolidColorBrush x:Key="TreeViewItem_Select_Text"               Color="#FF164666" />
+    <SolidColorBrush x:Key="TreeViewHeader_Background"              Color="#96A9AF" />
+    <SolidColorBrush x:Key="TreeViewItem_Select"                    Color="#96A9AF" />
+    <SolidColorBrush x:Key="TreeViewItem_Select_Text"               Color="White" />
     <SolidColorBrush x:Key="ListView_Column_Header"                 Color="#FF6D929B" />
     <SolidColorBrush x:Key="ListView_Column_Header_Gripper"         Color="#FFACD1E9" />
     <SolidColorBrush x:Key="ListView_Column_Header_Pressed"         Color="#FFACD1E9" />

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using mCleaner.ViewModel;
+using Microsoft.Practices.ServiceLocation;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -28,6 +30,22 @@ namespace mCleaner.UserControls.Window
         private void AzureDataGrid_Selected(object sender, RoutedEventArgs e)
         {
             btnUninstall.IsEnabled = true;
+        }
+
+        public ViewModel_Uninstaller Uninstaller
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<ViewModel_Uninstaller>();
+            }
+        }
+
+
+        private void Row_DoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            DataGridRow row = sender as DataGridRow;
+            Uninstaller.Command_UninstallProgram_Click();
+            // Some operations with this row
         }
     }
 }

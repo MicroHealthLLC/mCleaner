@@ -268,6 +268,8 @@ namespace mCleaner.ViewModel
             //CleanerML.SelectedTabIndex = 1;
             //this.CleanerML.TextLog = "Check duplicates";
             //this.FileOperationPanelShow = true;
+            CleanerML.btnCleanNowPreviousState = CleanerML.btnPreviewCleanEnable;
+            CleanerML.btnPreviewCleanEnable = false;
             CleanerML.ShowFrontPage = false;
             this.ShowWindow = true;
         }
@@ -283,6 +285,7 @@ namespace mCleaner.ViewModel
             this.ShowWindow = false;
             CleanerML.Run = false;
             CleanerML.ShowFrontPage = true;
+            CleanerML.btnPreviewCleanEnable = CleanerML.btnCleanNowPreviousState;
         }
 
         public void Command_Cancel_Click()

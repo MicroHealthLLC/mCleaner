@@ -123,7 +123,8 @@
         <Setter Property="KeyboardNavigation.AcceptsReturn" Value="True" />
         <Setter Property="dw:VirtualToggleButton.IsVirtualToggleButton" Value="True" />
         <Setter Property="dw:VirtualToggleButton.IsChecked" Value="{Binding IsChecked}" />
-        
+        <!--<Setter Property="IsExpanded" Value="{Binding CleanerML.blnCollapseALL}">-->
+
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TreeViewItem}">

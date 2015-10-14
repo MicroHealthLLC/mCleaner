@@ -76,6 +76,11 @@
                                 <DataGridTextColumn Header="Version"
                                     Binding="{Binding ProgramDetails.Version}" />
                             </DataGrid.Columns>
+                            <DataGrid.Resources>
+                                <Style TargetType="DataGridRow">
+                                    <EventSetter Event="MouseDoubleClick" Handler="Row_DoubleClick" />
+                                </Style>
+                            </DataGrid.Resources>
                         </DataGrid>
                     </Grid>
                 </Grid>

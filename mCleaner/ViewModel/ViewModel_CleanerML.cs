@@ -114,6 +114,63 @@ namespace mCleaner.ViewModel
             }
         }
 
+        private bool _blnCollapseALL = true;
+        public bool blnCollapseALL
+        {
+            get { return _blnCollapseALL; }
+            set
+            {
+                if (_blnCollapseALL != value)
+                {
+                    _blnCollapseALL = value;
+                    base.RaisePropertyChanged("blnCollapseALL");
+                }
+            }
+        }
+
+
+        private string _txtCollapse = "Collapse All";
+        public string txtCollapse
+        {
+            get { return _txtCollapse; }
+            set
+            {
+                if (_txtCollapse != value)
+                {
+                    _txtCollapse = value;
+                    base.RaisePropertyChanged("txtCollapse");
+                }
+            }
+        }
+
+        private string _txtLoForgoundColor = "Black";
+        public string txtLoForgoundColor
+        {
+            get { return _txtLoForgoundColor; }
+            set
+            {
+                if (_txtLoForgoundColor != value)
+                {
+                    _txtLoForgoundColor = value;
+                    base.RaisePropertyChanged("txtLoForgoundColor");
+                }
+            }
+        }
+
+        private bool _btnCleanNowPreviousState = false;
+        public bool btnCleanNowPreviousState
+        {
+            get { return _btnCleanNowPreviousState; }
+            set
+            {
+                if (_btnCleanNowPreviousState != value)
+                {
+                    _btnCleanNowPreviousState = value;
+                    base.RaisePropertyChanged("btnCleanNowPreviousState");
+                }
+            }
+        }
+
         private bool _ShowFrontPage = false;
         public bool ShowFrontPage
         {
@@ -296,6 +353,20 @@ namespace mCleaner.ViewModel
             }
         }
 
+        private bool _btnCloseEnable = true;
+        public bool btnCloseEnable
+        {
+            get { return _btnCloseEnable; }
+            set
+            {
+                if (_btnCloseEnable != value)
+                {
+                    _btnCloseEnable = value;
+                    base.RaisePropertyChanged("btnCloseEnable");
+                }
+            }
+        }
+
         private int _SelectedTabIndex = 0;
         public int SelectedTabIndex
         {
@@ -384,7 +455,9 @@ namespace mCleaner.ViewModel
                 Command_CleanNow = new RelayCommand(Command_CleanNow_Click);
                 Command_Quit = new RelayCommand(Command_Quit_Click);
                 Command_CloseWindow = new RelayCommand(Command_CloseWindow_Click);
+                Command_SaveLog = new RelayCommand(Command_SaveLog_Click);
                 Command_CloseCleanerDescription = new RelayCommand(Command_CloseCleanerDescription_Click);
+                CommandCollapseAll = new RelayCommand(CommandCollapseAllClick);
                 Command_Cancel = new RelayCommand(Command_Cancel_Click);
                 //Command_CleanOption = new RelayCommand<string>(new Action<string>((i) =>
                 //{
@@ -418,15 +491,30 @@ namespace mCleaner.ViewModel
         private void Command_CloseWindow_Click()
         {
             this.Run = false;
+            btnPreviewCleanEnable = true;
             this.Cancel = true;
             this.ShowFrontPage = true;
         }
+        private void Command_SaveLog_Click()
+        {
+            System.Windows.Forms.SaveFileDialog sfd = new System.Windows.Forms.SaveFileDialog();
+            sfd.Filter = "Text files (*.txt)|*.txt";
+            sfd.DefaultExt= "txt";
+            sfd.FileName = "mCLeanerLog";
+            sfd.Title = "Save a Log";
+            sfd.ShowDialog();
+            File.WriteAllText(sfd.FileName, TextLog);
+        }
+
+
+        
         #endregion
 
         #region commands
         public ICommand Command_Quit { get; set; }
 
         public ICommand Command_CloseWindow { get; set; }
+        public ICommand Command_SaveLog { get; set; }
         public ICommand Command_Preview { get; internal set; }
         public ICommand Command_Clean { get; internal set; }
         public ICommand Command_CustomCleaningSelection { get; internal set; }
@@ -435,6 +523,7 @@ namespace mCleaner.ViewModel
         public ICommand Command_CleanNow { get; internal set; }
         public ICommand Command_CleanOption { get; internal set; }
         public ICommand Command_CloseCleanerDescription { get; internal set; }
+        public ICommand CommandCollapseAll { get; internal set; }
         public ICommand Command_Cancel { get; internal set; }
         #endregion
 
@@ -442,11 +531,13 @@ namespace mCleaner.ViewModel
         public async void Command_Preview_Click()
         {
             Worker.I.Preview = true;
-
+            txtLoForgoundColor = "Black";
+            btnCloseEnable = false;
             this.Cancel = false;
             this.ShowCleanerDescription = false;
             this.ShowFrontPage = false;
             this.Run = true;
+            btnPreviewCleanEnable = false;
             this.ProgressIsIndeterminate = true;
 
             await Start();
@@ -462,6 +553,12 @@ namespace mCleaner.ViewModel
             if (this.Cancel)
             {
                 ProgressWorker.I.EnQ("Operation Canceled");
+            }
+            btnCloseEnable = true;
+
+            if(Worker.I.TotalFileDelete>0 && MessageBox.Show("You want to clean this files?","mCleaner",MessageBoxButton.YesNo,MessageBoxImage.Question)==MessageBoxResult.Yes)
+            {
+                Command_CleanNow_Click();
             }
         }
 
@@ -629,10 +726,12 @@ namespace mCleaner.ViewModel
         {
             this.Cancel = false;
             Worker.I.Preview = false;
+            btnCloseEnable = false;
             this.Run = true;
+            btnPreviewCleanEnable = false;
             this.ShowCleanerDescription = false;
             this.ShowFrontPage = false;
-
+            txtLoForgoundColor = "Red";
             await Start();
 
             // some time, user may have cancel the operation
@@ -642,6 +741,8 @@ namespace mCleaner.ViewModel
             }
 
             Worker.I.DoWork();
+
+            btnCloseEnable = true;
         }
 
         public void Command_Quit_Click()
@@ -664,6 +765,19 @@ namespace mCleaner.ViewModel
                 this.Run = true;
             }
         }
+
+        public void CommandCollapseAllClick()
+        {
+            blnCollapseALL = !blnCollapseALL;
+            foreach (TreeNode tn in this.CleanersCollection)
+            {
+                tn.IsExpanded = blnCollapseALL;
+            }
+
+            txtCollapse = blnCollapseALL ? "Collapse All" : "Expand All";
+        }
+
+        
 
         public void Command_Cancel_Click()
         {
@@ -986,6 +1100,50 @@ namespace mCleaner.ViewModel
             Worker.I.ClearTTD(); // reset TTD content
             this.TextLog = string.Empty;
 
+            if(!Worker.I.Preview)
+            foreach (TreeNode node in this.CleanersCollection)
+            {
+                if (node.Name == "Google Chrome" || node.Name == "Mozilla Firefox")
+                {
+                    foreach (TreeNode child in node.Children)
+                    {
+                        if (this.Cancel)
+                        {
+                            ProgressWorker.I.EnQ("Operation Canceled");
+                            break;
+                        }
+
+                        if (child.IsChecked != null)
+                        {
+                            if (child.IsChecked.Value)
+                            {
+                                if (node.Name == "Google Chrome")
+                                {
+                                    if (CommandLogic_Chrome.IsChromeRunning())
+                                    {
+                                        if (MessageBox.Show("It seems google chrome is running to perform google chrome cleaning you need to close chrome. are you sure you want to continue anyway?", "mCleaner", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
+                                            return false;
+                                        else
+                                            break;
+                                    }
+                                }
+                                else if (node.Name == "Mozilla Firefox")
+                                {
+                                    if (CommandLogic_Chrome.IsFirefoxRunning())
+                                    {
+                                        if (MessageBox.Show("It seems firefox is running to perform firefox cleaning you need to close firefox. are you sure you want to continue anyway?", "mCleaner", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
+                                            return false;
+                                        else
+                                            break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+
+            }
             foreach (TreeNode node in this.CleanersCollection)
             {
                 if (this.Cancel)

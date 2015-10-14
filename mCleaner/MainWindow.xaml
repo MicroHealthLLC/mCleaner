@@ -7,7 +7,7 @@
                       xmlns:ctl="clr-namespace:mCleaner.Helpers.Controls"
                       ShowTitleBar="False"
                       StateChanged="MetroWindow_StateChanged"
-                     Height="700" Width="1150" Icon="appicon.ico" WindowStartupLocation="CenterScreen">
+                     Height="700" Width="1200" Icon="appicon.ico" WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
         <CollectionViewSource x:Key="ListViewSource" Source="{Binding DupChecker.DupplicateCollection}">
@@ -193,7 +193,7 @@
                             <TextBlock Text="Custom Selection" HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" Foreground="Black"/>
                         </StackPanel>
                     </Button>
-                    <Button Width="70" x:Name="btnPreviewMenu" Command="{Binding CleanerML.Command_Preview}" ToolTip="Preview work" VerticalAlignment="Top"  IsEnabled="{Binding CleanerML.Run, Converter={StaticResource Not}}">
+                    <Button Width="70" x:Name="btnPreviewMenu" Command="{Binding CleanerML.Command_Preview}" ToolTip="Preview work" VerticalAlignment="Top" IsEnabled="{Binding CleanerML.btnPreviewCleanEnable}" >
                         <StackPanel>
                             <Rectangle Fill="#5AA552" Height="32" Width="32">
                                 <Rectangle.OpacityMask>
@@ -219,7 +219,7 @@
                             <TextBlock Text="" />
                         </StackPanel>
                     </Button>
-                    <Button Width="70" ToolTip="Start cleaning" x:Name="btnCleanNowMenu" VerticalAlignment="Top" Command="{Binding CleanerML.Command_CleanNow}" IsEnabled="{Binding CleanerML.Run, Converter={StaticResource Not}}">
+                    <Button Width="70" ToolTip="Start cleaning" x:Name="btnCleanNowMenu" VerticalAlignment="Top" Command="{Binding CleanerML.Command_CleanNow}" IsEnabled="{Binding CleanerML.btnPreviewCleanEnable}">
                         <StackPanel>
                             <Rectangle Fill="#084502" Height="32" Width="32">
                                 <Rectangle.OpacityMask>
@@ -242,6 +242,21 @@
                                 </Rectangle.Style>
                             </Rectangle>
                             <TextBlock Text="Clean Now" HorizontalAlignment="Center" Foreground="Black" />
+                            <TextBlock Text="" />
+                        </StackPanel>
+                    </Button>
+                    <Button Width="70" ToolTip="Collase the Treeview" x:Name="btnCollapse" VerticalAlignment="Top" Command="{Binding CleanerML.CommandCollapseAll}">
+                        <StackPanel>
+                            <Rectangle Fill="#607D8B" Height="32" Width="32">
+                                <Rectangle.OpacityMask>
+                                    <VisualBrush>
+                                        <VisualBrush.Visual>
+                                            <Image Width="32" Height="32" Source="Assets/CollapseAll.png" HorizontalAlignment="Center" />
+                                        </VisualBrush.Visual>
+                                    </VisualBrush>
+                                </Rectangle.OpacityMask>
+                            </Rectangle>
+                            <TextBlock Text="{Binding CleanerML.txtCollapse}"  HorizontalAlignment="Center" Foreground="Black" />
                             <TextBlock Text="" />
                         </StackPanel>
                     </Button>
@@ -272,7 +287,7 @@
                         </StackPanel>
                     </Button>
                     <Separator />
-                    <Button Width="70" ToolTip="Clean duplicates from directory" x:Name="btnCleanDuplicatesMenu" Visibility="Visible" Command="{Binding DupChecker.Command_ShowDupTab}" IsEnabled="{Binding CleanerML.Run, Converter={StaticResource Not}}">
+                    <Button Width="70" ToolTip="Clean duplicates from directory" x:Name="btnCleanDuplicatesMenu" Visibility="Visible" Command="{Binding DupChecker.Command_ShowDupTab}" IsEnabled="{Binding CleanerML.ShowFrontPage}">
                         <StackPanel>
                             <Rectangle Fill="#37862F" Height="32" Width="32">
                                 <Rectangle.OpacityMask>
@@ -344,7 +359,7 @@
                         </StackPanel>
                     </Button>
                     <Separator />
-                    <Button Width="70" ToolTip="Shred Files and folder" x:Name="btnShredFilesMenu" Visibility="Visible" Command="{Binding DupChecker.Command_ShowDupTab}" IsEnabled="{Binding CleanerML.Run, Converter={StaticResource Not}}">
+                    <Button Width="70" ToolTip="Shred Files and folder" x:Name="btnShredFilesMenu" Visibility="Visible" Command="{Binding ShredWindow.Command_ShowWindow}" IsEnabled="{Binding CleanerML.ShowFrontPage}">
                         <StackPanel>
                             <Rectangle Fill="#081439" Height="32" Width="32">
                                 <Rectangle.OpacityMask>
@@ -540,6 +555,82 @@
                             </Grid>
                         </Grid>
 
+                        <Grid Visibility="{Binding ShredWindow.ShowWindow, Converter={StaticResource boolTovis}}">
+                            <Grid Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="auto" />
+                                </Grid.RowDefinitions>
+
+                                <Grid Grid.Row="0" Margin="5">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="auto" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="auto" />
+                                            <RowDefinition Height="auto" />
+                                            <RowDefinition Height="*" />
+                                        </Grid.RowDefinitions>
+
+                                        <!-- progress bar -->
+                                        <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,0,5">
+                                            <ProgressBar Height="25" Maximum="{Binding ShredWindow.ProgressMax}" Value="{Binding ShredWindow.ProgressIndex}" Style="{StaticResource ProgressBarStyle}" />
+                                            <TextBlock Text="{Binding ShredWindow.ProgressText}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{StaticResource MainWindow_ProgressBar_Progress_Text}" >
+                                                <TextBlock.Effect>
+                                                    <DropShadowEffect ShadowDepth="2" BlurRadius="3" Color="{DynamicResource {x:Static SystemColors.ActiveCaptionTextColorKey}}" Opacity="0.2"/>
+                                                </TextBlock.Effect>
+                                            </TextBlock>
+                                            <Button  Content="Close" IsEnabled="{Binding ShredWindow.btnCloseEnable}" VerticalAlignment="Top" HorizontalAlignment="Right" Style="{StaticResource ButtonStyle}" Margin="0,0,10,0"  Command="{Binding ShredWindow.Command_CloseWindow}" />
+                                        </Grid>
+
+                                        <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,0,5">
+                                            <Border Padding="5" Background="{StaticResource InfoTip_Background}">
+                                                <TextBlock>
+                                        <Run Text="This will shred files and folder that you have selected." />
+                                                </TextBlock>
+                                            </Border>
+                                        </Grid>
+
+                                        <Grid Grid.Row="2" Grid.Column="0" Background="{StaticResource DupChecker_Panel_FileOperation}" Visibility="{Binding DupChecker.FileOperationPanelShow, Converter={StaticResource boolTovis}}" Width="160">
+                                            <StackPanel Margin="5">
+                                                <StackPanel.Resources>
+                                                    <Style TargetType="{x:Type TextBlock}">
+                                                        <Setter Property="Foreground" Value="{StaticResource DupChecker_Panel_FileOperation_Texts}" />
+                                                    </Style>
+                                                    <Style TargetType="{x:Type RadioButton}">
+                                                        <Setter Property="Foreground" Value="{StaticResource DupChecker_Panel_FileOperation_Texts}" />
+                                                    </Style>
+                                                </StackPanel.Resources>
+
+                                                <Button Content="Select Files" Style="{StaticResource ButtonStyle}" Command="{Binding ShredWindow.Command_SelectFiles}" Visibility="Visible" IsEnabled="{Binding DupChecker.EnableScanFolder}"/>
+                                                <TextBlock Text=" " />
+                                                <Button Content="Select Folders" Style="{StaticResource ButtonStyle}" Command="{Binding ShredWindow.Command_SelectFolders}" Visibility="Visible" IsEnabled="{Binding DupChecker.EnableSelectFolder}"/>
+                                                <TextBlock Text=" " />
+                                                <Button  Content="Shred Selected" Style="{DynamicResource ButtonStyle}" Command="{Binding ShredWindow.Command_ShredStart}" Visibility="Visible" IsEnabled="{Binding DupChecker.EnableRemoveDuplicates}" />
+                                            </StackPanel>
+                                        </Grid>
+
+                                        <Grid Grid.Column="1" Grid.Row="2">
+                                            <ListView Margin="5"
+                          BorderThickness="0"
+                          ItemsSource="{Binding ShredWindow.ShredFilesCollection}"
+                          SelectedIndex="0">
+                                                <ListView.View>
+                                                    <GridView>
+                                                        <GridViewColumn DisplayMemberBinding="{Binding FilePath }"
+                                            Header="File\Folder Path" />
+                                                    </GridView>
+                                                </ListView.View>
+                                            </ListView>
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                        </Grid>
+
                         <!-- Cleaner logs -->
                         <Grid Visibility="{Binding CleanerML.Run, Converter={StaticResource boolTovis}}">
                             <Grid.RowDefinitions>
@@ -562,11 +653,12 @@
                                             <DropShadowEffect ShadowDepth="2" BlurRadius="3" Color="{DynamicResource {x:Static SystemColors.ActiveCaptionTextColorKey}}" Opacity="0.2"/>
                                         </TextBlock.Effect>
                                     </TextBlock>
-                                    <Button Content="Close" VerticalAlignment="Top" HorizontalAlignment="Right" Style="{StaticResource ButtonStyle}" Margin="0,0,10,0" Command="{Binding CleanerML.Command_CloseWindow}" />
+                                    <Button Content="SaveLog" VerticalAlignment="Top" HorizontalAlignment="Right" Style="{StaticResource ButtonStyle}" Margin="0,0,90,0"  IsEnabled="{Binding CleanerML.btnCloseEnable}" Command="{Binding CleanerML.Command_SaveLog}" />
+                                    <Button Content="Close" VerticalAlignment="Top" HorizontalAlignment="Right" Style="{StaticResource ButtonStyle}" Margin="0,0,10,0" IsEnabled="{Binding CleanerML.btnCloseEnable}" Command="{Binding CleanerML.Command_CloseWindow}" />
                                 </Grid>
                             </Grid>
                             <Border Grid.Row="1" Background="White">
-                                <TextBox IsReadOnly="True" BorderThickness="0" Text="{Binding CleanerML.TextLog}" AllowDrop="False" IsTabStop="False" ScrollViewer.VerticalScrollBarVisibility="Auto" />
+                                <TextBox x:Name="txtLog" IsReadOnly="True" BorderThickness="0" Text="{Binding CleanerML.TextLog}" AllowDrop="False" IsTabStop="False" Foreground="{Binding CleanerML.txtLoForgoundColor}" ScrollViewer.VerticalScrollBarVisibility="Auto" />
                             </Border>
                         </Grid>
 
@@ -600,10 +692,10 @@
                                             <LineBreak />
                                             <ctl:HyperlinkEx NavigateUri="mailto:feedback@microhealthllc.com">feedback@microhealthllc.com</ctl:HyperlinkEx>
                                 </TextBlock>
-                                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Left"   Margin="50,0,0,0" >
+                                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" >
                                     <TextBlock Text="Start cleaning now!" FontSize="20" TextAlignment="Center"  Padding="5" Margin="0,0,0,3" />
                                     <StackPanel Orientation="Horizontal">
-                                        <controls:Tile Title="Safe Cleaning"
+                                        <controls:Tile Title="Safe Cleaning" Name="TileSafeCleaning"
                                Style="{StaticResource SmallTileStyle}" TiltFactor="2" Command="{Binding CleanerML.Command_Clean}" HorizontalAlignment="Center"
                                                        HorizontalContentAlignment="Center" CommandParameter="1" Background="#4B5B88" Foreground="White" Margin="3">
                                             <Rectangle Fill="White" Height="64" Width="64">
@@ -616,7 +708,7 @@
                                                 </Rectangle.OpacityMask>
                                             </Rectangle>
                                         </controls:Tile>
-                                        <controls:Tile Title="Moderate Cleaning"
+                                        <controls:Tile Title="Moderate Cleaning" Name="TileMordrateCleaning"
                                Style="{StaticResource SmallTileStyle}" TiltFactor="2" Command="{Binding CleanerML.Command_Clean}" HorizontalAlignment="Center" HorizontalContentAlignment="Center" CommandParameter="2"
                                                        Background="#2F3F6F" Foreground="White" Margin="3">
                                             <Rectangle Fill="White" Height="64" Width="64">
@@ -629,7 +721,7 @@
                                                 </Rectangle.OpacityMask>
                                             </Rectangle>
                                         </controls:Tile>
-                                        <controls:Tile Title="Aggressive Cleaning"
+                                        <controls:Tile Title="Aggressive Cleaning" Name="TileAggressiveCleaning"
                                Style="{StaticResource SmallTileStyle}" TiltFactor="2" Command="{Binding CleanerML.Command_Clean}" HorizontalAlignment="Center" HorizontalContentAlignment="Center" CommandParameter="3"
                                                        Background="#192855" Foreground="White" Margin="3">
                                             <Rectangle Fill="White" Height="64" Width="64">
@@ -642,7 +734,7 @@
                                                 </Rectangle.OpacityMask>
                                             </Rectangle>
                                         </controls:Tile>
-                                        <controls:Tile Title="Clean Duplicates"
+                                        <controls:Tile Title="Clean Duplicates" Name="TileCleanDuplicates"
                                Style="{StaticResource LargeTileStyle}" TiltFactor="2" Command="{Binding DupChecker.Command_ShowDupTab}" HorizontalAlignment="Center" HorizontalContentAlignment="Center"
                                                        Background="#37862F" Foreground="White" Margin="3">
                                             <Rectangle Fill="White" Height="60" Width="60">
@@ -659,7 +751,7 @@
 
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal">
-                                        <controls:Tile Title="Custom Selection"
+                                        <controls:Tile Title="Custom Selection" Name="TIleCustomSelection"
                                Style="{StaticResource SmallTileStyle}" TiltFactor="2" Command="{Binding CleanerML.Command_CustomCleaningSelection}" HorizontalAlignment="Center" HorizontalContentAlignment="Center" CommandParameter="3"
                                                        Background="#230538" Foreground="White" Margin="3">
                                             <Rectangle Fill="White" Height="64" Width="64">
@@ -672,7 +764,7 @@
                                                 </Rectangle.OpacityMask>
                                             </Rectangle>
                                         </controls:Tile>
-                                        <controls:Tile Title="Registry Selection"
+                                        <controls:Tile Title="Registry Selection" Name="TileRegistrySelection"
                                Style="{StaticResource SmallTileStyle}" TiltFactor="2" Command="{Binding CleanerML.Command_RegistrySelection}" HorizontalAlignment="Center" HorizontalContentAlignment="Center" CommandParameter="3"
                                                        Background="#7E4719" Foreground="White" Margin="3">
                                             <Rectangle Fill="White" Height="64" Width="64">
@@ -685,7 +777,7 @@
                                                 </Rectangle.OpacityMask>
                                             </Rectangle>
                                         </controls:Tile>
-                                        <controls:Tile Title="Clear Selection"
+                                        <controls:Tile Title="Clear Selection" Name="TileClearSelection"
                                Style="{StaticResource SmallTileStyle}" TiltFactor="2" Command="{Binding CleanerML.CommandClearSelection}" HorizontalAlignment="Center" HorizontalContentAlignment="Center" CommandParameter="3"
                                                        Background="#7481A6" Foreground="White" Margin="3">
                                             <Rectangle Fill="White" Height="64" Width="64">
@@ -698,7 +790,7 @@
                                                 </Rectangle.OpacityMask>
                                             </Rectangle>
                                         </controls:Tile>
-                                        <controls:Tile Title="Uninstall Programs"
+                                        <controls:Tile Title="Uninstall Programs" Name="TileUninstall"
                                Style="{StaticResource SmallTileStyle}" TiltFactor="2" Command="{Binding Uninstaller.Command_ShowUninstaller}" HorizontalAlignment="Center" HorizontalContentAlignment="Center"
                                                        Background="#542702" Foreground="White" Margin="3">
                                             <Rectangle Fill="White" Height="60" Width="60">
@@ -711,8 +803,8 @@
                                                 </Rectangle.OpacityMask>
                                             </Rectangle>
                                         </controls:Tile>
-                                        <controls:Tile Title="Shred File/Folder"
-                               Style="{StaticResource SmallTileStyle}" TiltFactor="2" Command="{Binding DupChecker.Command_ShowDupTab}" HorizontalAlignment="Center" HorizontalContentAlignment="Center"
+                                        <controls:Tile Title="Shred File/Folder" Name="TileShredFileFolder"
+                               Style="{StaticResource SmallTileStyle}" TiltFactor="2"  Command="{Binding ShredWindow.Command_ShowWindow}" HorizontalAlignment="Center" HorizontalContentAlignment="Center"
                                                        Background="#081439" Foreground="White" Margin="3">
                                             <Rectangle Fill="White" Height="60" Width="60">
                                                 <Rectangle.OpacityMask>
@@ -727,7 +819,7 @@
 
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal">
-                                        <controls:Tile Title="Preview"
+                                        <controls:Tile Title="Preview" Name="TilePreview"
                                Style="{StaticResource SmallTileStyle}" TiltFactor="2" Command="{Binding CleanerML.Command_Preview}" HorizontalAlignment="Center" HorizontalContentAlignment="Center" CommandParameter="3"
                                                        Background="#5AA552" IsEnabled="{Binding CleanerML.btnPreviewCleanEnable}" Foreground="White" Margin="3">
                                             <Rectangle Fill="White" Height="60" Width="60">
@@ -740,7 +832,7 @@
                                                 </Rectangle.OpacityMask>
                                             </Rectangle>
                                         </controls:Tile>
-                                        <controls:Tile Title="Clean Now"
+                                        <controls:Tile Title="Clean Now" Name="TileCleanNow"
                                Style="{StaticResource SmallTileStyle}" TiltFactor="2" Command="{Binding CleanerML.Command_CleanNow}" HorizontalAlignment="Center" HorizontalContentAlignment="Center" CommandParameter="3"
                                                        Background="#084502" IsEnabled="{Binding CleanerML.btnPreviewCleanEnable}" Foreground="White" Margin="3">
                                             <Rectangle Fill="White" Height="60" Width="60">
@@ -753,7 +845,7 @@
                                                 </Rectangle.OpacityMask>
                                             </Rectangle>
                                         </controls:Tile>
-                                        <controls:Tile Title="Scan PC for virus"
+                                        <controls:Tile Title="Scan PC for virus" Name="TileScanPC"
                                Style="{StaticResource LargeTileStyle}" TiltFactor="2" Command="{Binding Clam.Command_ScanForVirus}" HorizontalAlignment="Center" HorizontalContentAlignment="Center"
                                                        Background="#8F71A5" Foreground="White" Margin="3">
                                             <Rectangle Fill="White" Height="60" Width="60">
@@ -767,7 +859,7 @@
                                             </Rectangle>
                                         </controls:Tile>
 
-                                        <controls:Tile Title="Scan Memory for virus"
+                                        <controls:Tile Title="Scan Memory for virus" Name="TileScanMemory"
                                Style="{StaticResource SmallTileStyle}" TiltFactor="2" Command="{Binding Clam.Command_ScanMemory}" HorizontalAlignment="Center" HorizontalContentAlignment="Center"
                                                        Background="#522B6E" Foreground="White" Margin="3">
                                             <Rectangle Fill="White" Height="60" Width="60">
@@ -792,7 +884,7 @@
         <ucw:ClamWindowVirusScan    Visibility="{Binding Clam.ShowClamWinVirusScanner,      Converter={StaticResource boolTovis}}" />
         <ucw:ClamWindow             Visibility="{Binding Clam.ShowClamWinVirusUpdateWindow, Converter={StaticResource boolTovis}}" />
         <ucw:PreferencesWindow      Visibility="{Binding Prefs.ShowWindow,                  Converter={StaticResource boolTovis}}" />
-        <ucw:ShredWindow            Visibility="{Binding ShredWindow.ShowWindow,            Converter={StaticResource boolTovis}}" />
+        <!--<ucw:ShredWindow            Visibility="{Binding ShredWindow.ShowWindow,            Converter={StaticResource boolTovis}}" />-->
         <ucw:ReleaseNotesWindow     Visibility="{Binding ReleaseNote.ShowWindow,            Converter={StaticResource boolTovis}}" />
         <ucw:PrivacyPolicy     Visibility="{Binding PrivacyPolicy.ShowWindow,            Converter={StaticResource boolTovis}}" />
         <ucw:ProgramUninstallerWindow     Visibility="{Binding Uninstaller.ShowWindow,            Converter={StaticResource boolTovis}}" />

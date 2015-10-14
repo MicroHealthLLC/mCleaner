@@ -5,40 +5,11 @@
     <Setting Name="ClamWin_DB" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="ClamWin_ScanLocations" Type="System.Collections.Specialized.StringCollection" Scope="User">
-      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
-&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;string&gt;C:\&lt;/string&gt;
-&lt;/ArrayOfString&gt;</Value>
-    </Setting>
     <Setting Name="ClamWin_UpdateDBAtStartup" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="ClamWin_AutoScanMemoryAtStartup" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
-    </Setting>
-    <Setting Name="ClamWin_Max" Type="System.Collections.Specialized.StringCollection" Scope="User">
-      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
-&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;string&gt;500&lt;/string&gt;
-  &lt;string&gt;150M&lt;/string&gt;
-  &lt;string&gt;50&lt;/string&gt;
-  &lt;string&gt;100M&lt;/string&gt;
-&lt;/ArrayOfString&gt;</Value>
-    </Setting>
-    <Setting Name="ClamWin_Exclude" Type="System.Collections.Specialized.StringCollection" Scope="User">
-      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
-&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;string&gt;[^\]*\.dbx$&lt;/string&gt;
-  &lt;string&gt;[^\]*\.tbb$&lt;/string&gt;
-  &lt;string&gt;[^\]*\.pst$&lt;/string&gt;
-  &lt;string&gt;[^\]*\.dat$&lt;/string&gt;
-  &lt;string&gt;[^\]*\.log$&lt;/string&gt;
-  &lt;string&gt;[^\]*\.evt$&lt;/string&gt;
-  &lt;string&gt;[^\]*\.nsf$&lt;/string&gt;
-  &lt;string&gt;[^\]*\.ntf$&lt;/string&gt;
-  &lt;string&gt;[^\]*\.chm$&lt;/string&gt;
-&lt;/ArrayOfString&gt;</Value>
     </Setting>
     <Setting Name="ClamWin_Proxy_Address" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
@@ -105,6 +76,35 @@
     </Setting>
     <Setting Name="CustomCleanerSelections" Type="System.Collections.Specialized.StringCollection" Scope="User">
       <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ClamWin_ScanLocations" Type="System.Collections.Specialized.StringCollection" Scope="User">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;string&gt;C:\&lt;/string&gt;
+&lt;/ArrayOfString&gt;</Value>
+    </Setting>
+    <Setting Name="ClamWin_Max" Type="System.Collections.Specialized.StringCollection" Scope="User">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;string&gt;500&lt;/string&gt;
+  &lt;string&gt;150M&lt;/string&gt;
+  &lt;string&gt;50&lt;/string&gt;
+  &lt;string&gt;100M&lt;/string&gt;
+&lt;/ArrayOfString&gt;</Value>
+    </Setting>
+    <Setting Name="ClamWin_Exclude" Type="System.Collections.Specialized.StringCollection" Scope="User">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;string&gt;[^\]*\.dbx$&lt;/string&gt;
+  &lt;string&gt;[^\]*\.tbb$&lt;/string&gt;
+  &lt;string&gt;[^\]*\.pst$&lt;/string&gt;
+  &lt;string&gt;[^\]*\.dat$&lt;/string&gt;
+  &lt;string&gt;[^\]*\.log$&lt;/string&gt;
+  &lt;string&gt;[^\]*\.evt$&lt;/string&gt;
+  &lt;string&gt;[^\]*\.nsf$&lt;/string&gt;
+  &lt;string&gt;[^\]*\.ntf$&lt;/string&gt;
+  &lt;string&gt;[^\]*\.chm$&lt;/string&gt;
+&lt;/ArrayOfString&gt;</Value>
     </Setting>
   </Settings>
 </SettingsFile>
