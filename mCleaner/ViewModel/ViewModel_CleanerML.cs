@@ -69,6 +69,20 @@ namespace mCleaner.ViewModel
             }
         }
 
+        private bool _IsCancelProcessEnabled = false;
+        public bool IsCancelProcessEnabled
+        {
+            get { return _IsCancelProcessEnabled; }
+            set
+            {
+                if (_IsCancelProcessEnabled != value)
+                {
+                    _IsCancelProcessEnabled = value;
+                    base.RaisePropertyChanged("IsCancelProcessEnabled");
+                }
+            }
+        }
+
 
         private int _GridWidth =150;
         public int GridWidth
@@ -533,6 +547,7 @@ namespace mCleaner.ViewModel
             Worker.I.Preview = true;
             txtLoForgoundColor = "Black";
             btnCloseEnable = false;
+            IsCancelProcessEnabled = true;
             this.Cancel = false;
             this.ShowCleanerDescription = false;
             this.ShowFrontPage = false;
@@ -555,6 +570,7 @@ namespace mCleaner.ViewModel
                 ProgressWorker.I.EnQ("Operation Canceled");
             }
             btnCloseEnable = true;
+            IsCancelProcessEnabled = false;
 
             if(Worker.I.TotalFileDelete>0 && MessageBox.Show("You want to clean this files?","mCleaner",MessageBoxButton.YesNo,MessageBoxImage.Question)==MessageBoxResult.Yes)
             {
@@ -727,6 +743,7 @@ namespace mCleaner.ViewModel
             this.Cancel = false;
             Worker.I.Preview = false;
             btnCloseEnable = false;
+            IsCancelProcessEnabled = true;
             this.Run = true;
             btnPreviewCleanEnable = false;
             this.ShowCleanerDescription = false;
@@ -743,6 +760,7 @@ namespace mCleaner.ViewModel
             Worker.I.DoWork();
 
             btnCloseEnable = true;
+            IsCancelProcessEnabled = false;
         }
 
         public void Command_Quit_Click()

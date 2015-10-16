@@ -4033,7 +4033,7 @@
 		<row><td>IDS__TargetReq_DESC_RAM</td><td>1033</td><td>The amount of RAM is not adequate for running [ProductName].</td><td>0</td><td/><td>-995910411</td></row>
 		<row><td>IDS__TargetReq_DESC_RESOLUTION</td><td>1033</td><td>The screen resolution is not adequate for running [ProductName].</td><td>0</td><td/><td>-995910411</td></row>
 		<row><td>ID_STRING1</td><td>1033</td><td/><td>0</td><td/><td>-995908363</td></row>
-		<row><td>ID_STRING2</td><td>1033</td><td>http://www.MicroHealth,LLC.com</td><td>0</td><td/><td>1428378145</td></row>
+		<row><td>ID_STRING2</td><td>1033</td><td>https://www.microhealthllc.com/</td><td>0</td><td/><td>2099483159</td></row>
 		<row><td>ID_STRING3</td><td>1033</td><td>MicroHealth, LLC</td><td>0</td><td/><td>1428378145</td></row>
 		<row><td>ID_STRING4</td><td>1033</td><td>LAUNCH~1.EXE|Launch mCleaner.exe</td><td>0</td><td/><td>-995920203</td></row>
 		<row><td>ID_STRING5</td><td>1033</td><td> mCleaner</td><td>0</td><td/><td>1428373953</td></row>
@@ -4234,7 +4234,7 @@
 		<row><td>RegisterUser</td><td/><td>6000</td><td>RegisterUser</td><td/></row>
 		<row><td>RemoveDuplicateFiles</td><td/><td>3400</td><td>RemoveDuplicateFiles</td><td/></row>
 		<row><td>RemoveEnvironmentStrings</td><td/><td>3300</td><td>RemoveEnvironmentStrings</td><td/></row>
-		<row><td>RemoveExistingProducts</td><td/><td>1410</td><td>RemoveExistingProducts</td><td/></row>
+		<row><td>RemoveExistingProducts</td><td/><td>6601</td><td>RemoveExistingProducts</td><td/></row>
 		<row><td>RemoveFiles</td><td/><td>3500</td><td>RemoveFiles</td><td/></row>
 		<row><td>RemoveFolders</td><td/><td>3600</td><td>RemoveFolders</td><td/></row>
 		<row><td>RemoveIniValues</td><td/><td>3100</td><td>RemoveIniValues</td><td/></row>

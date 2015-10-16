@@ -129,7 +129,10 @@ namespace mCleaner.ViewModel
                 var process = new Process { StartInfo = startInfo };
 
                 process.Start();
-                process.StandardInput.WriteLine(SelectedProgramDetails.ProgramDetails.UninstallString);
+                if (!SelectedProgramDetails.ProgramDetails.UninstallString.StartsWith("\"") && !SelectedProgramDetails.ProgramDetails.UninstallString.EndsWith("\""))
+                    process.StandardInput.WriteLine("\""+SelectedProgramDetails.ProgramDetails.UninstallString+"\"");
+                else
+                    process.StandardInput.WriteLine(SelectedProgramDetails.ProgramDetails.UninstallString);
                 process.StandardInput.WriteLine("exit");
 
                 process.WaitForExit();

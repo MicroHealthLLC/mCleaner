@@ -149,6 +149,7 @@ namespace mCleaner.ViewModel
         public ICommand Command_ShredStart { get; set; }
         public ICommand Command_SelectFiles { get; set; }
         public ICommand Command_SelectFolders { get; set; }
+        public ICommand Command_ShredRecycleBin { get; set; }
         public ICommand Command_ShowWindow { get; set; }
         public ICommand Command_CloseWindow { get; set; }
 
@@ -166,6 +167,7 @@ namespace mCleaner.ViewModel
                 Command_ShowWindow = new RelayCommand(Command_ShowWindow_Click);
                 Command_SelectFiles = new RelayCommand(Command_SelectFiles_Click);
                 Command_SelectFolders = new RelayCommand(Command_SelectFolder_Click);
+                Command_ShredRecycleBin = new RelayCommand(Command_ShredRecycleBin_Click);
                 Command_CloseWindow = new RelayCommand(Command_CloseWindow_Click);
             }
         }
@@ -182,6 +184,7 @@ namespace mCleaner.ViewModel
             await Task.Run(() => StartShredding());
             btnCloseEnable = true;
             this.ShredFilesCollection.Clear();
+            this.ProgressText = "Shredding is done however it is running in background task and it will complete in couple of minutes you can close window.";
             return true;
         }
 
@@ -215,6 +218,33 @@ namespace mCleaner.ViewModel
                 if (!this.ShredFilesCollection.Where(dc => dc.FilePath == fbd.SelectedPath).Any())
                     this.ShredFilesCollection.Add(new Model_Shred() { FilePath = fbd.SelectedPath });
             }
+        }
+
+
+        public void Command_ShredRecycleBin_Click()
+        {
+
+            if (System.Windows.MessageBox.Show("Are you sure you want to shred files that is in recycle bin?", "mCleaner", System.Windows.MessageBoxButton.YesNo, System.Windows.MessageBoxImage.Question) == System.Windows.MessageBoxResult.No)
+                return;
+
+            string full_param = "erase recyclebin /quiet";
+
+            ProcessStartInfo startInfo = new ProcessStartInfo(Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "Eraser", "Eraser.exe"), full_param)
+            {
+                WindowStyle = ProcessWindowStyle.Hidden,
+                UseShellExecute = false,
+                RedirectStandardOutput = true,
+                CreateNoWindow = true,
+            };
+
+            Process Shred_process = new Process()
+               {
+                   StartInfo = startInfo
+               };
+            Shred_process.Start();
+            Shred_process.BeginOutputReadLine();
+            Shred_process.WaitForExit();
+
         }
 
         public void Command_ShowWindow_Click()

@@ -88,7 +88,7 @@
     <Style x:Key="SmallTileStyle"
                    TargetType="controls:Tile">
         <Setter Property="Width"
-                        Value="147" />
+                        Value="148" />
         <Setter Property="Height"
                         Value="125" />
         <Setter Property="TitleFontSize"

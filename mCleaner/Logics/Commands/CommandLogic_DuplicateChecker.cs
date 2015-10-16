@@ -316,15 +316,7 @@ namespace mCleaner.Logics.Commands
             files_to_hash.Clear();
             hashed_files.Clear();
             files_with_same_hash.Clear();
-
-            //foreach (Model_DuplicateChecker e in DupChecker.DupplicationCollection)
-            //{
-            //    foreach (string file in e.DuplicateFiles)
-            //    {
-            //        FileInfo fi = new FileInfo(file);
-            //        UpdateProgressLog(string.Format("Duplicate {2} \"{0}\" in \"{1}\" - {3}", fi.Name, fi.Directory.FullName, Win32API.FormatByteSize(fi.Length), e.Hash), "Retreiving duplicate files from the collection");
-            //    }
-            //}
+            ProgressWorker.I.EnQ("Done click on remove duplicates to remove files.");
         }
 
         public void Start(ObservableCollection<Model_DuplicateChecker> files, int operation = 0, BackgroundWorker bgWorker = null) // 0 = delete, 1 = move
@@ -336,7 +328,7 @@ namespace mCleaner.Logics.Commands
             
             foreach (Model_DuplicateChecker dc in files)
             {
-                if (!this.DupChecker.Cancel)
+                if (this.DupChecker.Cancel)
                 {
                     ProgressWorker.I.EnQ("Operation Cancelled");
                     break;
