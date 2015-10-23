@@ -3,9 +3,13 @@
                       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                       xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
                       xmlns:ucw="clr-namespace:mCleaner.UserControls.Window"
-                      Title="mCleaner"
+                      Title="mCleaner by MicroHealth"
                       xmlns:ctl="clr-namespace:mCleaner.Helpers.Controls"
-                      ShowTitleBar="False"
+                      ShowTitleBar="True"
+                      ShowIconOnTitleBar="False"
+                      TitleForeground="White"
+                      TitleCaps="False"
+                      WindowStyle="ToolWindow"
                       StateChanged="MetroWindow_StateChanged"
                      Height="700" Width="1200" Icon="appicon.ico" WindowStartupLocation="CenterScreen">
 
@@ -23,7 +27,7 @@
     <Grid>
         <!-- now your content -->
 
-        <Grid>
+        <Grid Background="White">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="auto" />
@@ -74,7 +78,7 @@
                         </MenuItem.Icon>
                     </MenuItem>
                     <MenuItem IsEnabled="True" Header="System Information" Visibility="Collapsed" />
-                    <MenuItem IsEnabled="True" Header="About" Visibility="Collapsed">
+                    <MenuItem IsEnabled="True" Header="About" Visibility="Visible" Command="{Binding About.Command_ShowWindow}">
                         <MenuItem.Icon>
                             <Image Width="16" Height="16" Source="Assets/About.png" />
                         </MenuItem.Icon>
@@ -107,7 +111,21 @@
                             <TextBlock Text="" />
                         </StackPanel>
                     </Button>
-
+                    <Button Width="70" ToolTip="Collapse the Treeview" x:Name="btnCollapse" VerticalAlignment="Top" Command="{Binding CleanerML.CommandCollapseAll}">
+                        <StackPanel>
+                            <Rectangle Fill="#607D8B" Height="32" Width="32">
+                                <Rectangle.OpacityMask>
+                                    <VisualBrush>
+                                        <VisualBrush.Visual>
+                                            <Image Width="32" Height="32" Source="Assets/CollapseAll.png" HorizontalAlignment="Center" />
+                                        </VisualBrush.Visual>
+                                    </VisualBrush>
+                                </Rectangle.OpacityMask>
+                            </Rectangle>
+                            <TextBlock Text="{Binding CleanerML.txtCollapse}"  HorizontalAlignment="Center" Foreground="Black" />
+                            <TextBlock Text="" />
+                        </StackPanel>
+                    </Button>
                     <Button Width="70" ToolTip="Cleans the PC safely!" Command="{Binding CleanerML.Command_Clean}" BorderBrush="Black" CommandParameter="1"  VerticalAlignment="Top">
                         <StackPanel>
                             <Rectangle Fill="#4B5B88" Height="32" Width="32">
@@ -122,7 +140,7 @@
                             <TextBlock Text="Safe Cleaning" HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" Foreground="Black"/>
                         </StackPanel>
                     </Button>
-                    <Button Width="70" ToolTip="Mordrate cleaning !" Command="{Binding CleanerML.Command_Clean}" CommandParameter="2"  VerticalAlignment="Top">
+                    <Button Width="70" ToolTip="Moderate cleaning !" Command="{Binding CleanerML.Command_Clean}" CommandParameter="2"  VerticalAlignment="Top">
                         <StackPanel>
                             <Rectangle Fill="#2F3F6F" Height="32" Width="32">
                                 <Rectangle.OpacityMask>
@@ -136,7 +154,7 @@
                             <TextBlock Text="Moderate Cleaning" HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" Foreground="Black" />
                         </StackPanel>
                     </Button>
-                    <Button Width="70" ToolTip="Cleans the files aggressively" Command="{Binding CleanerML.Command_Clean}" CommandParameter="3"  VerticalAlignment="Top" >
+                    <Button  Width="70" ToolTip="Cleans the files aggressively" Command="{Binding CleanerML.Command_Clean}" CommandParameter="3"  VerticalAlignment="Top" >
                         <StackPanel>
                             <Rectangle Fill="#192855" Height="32" Width="32">
                                 <Rectangle.OpacityMask>
@@ -147,7 +165,7 @@
                                     </VisualBrush>
                                 </Rectangle.OpacityMask>
                             </Rectangle>
-                            <TextBlock Text="Aggressive Cleaning" HorizontalAlignment="Center"  TextWrapping="Wrap" TextAlignment="Center" Foreground="Black"/>
+                            <TextBlock  Text="Aggressive Cleaning" HorizontalAlignment="Center"  TextWrapping="Wrap" TextAlignment="Center" Foreground="Black"/>
                         </StackPanel>
                     </Button>
                     <Button Width="70" ToolTip="Cleans windows registry" Command="{Binding CleanerML.Command_RegistrySelection}" CommandParameter="3"  VerticalAlignment="Top" >
@@ -164,7 +182,7 @@
                             <TextBlock Text="Registry Cleaning" HorizontalAlignment="Center"  TextWrapping="Wrap" TextAlignment="Center" Foreground="Black"/>
                         </StackPanel>
                     </Button>
-                    <Button Width="70" ToolTip="Cleans option which you select!" Command="{Binding CleanerML.Command_CustomCleaningSelection}" CommandParameter="3"  VerticalAlignment="Top">
+                    <Button Width="70" ToolTip="Cleans options which you select!" Command="{Binding CleanerML.Command_CustomCleaningSelection}" CommandParameter="3"  VerticalAlignment="Top">
                         <StackPanel>
                             <Rectangle Fill="#230538" Height="32" Width="32">
                                 <Rectangle.OpacityMask>
@@ -204,7 +222,7 @@
                             <TextBlock Text="" />
                         </StackPanel>
                     </Button>
-                    <Button Width="70" ToolTip="Start cleaning" x:Name="btnCleanNowMenu" VerticalAlignment="Top" Command="{Binding CleanerML.Command_CleanNow}" IsEnabled="{Binding CleanerML.btnPreviewCleanEnable}">
+                    <Button  Width="70" ToolTip="Start cleaning" x:Name="btnCleanNowMenu" VerticalAlignment="Top" Command="{Binding CleanerML.Command_CleanNow}" IsEnabled="{Binding CleanerML.btnPreviewCleanEnable}">
                         <StackPanel>
                             <Rectangle Fill="#084502" Height="32" Width="32">
                                 <Rectangle.OpacityMask>
@@ -227,21 +245,6 @@
                                 </Rectangle.Style>
                             </Rectangle>
                             <TextBlock Text="Clean Now" HorizontalAlignment="Center" Foreground="Black" />
-                            <TextBlock Text="" />
-                        </StackPanel>
-                    </Button>
-                    <Button Width="70" ToolTip="Collase the Treeview" x:Name="btnCollapse" VerticalAlignment="Top" Command="{Binding CleanerML.CommandCollapseAll}">
-                        <StackPanel>
-                            <Rectangle Fill="#607D8B" Height="32" Width="32">
-                                <Rectangle.OpacityMask>
-                                    <VisualBrush>
-                                        <VisualBrush.Visual>
-                                            <Image Width="32" Height="32" Source="Assets/CollapseAll.png" HorizontalAlignment="Center" />
-                                        </VisualBrush.Visual>
-                                    </VisualBrush>
-                                </Rectangle.OpacityMask>
-                            </Rectangle>
-                            <TextBlock Text="{Binding CleanerML.txtCollapse}"  HorizontalAlignment="Center" Foreground="Black" />
                             <TextBlock Text="" />
                         </StackPanel>
                     </Button>
@@ -375,7 +378,7 @@
                         </StackPanel>
                     </Button>
                     <Separator />
-                    <Button Width="70" ToolTip="Unistall installed programs" Visibility="Visible" Command="{Binding Uninstaller.Command_ShowUninstaller}">
+                    <Button Width="70" ToolTip="Uninstall installed" Visibility="Visible"  Command="{Binding Uninstaller.Command_ShowUninstaller}">
                         <StackPanel>
                             <Rectangle Fill="#542702" Height="32" Width="32">
                                 <Rectangle.OpacityMask>
@@ -568,15 +571,15 @@
                                                     <DropShadowEffect ShadowDepth="2" BlurRadius="3" Color="{DynamicResource {x:Static SystemColors.ActiveCaptionTextColorKey}}" Opacity="0.2"/>
                                                 </TextBlock.Effect>
                                             </TextBlock>
-                                            <Button  Content="Close" IsEnabled="{Binding ShredWindow.btnCloseEnable}" VerticalAlignment="Top" HorizontalAlignment="Right" Style="{StaticResource ButtonStyle}" Margin="0,0,10,0"  Command="{Binding ShredWindow.Command_CloseWindow}" />
                                         </Grid>
 
                                         <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,0,5">
                                             <Border Padding="5" Background="{StaticResource InfoTip_Background}">
                                                 <TextBlock>
-                                        <Run Text="This will shred files and folder that you have selected." />
+                                        <Run Text="This will shred files and folders that you have selected." />
                                                 </TextBlock>
                                             </Border>
+                                            <Button  Content="Close" IsEnabled="{Binding ShredWindow.btnCloseEnable}" VerticalAlignment="Top" HorizontalAlignment="Right" Style="{StaticResource ButtonStyle}" Margin="0,0,10,0"  Command="{Binding ShredWindow.Command_CloseWindow}" />
                                         </Grid>
 
                                         <Grid Grid.Row="2" Grid.Column="0" Background="{StaticResource DupChecker_Panel_FileOperation}" Visibility="{Binding DupChecker.FileOperationPanelShow, Converter={StaticResource boolTovis}}" Width="160">
@@ -590,13 +593,13 @@
                                                     </Style>
                                                 </StackPanel.Resources>
 
-                                                <Button Content="Select Files" Style="{StaticResource ButtonStyle}" Command="{Binding ShredWindow.Command_SelectFiles}" Visibility="Visible" IsEnabled="{Binding DupChecker.EnableScanFolder}"/>
+                                                <Button Content="Select Files" Style="{StaticResource ButtonStyle}" Command="{Binding ShredWindow.Command_SelectFiles}" Visibility="Visible" />
                                                 <TextBlock Text=" " />
-                                                <Button Content="Select Folders" Style="{StaticResource ButtonStyle}" Command="{Binding ShredWindow.Command_SelectFolders}" Visibility="Visible" IsEnabled="{Binding DupChecker.EnableSelectFolder}"/>
+                                                <Button Content="Select Folders" Style="{StaticResource ButtonStyle}" Command="{Binding ShredWindow.Command_SelectFolders}" Visibility="Visible"/>
                                                 <TextBlock Text=" " />
-                                                <Button Content="Shred Recycle Bin" ToolTip="Shred the files in Recycle Bin" Style="{StaticResource ButtonStyle}" Command="{Binding ShredWindow.Command_ShredRecycleBin}" Visibility="Visible" IsEnabled="{Binding DupChecker.EnableSelectFolder}"/>
+                                                <Button Content="Shred Recycle Bin" ToolTip="Shred the files in Recycle Bin" Style="{StaticResource ButtonStyle}" Command="{Binding ShredWindow.Command_ShredRecycleBin}" Visibility="Visible" />
                                                 <TextBlock Text=" " />
-                                                <Button  Content="Start Shredding" Style="{DynamicResource ButtonStyle}" Command="{Binding ShredWindow.Command_ShredStart}" Visibility="Visible" IsEnabled="{Binding DupChecker.EnableRemoveDuplicates}" />
+                                                <Button  Content="Start Shredding" Style="{DynamicResource ButtonStyle}" Command="{Binding ShredWindow.Command_ShredStart}" Visibility="Visible" IsEnabled="{Binding  ShredWindow.btnShreddingEnable}" />
                                             </StackPanel>
                                         </Grid>
 
@@ -608,7 +611,7 @@
                                                 <ListView.View>
                                                     <GridView>
                                                         <GridViewColumn DisplayMemberBinding="{Binding FilePath }"
-                                            Header="File\Folder Path" />
+                                            Header="Folder\File Path" />
                                                     </GridView>
                                                 </ListView.View>
                                             </ListView>
@@ -632,16 +635,17 @@
                                 </Grid.ColumnDefinitions>
 
                                 <Grid Grid.Column="1">
-                                    <Border BorderThickness="1" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}">
+                                    <Border BorderThickness="1" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" Margin="0,0,180,0">
                                         <ProgressBar Height="25" Maximum="{Binding CleanerML.MaxProgress}" Value="{Binding CleanerML.ProgressIndex}" VerticalAlignment="Center" IsHitTestVisible="False" Margin="1" IsIndeterminate="{Binding CleanerML.ProgressIsIndeterminate}" Style="{DynamicResource ProgressBarStyle}"/>
                                     </Border>
-                                    <TextBlock Text="{Binding CleanerML.ProgressText}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{StaticResource MainWindow_ProgressBar_Progress_Text}" >
+                                    <TextBlock Text="{Binding CleanerML.ProgressText}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{StaticResource MainWindow_ProgressBar_Progress_Text}" Margin="0,0,180,0">
                                         <TextBlock.Effect>
                                             <DropShadowEffect ShadowDepth="2" BlurRadius="3" Color="{DynamicResource {x:Static SystemColors.ActiveCaptionTextColorKey}}" Opacity="0.2"/>
                                         </TextBlock.Effect>
                                     </TextBlock>
                                     <Button Content="SaveLog" VerticalAlignment="Top" HorizontalAlignment="Right" Style="{StaticResource ButtonStyle}" Margin="0,0,90,0"  IsEnabled="{Binding CleanerML.btnCloseEnable}" Command="{Binding CleanerML.Command_SaveLog}" />
                                     <Button Content="Close" VerticalAlignment="Top" HorizontalAlignment="Right" Style="{StaticResource ButtonStyle}" Margin="0,0,10,0" IsEnabled="{Binding CleanerML.btnCloseEnable}" Command="{Binding CleanerML.Command_CloseWindow}" />
+                                    
                                 </Grid>
                             </Grid>
                             <Border Grid.Row="1" Background="White">
@@ -664,7 +668,7 @@
                                 <StackPanel>
                                     <TextBlock Text="mCleaner" Foreground="Black" FontSize="30"/>
                                     <TextBlock Text="A complete system cleaner for Windows!" />
-                                    <TextBlock>Copyright© <ctl:HyperlinkEx NavigateUri="http://www.microhealthllc.com">MicroHealth, LLC</ctl:HyperlinkEx> 2015</TextBlock>
+                                    <TextBlock>Copyright© 2015 <ctl:HyperlinkEx NavigateUri="http://www.microhealthllc.com">MicroHealth, LLC</ctl:HyperlinkEx></TextBlock>
                                     <TextBlock Text=" " />
                                 </StackPanel>
 
@@ -871,11 +875,7 @@
         <ucw:ClamWindow             Visibility="{Binding Clam.ShowClamWinVirusUpdateWindow, Converter={StaticResource boolTovis}}" />
         <ucw:PreferencesWindow      Visibility="{Binding Prefs.ShowWindow,                  Converter={StaticResource boolTovis}}" />
         <ucw:ReleaseNotesWindow     Visibility="{Binding ReleaseNote.ShowWindow,            Converter={StaticResource boolTovis}}" />
-        <ucw:PrivacyPolicy     Visibility="{Binding PrivacyPolicy.ShowWindow,            Converter={StaticResource boolTovis}}" />
-        <ucw:ProgramUninstallerWindow     Visibility="{Binding Uninstaller.ShowWindow,            Converter={StaticResource boolTovis}}" />
-
-
-
-
+        <ucw:PrivacyPolicy          Visibility="{Binding PrivacyPolicy.ShowWindow,            Converter={StaticResource boolTovis}}" />
+        <ucw:About                  Visibility="{Binding About.ShowWindow,            Converter={StaticResource boolTovis}}" />
     </Grid>
 </controls:MetroWindow>

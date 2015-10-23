@@ -27,6 +27,15 @@ namespace mCleaner.ViewModel
             }
         }
 
+        public ViewModel_DuplicateChecker DupCheck
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<ViewModel_DuplicateChecker>();
+            }
+        }
+
+
         private bool _ShowWindow = false;
         public bool ShowWindow
         {
@@ -153,6 +162,20 @@ namespace mCleaner.ViewModel
             }
         }
 
+        private bool _DuplicateFilterFileSizeCriteara = true;
+        public bool DuplicateFilterFileSizeCriteara
+        {
+            get { return _DuplicateFilterFileSizeCriteara; }
+            set
+            {
+                if (_DuplicateFilterFileSizeCriteara != value)
+                {
+                    _DuplicateFilterFileSizeCriteara = value;
+                    base.RaisePropertyChanged("DuplicateFilterFileSizeCriteara");
+                }
+            }
+        }
+       
         private bool _ShredFiles = false;
         public bool ShredFiles
         {
@@ -371,6 +394,7 @@ namespace mCleaner.ViewModel
         {
             WriteSettings();
             this.CleanerML.RefreshSystemCleaners();
+            DupCheck.EnableScanFolder = Settings.Default.DupChecker_CustomPath.Count > 0;
             this.ShowWindow = false;
         }
         void Command_CloseWindow_Click()
@@ -556,6 +580,7 @@ namespace mCleaner.ViewModel
             this.HideIrrelevantCleaners     = Settings.Default.HideIrrelevantCleaners;
             this.ShredFiles                 = Settings.Default.ShredFiles;
             this.StartWhenSystemStarts      = Settings.Default.StartWhenSystemStarts;
+            this.DuplicateFilterFileSizeCriteara = Settings.Default.DuplicateFilterFileSizeCriteara;
             //this.Whitelist                  = Settings.Default.WhitelistCollection;
             //this.CustomLocationList         = Settings.Default.CustomLocationForDeletion;
             if (Settings.Default.WhitelistCollection != null)
@@ -630,10 +655,11 @@ namespace mCleaner.ViewModel
                 return;
             }
 
-            Settings.Default.ClamWin_UpdateDBAtStartup  = this.AutoUpdateDBAtStartup;
-            Settings.Default.HideIrrelevantCleaners     = this.HideIrrelevantCleaners;
-            Settings.Default.ShredFiles                 = this.ShredFiles;
-            Settings.Default.StartWhenSystemStarts      = this.StartWhenSystemStarts;
+            Settings.Default.ClamWin_UpdateDBAtStartup              = this.AutoUpdateDBAtStartup;
+            Settings.Default.HideIrrelevantCleaners                 = this.HideIrrelevantCleaners;
+            Settings.Default.ShredFiles                             = this.ShredFiles;
+            Settings.Default.StartWhenSystemStarts                  = this.StartWhenSystemStarts;
+            Settings.Default.DuplicateFilterFileSizeCriteara        = this.DuplicateFilterFileSizeCriteara;
 
             if (Settings.Default.CustomLocationForDeletion == null) Settings.Default.CustomLocationForDeletion = new StringCollection();
             Settings.Default.CustomLocationForDeletion.Clear();

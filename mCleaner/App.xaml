@@ -8,7 +8,6 @@
         <ResourceDictionary Source="Styles\Theme.xaml" />
         <ResourceDictionary Source="Styles\ButtonStyle.xaml" />
         <ResourceDictionary Source="Styles\TreeViewStyle.xaml" />
-        <ResourceDictionary Source="Styles\CleanMenuStyle.xaml" />
         <ResourceDictionary Source="Styles\ToolbarStyle.xaml" />
         <ResourceDictionary Source="Styles\ListViewStyle.xaml" />
         <ResourceDictionary Source="Styles\ProgressBarStyle.xaml" />

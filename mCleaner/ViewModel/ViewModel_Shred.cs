@@ -48,6 +48,21 @@ namespace mCleaner.ViewModel
             }
         }
 
+        private string _strDefaultScanLocation =string.Empty;
+        public string strDefaultScanLocation
+        {
+            get { return _strDefaultScanLocation; }
+            set
+            {
+                if (_strDefaultScanLocation != value)
+                {
+                    _strDefaultScanLocation = value;
+                    base.RaisePropertyChanged("strDefaultScanLocation");
+                }
+            }
+        }
+
+
         private ObservableCollection<Model_Shred> _ShredFilesCollection = new ObservableCollection<Model_Shred>();
         public ObservableCollection<Model_Shred> ShredFilesCollection
         {
@@ -86,6 +101,20 @@ namespace mCleaner.ViewModel
                 {
                     _btnCloseEnable = value;
                     base.RaisePropertyChanged("btnCloseEnable");
+                }
+            }
+        }
+
+        private bool _btnShreddingEnable = true;
+        public bool btnShreddingEnable
+        {
+            get { return _btnShreddingEnable; }
+            set
+            {
+                if (_btnShreddingEnable != value)
+                {
+                    _btnShreddingEnable = value;
+                    base.RaisePropertyChanged("btnShreddingEnable");
                 }
             }
         }
@@ -180,11 +209,10 @@ namespace mCleaner.ViewModel
             btnCloseEnable = false;
             this.ProgressMax = ShredFilesCollection.Count;
             this.ProgressIndex = 0;
-            this.ProgressText = "Statred to Shred Please Wait.";
+            this.ProgressText = "Started to Shred Please Wait.";
             await Task.Run(() => StartShredding());
             btnCloseEnable = true;
             this.ShredFilesCollection.Clear();
-            this.ProgressText = "Shredding is done however it is running in background task and it will complete in couple of minutes you can close window.";
             return true;
         }
 
@@ -227,23 +255,22 @@ namespace mCleaner.ViewModel
             if (System.Windows.MessageBox.Show("Are you sure you want to shred files that is in recycle bin?", "mCleaner", System.Windows.MessageBoxButton.YesNo, System.Windows.MessageBoxImage.Question) == System.Windows.MessageBoxResult.No)
                 return;
 
-            string full_param = "erase recyclebin /quiet";
-
-            ProcessStartInfo startInfo = new ProcessStartInfo(Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "Eraser", "Eraser.exe"), full_param)
+            btnShreddingEnable = false;
+            Wipe Wiper = new Wipe();
+            Wiper.WipeErrorEvent += Wiper_WipeErrorEvent;
+            Wiper.PassInfoEvent += Wiper_PassInfoEvent;
+            Wiper.SectorInfoEvent += Wiper_SectorInfoEvent;
+            Wiper.WipeDoneEvent += Wiper_WipeDoneEvent;
+            this.ProgressText = "Started to Shreding recyclebin please Wait.";
+            Thread.Sleep(2000);
+            foreach (string file in Directory.EnumerateFiles("C:\\$RECYCLE.BIN", "*.*", SearchOption.AllDirectories))
             {
-                WindowStyle = ProcessWindowStyle.Hidden,
-                UseShellExecute = false,
-                RedirectStandardOutput = true,
-                CreateNoWindow = true,
-            };
+                this.ProgressText = "Started to Shred File " + file + " please Wait.";
+                Wiper.WipeFile(file, 2);
+            }
 
-            Process Shred_process = new Process()
-               {
-                   StartInfo = startInfo
-               };
-            Shred_process.Start();
-            Shred_process.BeginOutputReadLine();
-            Shred_process.WaitForExit();
+            this.ProgressText = "Done.";
+            btnShreddingEnable = true;
 
         }
 
@@ -263,13 +290,19 @@ namespace mCleaner.ViewModel
         {
             CleanerML.Run = false;
             CleanerML.ShowFrontPage = true;
+            CleanerML.ShowCleanerDescription = false;
             CleanerML.btnPreviewCleanEnable = CleanerML.btnCleanNowPreviousState;
             this.ShowWindow = false;
         }
 
         void StartShredding()
         {
-
+            btnShreddingEnable = true;
+            Wipe Wiper = new Wipe();
+            Wiper.WipeErrorEvent += Wiper_WipeErrorEvent;
+            Wiper.PassInfoEvent += Wiper_PassInfoEvent;
+            Wiper.SectorInfoEvent += Wiper_SectorInfoEvent;
+            Wiper.WipeDoneEvent += Wiper_WipeDoneEvent;
             foreach (Model_Shred MdlShared in ShredFilesCollection)
             {
                 //            AddLog("Starting to securely shred " + this.QueueFiles.Count + " files with 5 iterations.");
@@ -279,34 +312,45 @@ namespace mCleaner.ViewModel
                 if (attr.HasFlag(FileAttributes.Directory))
                 {
                     //Directory delete Command "erase dir=\"C:\filename-list.txt\" /quiet"
-                    this.ProgressText = "Statred to Shred Folder" +MdlShared.FilePath+" Please Wait.";
-                    full_param = "erase dir=\""+MdlShared.FilePath+"\" /quiet";
+                    this.ProgressText = "Started to Shred Folder" + MdlShared.FilePath + " Please Wait.";
+                    foreach (string file in Directory.EnumerateFiles(MdlShared.FilePath, "*.*", SearchOption.AllDirectories))
+                    {
+                        this.ProgressText = "Started to Shred File " + file + " inside folder " + MdlShared.FilePath + " Please Wait.";
+                        Wiper.WipeFile(file, 2);
+                    }
+                    Directory.Delete(MdlShared.FilePath, true);
                 }
                 else
                 {
                     // for File Command  erase file="C:\filename-list.txt" /quiet
-                    this.ProgressText = "Statred to Shred File " +MdlShared.FilePath+" Please Wait.";
-                    full_param = "erase file=\"" + MdlShared.FilePath + "\" /quiet";
+                    this.ProgressText = "Started to Shred File " + MdlShared.FilePath + " Please Wait.";
+                    Wiper.WipeFile(MdlShared.FilePath, 2);
                 } 
 
-                ProcessStartInfo startInfo = new ProcessStartInfo(Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "Eraser", "Eraser.exe"), full_param)
-                {
-                    WindowStyle = ProcessWindowStyle.Hidden,
-                    UseShellExecute = false,
-                    RedirectStandardOutput = true,
-                    CreateNoWindow = true,
-                };
-
-                Process Shred_process = new Process()
-                   {
-                       StartInfo = startInfo
-                   };
-                Shred_process.Start();
-                Shred_process.BeginOutputReadLine();
-                Shred_process.WaitForExit();
                 this.ProgressIndex++;
             }
+            btnShreddingEnable = true;
             this.ProgressText = "Shreding is done you can now close the window.";
+        }
+
+        void Wiper_WipeDoneEvent(WipeDoneEventArgs e)
+        {
+            Console.WriteLine("Wipe is done");
+        }
+
+        void Wiper_SectorInfoEvent(SectorInfoEventArgs e)
+        {
+            
+        }
+
+        void Wiper_PassInfoEvent(PassInfoEventArgs e)
+        {
+            Console.WriteLine("Passinfo Event");
+        }
+
+        void Wiper_WipeErrorEvent(WipeErrorEventArgs e)
+        {
+            Console.WriteLine("Wipe error detail: " + e.WipeError.Message);
         }
 
         void AddLog(string log, bool addCrLf = true)

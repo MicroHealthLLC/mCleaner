@@ -146,10 +146,13 @@ namespace mCleaner.ViewModel
 
         #region command methods
 
+        ProgramUninstallerWindow PUW = null;
         public void Command_ShowUninstaller_Click()
         {
             BtnUninstall = false;
             this.ShowWindow = true;
+            PUW= new ProgramUninstallerWindow();
+            PUW.Show();
             GetInstalledPrograms();
         }
 
@@ -216,6 +219,8 @@ namespace mCleaner.ViewModel
         public void Command_CloseWindow_Click()
         {
             this.ShowWindow = false;
+            if (PUW!=null)
+                    PUW.Close();
         }
 
         public void Command_Refresh_Click()

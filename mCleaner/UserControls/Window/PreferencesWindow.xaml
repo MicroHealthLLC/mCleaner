@@ -8,10 +8,10 @@
              
              DataContext="{Binding Source={StaticResource Locator}}"
              
-             d:DesignHeight="400" d:DesignWidth="700">
+             d:DesignHeight="450" d:DesignWidth="700">
     
     
-    <Border Width="700" Height="400" VerticalAlignment="Center" HorizontalAlignment="Center" BorderThickness="1" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}">
+    <Border Width="700" Height="450" VerticalAlignment="Center" HorizontalAlignment="Center" BorderThickness="1" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}">
         <Border.Effect>
             <DropShadowEffect Opacity="0.2" BlurRadius="10"/>
         </Border.Effect>
@@ -198,7 +198,7 @@
                     </TabItem>
                     <TabItem Header="Duplicate Checker" Controls:ControlsHelper.HeaderFontSize="18">
                         <TabControl>
-                            <TabItem Header="Custom Location">
+                            <TabItem Header="Custom Location" Controls:ControlsHelper.HeaderFontSize="18">
                                 <Grid>
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="auto" />
@@ -228,8 +228,20 @@
                                     </StackPanel>
                                 </Grid>
                             </TabItem>
-                            <TabItem Header="Filters">
+                            <TabItem Header="Filters" Controls:ControlsHelper.HeaderFontSize="18">
                                 <StackPanel Margin="5">
+                                    <TextBlock Text="Duplicate file search critera" />
+                                    <TextBlock Text="e.g. FileName and FileSize is selected then it will include the files only with same name and size." Opacity="0.70" />
+                                    <Grid Margin="5">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="220" />
+                                            <ColumnDefinition Width="220" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <CheckBox x:Name="cbFileName" Content="FileName" IsChecked="True" IsEnabled="False" Grid.Column="0"/>
+                                        <CheckBox x:Name="cbFileSize" Content="FileSize" IsChecked="{Binding Prefs.DuplicateFilterFileSizeCriteara, Mode=TwoWay}" Grid.Column="1"/>
+                                    </Grid>
+                                    <TextBlock Text="" />
                                     <TextBlock Text="File size" />
                                     <Grid>
                                         <Grid.ColumnDefinitions>

@@ -183,6 +183,21 @@ namespace mCleaner.ViewModel
                 }
             }
         }
+
+        private bool _Cancel = false;
+        public bool Cancel
+        {
+            get { return _Cancel; }
+            set
+            {
+                if (_Cancel != value)
+                {
+                    _Cancel = value;
+                }
+            }
+        }
+
+
         #endregion
 
         #region commands
@@ -249,6 +264,8 @@ namespace mCleaner.ViewModel
         public async void Command_Start_Click()
         {
             await Task.Run(() => CommandLogic_DuplicateChecker.I.Start(this.DupplicateCollection, IsMove ? 1 : 0));
+
+            DupplicateCollection.Clear();
         }
 
         public void Command_CheckDuplicate_Click()
@@ -263,14 +280,13 @@ namespace mCleaner.ViewModel
         public void Command_ShowDupTab_Click()
         {
             CleanerML.Run = false;
-            //CleanerML.ShowFrontPage = false;
             CleanerML.ShowCleanerDescription = false;
-            //CleanerML.SelectedTabIndex = 1;
-            //this.CleanerML.TextLog = "Check duplicates";
-            //this.FileOperationPanelShow = true;
             CleanerML.btnCleanNowPreviousState = CleanerML.btnPreviewCleanEnable;
             CleanerML.btnPreviewCleanEnable = false;
             CleanerML.ShowFrontPage = false;
+            this.EnableRemoveDuplicates = false;
+            this.EnableScanFolder = Settings.Default.DupChecker_CustomPath.Count > 0;
+            DupplicateCollection.Clear();
             this.ShowWindow = true;
         }
 
@@ -284,6 +300,7 @@ namespace mCleaner.ViewModel
         {
             this.ShowWindow = false;
             CleanerML.Run = false;
+            CleanerML.ShowCleanerDescription = false;
             CleanerML.ShowFrontPage = true;
             CleanerML.btnPreviewCleanEnable = CleanerML.btnCleanNowPreviousState;
         }
@@ -297,18 +314,5 @@ namespace mCleaner.ViewModel
         #region methods
 
         #endregion
-
-        private bool _Cancel = false;
-        public bool Cancel
-        {
-            get { return _Cancel; }
-            set
-            {
-                if (_Cancel != value)
-                {
-                    _Cancel = value;
-                }
-            }
-        }
     }
 }

@@ -6,6 +6,7 @@ using System.Runtime.InteropServices;
 using System.Windows;
 using mCleaner.Helpers;
 using mCleaner.Logics.Clam;
+using Microsoft.Practices.ServiceLocation;
 
 namespace mCleaner
 {
@@ -22,25 +23,32 @@ namespace mCleaner
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-
-            // force one instance of this application
-            bool force_terminate = false;
-            Process curr = Process.GetCurrentProcess();
-            Process[] procs = Process.GetProcessesByName(curr.ProcessName);
-            foreach (Process p in procs)
+            if (e.Args.Length == 2 && e.Args[0] == "shred")
             {
-                if ((p.Id != curr.Id) && (p.MainModule.FileName == curr.MainModule.FileName))
-                {
-                    force_terminate = true;
-                    curr = p;
-                    break;
-                }
+                mCleaner.Logics.StaticResources.strShredLocation = e.Args[1];
             }
-            if (force_terminate)
+            else
             {
-                MessageBox.Show("mCleaner is already running", "mCleaner", MessageBoxButton.OK, MessageBoxImage.Information);
-                SetForegroundWindow(curr.MainWindowHandle);
-                Process.GetCurrentProcess().Kill();
+                mCleaner.Logics.StaticResources.strShredLocation = string.Empty;
+                // force one instance of this application
+                bool force_terminate = false;
+                Process curr = Process.GetCurrentProcess();
+                Process[] procs = Process.GetProcessesByName(curr.ProcessName);
+                foreach (Process p in procs)
+                {
+                    if ((p.Id != curr.Id) && (p.MainModule.FileName == curr.MainModule.FileName))
+                    {
+                        force_terminate = true;
+                        curr = p;
+                        break;
+                    }
+                }
+                if (force_terminate)
+                {
+                    MessageBox.Show("mCleaner is already running", "mCleaner", MessageBoxButton.OK, MessageBoxImage.Information);
+                    SetForegroundWindow(curr.MainWindowHandle);
+                    Process.GetCurrentProcess().Kill();
+                }
             }
 
             // check permission
@@ -66,7 +74,12 @@ namespace mCleaner
 
             // check for clamwin installation and
             // decide which database to use
-            CommandLogic_Clam.I.CheckClamWinInstallation();
+            if (e.Args.Length == 2 && e.Args[0] == "shred")
+            {
+                //do nothing in this case
+            }
+            else
+             CommandLogic_Clam.I.CheckClamWinInstallation();
 
             if (mCleaner.Properties.Settings.Default.DupChecker_DuplicateFolderPath == string.Empty)
             {

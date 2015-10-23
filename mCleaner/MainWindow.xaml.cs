@@ -9,6 +9,7 @@ using mCleaner.ViewModel;
 using Microsoft.Practices.ServiceLocation;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -84,17 +85,38 @@ namespace mCleaner
 
         void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
+            CleanerML.CommandCollapseAllClick();
             // check if an update is required after being prechecked at App.xaml.cs
-            if (Settings.Default.ClamWin_Update)
+            if (mCleaner.Logics.StaticResources.strShredLocation == string.Empty)
             {
-                CommandLogic_Clam.I.LaunchUpdater();
-            }
-            else // none
-            {   // then check if it requires an update at startup
-                if (Settings.Default.ClamWin_UpdateDBAtStartup)
+                if (Settings.Default.ClamWin_Update)
                 {
                     CommandLogic_Clam.I.LaunchUpdater();
                 }
+                else // none
+                {   // then check if it requires an update at startup
+                    if (Settings.Default.ClamWin_UpdateDBAtStartup)
+                    {
+                        CommandLogic_Clam.I.LaunchUpdater();
+                    }
+                }
+
+            }
+            else
+            {
+                ServiceLocator.Current.GetInstance<ViewModel.ViewModel_Shred>().Command_ShowWindow_Click();
+                ServiceLocator.Current.GetInstance<ViewModel.ViewModel_Shred>().ShredFilesCollection.Add(new Model_Shred() { FilePath = mCleaner.Logics.StaticResources.strShredLocation });
+                ServiceLocator.Current.GetInstance<ViewModel.ViewModel_Shred>().Command_ShredStart_Click();
+                  FileAttributes attr = File.GetAttributes(mCleaner.Logics.StaticResources.strShredLocation);
+                  if (attr.HasFlag(FileAttributes.Directory))
+                  {
+                      MessageBox.Show("Shredding is done successfully for the folder: " + mCleaner.Logics.StaticResources.strShredLocation,"mCleaner",MessageBoxButton.OK,MessageBoxImage.Information);
+                  }
+                  else
+                      MessageBox.Show("Shredding is done successfully for file : " + mCleaner.Logics.StaticResources.strShredLocation, "mCleaner", MessageBoxButton.OK, MessageBoxImage.Information);
+                      
+
+                  Application.Current.Shutdown();
             }
 
             ProgressWorker.I.Start();
@@ -144,7 +166,7 @@ namespace mCleaner
             {
                 TileSafeCleaning.Width = TileMordrateCleaning.Width = TileAggressiveCleaning.Width = TIleCustomSelection.Width = TileRegistrySelection.Width = TilePreview.Width = TileCleanNow.Width = TileClearSelection.Width = TileUninstall.Width = TileShredFileFolder.Width = TileScanMemory.Width =  197;
                 TileCleanDuplicates.Width = TileScanPC.Width = 400;
-                TileSafeCleaning.Height = TileMordrateCleaning.Height = TileAggressiveCleaning.Height = TileCleanDuplicates.Height = TIleCustomSelection.Height = TileRegistrySelection.Height = TilePreview.Height = TileCleanNow.Height = TileClearSelection.Height = TileUninstall.Height = TileShredFileFolder.Height = TileScanMemory.Height = TileScanPC.Height = 150;
+                TileSafeCleaning.Height = TileMordrateCleaning.Height = TileAggressiveCleaning.Height = TileCleanDuplicates.Height = TIleCustomSelection.Height = TileRegistrySelection.Height = TilePreview.Height = TileCleanNow.Height = TileClearSelection.Height = TileUninstall.Height = TileShredFileFolder.Height = TileScanMemory.Height = TileScanPC.Height = 145;
                
             }
             else if (this.WindowState == System.Windows.WindowState.Normal)

@@ -48,49 +48,6 @@ namespace mCleaner.Model
             }
         }
     }
-    //public class Model_DuplicateChecker : ViewModelBase
-    //{
-    //    private ObservableCollection<Model_DuplicateChecker_FileDetails> _DuplicateFiles = new ObservableCollection<Model_DuplicateChecker_FileDetails>();
-    //    public ObservableCollection<Model_DuplicateChecker_FileDetails> DuplicateFiles
-    //    {
-    //        get { return _DuplicateFiles; }
-    //        set
-    //        {
-    //            if (_DuplicateFiles != value)
-    //            {
-    //                _DuplicateFiles = value;
-    //                base.RaisePropertyChanged("DuplicateFiles");
-    //            }
-    //        }
-    //    }
-
-    //    //private string _FullFilePath = string.Empty;
-    //    //public string FullFilePath
-    //    //{
-    //    //    get { return _FullFilePath; }
-    //    //    set
-    //    //    {
-    //    //        if (_FullFilePath != value)
-    //    //        {
-    //    //            _FullFilePath = value;
-    //    //        }
-    //    //    }
-    //    //}
-
-    //    private string _Hash = string.Empty;
-    //    public string Hash
-    //    {
-    //        get { return _Hash; }
-    //        set
-    //        {
-    //            if (_Hash != value)
-    //            {
-    //                _Hash = value;
-    //                base.RaisePropertyChanged("Hash");
-    //            }
-    //        }
-    //    }
-    //}
 
     public class Model_DuplicateChecker_FileDetails
     {

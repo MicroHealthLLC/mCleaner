@@ -9,7 +9,7 @@
     <Geometry x:Key="DownArrow">M0,0 L1,0 0.5,1Z</Geometry>
 
     <Style x:Key="TreeViewStyle" TargetType="{x:Type TreeView}">
-        <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
+        <Setter Property="Background" Value="{StaticResource TreeViewHeader_CollapsedBackground}"/>
         <Setter Property="BorderBrush" Value="{StaticResource ListBorder}"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Padding" Value="0"/>
@@ -159,6 +159,7 @@
                         <Trigger Property="IsExpanded" Value="false">
                             <Setter Property="Visibility" TargetName="ItemsHost" Value="Collapsed"/>
                             <Setter Property="Visibility" TargetName="DownArrow" Value="Collapsed" />
+                            <!--<Setter Property="Background" Value="{StaticResource TreeViewHeader_CollapsedBackground}"/>-->
                         </Trigger>
                         <Trigger Property="HasItems" Value="false">
                             <Setter Property="Visibility" TargetName="Expander" Value="Collapsed"/>
@@ -181,13 +182,6 @@
                             <Setter Property="Background" TargetName="Bd" Value="{StaticResource TreeViewHeader_Background}"/>
                             <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}}"/>
                         </MultiTrigger>
-                        <!--<MultiDataTrigger>
-                            <MultiDataTrigger.Conditions>
-                                <Condition Property="HasItems" Value="false"/>
-                                <Condition Binding="{Binding IsAccordionHeader}" Value="true" />
-                            </MultiDataTrigger.Conditions>
-                            <Setter Property="Margin" Value="5" TargetName="ParentNodeContainer2" />
-                        </MultiDataTrigger>-->
                         <Trigger Property="IsEnabled" Value="false">
                             <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
                         </Trigger>

@@ -341,45 +341,20 @@
 		<col def="S0">ISDotNetInstallerArgsCommit</col>
 		<col def="S0">ISDotNetInstallerArgsUninstall</col>
 		<col def="S0">ISDotNetInstallerArgsRollback</col>
-		<row><td>BevelLine.dll</td><td>{94887370-4C52-45B5-8E90-41DED8B76F14}</td><td>ERASER</td><td>2</td><td/><td>bevelline.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>CommonLibrary.dll</td><td>{A4EB1C20-60B7-4B27-AD29-CA331B4910D3}</td><td>ERASER</td><td>2</td><td/><td>commonlibrary.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>DragDropLib.dll</td><td>{EC0C7A93-B6F3-4949-B407-54B274C1B447}</td><td>ERASER</td><td>2</td><td/><td>dragdroplib.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>Eraser.BlackBox.dll</td><td>{4AC4902A-F59A-4E89-988B-21AC2AD1E7CF}</td><td>PLUGINS</td><td>2</td><td/><td>eraser.blackbox.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>Eraser.BlackBox.resources.dll</td><td>{A06FEFAD-EE7A-42DC-A866-6D15657DC518}</td><td>EN1</td><td>2</td><td/><td>eraser.blackbox.resources.dl</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>Eraser.DefaultPlugins.dll</td><td>{C8384BE0-BD5D-4F77-AFBF-869112513D1D}</td><td>PLUGINS</td><td>2</td><td/><td>eraser.defaultplugins.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>Eraser.DefaultPlugins.resources.dll</td><td>{21627A64-F021-4463-8867-292BFC7726D5}</td><td>EN1</td><td>2</td><td/><td>eraser.defaultplugins.resour</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>Eraser.Manager.dll</td><td>{A707B83F-DF8D-46A0-81EE-BA90DAF36B38}</td><td>ERASER</td><td>2</td><td/><td>eraser.manager.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>Eraser.Manager.resources.dll</td><td>{07FE5DBC-D91B-4B9C-A056-B7DD1A0EA92B}</td><td>EN</td><td>2</td><td/><td>eraser.manager.resources.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>Eraser.Plugins.dll</td><td>{35FA1081-04AD-441B-97AC-153AB20F09CE}</td><td>ERASER</td><td>2</td><td/><td>eraser.plugins.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>Eraser.Shell.dll</td><td>{4F1C6D8C-EA03-458A-AD40-F3F718517930}</td><td>ERASER</td><td>2</td><td/><td>eraser.shell.dll</td><td>20</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>Eraser.Util.Native.dll</td><td>{AC753E05-CE3F-4A96-A84D-55075D0468A8}</td><td>ERASER</td><td>2</td><td/><td>eraser.util.native.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>Eraser.Util.Native.resources.dll</td><td>{D6E7A3CF-D787-4C4A-9A59-0C6117512EFC}</td><td>EN</td><td>2</td><td/><td>eraser.util.native.resources</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>Eraser.Util.dll</td><td>{B6C08DC5-7741-4E36-83D5-75E5968F4037}</td><td>ERASER</td><td>2</td><td/><td>eraser.util.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>Eraser.Util.resources.dll</td><td>{404A2D4F-EF41-4824-B4A2-8819C00B04D7}</td><td>EN</td><td>2</td><td/><td>eraser.util.resources.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>Eraser.exe</td><td>{436F64B1-8D98-4656-B259-B5DBAB39F6EC}</td><td>ERASER</td><td>2</td><td/><td>eraser.exe</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>Eraser.resources.dll</td><td>{507FAA85-BF0B-418A-866F-B69FC3082CAA}</td><td>EN</td><td>2</td><td/><td>eraser.resources.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>CSShellExtContextMenuHandler.dll</td><td>{8F2ABC07-B61E-4069-AFEC-E865AE70E4B6}</td><td>INSTALLDIR</td><td>2</td><td/><td>csshellextcontextmenuhandler</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>GalaSoft.MvvmLight.Extras.dll</td><td>{582267E4-B057-4257-99DA-F5D789DB2A1E}</td><td>INSTALLDIR</td><td>2</td><td/><td>galasoft.mvvmlight.extras.dl</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>GalaSoft.MvvmLight.Platform.dll</td><td>{5A77EFFF-4AF7-4440-A458-C3881330D1CD}</td><td>INSTALLDIR</td><td>2</td><td/><td>galasoft.mvvmlight.platform.</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>GalaSoft.MvvmLight.dll</td><td>{A8BE124D-47AF-4213-8E77-981D528B5F74}</td><td>INSTALLDIR</td><td>2</td><td/><td>galasoft.mvvmlight.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>ICSharpCode.SharpZipLib.dll</td><td>{50F0F07B-6DC2-4871-BC72-5185E1202BD1}</td><td>PLUGINS</td><td>2</td><td/><td>icsharpcode.sharpziplib.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>ISX_DEFAULTCOMPONENT</td><td>{4C0EA667-9B1B-48BD-854C-F082D4ED8CD5}</td><td>CLAM</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>ISX_DEFAULTCOMPONENT1</td><td>{5401734F-7903-4A18-942A-6A7899BE5DD7}</td><td>DB</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>ISX_DEFAULTCOMPONENT2</td><td>{969045E1-0649-45B0-8157-00209340F364}</td><td>CLEANERS</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>ISX_DEFAULTCOMPONENT3</td><td>{A822D02D-6B02-44F2-BE2E-7D83E8E0BA4C}</td><td>INSTALLDIR</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>ISX_DEFAULTCOMPONENT4</td><td>{A6E3D7B9-2345-476D-81A4-E3B2E2F3A05D}</td><td>ERASER</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>ISX_DEFAULTCOMPONENT5</td><td>{AE493240-FA55-41FB-BA88-630D97EB2F2D}</td><td>EN</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>ISX_DEFAULTCOMPONENT6</td><td>{B59FBE0A-5790-4FD8-830B-CAD00C47734D}</td><td>PLUGINS</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>ISX_DEFAULTCOMPONENT7</td><td>{7283AB54-E7F7-4E22-9F85-7BCA3FAA3F98}</td><td>EN1</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>LZMA_.dll</td><td>{D09B7358-03A0-44FD-A6B5-6751AEF2F1EE}</td><td>PLUGINS</td><td>2</td><td/><td>lzma_.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>MahApps.Metro.dll</td><td>{6AE8CC5B-FF4D-4CAB-B6DA-E7B949097125}</td><td>INSTALLDIR</td><td>2</td><td/><td>mahapps.metro.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>Microsoft.Practices.ServiceLocation.dll</td><td>{5ABEBF80-E1CA-4F8C-9457-EB3FF42A73F3}</td><td>INSTALLDIR</td><td>2</td><td/><td>microsoft.practices.servicel</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>Microsoft.Runtime.Hosting.dll</td><td>{6E6BDB2E-9672-4903-B6B5-7C465D2735B4}</td><td>ERASER</td><td>2</td><td/><td>microsoft.runtime.hosting.dl</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>Newtonsoft.Json.dll</td><td>{2A26ADB5-56F1-4DC7-90E3-7B595BF6E6D6}</td><td>INSTALLDIR</td><td>2</td><td/><td>newtonsoft.json.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>SQLite.Interop.dll</td><td>{3AEF778F-25AD-4338-B278-51F3420FA67A}</td><td>INSTALLDIR</td><td>2</td><td/><td>sqlite.interop.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>System.Data.SQLite.dll</td><td>{3DA0AD24-EEE0-4B07-BFCF-4E770DCA6AC5}</td><td>INSTALLDIR</td><td>2</td><td/><td>system.data.sqlite.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>System.Windows.Interactivity.dll</td><td>{9BE9EDD1-DDC4-4CD3-A611-57B3C3DB85A6}</td><td>INSTALLDIR</td><td>2</td><td/><td>system.windows.interactivity</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>TaskDialog.dll</td><td>{FBD288A3-0150-49F5-A990-6D189186C7AB}</td><td>ERASER</td><td>2</td><td/><td>taskdialog.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>alglibnet2.dll</td><td>{A6AB8027-7EC1-42BD-9679-E38E065901E8}</td><td>ERASER</td><td>2</td><td/><td>alglibnet2.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>clamscan.exe</td><td>{3E52D912-136D-4937-90AC-28E6069D9D55}</td><td>CLAM</td><td>2</td><td/><td>clamscan.exe</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>freshclam.exe</td><td>{B311C36B-66DB-4F3B-8B3A-F5735ACA3116}</td><td>CLAM</td><td>2</td><td/><td>freshclam.exe</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>libclamav.dll</td><td>{B2D60FCD-17D5-47FC-9FD5-44622E105D15}</td><td>CLAM</td><td>2</td><td/><td>libclamav.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
@@ -1106,66 +1081,20 @@
 		<row><td>CLAM</td><td>msvcr80.dll</td></row>
 		<row><td>CLEANERS</td><td>ISX_DEFAULTCOMPONENT2</td></row>
 		<row><td>DB</td><td>ISX_DEFAULTCOMPONENT1</td></row>
-		<row><td>EN</td><td>Eraser.Manager.resources.dll</td></row>
-		<row><td>EN</td><td>Eraser.Util.Native.resources.dll</td></row>
-		<row><td>EN</td><td>Eraser.Util.resources.dll</td></row>
-		<row><td>EN</td><td>Eraser.resources.dll</td></row>
-		<row><td>EN</td><td>ISX_DEFAULTCOMPONENT5</td></row>
-		<row><td>EN1</td><td>Eraser.BlackBox.resources.dll</td></row>
-		<row><td>EN1</td><td>Eraser.DefaultPlugins.resources.dll</td></row>
-		<row><td>EN1</td><td>ISX_DEFAULTCOMPONENT7</td></row>
-		<row><td>ERASER</td><td>BevelLine.dll</td></row>
-		<row><td>ERASER</td><td>CommonLibrary.dll</td></row>
-		<row><td>ERASER</td><td>DragDropLib.dll</td></row>
-		<row><td>ERASER</td><td>Eraser.Manager.dll</td></row>
-		<row><td>ERASER</td><td>Eraser.Plugins.dll</td></row>
-		<row><td>ERASER</td><td>Eraser.Shell.dll</td></row>
-		<row><td>ERASER</td><td>Eraser.Util.Native.dll</td></row>
-		<row><td>ERASER</td><td>Eraser.Util.dll</td></row>
-		<row><td>ERASER</td><td>Eraser.exe</td></row>
-		<row><td>ERASER</td><td>ISX_DEFAULTCOMPONENT4</td></row>
-		<row><td>ERASER</td><td>Microsoft.Runtime.Hosting.dll</td></row>
-		<row><td>ERASER</td><td>TaskDialog.dll</td></row>
-		<row><td>ERASER</td><td>alglibnet2.dll</td></row>
-		<row><td>INSTALLDIR</td><td>BevelLine.dll</td></row>
-		<row><td>INSTALLDIR</td><td>CommonLibrary.dll</td></row>
-		<row><td>INSTALLDIR</td><td>DragDropLib.dll</td></row>
-		<row><td>INSTALLDIR</td><td>Eraser.BlackBox.dll</td></row>
-		<row><td>INSTALLDIR</td><td>Eraser.BlackBox.resources.dll</td></row>
-		<row><td>INSTALLDIR</td><td>Eraser.DefaultPlugins.dll</td></row>
-		<row><td>INSTALLDIR</td><td>Eraser.DefaultPlugins.resources.dll</td></row>
-		<row><td>INSTALLDIR</td><td>Eraser.Manager.dll</td></row>
-		<row><td>INSTALLDIR</td><td>Eraser.Manager.resources.dll</td></row>
-		<row><td>INSTALLDIR</td><td>Eraser.Plugins.dll</td></row>
-		<row><td>INSTALLDIR</td><td>Eraser.Shell.dll</td></row>
-		<row><td>INSTALLDIR</td><td>Eraser.Util.Native.dll</td></row>
-		<row><td>INSTALLDIR</td><td>Eraser.Util.Native.resources.dll</td></row>
-		<row><td>INSTALLDIR</td><td>Eraser.Util.dll</td></row>
-		<row><td>INSTALLDIR</td><td>Eraser.Util.resources.dll</td></row>
-		<row><td>INSTALLDIR</td><td>Eraser.exe</td></row>
-		<row><td>INSTALLDIR</td><td>Eraser.resources.dll</td></row>
+		<row><td>INSTALLDIR</td><td>CSShellExtContextMenuHandler.dll</td></row>
 		<row><td>INSTALLDIR</td><td>GalaSoft.MvvmLight.Extras.dll</td></row>
 		<row><td>INSTALLDIR</td><td>GalaSoft.MvvmLight.Platform.dll</td></row>
 		<row><td>INSTALLDIR</td><td>GalaSoft.MvvmLight.dll</td></row>
-		<row><td>INSTALLDIR</td><td>ICSharpCode.SharpZipLib.dll</td></row>
 		<row><td>INSTALLDIR</td><td>ISX_DEFAULTCOMPONENT</td></row>
 		<row><td>INSTALLDIR</td><td>ISX_DEFAULTCOMPONENT1</td></row>
 		<row><td>INSTALLDIR</td><td>ISX_DEFAULTCOMPONENT2</td></row>
 		<row><td>INSTALLDIR</td><td>ISX_DEFAULTCOMPONENT3</td></row>
-		<row><td>INSTALLDIR</td><td>ISX_DEFAULTCOMPONENT4</td></row>
-		<row><td>INSTALLDIR</td><td>ISX_DEFAULTCOMPONENT5</td></row>
-		<row><td>INSTALLDIR</td><td>ISX_DEFAULTCOMPONENT6</td></row>
-		<row><td>INSTALLDIR</td><td>ISX_DEFAULTCOMPONENT7</td></row>
-		<row><td>INSTALLDIR</td><td>LZMA_.dll</td></row>
 		<row><td>INSTALLDIR</td><td>MahApps.Metro.dll</td></row>
 		<row><td>INSTALLDIR</td><td>Microsoft.Practices.ServiceLocation.dll</td></row>
-		<row><td>INSTALLDIR</td><td>Microsoft.Runtime.Hosting.dll</td></row>
 		<row><td>INSTALLDIR</td><td>Newtonsoft.Json.dll</td></row>
 		<row><td>INSTALLDIR</td><td>SQLite.Interop.dll</td></row>
 		<row><td>INSTALLDIR</td><td>System.Data.SQLite.dll</td></row>
 		<row><td>INSTALLDIR</td><td>System.Windows.Interactivity.dll</td></row>
-		<row><td>INSTALLDIR</td><td>TaskDialog.dll</td></row>
-		<row><td>INSTALLDIR</td><td>alglibnet2.dll</td></row>
 		<row><td>INSTALLDIR</td><td>clamscan.exe</td></row>
 		<row><td>INSTALLDIR</td><td>freshclam.exe</td></row>
 		<row><td>INSTALLDIR</td><td>libclamav.dll</td></row>
@@ -1174,11 +1103,6 @@
 		<row><td>INSTALLDIR</td><td>msvcp80.dll</td></row>
 		<row><td>INSTALLDIR</td><td>msvcr80.dll</td></row>
 		<row><td>INSTALLDIR</td><td>sqlite3.dll</td></row>
-		<row><td>PLUGINS</td><td>Eraser.BlackBox.dll</td></row>
-		<row><td>PLUGINS</td><td>Eraser.DefaultPlugins.dll</td></row>
-		<row><td>PLUGINS</td><td>ICSharpCode.SharpZipLib.dll</td></row>
-		<row><td>PLUGINS</td><td>ISX_DEFAULTCOMPONENT6</td></row>
-		<row><td>PLUGINS</td><td>LZMA_.dll</td></row>
 	</table>
 
 	<table name="CustomAction">
@@ -1269,9 +1193,6 @@
 		<row><td>DATABASEDIR</td><td>ISYourDataBaseDir</td><td>.</td><td/><td>0</td><td/></row>
 		<row><td>DB</td><td>CLAM</td><td>db</td><td/><td>0</td><td/></row>
 		<row><td>DesktopFolder</td><td>TARGETDIR</td><td>.:Desktop</td><td/><td>3</td><td/></row>
-		<row><td>EN</td><td>ERASER</td><td>en</td><td/><td>0</td><td/></row>
-		<row><td>EN1</td><td>PLUGINS</td><td>en</td><td/><td>0</td><td/></row>
-		<row><td>ERASER</td><td>INSTALLDIR</td><td>Eraser</td><td/><td>0</td><td/></row>
 		<row><td>FavoritesFolder</td><td>TARGETDIR</td><td>.:FAVORI~1|Favorites</td><td/><td>0</td><td/></row>
 		<row><td>FontsFolder</td><td>TARGETDIR</td><td>.:Fonts</td><td/><td>0</td><td/></row>
 		<row><td>GlobalAssemblyCache</td><td>TARGETDIR</td><td>.:Global~1|GlobalAssemblyCache</td><td/><td>0</td><td/></row>
@@ -1285,7 +1206,6 @@
 		<row><td>MY_PRODUCT_NAME</td><td>MICROHEALTH__LLC</td><td>mCleaner</td><td/><td>0</td><td/></row>
 		<row><td>MyPicturesFolder</td><td>TARGETDIR</td><td>.:MyPict~1|MyPictures</td><td/><td>0</td><td/></row>
 		<row><td>NetHoodFolder</td><td>TARGETDIR</td><td>.:NetHood</td><td/><td>0</td><td/></row>
-		<row><td>PLUGINS</td><td>ERASER</td><td>Plugins</td><td/><td>0</td><td/></row>
 		<row><td>PersonalFolder</td><td>TARGETDIR</td><td>.:Personal</td><td/><td>0</td><td/></row>
 		<row><td>PrimaryVolumePath</td><td>TARGETDIR</td><td>.:Primar~1|PrimaryVolumePath</td><td/><td>0</td><td/></row>
 		<row><td>PrintHoodFolder</td><td>TARGETDIR</td><td>.:PRINTH~1|PrintHood</td><td/><td>0</td><td/></row>
@@ -1999,45 +1919,20 @@
 	<table name="FeatureComponents">
 		<col key="yes" def="s38">Feature_</col>
 		<col key="yes" def="s72">Component_</col>
-		<row><td>AlwaysInstall</td><td>BevelLine.dll</td></row>
-		<row><td>AlwaysInstall</td><td>CommonLibrary.dll</td></row>
-		<row><td>AlwaysInstall</td><td>DragDropLib.dll</td></row>
-		<row><td>AlwaysInstall</td><td>Eraser.BlackBox.dll</td></row>
-		<row><td>AlwaysInstall</td><td>Eraser.BlackBox.resources.dll</td></row>
-		<row><td>AlwaysInstall</td><td>Eraser.DefaultPlugins.dll</td></row>
-		<row><td>AlwaysInstall</td><td>Eraser.DefaultPlugins.resources.dll</td></row>
-		<row><td>AlwaysInstall</td><td>Eraser.Manager.dll</td></row>
-		<row><td>AlwaysInstall</td><td>Eraser.Manager.resources.dll</td></row>
-		<row><td>AlwaysInstall</td><td>Eraser.Plugins.dll</td></row>
-		<row><td>AlwaysInstall</td><td>Eraser.Shell.dll</td></row>
-		<row><td>AlwaysInstall</td><td>Eraser.Util.Native.dll</td></row>
-		<row><td>AlwaysInstall</td><td>Eraser.Util.Native.resources.dll</td></row>
-		<row><td>AlwaysInstall</td><td>Eraser.Util.dll</td></row>
-		<row><td>AlwaysInstall</td><td>Eraser.Util.resources.dll</td></row>
-		<row><td>AlwaysInstall</td><td>Eraser.exe</td></row>
-		<row><td>AlwaysInstall</td><td>Eraser.resources.dll</td></row>
+		<row><td>AlwaysInstall</td><td>CSShellExtContextMenuHandler.dll</td></row>
 		<row><td>AlwaysInstall</td><td>GalaSoft.MvvmLight.Extras.dll</td></row>
 		<row><td>AlwaysInstall</td><td>GalaSoft.MvvmLight.Platform.dll</td></row>
 		<row><td>AlwaysInstall</td><td>GalaSoft.MvvmLight.dll</td></row>
-		<row><td>AlwaysInstall</td><td>ICSharpCode.SharpZipLib.dll</td></row>
 		<row><td>AlwaysInstall</td><td>ISX_DEFAULTCOMPONENT</td></row>
 		<row><td>AlwaysInstall</td><td>ISX_DEFAULTCOMPONENT1</td></row>
 		<row><td>AlwaysInstall</td><td>ISX_DEFAULTCOMPONENT2</td></row>
 		<row><td>AlwaysInstall</td><td>ISX_DEFAULTCOMPONENT3</td></row>
-		<row><td>AlwaysInstall</td><td>ISX_DEFAULTCOMPONENT4</td></row>
-		<row><td>AlwaysInstall</td><td>ISX_DEFAULTCOMPONENT5</td></row>
-		<row><td>AlwaysInstall</td><td>ISX_DEFAULTCOMPONENT6</td></row>
-		<row><td>AlwaysInstall</td><td>ISX_DEFAULTCOMPONENT7</td></row>
-		<row><td>AlwaysInstall</td><td>LZMA_.dll</td></row>
 		<row><td>AlwaysInstall</td><td>MahApps.Metro.dll</td></row>
 		<row><td>AlwaysInstall</td><td>Microsoft.Practices.ServiceLocation.dll</td></row>
-		<row><td>AlwaysInstall</td><td>Microsoft.Runtime.Hosting.dll</td></row>
 		<row><td>AlwaysInstall</td><td>Newtonsoft.Json.dll</td></row>
 		<row><td>AlwaysInstall</td><td>SQLite.Interop.dll</td></row>
 		<row><td>AlwaysInstall</td><td>System.Data.SQLite.dll</td></row>
 		<row><td>AlwaysInstall</td><td>System.Windows.Interactivity.dll</td></row>
-		<row><td>AlwaysInstall</td><td>TaskDialog.dll</td></row>
-		<row><td>AlwaysInstall</td><td>alglibnet2.dll</td></row>
 		<row><td>AlwaysInstall</td><td>clamscan.exe</td></row>
 		<row><td>AlwaysInstall</td><td>freshclam.exe</td></row>
 		<row><td>AlwaysInstall</td><td>libclamav.dll</td></row>
@@ -2061,27 +1956,11 @@
 		<col def="I4">ISAttributes</col>
 		<col def="S72">ISComponentSubFolder_</col>
 		<row><td>adobe_reader.xml</td><td>ISX_DEFAULTCOMPONENT2</td><td>ADOBE_~1.XML|adobe_reader.xml</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release\Cleaners\adobe_reader.xml</td><td>1</td><td/></row>
-		<row><td>alglibnet2.dll</td><td>alglibnet2.dll</td><td>ALGLIB~1.DLL|alglibnet2.dll</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release\Eraser\alglibnet2.dll</td><td>1</td><td/></row>
 		<row><td>amule.xml</td><td>ISX_DEFAULTCOMPONENT2</td><td>amule.xml</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release\Cleaners\amule.xml</td><td>1</td><td/></row>
-		<row><td>bevelline.dll</td><td>BevelLine.dll</td><td>BEVELL~1.DLL|BevelLine.dll</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release\Eraser\BevelLine.dll</td><td>1</td><td/></row>
+		<row><td>appicon.ico</td><td>ISX_DEFAULTCOMPONENT3</td><td>appicon.ico</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\appicon.ico</td><td>1</td><td/></row>
 		<row><td>chromium.xml</td><td>ISX_DEFAULTCOMPONENT2</td><td>chromium.xml</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release\Cleaners\chromium.xml</td><td>1</td><td/></row>
 		<row><td>clamscan.exe</td><td>clamscan.exe</td><td>clamscan.exe</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release\Clam\clamscan.exe</td><td>1</td><td/></row>
-		<row><td>commonlibrary.dll</td><td>CommonLibrary.dll</td><td>COMMON~1.DLL|CommonLibrary.dll</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release\Eraser\CommonLibrary.dll</td><td>1</td><td/></row>
-		<row><td>dragdroplib.dll</td><td>DragDropLib.dll</td><td>DRAGDR~1.DLL|DragDropLib.dll</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release\Eraser\DragDropLib.dll</td><td>1</td><td/></row>
-		<row><td>eraser.blackbox.dll</td><td>Eraser.BlackBox.dll</td><td>ERASER~1.DLL|Eraser.BlackBox.dll</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release\Eraser\Plugins\Eraser.BlackBox.dll</td><td>1</td><td/></row>
-		<row><td>eraser.blackbox.resources.dl</td><td>Eraser.BlackBox.resources.dll</td><td>ERASER~1.DLL|Eraser.BlackBox.resources.dll</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release\Eraser\Plugins\en\Eraser.BlackBox.resources.dll</td><td>1</td><td/></row>
-		<row><td>eraser.defaultplugins.dll</td><td>Eraser.DefaultPlugins.dll</td><td>ERASER~1.DLL|Eraser.DefaultPlugins.dll</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release\Eraser\Plugins\Eraser.DefaultPlugins.dll</td><td>1</td><td/></row>
-		<row><td>eraser.defaultplugins.resour</td><td>Eraser.DefaultPlugins.resources.dll</td><td>ERASER~1.DLL|Eraser.DefaultPlugins.resources.dll</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release\Eraser\Plugins\en\Eraser.DefaultPlugins.resources.dll</td><td>1</td><td/></row>
-		<row><td>eraser.exe</td><td>Eraser.exe</td><td>Eraser.exe</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release\Eraser\Eraser.exe</td><td>1</td><td/></row>
-		<row><td>eraser.manager.dll</td><td>Eraser.Manager.dll</td><td>ERASER~1.DLL|Eraser.Manager.dll</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release\Eraser\Eraser.Manager.dll</td><td>1</td><td/></row>
-		<row><td>eraser.manager.resources.dll</td><td>Eraser.Manager.resources.dll</td><td>ERASER~1.DLL|Eraser.Manager.resources.dll</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release\Eraser\en\Eraser.Manager.resources.dll</td><td>1</td><td/></row>
-		<row><td>eraser.plugins.dll</td><td>Eraser.Plugins.dll</td><td>ERASER~1.DLL|Eraser.Plugins.dll</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release\Eraser\Eraser.Plugins.dll</td><td>1</td><td/></row>
-		<row><td>eraser.resources.dll</td><td>Eraser.resources.dll</td><td>ERASER~1.DLL|Eraser.resources.dll</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release\Eraser\en\Eraser.resources.dll</td><td>1</td><td/></row>
-		<row><td>eraser.shell.dll</td><td>Eraser.Shell.dll</td><td>ERASER~1.DLL|Eraser.Shell.dll</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release\Eraser\Eraser.Shell.dll</td><td>1</td><td/></row>
-		<row><td>eraser.util.dll</td><td>Eraser.Util.dll</td><td>ERASER~1.DLL|Eraser.Util.dll</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release\Eraser\Eraser.Util.dll</td><td>1</td><td/></row>
-		<row><td>eraser.util.native.dll</td><td>Eraser.Util.Native.dll</td><td>ERASER~1.DLL|Eraser.Util.Native.dll</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release\Eraser\Eraser.Util.Native.dll</td><td>1</td><td/></row>
-		<row><td>eraser.util.native.resources</td><td>Eraser.Util.Native.resources.dll</td><td>ERASER~1.DLL|Eraser.Util.Native.resources.dll</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release\Eraser\en\Eraser.Util.Native.resources.dll</td><td>1</td><td/></row>
-		<row><td>eraser.util.resources.dll</td><td>Eraser.Util.resources.dll</td><td>ERASER~1.DLL|Eraser.Util.resources.dll</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release\Eraser\en\Eraser.Util.resources.dll</td><td>1</td><td/></row>
+		<row><td>csshellextcontextmenuhandler</td><td>CSShellExtContextMenuHandler.dll</td><td>CSSHEL~1.DLL|CSShellExtContextMenuHandler.dll</td><td>0</td><td/><td/><td>0</td><td>1</td><td>C:\Code\Mcleaner\mCleaner\Release\CSShellExtContextMenuHandler.dll</td><td>1</td><td/></row>
 		<row><td>filezilla.xml</td><td>ISX_DEFAULTCOMPONENT2</td><td>FILEZI~1.XML|filezilla.xml</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release\Cleaners\filezilla.xml</td><td>1</td><td/></row>
 		<row><td>flash.xml</td><td>ISX_DEFAULTCOMPONENT2</td><td>flash.xml</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release\Cleaners\flash.xml</td><td>1</td><td/></row>
 		<row><td>freshclam.conf</td><td>ISX_DEFAULTCOMPONENT</td><td>FRESHC~1.CON|freshclam.conf</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release\Clam\freshclam.conf</td><td>1</td><td/></row>
@@ -2095,18 +1974,15 @@
 		<row><td>google_earth.xml</td><td>ISX_DEFAULTCOMPONENT2</td><td>GOOGLE~1.XML|google_earth.xml</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release\Cleaners\google_earth.xml</td><td>1</td><td/></row>
 		<row><td>google_toolbar.xml</td><td>ISX_DEFAULTCOMPONENT2</td><td>GOOGLE~1.XML|google_toolbar.xml</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release\Cleaners\google_toolbar.xml</td><td>1</td><td/></row>
 		<row><td>hippo_opensim_viewer.xml</td><td>ISX_DEFAULTCOMPONENT2</td><td>HIPPO_~1.XML|hippo_opensim_viewer.xml</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release\Cleaners\hippo_opensim_viewer.xml</td><td>1</td><td/></row>
-		<row><td>icsharpcode.sharpziplib.dll</td><td>ICSharpCode.SharpZipLib.dll</td><td>ICSHAR~1.DLL|ICSharpCode.SharpZipLib.dll</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release\Eraser\Plugins\ICSharpCode.SharpZipLib.dll</td><td>1</td><td/></row>
 		<row><td>internet_explorer.xml</td><td>ISX_DEFAULTCOMPONENT2</td><td>INTERN~1.XML|internet_explorer.xml</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release\Cleaners\internet_explorer.xml</td><td>1</td><td/></row>
 		<row><td>java.xml</td><td>ISX_DEFAULTCOMPONENT2</td><td>java.xml</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release\Cleaners\java.xml</td><td>1</td><td/></row>
 		<row><td>libclamav.dll</td><td>libclamav.dll</td><td>LIBCLA~1.DLL|libclamav.dll</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release\Clam\libclamav.dll</td><td>1</td><td/></row>
 		<row><td>liferea.xml</td><td>ISX_DEFAULTCOMPONENT2</td><td>liferea.xml</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release\Cleaners\liferea.xml</td><td>1</td><td/></row>
 		<row><td>littleregistry.xml</td><td>ISX_DEFAULTCOMPONENT2</td><td>LITTLE~1.XML|LittleRegistry.xml</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release\Cleaners\LittleRegistry.xml</td><td>1</td><td/></row>
-		<row><td>lzma_.dll</td><td>LZMA_.dll</td><td>LZMA#.dll</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release\Eraser\Plugins\LZMA#.dll</td><td>1</td><td/></row>
 		<row><td>mahapps.metro.dll</td><td>MahApps.Metro.dll</td><td>MAHAPP~1.DLL|MahApps.Metro.dll</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release\MahApps.Metro.dll</td><td>1</td><td/></row>
 		<row><td>mcleaner.exe</td><td>mCleaner.exe</td><td>mCleaner.exe</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release\mCleaner.exe</td><td>1</td><td/></row>
 		<row><td>mcleaner.exe.config</td><td>ISX_DEFAULTCOMPONENT3</td><td>MCLEAN~1.CON|mCleaner.exe.config</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release\mCleaner.exe.config</td><td>1</td><td/></row>
 		<row><td>microsoft.practices.servicel</td><td>Microsoft.Practices.ServiceLocation.dll</td><td>MICROS~1.DLL|Microsoft.Practices.ServiceLocation.dll</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release\Microsoft.Practices.ServiceLocation.dll</td><td>1</td><td/></row>
-		<row><td>microsoft.runtime.hosting.dl</td><td>Microsoft.Runtime.Hosting.dll</td><td>MICROS~1.DLL|Microsoft.Runtime.Hosting.dll</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release\Eraser\Microsoft.Runtime.Hosting.dll</td><td>1</td><td/></row>
 		<row><td>microsoft.vc80.crt.manifest</td><td>ISX_DEFAULTCOMPONENT</td><td>MICROS~1.MAN|Microsoft.VC80.CRT.manifest</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release\Clam\Microsoft.VC80.CRT.manifest</td><td>1</td><td/></row>
 		<row><td>microsoft_office.xml</td><td>ISX_DEFAULTCOMPONENT2</td><td>MICROS~1.XML|microsoft_office.xml</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release\Cleaners\microsoft_office.xml</td><td>1</td><td/></row>
 		<row><td>miro.xml</td><td>ISX_DEFAULTCOMPONENT2</td><td>miro.xml</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release\Cleaners\miro.xml</td><td>1</td><td/></row>
@@ -2129,7 +2005,6 @@
 		<row><td>sqlite3.dll</td><td>sqlite3.dll</td><td>sqlite3.dll</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release\sqlite3.dll</td><td>1</td><td/></row>
 		<row><td>system.data.sqlite.dll</td><td>System.Data.SQLite.dll</td><td>SYSTEM~1.DLL|System.Data.SQLite.dll</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release\System.Data.SQLite.dll</td><td>1</td><td/></row>
 		<row><td>system.windows.interactivity</td><td>System.Windows.Interactivity.dll</td><td>SYSTEM~1.DLL|System.Windows.Interactivity.dll</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release\System.Windows.Interactivity.dll</td><td>1</td><td/></row>
-		<row><td>taskdialog.dll</td><td>TaskDialog.dll</td><td>TASKDI~1.DLL|TaskDialog.dll</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release\Eraser\TaskDialog.dll</td><td>1</td><td/></row>
 		<row><td>teamviewer.xml</td><td>ISX_DEFAULTCOMPONENT2</td><td>TEAMVI~1.XML|teamviewer.xml</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release\Cleaners\teamviewer.xml</td><td>1</td><td/></row>
 		<row><td>thunderbird.xml</td><td>ISX_DEFAULTCOMPONENT2</td><td>THUNDE~1.XML|thunderbird.xml</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release\Cleaners\thunderbird.xml</td><td>1</td><td/></row>
 		<row><td>tortoisesvn.xml</td><td>ISX_DEFAULTCOMPONENT2</td><td>TORTOI~1.XML|tortoisesvn.xml</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release\Cleaners\tortoisesvn.xml</td><td>1</td><td/></row>
@@ -2161,6 +2036,8 @@
 	<table name="ISAssistantTag">
 		<col key="yes" def="s72">Tag</col>
 		<col def="S255">Data</col>
+		<row><td>PROJECT_ASSISTANT_DEFAULT_FEATURE</td><td>AlwaysInstall</td></row>
+		<row><td>RegistryPageEnabled</td><td>Yes</td></row>
 	</table>
 
 	<table name="ISBillBoard">
@@ -2287,45 +2164,20 @@
 		<col def="S0">FTPLocation</col>
 		<col def="S0">HTTPLocation</col>
 		<col def="S0">Miscellaneous</col>
-		<row><td>BevelLine.dll</td><td/><td/><td>_D53E8B90_A0D7_4E4D_9A97_7A72B21D56FB_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>CommonLibrary.dll</td><td/><td/><td>_2B69419D_9D53_4D68_A5B4_8FED881B9E25_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>DragDropLib.dll</td><td/><td/><td>_6F9F10BA_C84C_4385_88F0_B1C342B85A4D_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>Eraser.BlackBox.dll</td><td/><td/><td>_D8DD26AE_6790_4E96_88EC_C6A62EB42BC5_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>Eraser.BlackBox.resources.dll</td><td/><td/><td>_E7B174F5_887B_46E3_A9A9_61FF688BC93F_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>Eraser.DefaultPlugins.dll</td><td/><td/><td>_558DF7D9_54F7_4D1E_ACFC_9340E30E5A93_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>Eraser.DefaultPlugins.resources.dll</td><td/><td/><td>_C312099D_75F4_47E1_8834_6EE35DBCC01C_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>Eraser.Manager.dll</td><td/><td/><td>_2F729CB8_E36C_4A8B_9805_66D2D1828349_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>Eraser.Manager.resources.dll</td><td/><td/><td>_118AF952_F9AE_4F06_B4DB_8CB0BB0869CD_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>Eraser.Plugins.dll</td><td/><td/><td>_B49E607D_82E5_414D_A0DC_2FB2E9427CD4_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>Eraser.Shell.dll</td><td/><td/><td>_63438DF2_6F07_4D97_BEA2_1E4815DEC493_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>Eraser.Util.Native.dll</td><td/><td/><td>_16305C24_8398_4E6E_AB97_93CD4A5383EB_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>Eraser.Util.Native.resources.dll</td><td/><td/><td>_769636EA_F097_4205_A18B_74AB5082D7CC_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>Eraser.Util.dll</td><td/><td/><td>_6E83641A_9DE9_4AFF_A15B_14A57A34FF14_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>Eraser.Util.resources.dll</td><td/><td/><td>_53816071_C37E_4236_BE75_33C3663E2250_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>Eraser.exe</td><td/><td/><td>_34848493_2175_4071_971B_50C19A7AD8E8_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>Eraser.resources.dll</td><td/><td/><td>_C75179B2_0101_4A17_BDDF_CE7AA50FAA69_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>CSShellExtContextMenuHandler.dll</td><td/><td/><td>_3BFAC6D8_3B48_4FC0_A7DE_1F33287CC923_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>GalaSoft.MvvmLight.Extras.dll</td><td/><td/><td>_2D677A95_4DF0_470A_9EB3_8A6C75BCA0AD_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>GalaSoft.MvvmLight.Platform.dll</td><td/><td/><td>_4808FFD4_FF38_4E05_A6C6_3B491C670DEA_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>GalaSoft.MvvmLight.dll</td><td/><td/><td>_5F57E7A6_E220_47BF_A62E_4835B85EA0C3_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>ICSharpCode.SharpZipLib.dll</td><td/><td/><td>_7093B325_0F9E_4488_BB1F_ED94EA638810_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>ISX_DEFAULTCOMPONENT</td><td/><td/><td>_E3EF8AB5_23E8_4179_BB92_9DC8EE728C48_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>ISX_DEFAULTCOMPONENT1</td><td/><td/><td>_1A97DA31_9298_4FD5_870F_2B06D656ADDB_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>ISX_DEFAULTCOMPONENT2</td><td/><td/><td>_C3600C24_385F_4271_AB4D_EC71F6220232_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>ISX_DEFAULTCOMPONENT3</td><td/><td/><td>_D6E8041F_40F4_4162_AE22_535E44E8C915_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>ISX_DEFAULTCOMPONENT4</td><td/><td/><td>_B681124F_AD53_4980_9EA0_12C4CCF59ADA_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>ISX_DEFAULTCOMPONENT5</td><td/><td/><td>_5B797BB0_CA01_452B_8F20_0B199F1346C4_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>ISX_DEFAULTCOMPONENT6</td><td/><td/><td>_7B15C79D_E86C_4364_890C_3D6C931F1F1A_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>ISX_DEFAULTCOMPONENT7</td><td/><td/><td>_E69A0E83_2E1F_421A_96E7_3528692692BE_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>LZMA_.dll</td><td/><td/><td>_C4A99F1C_664D_4AEC_8057_3517F5487B41_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>MahApps.Metro.dll</td><td/><td/><td>_4CDDFB6C_AC9B_456B_92EB_4A7935D0336F_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>Microsoft.Practices.ServiceLocation.dll</td><td/><td/><td>_67E9BA8B_24AC_4421_A380_3FDBCD008CA4_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>Microsoft.Runtime.Hosting.dll</td><td/><td/><td>_3A43D8D4_6A7F_4C52_9A13_A133E5EE1323_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>Newtonsoft.Json.dll</td><td/><td/><td>_982A5206_A64A_49B4_A3AD_917B1D91DCA3_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>SQLite.Interop.dll</td><td/><td/><td>_19059921_30EF_4C12_9BFE_742F60799E87_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>System.Data.SQLite.dll</td><td/><td/><td>_5B5A9515_B05E_45D1_9524_0F6C9A86029C_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>System.Windows.Interactivity.dll</td><td/><td/><td>_3BCF9226_9A5E_4322_93A9_79A72B6D65C9_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>TaskDialog.dll</td><td/><td/><td>_0D00F92B_3651_4BEB_9DA9_94874D57053E_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>alglibnet2.dll</td><td/><td/><td>_4B3428D9_2136_4997_8CE9_4F551F0F43AB_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>clamscan.exe</td><td/><td/><td>_54A262F6_ED69_461E_AB77_52D39601B1FC_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>freshclam.exe</td><td/><td/><td>_24688A09_4197_49A7_BB00_00B26E02634C_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>libclamav.dll</td><td/><td/><td>_CE27A761_5A50_4208_8770_8CC5967C5539_FILTER</td><td/><td/><td/><td/></row>
@@ -2922,7 +2774,7 @@
 		<col def="I2">Encoded</col>
 		<col def="S0">Comment</col>
 		<col def="I4">TimeStamp</col>
-		<row><td>COMPANY_NAME</td><td>1033</td><td>MicroHealth, LLC</td><td>0</td><td/><td>1428378145</td></row>
+		<row><td>COMPANY_NAME</td><td>1033</td><td>MicroHealth, LLC</td><td>0</td><td/><td>-1658599563</td></row>
 		<row><td>DN_AlwaysInstall</td><td>1033</td><td>Always Install</td><td>0</td><td/><td>-995910411</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_COLOR</td><td>1033</td><td>The color settings of your system are not adequate for running [ProductName].</td><td>0</td><td/><td>-995910411</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_DOTNETVERSION45FULL</td><td>1033</td><td>Microsoft .NET Framework 4.5 Full package or greater needs to be installed for this installation to continue.</td><td>0</td><td/><td>-995908203</td></row>
@@ -4033,8 +3885,8 @@
 		<row><td>IDS__TargetReq_DESC_RAM</td><td>1033</td><td>The amount of RAM is not adequate for running [ProductName].</td><td>0</td><td/><td>-995910411</td></row>
 		<row><td>IDS__TargetReq_DESC_RESOLUTION</td><td>1033</td><td>The screen resolution is not adequate for running [ProductName].</td><td>0</td><td/><td>-995910411</td></row>
 		<row><td>ID_STRING1</td><td>1033</td><td/><td>0</td><td/><td>-995908363</td></row>
-		<row><td>ID_STRING2</td><td>1033</td><td>https://www.microhealthllc.com/</td><td>0</td><td/><td>2099483159</td></row>
-		<row><td>ID_STRING3</td><td>1033</td><td>MicroHealth, LLC</td><td>0</td><td/><td>1428378145</td></row>
+		<row><td>ID_STRING2</td><td>1033</td><td>http://www.MicroHealth,LLC.com</td><td>0</td><td/><td>-1658599563</td></row>
+		<row><td>ID_STRING3</td><td>1033</td><td>MicroHealth, LLC</td><td>0</td><td/><td>-1658599563</td></row>
 		<row><td>ID_STRING4</td><td>1033</td><td>LAUNCH~1.EXE|Launch mCleaner.exe</td><td>0</td><td/><td>-995920203</td></row>
 		<row><td>ID_STRING5</td><td>1033</td><td> mCleaner</td><td>0</td><td/><td>1428373953</td></row>
 		<row><td>IIDS_UITEXT_FeatureUninstalled</td><td>1033</td><td>This feature will remain uninstalled.</td><td>0</td><td/><td>-995910411</td></row>
@@ -4152,8 +4004,6 @@
 		<col def="I2">ISIconIndex</col>
 		<row><td>ARPPRODUCTICON.exe</td><td/><td>&lt;VSSolutionFolder&gt;\mCleaner\appicon.ico</td><td>0</td></row>
 		<row><td>Eraser.exe_34BD5A8688C94A478773663E77CC435F.exe</td><td/><td>C:\Code\Mcleaner\mCleaner\bin\Release\Eraser\Eraser.exe</td><td>0</td></row>
-		<row><td>clamscan.exe_934EAE59354C459C8E8F94F816B48ACA.exe</td><td/><td>C:\Code\Mcleaner\mCleaner\bin\Release\Clam\clamscan.exe</td><td>0</td></row>
-		<row><td>freshclam.exe_A9A7E071B2F244EEA0587E312F2D64B2.exe</td><td/><td>C:\Code\Mcleaner\mCleaner\bin\Release\Clam\freshclam.exe</td><td>0</td></row>
 		<row><td>mCleaner.exe1_49C0CEB788EF4F95A9AE3DFD665A1695.exe</td><td/><td>C:\Code\Mcleaner\mCleaner\bin\Release64\mCleaner.exe</td><td>0</td></row>
 		<row><td>mCleaner.exe1_99DC95C6010840B9A857BE5794DD0FA1.exe</td><td/><td>C:\Code\Mcleaner\mCleaner\bin\Release\mCleaner.exe</td><td>0</td></row>
 		<row><td>mCleaner.exe_53EE527D6B734060B89964276830A455.exe</td><td/><td>C:\Code\Mcleaner\mCleaner\bin\Release64\mCleaner.exe</td><td>0</td></row>
@@ -4290,7 +4140,7 @@ QwBEAF8AUgBPAE0AAQBFAHgAcAByAGUAcwBzAA==
 		<row><td>ISTheme</td><td>InstallShield Blue.theme</td></row>
 		<row><td>ISUSLock</td><td>{C0B308C7-D0E3-46FA-820D-A7F0E543698E}</td></row>
 		<row><td>ISUSSignature</td><td>{C196569C-14C5-469F-B9EF-E7B86402E655}</td></row>
-		<row><td>ISVisitedViews</td><td>viewAssistant,viewProject,viewRegistry,viewUI,viewSystemSearch,viewCustomActions,viewRelease,viewISToday,viewLearnMore,viewUpdateService,viewAppFiles,viewTextMessages,viewShortcuts,viewUpgradePaths</td></row>
+		<row><td>ISVisitedViews</td><td>viewAssistant,viewProject,viewRegistry,viewUI,viewSystemSearch,viewCustomActions,viewRelease,viewISToday,viewLearnMore,viewUpdateService,viewAppFiles,viewTextMessages,viewShortcuts,viewUpgradePaths,viewServices,viewEnvironmentVariables,viewFileExtensions,viewIniFiles,viewObjects</td></row>
 		<row><td>Limited</td><td>1</td></row>
 		<row><td>LockPermissionMode</td><td>1</td></row>
 		<row><td>MsiExecCmdLineOptions</td><td/></row>
@@ -4671,7 +4521,7 @@ QwBEAF8AUgBPAE0AAQBFAHgAcAByAGUAcwBzAA==
 		<row><td>PROGRAMFILETOLAUNCHATEND</td><td>[INSTALLDIR]mCleaner.exe</td><td/></row>
 		<row><td>ProductCode</td><td>{CD549A7C-FAF0-45D0-BBBA-159031B81456}</td><td/></row>
 		<row><td>ProductName</td><td>mCleaner</td><td/></row>
-		<row><td>ProductVersion</td><td>1.00.0000</td><td/></row>
+		<row><td>ProductVersion</td><td>1.0.0</td><td/></row>
 		<row><td>ProgressType0</td><td>install</td><td/></row>
 		<row><td>ProgressType1</td><td>Installing</td><td/></row>
 		<row><td>ProgressType2</td><td>installed</td><td/></row>
@@ -4740,6 +4590,9 @@ QwBEAF8AUgBPAE0AAQBFAHgAcAByAGUAcwBzAA==
 		<col def="S0">Value</col>
 		<col def="s72">Component_</col>
 		<col def="I4">ISAttributes</col>
+		<row><td>Registry1</td><td>0</td><td>AllFilesystemObjects\shell\Shred.mCleaner\command</td><td/><td>"[INSTALLDIR]mCleaner.exe" shred "%1"</td><td>ISX_DEFAULTCOMPONENT3</td><td>0</td></row>
+		<row><td>Registry2</td><td>0</td><td>AllFilesystemObjects\shell\Shred.mCleaner</td><td/><td>Shred with mCleaner</td><td>ISX_DEFAULTCOMPONENT3</td><td>0</td></row>
+		<row><td>Registry3</td><td>0</td><td>AllFilesystemObjects\shell\Shred.mCleaner</td><td>Icon</td><td>[INSTALLDIR]appicon.ico</td><td>ISX_DEFAULTCOMPONENT3</td><td>0</td></row>
 	</table>
 
 	<table name="RemoveFile">
@@ -4748,10 +4601,7 @@ QwBEAF8AUgBPAE0AAQBFAHgAcAByAGUAcwBzAA==
 		<col def="L255">FileName</col>
 		<col def="s72">DirProperty</col>
 		<col def="i2">InstallMode</col>
-		<row><td>Eraser.exe</td><td>Eraser.exe</td><td/><td>mcleaner</td><td>2</td></row>
 		<row><td>FileKey3</td><td>mCleaner.exe</td><td/><td>mcleaner</td><td>2</td></row>
-		<row><td>clamscan.exe</td><td>clamscan.exe</td><td/><td>mcleaner</td><td>2</td></row>
-		<row><td>freshclam.exe</td><td>freshclam.exe</td><td/><td>mcleaner</td><td>2</td></row>
 		<row><td>mCleaner.exe</td><td>mCleaner.exe</td><td/><td>mcleaner</td><td>2</td></row>
 	</table>
 
@@ -4838,9 +4688,6 @@ QwBEAF8AUgBPAE0AAQBFAHgAcAByAGUAcwBzAA==
 		<col def="S255">ISComments</col>
 		<col def="S255">ISShortcutName</col>
 		<col def="I4">ISAttributes</col>
-		<row><td>Eraser.exe</td><td>mcleaner</td><td>##IDS_SHORTCUT_DISPLAY_NAME9##</td><td>Eraser.exe</td><td>AlwaysInstall</td><td/><td/><td/><td>Eraser.exe_34BD5A8688C94A478773663E77CC435F.exe</td><td>1</td><td>1</td><td>ERASER</td><td/><td/><td/><td/><td/><td/><td/></row>
-		<row><td>clamscan.exe</td><td>mcleaner</td><td>##IDS_SHORTCUT_DISPLAY_NAME7##</td><td>clamscan.exe</td><td>AlwaysInstall</td><td/><td/><td/><td>clamscan.exe_934EAE59354C459C8E8F94F816B48ACA.exe</td><td>1</td><td>1</td><td>CLAM</td><td/><td/><td/><td/><td/><td/><td/></row>
-		<row><td>freshclam.exe</td><td>mcleaner</td><td>##IDS_SHORTCUT_DISPLAY_NAME8##</td><td>freshclam.exe</td><td>AlwaysInstall</td><td/><td/><td/><td>freshclam.exe_A9A7E071B2F244EEA0587E312F2D64B2.exe</td><td>1</td><td>1</td><td>CLAM</td><td/><td/><td/><td/><td/><td/><td/></row>
 		<row><td>mCleaner.exe</td><td>mcleaner</td><td>##IDS_SHORTCUT_DISPLAY_NAME4##</td><td>mCleaner.exe</td><td>AlwaysInstall</td><td/><td/><td/><td>mCleaner.exe_B987570C9A3D4D2B8B8492BBA7F82623.exe</td><td>1</td><td>1</td><td>INSTALLDIR</td><td/><td/><td/><td/><td/><td/><td/></row>
 		<row><td>mCleaner.exe1</td><td>DesktopFolder</td><td>##IDS_SHORTCUT_DISPLAY_NAME4##</td><td>mCleaner.exe</td><td>AlwaysInstall</td><td/><td/><td/><td>mCleaner.exe1_99DC95C6010840B9A857BE5794DD0FA1.exe</td><td>1</td><td>1</td><td>INSTALLDIR</td><td/><td/><td/><td/><td/><td/><td/></row>
 	</table>

@@ -1,4 +1,5 @@
-﻿using mCleaner.ViewModel;
+﻿using MahApps.Metro.Controls;
+using mCleaner.ViewModel;
 using Microsoft.Practices.ServiceLocation;
 using System;
 using System.Collections.Generic;
@@ -15,21 +16,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace mCleaner.UserControls.Window
+namespace mCleaner
 {
     /// <summary>
     /// Interaction logic for DuplicateScannerWindow.xaml
     /// </summary>
-    public partial class ProgramUninstallerWindow : UserControl
+    public partial class ProgramUninstallerWindow : MetroWindow
     {
         public ProgramUninstallerWindow()
         {
             InitializeComponent();
-        }
-
-        private void AzureDataGrid_Selected(object sender, RoutedEventArgs e)
-        {
-            btnUninstall.IsEnabled = true;
         }
 
         public ViewModel_Uninstaller Uninstaller
@@ -46,6 +42,12 @@ namespace mCleaner.UserControls.Window
             DataGridRow row = sender as DataGridRow;
             Uninstaller.Command_UninstallProgram_Click();
             // Some operations with this row
+        }
+
+        private void AzureDataGrid_Selected(object sender, SelectionChangedEventArgs e)
+        {
+            if (btnUninstall!=null)
+                btnUninstall.IsEnabled = true;
         }
     }
 }

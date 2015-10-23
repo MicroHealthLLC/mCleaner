@@ -636,6 +636,9 @@ namespace mCleaner.ViewModel
             }
             #endregion
 
+
+            CommandExpandAllClick();
+
             if (level >= 4)
             {
                 Command_CleanNow_Click();
@@ -684,6 +687,9 @@ namespace mCleaner.ViewModel
                 }
                 #endregion
             }
+
+
+            CommandExpandAllClick();
         }
 
         //little_reg;
@@ -720,6 +726,9 @@ namespace mCleaner.ViewModel
                 }
             }
             #endregion
+
+
+            CommandExpandAllClick();
         }
 
         public void Command_ClearSelection_Click()
@@ -791,6 +800,17 @@ namespace mCleaner.ViewModel
             {
                 tn.IsExpanded = blnCollapseALL;
             }
+
+            txtCollapse = blnCollapseALL ? "Collapse All" : "Expand All";
+        }
+
+        public void CommandExpandAllClick()
+        {
+            foreach (TreeNode tn in this.CleanersCollection)
+            {
+                tn.IsExpanded = true;
+            }
+            blnCollapseALL = true;
 
             txtCollapse = blnCollapseALL ? "Collapse All" : "Expand All";
         }
@@ -1345,54 +1365,8 @@ namespace mCleaner.ViewModel
             nodes_to_remove = null;
 
             AddSystemCleaner();
-            AddDuplicateCleaner();
 
             SortCleanerCollection();
-        }
-
-        void AddDuplicateCleaner(bool select = false)
-        {
-            cleaner c = new cleaner()
-            {
-                id = "duplicate_checker",
-                label = "Duplicate Checker",
-                description = "Checks for duplicate in your file system",
-                option = new List<option>()
-            };
-
-            TreeNode root = new TreeNode();
-            root = new TreeNode(c.label, c.id);
-            root.IsAccordionHeader = true;
-            root.IsExpanded = true;
-            root.Tag = c;
-            root.TreeNodeChecked += TeeNode_TreeNodeChecked;
-            root.TreeNodeSelected += TreeNode_TreeNodeSelected;
-            root.Children = new List<TreeNode>();
-
-            // add subtree
-            c.option.AddRange(AddDuplicateCheckerCleaner());
-
-            foreach (option o in c.option)
-            {
-                o.parent_cleaner = c;
-
-                TreeNode child = new TreeNode(o.label, o.id);
-                child.Tag = o;
-                child.TreeNodeChecked += TeeNode_TreeNodeChecked;
-                child.TreeNodeSelected += TreeNode_TreeNodeSelected;
-                child.Initialize();
-
-                root.Children.Add(child);
-
-                foreach (action a in o.action)
-                {
-                    a.parent_option = o;
-                }
-            }
-
-            root.Initialize();
-            root.IsInitiallySelected = select;
-            this._nodes.Add(root);
         }
 
         void AddSystemCleaner(bool select = false)

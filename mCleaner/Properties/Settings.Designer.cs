@@ -371,5 +371,17 @@ namespace mCleaner.Properties {
                 this["ClamWin_Exclude"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool DuplicateFilterFileSizeCriteara {
+            get {
+                return ((bool)(this["DuplicateFilterFileSizeCriteara"]));
+            }
+            set {
+                this["DuplicateFilterFileSizeCriteara"] = value;
+            }
+        }
     }
 }
