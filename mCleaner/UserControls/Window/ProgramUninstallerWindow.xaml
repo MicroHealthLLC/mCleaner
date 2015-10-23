@@ -5,13 +5,13 @@
                       xmlns:ucw="clr-namespace:mCleaner.UserControls.Window"
                       Title="Windows Program Uninstaller"
                       xmlns:ctl="clr-namespace:mCleaner.Helpers.Controls"
-                      ShowTitleBar="False"
+                      ShowTitleBar="True"
                       ShowIconOnTitleBar="False"
-                      ShowMaxRestoreButton ="False"
+                      ShowMaxRestoreButton ="True"
                       TitleForeground="White"
                       TitleCaps="False"
                       WindowStyle="ToolWindow"  Icon="../../appicon.ico" 
-                     Height="470" Width="810" WindowStartupLocation="CenterScreen">
+                     Height="600" Width="1000"  WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
         <CollectionViewSource x:Key="ListViewSource" Source="{Binding Uninstaller.ProgramCollection}">
@@ -20,11 +20,11 @@
     <Window.DataContext>
         <Binding Source="{StaticResource Locator}"/>
     </Window.DataContext>
-    <Grid>
-    <Border VerticalAlignment="Center" HorizontalAlignment="Center" BorderThickness="1" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}">
+    <!--<Grid>-->
+    <!--<Border VerticalAlignment="Center" HorizontalAlignment="Center" BorderThickness="1" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}">
         <Border.Effect>
             <DropShadowEffect Opacity="0.2" BlurRadius="10"/>
-        </Border.Effect>
+        </Border.Effect>-->
 
         <Grid Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}">
             <Grid.RowDefinitions>
@@ -41,8 +41,8 @@
 
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto" />
-                        <RowDefinition Height="350" />
                         <RowDefinition Height="*" />
+                        <RowDefinition Height="auto" />
                     </Grid.RowDefinitions>
 
                     <Grid Grid.Row="0" Margin="5">
@@ -57,10 +57,8 @@
                         </StackPanel>
                     </Grid>
                     
-                    <Grid Grid.Row="1">
-                        <DataGrid x:Name="grdProgramList" IsReadOnly="True" Width="790"
-                 Grid.Column="1"
-                  Grid.Row="1"
+                    <Grid Grid.Row="1" Grid.ColumnSpan="2">
+                        <DataGrid x:Name="grdProgramList" IsReadOnly="True"  Height="auto" Grid.Column="1" Grid.Row="1"
                   RenderOptions.ClearTypeHint="Enabled"
                   TextOptions.TextFormattingMode="Display"
                   HeadersVisibility="All"
@@ -72,7 +70,7 @@
                   SelectedItem="{Binding Uninstaller.SelectedProgramDetails,  Mode=TwoWay}"
                   AutoGenerateColumns="False">
                             <DataGrid.Columns>
-                                    <DataGridTextColumn Header="PROGRAM NAME" 
+                                 <DataGridTextColumn Header="PROGRAM NAME" 
                                     Binding="{Binding ProgramDetails.ProgramName}" MinWidth="325" />
                                 <DataGridTextColumn Header="Publisher"
                                     Binding="{Binding ProgramDetails.PublisherName}" />
@@ -81,34 +79,33 @@
                                 <DataGridTextColumn Header="Version"
                                     Binding="{Binding ProgramDetails.Version}" />
                             </DataGrid.Columns>
-                                <DataGrid.RowStyle>
-                                    <Style TargetType="{x:Type DataGridRow}">
-                                        <EventSetter Event="MouseDoubleClick" Handler="Row_DoubleClick"/>
-                                    <Style.Triggers>
+                            <DataGrid.RowStyle>
+                            <Style TargetType="{x:Type DataGridRow}">
+                                <EventSetter Event="MouseDoubleClick" Handler="Row_DoubleClick"/>
+                                <Style.Triggers>
 
-                                        <!-- IsSelected -->
-                                        <MultiDataTrigger>
-                                                <MultiDataTrigger.Conditions>
-                                                    <Condition Binding="{Binding Path=IsSelected, RelativeSource={RelativeSource Self}}"
-                               Value="true" />
-                                            </MultiDataTrigger.Conditions>
-                                            <Setter Property="Background" Value="#CC119EDA" />
-                                            <Setter Property="Foreground" Value="White" />
-                                            <Setter Property="BorderBrush" Value="#CC119EDA" />
-                                        </MultiDataTrigger>
+                                    <!-- IsSelected -->
+                                    <MultiDataTrigger>
+                                        <MultiDataTrigger.Conditions>
+                                            <Condition Binding="{Binding Path=IsSelected, RelativeSource={RelativeSource Self}}" Value="true" />
+                                        </MultiDataTrigger.Conditions>
+                                        <Setter Property="Background" Value="#CC119EDA" />
+                                        <Setter Property="Foreground" Value="White" />
+                                        <Setter Property="BorderBrush" Value="#CC119EDA" />
+                                    </MultiDataTrigger>
 
-                                            <MultiDataTrigger>
-                                                <MultiDataTrigger.Conditions>
-                                                    <Condition Binding="{Binding Path=IsMouseOver, RelativeSource={RelativeSource Self}}" Value="true" />
-                                                </MultiDataTrigger.Conditions>
-                                                <Setter Property="Background" Value="#66119EDA" />
-                                                <Setter Property="BorderBrush" Value="#66119EDA" />
-                                            </MultiDataTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </DataGrid.RowStyle>
-                                
-                            </DataGrid>
+                                    <!-- IsHover -->
+                                    <MultiDataTrigger>
+                                        <MultiDataTrigger.Conditions>
+                                            <Condition Binding="{Binding Path=IsMouseOver, RelativeSource={RelativeSource Self}}" Value="true" />
+                                        </MultiDataTrigger.Conditions>
+                                        <Setter Property="Background" Value="#66119EDA" />
+                                        <Setter Property="BorderBrush" Value="#66119EDA" />
+                                    </MultiDataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGrid.RowStyle>
+                    </DataGrid>
                     </Grid>
                 </Grid>
             </Grid>
@@ -130,6 +127,6 @@
                 </StackPanel>
             </Grid>
         </Grid>
-    </Border>
-    </Grid>
+    <!--</Border>-->
+    <!--</Grid>-->
 </controls:MetroWindow>

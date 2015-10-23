@@ -41,7 +41,6 @@ namespace mCleaner
         {
             DataGridRow row = sender as DataGridRow;
             Uninstaller.Command_UninstallProgram_Click();
-            // Some operations with this row
         }
 
         private void AzureDataGrid_Selected(object sender, SelectionChangedEventArgs e)
