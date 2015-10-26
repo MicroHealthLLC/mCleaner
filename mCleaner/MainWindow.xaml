@@ -1,5 +1,4 @@
-﻿<controls:MetroWindow x:Class="mCleaner.MainWindow"
-                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+﻿<controls:MetroWindow x:Class="mCleaner.MainWindow"                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                       xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
                       xmlns:ucw="clr-namespace:mCleaner.UserControls.Window"
@@ -378,7 +377,7 @@
                         </StackPanel>
                     </Button>
                     <Separator />
-                    <Button Width="70" ToolTip="Uninstall installed" Visibility="Visible"  Command="{Binding Uninstaller.Command_ShowUninstaller}">
+                    <Button Width="70" ToolTip="Uninstall installed" Visibility="Visible" Name="btnMnuUninstaller" Command="{Binding Uninstaller.Command_ShowUninstaller}" IsEnabled="{Binding CleanerML.ShowFrontPage}">
                         <StackPanel>
                             <Rectangle Fill="#542702" Height="32" Width="32">
                                 <Rectangle.OpacityMask>
@@ -388,6 +387,17 @@
                                         </VisualBrush.Visual>
                                     </VisualBrush>
                                 </Rectangle.OpacityMask>
+                                <Rectangle.Style>
+                                    <Style TargetType="Rectangle">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding ElementName=btnMnuUninstaller, Path=IsEnabled}"
+                                     Value="False">
+                                                <Setter Property="Opacity"
+                                    Value="0.3" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Rectangle.Style>
                             </Rectangle>
                             <TextBlock Text="Uninstall Programs" HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" Foreground="Black" />
                         </StackPanel>
@@ -543,6 +553,7 @@
                             </Grid>
                         </Grid>
 
+                        <!--shred window-->
                         <Grid Visibility="{Binding ShredWindow.ShowWindow, Converter={StaticResource boolTovis}}">
                             <Grid Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}">
                                 <Grid.RowDefinitions>
@@ -611,7 +622,7 @@
                                                 <ListView.View>
                                                     <GridView>
                                                         <GridViewColumn DisplayMemberBinding="{Binding FilePath }"
-                                            Header="Folder\File Path" />
+                                            Header="Folder\File Path"  />
                                                     </GridView>
                                                 </ListView.View>
                                             </ListView>
@@ -653,6 +664,117 @@
                             </Border>
                         </Grid>
 
+                        <!--uninstaller window-->
+                        <Grid  Visibility="{Binding Uninstaller.ShowWindow, Converter={StaticResource boolTovis}}" Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="auto" />
+                            </Grid.RowDefinitions>
+
+                            <Grid Grid.Row="0" Margin="5">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="auto" />
+                                    </Grid.RowDefinitions>
+
+                                    <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,0,5">
+                                        <Border Padding="5" Background="{StaticResource InfoTip_Background}">
+                                            <TextBlock>
+                                        <Run Text="This will uninstall program that you have selected." />
+                                            </TextBlock>
+                                        </Border>
+                                        <Button x:Name="btnClose"  Content="Close" VerticalAlignment="Top" HorizontalAlignment="Right" Style="{StaticResource ButtonStyle}" Margin="0,0,10,0"  Command="{Binding Uninstaller.Command_CloseWindow}" />
+                                    </Grid>
+
+                                    <Grid Grid.Row="1" Grid.Column="0" Background="{StaticResource DupChecker_Panel_FileOperation}" Visibility="{Binding DupChecker.FileOperationPanelShow, Converter={StaticResource boolTovis}}" Width="120">
+                                        <StackPanel Margin="5,20">
+                                            <StackPanel.Resources>
+                                                <Style TargetType="{x:Type TextBlock}">
+                                                    <Setter Property="Foreground" Value="{StaticResource DupChecker_Panel_FileOperation_Texts}" />
+                                                </Style>
+                                                <Style TargetType="{x:Type RadioButton}">
+                                                    <Setter Property="Foreground" Value="{StaticResource DupChecker_Panel_FileOperation_Texts}" />
+                                                </Style>
+                                            </StackPanel.Resources>
+                                            <Button x:Name="btnUninstall" Content="Uninstall" Style="{DynamicResource ButtonStyle}" IsEnabled="{Binding Uninstaller.BtnUninstall, Mode=TwoWay}" Command="{Binding Uninstaller.Command_UninstallProgram}" />
+                                            <TextBlock Text=" " />
+                                            <Button x:Name="btnRefresh" Content="Refresh" IsEnabled="True"  Style="{DynamicResource ButtonStyle}" Command="{Binding Uninstaller.Command_Refesh}" />
+                                            <TextBlock Text=" " />
+                                        </StackPanel>
+                                    </Grid>
+                                    <Grid Grid.Column="1" Grid.Row="1">
+                                        <DataGrid x:Name="grdProgramList" IsReadOnly="True"  Grid.Column="1" Grid.Row="1" Width="{Binding Path=ActualWidth, ElementName=grid}"
+                                             RenderOptions.ClearTypeHint="Enabled"
+                                             TextOptions.TextFormattingMode="Display"
+                                             HeadersVisibility="All"
+                                             Margin="5"
+                                             SelectionMode="Single"
+                                             SelectionUnit="FullRow"
+                                             SelectionChanged="AzureDataGrid_Selected"
+                                             ItemsSource="{Binding Path=Uninstaller.ProgramCollection}"
+                                             SelectedItem="{Binding Uninstaller.SelectedProgramDetails,  Mode=TwoWay}"
+                                             AutoGenerateColumns="False">
+                                                    <DataGrid.Columns>
+                                                        <DataGridTextColumn Header="PROGRAM NAME" 
+                                            Binding="{Binding ProgramDetails.ProgramName}" MinWidth="325"  Width="*" />
+                                                        <DataGridTextColumn Header="Publisher"
+                                            Binding="{Binding ProgramDetails.PublisherName}" MinWidth="220" />
+                                                        <DataGridTextColumn Header="Estimated Size (KB)" MinWidth="150"
+                                            Binding="{Binding ProgramDetails.EstimatedSize}" />
+                                                        <DataGridTextColumn Header="Version"
+                                            Binding="{Binding ProgramDetails.Version}" Width="auto"  />
+                                                    </DataGrid.Columns>
+                                            <DataGrid.RowStyle>
+                                                <Style TargetType="{x:Type DataGridRow}">
+                                                    <EventSetter Event="MouseDoubleClick" Handler="Row_DoubleClick"/>
+                                                    <Style.Triggers>
+
+                                                        <!-- IsSelected -->
+                                                        <MultiDataTrigger>
+                                                            <MultiDataTrigger.Conditions>
+                                                                <Condition Binding="{Binding Path=IsSelected, RelativeSource={RelativeSource Self}}" Value="true" />
+                                                            </MultiDataTrigger.Conditions>
+                                                            <Setter Property="Background" Value="#CC119EDA" />
+                                                            <Setter Property="Foreground" Value="White" />
+                                                            <Setter Property="BorderBrush" Value="#CC119EDA" />
+                                                        </MultiDataTrigger>
+
+                                                        <!-- IsHover -->
+                                                        <MultiDataTrigger>
+                                                            <MultiDataTrigger.Conditions>
+                                                                <Condition Binding="{Binding Path=IsMouseOver, RelativeSource={RelativeSource Self}}" Value="true" />
+                                                            </MultiDataTrigger.Conditions>
+                                                            <Setter Property="Background" Value="#66119EDA" />
+                                                            <Setter Property="BorderBrush" Value="#66119EDA" />
+                                                        </MultiDataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </DataGrid.RowStyle>
+                                        </DataGrid>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                            <Grid Grid.Row="2">
+                                <StackPanel Margin="2" HorizontalAlignment="Left">
+                                    <TextBlock FontWeight="Bold">
+                                        <TextBlock.Text>
+                                            <MultiBinding StringFormat="{}{0} : {1}">
+                                                <Binding Path="Uninstaller.LblTotalPrograms" />
+                                                <Binding Path="Uninstaller.ProgramCollection.Count" />
+                                            </MultiBinding>
+                                        </TextBlock.Text>
+                                    </TextBlock>
+                                </StackPanel>
+                            </Grid>
+                        </Grid>
+
                         <!-- front page -->
                         <Border x:Name="gridMain" Margin="0" Visibility="{Binding CleanerML.ShowFrontPage, Converter={StaticResource boolTovis}}">
                             <!--Background="#f0f7fe"-->
@@ -664,7 +786,7 @@
                                 </Grid.Resources>
 
                                 <Image x:Name="logo" Source="Assets/MicroHealth_Logo_200.png" Opacity="1" Width="200"  Stretch="Uniform" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,13,0,0"/>
-
+                                <TextBlock Text="Start cleaning now!" FontSize="20" TextAlignment="Center"  Padding="5" Margin="0,35,0,3" />
                                 <StackPanel>
                                     <TextBlock Text="mCleaner" Foreground="Black" FontSize="30"/>
                                     <TextBlock Text="A complete system cleaner for Windows!" />
@@ -683,8 +805,7 @@
                                             <LineBreak />
                                             <ctl:HyperlinkEx NavigateUri="mailto:feedback@microhealthllc.com">feedback@microhealthllc.com</ctl:HyperlinkEx>
                                 </TextBlock>
-                                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" >
-                                    <TextBlock Text="Start cleaning now!" FontSize="20" TextAlignment="Center"  Padding="5" Margin="0,0,0,3" />
+                                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,35,0,0">
                                     <StackPanel Orientation="Horizontal">
                                         <controls:Tile Title="Safe Cleaning" Name="TileSafeCleaning"
                                Style="{StaticResource SmallTileStyle}" TiltFactor="2" Command="{Binding CleanerML.Command_Clean}" HorizontalAlignment="Center"

@@ -43,6 +43,14 @@ namespace mCleaner.ViewModel
             }
         }
 
+        public ViewModel_CleanerML CleanerML
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<ViewModel_CleanerML>();
+            }
+        }
+
         private bool _ShowWindow = false;
         public bool ShowWindow
         {
@@ -146,13 +154,16 @@ namespace mCleaner.ViewModel
 
         #region command methods
 
-        ProgramUninstallerWindow PUW = null;
         public void Command_ShowUninstaller_Click()
         {
             BtnUninstall = false;
             this.ShowWindow = true;
-            PUW= new ProgramUninstallerWindow();
-            PUW.Show();
+            CleanerML.Run = false;
+            CleanerML.ShowCleanerDescription = false;
+            CleanerML.btnCleanNowPreviousState = CleanerML.btnPreviewCleanEnable;
+            CleanerML.btnPreviewCleanEnable = false;
+            CleanerML.ShowFrontPage = false;
+           
             GetInstalledPrograms();
         }
 
@@ -219,8 +230,12 @@ namespace mCleaner.ViewModel
         public void Command_CloseWindow_Click()
         {
             this.ShowWindow = false;
-            if (PUW!=null)
-                    PUW.Close();
+            //if (PUW!=null)
+            //        PUW.Close();
+            CleanerML.Run = false;
+            CleanerML.ShowCleanerDescription = false;
+            CleanerML.ShowFrontPage = true;
+            CleanerML.btnPreviewCleanEnable = CleanerML.btnCleanNowPreviousState;
         }
 
         public void Command_Refresh_Click()

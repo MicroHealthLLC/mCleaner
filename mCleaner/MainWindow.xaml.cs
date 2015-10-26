@@ -53,19 +53,9 @@ namespace mCleaner
             InitializeComponent();
             CleanerML.TreeNodeSelected += CleanerML_TreeNodeSelected;
             tvCleaners.SelectedItemChanged += tvCleaners_SelectedItemChanged;
-            tvCleaners.MouseDown += tvCleaners_MouseDown;
-
-            //CleanerML.TreeNodeSelected
-
             this.Loaded += MainWindow_Loaded;
             
         }
-
-        void tvCleaners_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-
-        }
-
         void tvCleaners_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             TreeNode tn = (TreeNode)e.NewValue;
@@ -132,8 +122,6 @@ namespace mCleaner
         void CleanerML_TreeNodeSelected(object sender, System.EventArgs e)
         {
             TreeNode node = sender as TreeNode;
-            //node.IsExpanded = !node.IsExpanded;
-
             CleanerML.Run = false;
             CleanerML.ShowFrontPage = false;
             CleanerML.ShowCleanerDescription = true;
@@ -159,6 +147,14 @@ namespace mCleaner
             return source;
         }
 
+        public ViewModel_Uninstaller Uninstaller
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<ViewModel_Uninstaller>();
+            }
+        }
+
         private void MetroWindow_StateChanged(object sender, EventArgs e)
         {
            
@@ -176,6 +172,18 @@ namespace mCleaner
                 TileSafeCleaning.Height = TileMordrateCleaning.Height = TileAggressiveCleaning.Height = TileCleanDuplicates.Height = TIleCustomSelection.Height = TileRegistrySelection.Height = TilePreview.Height = TileCleanNow.Height = TileClearSelection.Height = TileUninstall.Height = TileShredFileFolder.Height = TileScanMemory.Height = TileScanPC.Height = 125;
                
             }
+        }
+
+        private void Row_DoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            DataGridRow row = sender as DataGridRow;
+            Uninstaller.Command_UninstallProgram_Click();
+        }
+
+        private void AzureDataGrid_Selected(object sender, SelectionChangedEventArgs e)
+        {
+            if (btnUninstall != null)
+                btnUninstall.IsEnabled = true;
         }
     }
 }

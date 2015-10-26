@@ -253,23 +253,21 @@
     <Compile Include="Model\Model_ThingsToDelete.cs" />
     <Compile Include="Model\Model_VirusDetails.cs" />
     <Compile Include="Settings.cs" />
+    <Compile Include="UserControls\Window\About.xaml.cs">
+      <DependentUpon>About.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="UserControls\Window\ClamWindow.xaml.cs">
       <DependentUpon>ClamWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Window\ClamWindowVirusScan.xaml.cs">
       <DependentUpon>ClamWindowVirusScan.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\Window\ProgramUninstallerWindow.xaml.cs">
-      <DependentUpon>ProgramUninstallerWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="UserControls\Window\PreferencesWindow.xaml.cs">
       <DependentUpon>PreferencesWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Window\PrivacyPolicy.xaml.cs">
       <DependentUpon>PrivacyPolicy.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\Window\About.xaml.cs">
-      <DependentUpon>About.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Window\ReleaseNotesWindow.xaml.cs">
       <DependentUpon>ReleaseNotesWindow.xaml</DependentUpon>
@@ -334,6 +332,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UserControls\Window\About.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControls\Window\ClamWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -342,19 +344,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControls\Window\ProgramUninstallerWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="UserControls\Window\PreferencesWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\Window\PrivacyPolicy.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="UserControls\Window\About.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
