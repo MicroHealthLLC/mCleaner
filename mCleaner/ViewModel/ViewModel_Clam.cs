@@ -5,12 +5,22 @@ using GalaSoft.MvvmLight.Command;
 using mCleaner.Logics.Clam;
 using mCleaner.Logics.Enumerations;
 using mCleaner.Model;
+using Microsoft.Practices.ServiceLocation;
 
 namespace mCleaner.ViewModel
 {
     public class ViewModel_Clam : ViewModelBase
     {
         #region properties
+
+        public ViewModel_CleanerML CleanerML
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<ViewModel_CleanerML>();
+            }
+        }
+
         private bool _ShowClamWinVirusUpdateWindow = false;
         public bool ShowClamWinVirusUpdateWindow
         {
@@ -230,6 +240,11 @@ namespace mCleaner.ViewModel
         public void Command_CloseWindow_Click()
         {
             CommandLogic_Clam.I.CancelUpdate();
+            CleanerML.Run = false;
+            CleanerML.ShowCleanerDescription = false;
+            CleanerML.ShowFrontPage = true;
+            CleanerML.btnPreviewCleanEnable = CleanerML.btnCleanNowPreviousState;
+            CleanerML.btnCleaningOptionsEnable = true;
             this.ShowClamWinVirusUpdateWindow = false;
             this.ShowClamWinVirusScanner = false;
         }
@@ -238,6 +253,12 @@ namespace mCleaner.ViewModel
         {
             //this.ShowClamWinVirusUpdateWindow = true;
             this.ProgressIsIndeterminate = true;
+            CleanerML.Run = false;
+            CleanerML.ShowCleanerDescription = false;
+            CleanerML.btnCleanNowPreviousState = CleanerML.btnPreviewCleanEnable;
+            CleanerML.btnPreviewCleanEnable = false;
+            CleanerML.btnCleaningOptionsEnable = false;
+            CleanerML.ShowFrontPage = false;
             this.ShowClamWinVirusScanner = true;
             CommandLogic_Clam.I.isUpdate = false;
             CommandLogic_Clam.I.LaunchScanner(SEARCH.clamscan_memory, string.Empty, true);

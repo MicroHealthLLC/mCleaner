@@ -1,8 +1,22 @@
-﻿using CodeBureau;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Documents;
+using System.Windows.Forms;
+using System.Windows.Input;
+using System.Xml.Serialization;
+using CodeBureau;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using mCleaner.Cleaners;
 using mCleaner.Helpers;
-using mCleaner.Helpers.Controls;
 using mCleaner.Logics;
 using mCleaner.Logics.Clam;
 using mCleaner.Logics.Commands;
@@ -10,18 +24,9 @@ using mCleaner.Logics.Enumerations;
 using mCleaner.Model;
 using mCleaner.Properties;
 using Microsoft.Practices.ServiceLocation;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Xml.Serialization;
-using mCleaner.Cleaners;
+using Octokit;
+using MessageBox = System.Windows.MessageBox;
+using TreeNode = mCleaner.Helpers.Controls.TreeNode;
 
 namespace mCleaner.ViewModel
 {
@@ -157,6 +162,34 @@ namespace mCleaner.ViewModel
             }
         }
 
+        private string _UpdateAvailableText =string.Empty;
+        public string UpdateAvailableText
+        {
+            get { return _UpdateAvailableText; }
+            set
+            {
+                if (_UpdateAvailableText != value)
+                {
+                    _UpdateAvailableText = value;
+                    base.RaisePropertyChanged("UpdateAvailableText");
+                }
+            }
+        }
+
+        private bool _blnUpdateAvaibleVisible = false;
+        public bool blnUpdateAvaibleVisible
+        {
+            get { return _blnUpdateAvaibleVisible; }
+            set
+            {
+                if (_blnUpdateAvaibleVisible != value)
+                {
+                    _blnUpdateAvaibleVisible = value;
+                    base.RaisePropertyChanged("blnUpdateAvaibleVisible");
+                }
+            }
+        }
+
         private string _txtLoForgoundColor = "Black";
         public string txtLoForgoundColor
         {
@@ -181,6 +214,20 @@ namespace mCleaner.ViewModel
                 {
                     _btnCleanNowPreviousState = value;
                     base.RaisePropertyChanged("btnCleanNowPreviousState");
+                }
+            }
+        }
+
+        private bool _btnCleaningOptionsEnable = true;
+        public bool btnCleaningOptionsEnable
+        {
+            get { return _btnCleaningOptionsEnable; }
+            set
+            {
+                if (_btnCleaningOptionsEnable != value)
+                {
+                    _btnCleaningOptionsEnable = value;
+                    base.RaisePropertyChanged("btnCleaningOptionsEnable");
                 }
             }
         }
@@ -441,7 +488,7 @@ namespace mCleaner.ViewModel
         #region ctor
         public ViewModel_CleanerML()
         {
-            _exec_path = System.AppDomain.CurrentDomain.BaseDirectory;
+            _exec_path = AppDomain.CurrentDomain.BaseDirectory;
             GetCleaners();
 
             Run = false;
@@ -457,9 +504,9 @@ namespace mCleaner.ViewModel
             }
             else
             {
-                CleanOption_Safe = Properties.Settings.Default.CleanOption == 1 ? true : false;
-                CleanOption_Moderate = Properties.Settings.Default.CleanOption == 2 ? true : false;
-                CleanOption_Aggressive = Properties.Settings.Default.CleanOption == 3 ? true : false;
+                CleanOption_Safe = Settings.Default.CleanOption == 1 ? true : false;
+                CleanOption_Moderate = Settings.Default.CleanOption == 2 ? true : false;
+                CleanOption_Aggressive = Settings.Default.CleanOption == 3 ? true : false;
 
                 Command_Preview = new RelayCommand(Command_Preview_Click);
                 Command_Clean = new RelayCommand<string>(Command_Clean_Click);
@@ -473,32 +520,6 @@ namespace mCleaner.ViewModel
                 Command_CloseCleanerDescription = new RelayCommand(Command_CloseCleanerDescription_Click);
                 CommandCollapseAll = new RelayCommand(CommandCollapseAllClick);
                 Command_Cancel = new RelayCommand(Command_Cancel_Click);
-                //Command_CleanOption = new RelayCommand<string>(new Action<string>((i) =>
-                //{
-                //    /*
-                //     * Safe
-                //       Safe removes temp files, keeps settings, preferences and passwords, cleans for malware.  
-                //     * Doesn't clean registry
-
-                //       Moderate
-                //       Recommended does all of the above plus cleans registry.  
-                //     * Instead of calling it recommended call it Moderate
-
-                //       Aggressive
-                //       Aggressive cleans every option including preferences, forms and passwords.
-                //     */
-
-                //    CleanOption_Safe = false;
-                //    CleanOption_Moderate = false;
-                //    CleanOption_Aggressive = false;
-
-                //    CleanOption_Safe = i == "1" ? true : false;
-                //    CleanOption_Moderate = i == "2" ? true : false;
-                //    CleanOption_Aggressive = i == "3" ? true : false;
-
-                //    Properties.Settings.Default.CleanOption = int.Parse(i);
-                //    Properties.Settings.Default.Save();
-                //}));
             }
         }
 
@@ -511,7 +532,7 @@ namespace mCleaner.ViewModel
         }
         private void Command_SaveLog_Click()
         {
-            System.Windows.Forms.SaveFileDialog sfd = new System.Windows.Forms.SaveFileDialog();
+            SaveFileDialog sfd = new SaveFileDialog();
             sfd.Filter = "Text files (*.txt)|*.txt";
             sfd.DefaultExt= "txt";
             sfd.FileName = "mCLeanerLog";
@@ -553,6 +574,7 @@ namespace mCleaner.ViewModel
             this.ShowFrontPage = false;
             this.Run = true;
             btnPreviewCleanEnable = false;
+            btnCleaningOptionsEnable = false;
             this.ProgressIsIndeterminate = true;
 
             await Start();
@@ -571,6 +593,7 @@ namespace mCleaner.ViewModel
             }
             btnCloseEnable = true;
             IsCancelProcessEnabled = false;
+            btnCleaningOptionsEnable = true;
 
             if(Worker.I.TotalFileDelete>0 && MessageBox.Show("You want to clean this files?","mCleaner",MessageBoxButton.YesNo,MessageBoxImage.Question)==MessageBoxResult.Yes)
             {
@@ -595,8 +618,8 @@ namespace mCleaner.ViewModel
                 CleanOption_Moderate = (level == 2) ? true : false;
                 CleanOption_Aggressive = (level == 3) ? true : false;
 
-                Properties.Settings.Default.CleanOption = level;
-                Properties.Settings.Default.Save();
+                Settings.Default.CleanOption = level;
+                Settings.Default.Save();
                 btnPreviewCleanEnable = true;
             }
 
@@ -660,17 +683,18 @@ namespace mCleaner.ViewModel
                     {
                         option o = (option)child.Tag;
                         child.IsChecked = false;
+                        child.SupressWarningMessage = true;
                     }
                 }
             }
 
-            if (Properties.Settings.Default.CustomCleanerSelections == null) return;
+            if (Settings.Default.CustomCleanerSelections == null) return;
 
             // do we have anything to restore?
-            if (Properties.Settings.Default.CustomCleanerSelections.Count > 0)
+            if (Settings.Default.CustomCleanerSelections.Count > 0)
             {
                 List<string> ids = new List<string>();
-                foreach (string id in Properties.Settings.Default.CustomCleanerSelections) ids.Add(id);
+                foreach (string id in Settings.Default.CustomCleanerSelections) ids.Add(id);
 
                 // then restore selection
                 #region check what needs to be checked
@@ -708,6 +732,7 @@ namespace mCleaner.ViewModel
                     {
                         option o = (option)child.Tag;
                         child.IsChecked = false;
+                        child.SupressWarningMessage = true;
                     }
                 }
             }
@@ -755,6 +780,7 @@ namespace mCleaner.ViewModel
             IsCancelProcessEnabled = true;
             this.Run = true;
             btnPreviewCleanEnable = false;
+            btnCleaningOptionsEnable = false;
             this.ShowCleanerDescription = false;
             this.ShowFrontPage = false;
             txtLoForgoundColor = "Red";
@@ -770,6 +796,7 @@ namespace mCleaner.ViewModel
 
             btnCloseEnable = true;
             IsCancelProcessEnabled = false;
+            btnCleaningOptionsEnable = true;
         }
 
         public void Command_Quit_Click()
@@ -879,11 +906,11 @@ namespace mCleaner.ViewModel
                 {
                     if (root.IsChecked.Value == true)
                     {
-                        if (Properties.Settings.Default.CustomCleanerSelections == null) Properties.Settings.Default.CustomCleanerSelections = new System.Collections.Specialized.StringCollection();
+                        if (Settings.Default.CustomCleanerSelections == null) Settings.Default.CustomCleanerSelections = new StringCollection();
 
                         // then save it
-                        Properties.Settings.Default.CustomCleanerSelections.Add(o.id + "|" + o.parent_cleaner.id);
-                        Properties.Settings.Default.Save();
+                        Settings.Default.CustomCleanerSelections.Add(o.id + "|" + o.parent_cleaner.id);
+                        Settings.Default.Save();
                     }
                 }
             }
@@ -1039,7 +1066,6 @@ namespace mCleaner.ViewModel
                 }
 
                 AddSystemCleaner();
-                //AddDuplicateCleaner();
             }
 
             SortCleanerCollection();
@@ -1054,6 +1080,29 @@ namespace mCleaner.ViewModel
             foreach (TreeNode t in this._nodes)
             {
                 this.CleanersCollection.Add(t);
+            }
+        }
+
+       public async Task CheckForUpdates()
+        {
+           try
+           {
+               
+                   var client = new GitHubClient(new ProductHeaderValue("mCleaner"));
+                   var releasess = await client.Release.GetAll("MicroHealthLLC", "mCleaner");
+                   var latest = releasess[0];
+
+                   if (new Version(latest.TagName.Replace("v", string.Empty)) >
+                       Assembly.GetExecutingAssembly().GetName().Version)
+                   {
+                       UpdateAvailableText = "mCleaner update available version:" +
+                                             latest.TagName.Replace("v", string.Empty);
+                       blnUpdateAvaibleVisible = true;
+                   }
+           }
+            catch (Exception ex)
+            {
+              //leaving cathc blank since we dont want user to display the error.
             }
         }
 
@@ -1232,7 +1281,7 @@ namespace mCleaner.ViewModel
                     {
                         #region // check cleaning level
                         int level = 3; // let it be the default
-                        int curlevel = Properties.Settings.Default.CleanOption;
+                        int curlevel = Settings.Default.CleanOption;
 
                         if (_a.parent_option.level == 0)
                         {
@@ -1433,10 +1482,10 @@ namespace mCleaner.ViewModel
         {
             List<option> ret = new List<option>();
 
-            if (mCleaner.Properties.Settings.Default.DupChecker_CustomPath != null)
+            if (Settings.Default.DupChecker_CustomPath != null)
             {
                 int i = 0;
-                foreach (string filepath in mCleaner.Properties.Settings.Default.DupChecker_CustomPath)
+                foreach (string filepath in Settings.Default.DupChecker_CustomPath)
                 {
                     if (Directory.Exists(filepath))
                     {

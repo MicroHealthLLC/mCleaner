@@ -1,7 +1,10 @@
 ﻿
+using System.Diagnostics;
+using System.IO;
+using System.Security;
 using mCleaner.Helpers;
 using Microsoft.Win32;
-using System.IO;
+
 namespace mCleaner.Logics.Commands.LittleRegistryCleaner.Scanners
 {
     public class WindowsHelpFiles : ScannerBase
@@ -44,9 +47,9 @@ namespace mCleaner.Logics.Commands.LittleRegistryCleaner.Scanners
                 CheckHelpFiles(Registry.LocalMachine, "SOFTWARE\\Microsoft\\Windows\\HTML Help");
                 CheckHelpFiles(Registry.LocalMachine, "SOFTWARE\\Microsoft\\Windows\\Help");
             }
-            catch (System.Security.SecurityException ex)
+            catch (SecurityException ex)
             {
-                System.Diagnostics.Debug.WriteLine(ex.Message);
+                Debug.WriteLine(ex.Message);
             }
         }
 

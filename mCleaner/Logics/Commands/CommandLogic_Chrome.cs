@@ -1,15 +1,16 @@
-﻿using CodeBureau;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.SQLite;
+using System.Diagnostics;
+using System.IO;
+using CodeBureau;
 using mCleaner.Helpers;
 using mCleaner.Helpers.Data;
 using mCleaner.Logics.Enumerations;
 using mCleaner.Model;
 using mCleaner.Properties;
 using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.Data.SQLite;
-using System.Diagnostics;
-using System.IO;
 
 namespace mCleaner.Logics.Commands
 {
@@ -86,7 +87,7 @@ namespace mCleaner.Logics.Commands
                 sql = "select value from meta where key='version';";
 
                 comm.CommandText = sql;
-                comm.CommandType = System.Data.CommandType.Text;
+                comm.CommandType = CommandType.Text;
 
                 try
                 {
@@ -139,7 +140,7 @@ namespace mCleaner.Logics.Commands
                 SQLiteCommand comm = conn.CreateCommand();
 
                 comm.CommandText = string.Format("select id from urls where url='{0}'", url);
-                comm.CommandType = System.Data.CommandType.Text;
+                comm.CommandType = CommandType.Text;
 
                 try
                 {

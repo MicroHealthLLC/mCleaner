@@ -2,7 +2,6 @@
 using mCleaner.Helpers;
 using mCleaner.Logics.Enumerations;
 using mCleaner.Model;
-using System;
 
 namespace mCleaner.Logics.Commands
 {

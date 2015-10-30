@@ -1,7 +1,5 @@
-﻿using GalaSoft.MvvmLight;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Windows.Media.Imaging;
+﻿using System.Windows.Media.Imaging;
+using GalaSoft.MvvmLight;
 
 namespace mCleaner.Model
 {

@@ -1,22 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using System.Collections.ObjectModel;
-using System.Threading.Tasks;
-using System.Windows.Input;
-using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
-using mCleaner.Logics.Commands;
-using mCleaner.Model;
-using mCleaner.Properties;
-using Microsoft.Practices.ServiceLocation;
-using Microsoft.Win32;
-using System;
 using System.Diagnostics;
+using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.Windows.Media;
+using System.Windows.Input;
 using System.Windows.Media.Imaging;
-using System.IO;
-using System.Windows.Controls;
+using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
+using mCleaner.Model;
+using Microsoft.Practices.ServiceLocation;
+using Microsoft.Win32;
 
 namespace mCleaner.ViewModel
 {
@@ -162,6 +156,7 @@ namespace mCleaner.ViewModel
             CleanerML.ShowCleanerDescription = false;
             CleanerML.btnCleanNowPreviousState = CleanerML.btnPreviewCleanEnable;
             CleanerML.btnPreviewCleanEnable = false;
+            CleanerML.btnCleaningOptionsEnable = false;
             CleanerML.ShowFrontPage = false;
            
             GetInstalledPrograms();
@@ -230,12 +225,11 @@ namespace mCleaner.ViewModel
         public void Command_CloseWindow_Click()
         {
             this.ShowWindow = false;
-            //if (PUW!=null)
-            //        PUW.Close();
             CleanerML.Run = false;
             CleanerML.ShowCleanerDescription = false;
             CleanerML.ShowFrontPage = true;
             CleanerML.btnPreviewCleanEnable = CleanerML.btnCleanNowPreviousState;
+            CleanerML.btnCleaningOptionsEnable = true;
         }
 
         public void Command_Refresh_Click()

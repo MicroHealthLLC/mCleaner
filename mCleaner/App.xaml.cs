@@ -4,9 +4,11 @@ using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Windows;
+using System.Windows.Threading;
 using mCleaner.Helpers;
+using mCleaner.Logics;
 using mCleaner.Logics.Clam;
-using Microsoft.Practices.ServiceLocation;
+using mCleaner.Properties;
 
 namespace mCleaner
 {
@@ -25,11 +27,11 @@ namespace mCleaner
             base.OnStartup(e);
             if (e.Args.Length == 2 && e.Args[0] == "shred")
             {
-                mCleaner.Logics.StaticResources.strShredLocation = e.Args[1];
+                StaticResources.strShredLocation = e.Args[1];
             }
             else
             {
-                mCleaner.Logics.StaticResources.strShredLocation = string.Empty;
+                StaticResources.strShredLocation = string.Empty;
                 // force one instance of this application
                 bool force_terminate = false;
                 Process curr = Process.GetCurrentProcess();
@@ -65,11 +67,11 @@ namespace mCleaner
             Version version = Assembly.GetEntryAssembly().GetName().Version;
             string s_version = version.ToString();
 
-            if (s_version != mCleaner.Properties.Settings.Default.Version)
+            if (s_version != Settings.Default.Version)
             {
-                mCleaner.Properties.Settings.Default.Upgrade();
-                mCleaner.Properties.Settings.Default.Version = s_version;
-                mCleaner.Properties.Settings.Default.Save();
+                Settings.Default.Upgrade();
+                Settings.Default.Version = s_version;
+                Settings.Default.Save();
             }
 
             // check for clamwin installation and
@@ -81,10 +83,10 @@ namespace mCleaner
             else
              CommandLogic_Clam.I.CheckClamWinInstallation();
 
-            if (mCleaner.Properties.Settings.Default.DupChecker_DuplicateFolderPath == string.Empty)
+            if (Settings.Default.DupChecker_DuplicateFolderPath == string.Empty)
             {
-                mCleaner.Properties.Settings.Default.DupChecker_DuplicateFolderPath = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "Duplicates");
-                mCleaner.Properties.Settings.Default.Save();
+                Settings.Default.DupChecker_DuplicateFolderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Duplicates");
+                Settings.Default.Save();
             }
         }
 
@@ -96,7 +98,7 @@ namespace mCleaner
             Permissions.SetPrivileges(false);
         }
 
-        private void Application_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
+        private void Application_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
             e.Handled = true;
         }

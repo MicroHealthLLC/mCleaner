@@ -358,7 +358,7 @@ namespace mCleaner.Logics.Commands
                             }
                             else if (operation == 1)
                             {
-                                DupChecker.ProgressText = "Moving file: " + fi.FullName + " to " + Properties.Settings.Default.DupChecker_DuplicateFolderPath;                                 string moveDir = Properties.Settings.Default.DupChecker_DuplicateFolderPath;
+                                DupChecker.ProgressText = "Moving file: " + fi.FullName + " to " + Settings.Default.DupChecker_DuplicateFolderPath;                                 string moveDir = Settings.Default.DupChecker_DuplicateFolderPath;
                                 moveDir = Path.Combine(moveDir, fi.Name);
                                 FileInfo fi_moveDir = new FileInfo(moveDir);
 

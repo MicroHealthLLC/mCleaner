@@ -1,7 +1,9 @@
 ﻿
-using Microsoft.Win32;
+using System.Diagnostics;
 using System.IO;
-using System.Threading.Tasks;
+using System.Security;
+using Microsoft.Win32;
+
 namespace mCleaner.Logics.Commands.LittleRegistryCleaner.Scanners
 {
     public class SharedDLLs : ScannerBase
@@ -81,9 +83,9 @@ namespace mCleaner.Logics.Commands.LittleRegistryCleaner.Scanners
 
                 regKey.Close();
             }
-            catch (System.Security.SecurityException ex)
+            catch (SecurityException ex)
             {
-                System.Diagnostics.Debug.WriteLine(ex.Message);
+                Debug.WriteLine(ex.Message);
             }
         }
     }

@@ -8,14 +8,21 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System;
+using System.CodeDom.Compiler;
+using System.Collections.Specialized;
+using System.Configuration;
+using System.Diagnostics;
+using System.Runtime.CompilerServices;
+
 namespace mCleaner.Properties {
     
     
-    [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "12.0.0.0")]
-    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
+    [CompilerGenerated()]
+    [GeneratedCode("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "12.0.0.0")]
+    internal sealed partial class Settings : ApplicationSettingsBase {
         
-        private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
+        private static Settings defaultInstance = ((Settings)(Synchronized(new Settings())));
         
         public static Settings Default {
             get {
@@ -23,9 +30,9 @@ namespace mCleaner.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("")]
         public string ClamWin_DB {
             get {
                 return ((string)(this["ClamWin_DB"]));
@@ -35,9 +42,9 @@ namespace mCleaner.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("False")]
         public bool ClamWin_UpdateDBAtStartup {
             get {
                 return ((bool)(this["ClamWin_UpdateDBAtStartup"]));
@@ -47,9 +54,9 @@ namespace mCleaner.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("False")]
         public bool ClamWin_AutoScanMemoryAtStartup {
             get {
                 return ((bool)(this["ClamWin_AutoScanMemoryAtStartup"]));
@@ -59,9 +66,9 @@ namespace mCleaner.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("")]
         public string ClamWin_Proxy_Address {
             get {
                 return ((string)(this["ClamWin_Proxy_Address"]));
@@ -71,9 +78,9 @@ namespace mCleaner.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("False")]
         public bool ClamWin_SupressMessageAtStartup {
             get {
                 return ((bool)(this["ClamWin_SupressMessageAtStartup"]));
@@ -83,9 +90,9 @@ namespace mCleaner.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("")]
         public string ClamWin_Proxy_UserPass {
             get {
                 return ((string)(this["ClamWin_Proxy_UserPass"]));
@@ -95,9 +102,9 @@ namespace mCleaner.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("database.clamav.net")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("database.clamav.net")]
         public string ClamWin_DatabaseMirror {
             get {
                 return ((string)(this["ClamWin_DatabaseMirror"]));
@@ -107,9 +114,9 @@ namespace mCleaner.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("True")]
         public bool HideIrrelevantCleaners {
             get {
                 return ((bool)(this["HideIrrelevantCleaners"]));
@@ -119,9 +126,9 @@ namespace mCleaner.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("False")]
         public bool ShredFiles {
             get {
                 return ((bool)(this["ShredFiles"]));
@@ -131,9 +138,9 @@ namespace mCleaner.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("False")]
         public bool StartWhenSystemStarts {
             get {
                 return ((bool)(this["StartWhenSystemStarts"]));
@@ -143,9 +150,9 @@ namespace mCleaner.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1.2.0.0")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("1.2.0.0")]
         public string Version {
             get {
                 return ((string)(this["Version"]));
@@ -155,31 +162,31 @@ namespace mCleaner.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public global::System.Collections.Specialized.StringCollection CustomLocationForDeletion {
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        public StringCollection CustomLocationForDeletion {
             get {
-                return ((global::System.Collections.Specialized.StringCollection)(this["CustomLocationForDeletion"]));
+                return ((StringCollection)(this["CustomLocationForDeletion"]));
             }
             set {
                 this["CustomLocationForDeletion"] = value;
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public global::System.Collections.Specialized.StringCollection WhitelistCollection {
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        public StringCollection WhitelistCollection {
             get {
-                return ((global::System.Collections.Specialized.StringCollection)(this["WhitelistCollection"]));
+                return ((StringCollection)(this["WhitelistCollection"]));
             }
             set {
                 this["WhitelistCollection"] = value;
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("2")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("2")]
         public int CleanOption {
             get {
                 return ((int)(this["CleanOption"]));
@@ -189,20 +196,20 @@ namespace mCleaner.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public global::System.Collections.Specialized.StringCollection DupChecker_CustomPath {
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        public StringCollection DupChecker_CustomPath {
             get {
-                return ((global::System.Collections.Specialized.StringCollection)(this["DupChecker_CustomPath"]));
+                return ((StringCollection)(this["DupChecker_CustomPath"]));
             }
             set {
                 this["DupChecker_CustomPath"] = value;
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("0")]
         public int DupChecker_MinSize {
             get {
                 return ((int)(this["DupChecker_MinSize"]));
@@ -212,9 +219,9 @@ namespace mCleaner.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("0")]
         public int DupChecker_MaxSize {
             get {
                 return ((int)(this["DupChecker_MaxSize"]));
@@ -224,9 +231,9 @@ namespace mCleaner.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("*")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("*")]
         public string DupChecker_FileContaining {
             get {
                 return ((string)(this["DupChecker_FileContaining"]));
@@ -236,9 +243,9 @@ namespace mCleaner.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("*.*")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("*.*")]
         public string DupChecker_FileExtensions {
             get {
                 return ((string)(this["DupChecker_FileExtensions"]));
@@ -248,9 +255,9 @@ namespace mCleaner.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("")]
         public string DupChecker_DuplicateFolderPath {
             get {
                 return ((string)(this["DupChecker_DuplicateFolderPath"]));
@@ -260,20 +267,20 @@ namespace mCleaner.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public global::System.DateTime ClamWin_LastDBUpdate {
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        public DateTime ClamWin_LastDBUpdate {
             get {
-                return ((global::System.DateTime)(this["ClamWin_LastDBUpdate"]));
+                return ((DateTime)(this["ClamWin_LastDBUpdate"]));
             }
             set {
                 this["ClamWin_LastDBUpdate"] = value;
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("3")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("3")]
         public int ClamWin_DaysBeforeNotifyToUpdate {
             get {
                 return ((int)(this["ClamWin_DaysBeforeNotifyToUpdate"]));
@@ -283,9 +290,9 @@ namespace mCleaner.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("False")]
         public bool ClamWin_Update {
             get {
                 return ((bool)(this["ClamWin_Update"]));
@@ -295,63 +302,63 @@ namespace mCleaner.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public global::System.Collections.Specialized.StringCollection LastActionsChecked {
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        public StringCollection LastActionsChecked {
             get {
-                return ((global::System.Collections.Specialized.StringCollection)(this["LastActionsChecked"]));
+                return ((StringCollection)(this["LastActionsChecked"]));
             }
             set {
                 this["LastActionsChecked"] = value;
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public global::System.Collections.Specialized.StringCollection CustomCleanerSelections {
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        public StringCollection CustomCleanerSelections {
             get {
-                return ((global::System.Collections.Specialized.StringCollection)(this["CustomCleanerSelections"]));
+                return ((StringCollection)(this["CustomCleanerSelections"]));
             }
             set {
                 this["CustomCleanerSelections"] = value;
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
             "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
             "tring>C:\\</string>\r\n</ArrayOfString>")]
-        public global::System.Collections.Specialized.StringCollection ClamWin_ScanLocations {
+        public StringCollection ClamWin_ScanLocations {
             get {
-                return ((global::System.Collections.Specialized.StringCollection)(this["ClamWin_ScanLocations"]));
+                return ((StringCollection)(this["ClamWin_ScanLocations"]));
             }
             set {
                 this["ClamWin_ScanLocations"] = value;
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue(@"<?xml version=""1.0"" encoding=""utf-16""?>
 <ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
   <string>500</string>
   <string>150M</string>
   <string>50</string>
   <string>100M</string>
 </ArrayOfString>")]
-        public global::System.Collections.Specialized.StringCollection ClamWin_Max {
+        public StringCollection ClamWin_Max {
             get {
-                return ((global::System.Collections.Specialized.StringCollection)(this["ClamWin_Max"]));
+                return ((StringCollection)(this["ClamWin_Max"]));
             }
             set {
                 this["ClamWin_Max"] = value;
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue(@"<?xml version=""1.0"" encoding=""utf-16""?>
 <ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
   <string>[^\]*\.dbx$</string>
   <string>[^\]*\.tbb$</string>
@@ -363,18 +370,18 @@ namespace mCleaner.Properties {
   <string>[^\]*\.ntf$</string>
   <string>[^\]*\.chm$</string>
 </ArrayOfString>")]
-        public global::System.Collections.Specialized.StringCollection ClamWin_Exclude {
+        public StringCollection ClamWin_Exclude {
             get {
-                return ((global::System.Collections.Specialized.StringCollection)(this["ClamWin_Exclude"]));
+                return ((StringCollection)(this["ClamWin_Exclude"]));
             }
             set {
                 this["ClamWin_Exclude"] = value;
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("True")]
         public bool DuplicateFilterFileSizeCriteara {
             get {
                 return ((bool)(this["DuplicateFilterFileSizeCriteara"]));

@@ -1,7 +1,6 @@
-﻿using Microsoft.Win32;
-using System;
+﻿using System;
 using System.IO;
-using System.Threading.Tasks;
+using Microsoft.Win32;
 
 namespace mCleaner.Logics.Commands.LittleRegistryCleaner.Scanners
 {

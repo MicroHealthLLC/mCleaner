@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Security.Principal;
 
@@ -43,7 +44,7 @@ namespace mCleaner.Helpers
             try
             {
                 TokPriv1Luid tp = new TokPriv1Luid();
-                IntPtr hproc = System.Diagnostics.Process.GetCurrentProcess().Handle;
+                IntPtr hproc = Process.GetCurrentProcess().Handle;
                 IntPtr htok = IntPtr.Zero;
 
                 if (!OpenProcessToken(hproc, TOKEN_ADJUST_PRIVILEGES | TOKEN_QUERY, ref htok))

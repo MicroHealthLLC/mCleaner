@@ -1,9 +1,8 @@
-﻿using CodeBureau;
+﻿using System.Collections.Generic;
+using CodeBureau;
 using mCleaner.Helpers;
 using mCleaner.Logics.Enumerations;
 using mCleaner.Model;
-using System.Collections.Generic;
-using System.Diagnostics;
 
 namespace mCleaner.Logics.Commands
 {

@@ -1,12 +1,14 @@
-﻿using CodeBureau;
-using mCleaner.Helpers;
-using mCleaner.Logics.Enumerations;
-using mCleaner.Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.IO;
+using CodeBureau;
+using GlobDir;
+using mCleaner.Helpers;
+using mCleaner.Logics.Enumerations;
+using mCleaner.Model;
+using mCleaner.Properties;
 
 namespace mCleaner.Logics.Commands
 {
@@ -121,9 +123,9 @@ namespace mCleaner.Logics.Commands
         {
             string path = Action.path;
 
-            if (GlobDir.Glob.HasGlobPattern(path))
+            if (Glob.HasGlobPattern(path))
             {
-                IEnumerable<string> files = GlobDir.Glob.GetMatches(path, GlobDir.Glob.Constants.PathName);
+                IEnumerable<string> files = Glob.GetMatches(path, Glob.Constants.PathName);
                 string[] _files = new List<string>(files).ToArray();
                 path = _files.Length > 0 ? _files[0] : null;
             }
@@ -168,9 +170,9 @@ namespace mCleaner.Logics.Commands
             // check glob path
             {
                 string rev_slash = path.Replace('\\', '/');
-                if (GlobDir.Glob.HasGlobPattern(rev_slash))
+                if (Glob.HasGlobPattern(rev_slash))
                 {
-                    IEnumerable<string> paths = GlobDir.Glob.GetMatches(rev_slash, GlobDir.Glob.Constants.IgnoreCase);
+                    IEnumerable<string> paths = Glob.GetMatches(rev_slash, Glob.Constants.IgnoreCase);
 
                     // since we have glob in our path
                     // let's take that off
@@ -232,7 +234,7 @@ namespace mCleaner.Logics.Commands
         {
             List<string> list_paths = new List<string>();
 
-            IEnumerable<string> path_and_file = GlobDir.Glob.GetMatches(Action.path.Replace('\\', '/'), GlobDir.Glob.Constants.IgnoreCase);
+            IEnumerable<string> path_and_file = Glob.GetMatches(Action.path.Replace('\\', '/'), Glob.Constants.IgnoreCase);
 
             // since we have glob in our path
             // let's take that off
@@ -306,7 +308,7 @@ namespace mCleaner.Logics.Commands
         public bool IsWhitelisted(string path)
         {
             bool ret = false;
-            StringCollection lists = Properties.Settings.Default.WhitelistCollection;
+            StringCollection lists = Settings.Default.WhitelistCollection;
 
             if (lists == null) return false;
 

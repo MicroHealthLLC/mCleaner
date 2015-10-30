@@ -1,10 +1,12 @@
-﻿using mCleaner.Helpers;
-using Microsoft.Win32;
-using System;
+﻿using System;
+using System.Diagnostics;
 using System.IO;
+using System.Security;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+using mCleaner.Helpers;
+using Microsoft.Win32;
+
 namespace mCleaner.Logics.Commands.LittleRegistryCleaner.Scanners
 {
     public class RecentDocs : ScannerBase
@@ -108,9 +110,9 @@ namespace mCleaner.Logics.Commands.LittleRegistryCleaner.Scanners
                     }
                 }
             }
-            catch (System.Security.SecurityException ex)
+            catch (SecurityException ex)
             {
-                System.Diagnostics.Debug.WriteLine(ex.Message);
+                Debug.WriteLine(ex.Message);
             }
         }
 
@@ -139,9 +141,9 @@ namespace mCleaner.Logics.Commands.LittleRegistryCleaner.Scanners
                     }
                 }
             }
-            catch (System.Security.SecurityException ex)
+            catch (SecurityException ex)
             {
-                System.Diagnostics.Debug.WriteLine(ex.Message);
+                Debug.WriteLine(ex.Message);
             }
         }
 

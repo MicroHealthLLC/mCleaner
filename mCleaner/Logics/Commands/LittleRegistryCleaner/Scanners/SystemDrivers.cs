@@ -1,8 +1,10 @@
 ﻿
+using System.Diagnostics;
+using System.IO;
+using System.Security;
 using mCleaner.Helpers;
 using Microsoft.Win32;
-using System.IO;
-using System.Threading.Tasks;
+
 namespace mCleaner.Logics.Commands.LittleRegistryCleaner.Scanners
 {
     public class SystemDrivers : ScannerBase
@@ -79,9 +81,9 @@ namespace mCleaner.Logics.Commands.LittleRegistryCleaner.Scanners
                     }
                 }
             }
-            catch (System.Security.SecurityException ex)
+            catch (SecurityException ex)
             {
-                System.Diagnostics.Debug.WriteLine(ex.Message);
+                Debug.WriteLine(ex.Message);
             }
         }
     }

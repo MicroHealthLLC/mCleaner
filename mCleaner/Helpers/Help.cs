@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Threading;
 
 namespace mCleaner.Helpers
 {
@@ -31,7 +32,7 @@ namespace mCleaner.Helpers
                 }
 
                 if(go) callback();
-            }), System.Windows.Threading.DispatcherPriority.Background, null);   
+            }), DispatcherPriority.Background, null);   
         }
     }
 }

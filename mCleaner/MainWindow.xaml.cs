@@ -1,26 +1,18 @@
-﻿using MahApps.Metro.Controls;
-using MahApps.Metro.Controls.Dialogs;
+﻿using System;
+using System.ComponentModel;
+using System.IO;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Media;
 using mCleaner.Helpers.Controls;
 using mCleaner.Logics;
 using mCleaner.Logics.Clam;
 using mCleaner.Model;
 using mCleaner.Properties;
 using mCleaner.ViewModel;
+using MahApps.Metro.Controls;
 using Microsoft.Practices.ServiceLocation;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace mCleaner
 {
@@ -76,8 +68,11 @@ namespace mCleaner
         void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             CleanerML.CommandCollapseAllClick();
+            BackgroundWorker bgCheckforUpdatesWorker=new BackgroundWorker();
+            bgCheckforUpdatesWorker.DoWork += new DoWorkEventHandler(bgCheckforUpdatesWorker_DoWork);
+            bgCheckforUpdatesWorker.RunWorkerAsync();
             // check if an update is required after being prechecked at App.xaml.cs
-            if (mCleaner.Logics.StaticResources.strShredLocation == string.Empty)
+            if (StaticResources.strShredLocation == string.Empty)
             {
                 if (Settings.Default.ClamWin_Update)
                 {
@@ -94,16 +89,16 @@ namespace mCleaner
             }
             else
             {
-                ServiceLocator.Current.GetInstance<ViewModel.ViewModel_Shred>().Command_ShowWindow_Click();
-                ServiceLocator.Current.GetInstance<ViewModel.ViewModel_Shred>().ShredFilesCollection.Add(new Model_Shred() { FilePath = mCleaner.Logics.StaticResources.strShredLocation });
-                ServiceLocator.Current.GetInstance<ViewModel.ViewModel_Shred>().Command_ShredStart_Click();
-                  FileAttributes attr = File.GetAttributes(mCleaner.Logics.StaticResources.strShredLocation);
+                ServiceLocator.Current.GetInstance<ViewModel_Shred>().Command_ShowWindow_Click();
+                ServiceLocator.Current.GetInstance<ViewModel_Shred>().ShredFilesCollection.Add(new Model_Shred() { FilePath = StaticResources.strShredLocation });
+                ServiceLocator.Current.GetInstance<ViewModel_Shred>().Command_ShredStart_Click();
+                  FileAttributes attr = File.GetAttributes(StaticResources.strShredLocation);
                   if (attr.HasFlag(FileAttributes.Directory))
                   {
-                      MessageBox.Show("Shredding is done successfully for the folder: " + mCleaner.Logics.StaticResources.strShredLocation,"mCleaner",MessageBoxButton.OK,MessageBoxImage.Information);
+                      MessageBox.Show("Shredding is done successfully for the folder: " + StaticResources.strShredLocation,"mCleaner",MessageBoxButton.OK,MessageBoxImage.Information);
                   }
                   else
-                      MessageBox.Show("Shredding is done successfully for file : " + mCleaner.Logics.StaticResources.strShredLocation, "mCleaner", MessageBoxButton.OK, MessageBoxImage.Information);
+                      MessageBox.Show("Shredding is done successfully for file : " + StaticResources.strShredLocation, "mCleaner", MessageBoxButton.OK, MessageBoxImage.Information);
                       
 
                   Application.Current.Shutdown();
@@ -112,14 +107,20 @@ namespace mCleaner
             ProgressWorker.I.Start();
         }
 
-        protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
+
+
+        protected void bgCheckforUpdatesWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            CleanerML.CheckForUpdates();
+        }
+        protected override void OnClosing(CancelEventArgs e)
         {
             base.OnClosing(e);
 
             ProgressWorker.I.Stop();
         }
 
-        void CleanerML_TreeNodeSelected(object sender, System.EventArgs e)
+        void CleanerML_TreeNodeSelected(object sender, EventArgs e)
         {
             TreeNode node = sender as TreeNode;
             CleanerML.Run = false;
@@ -158,14 +159,14 @@ namespace mCleaner
         private void MetroWindow_StateChanged(object sender, EventArgs e)
         {
            
-            if (this.WindowState == System.Windows.WindowState.Maximized)
+            if (this.WindowState == WindowState.Maximized)
             {
                 TileSafeCleaning.Width = TileMordrateCleaning.Width = TileAggressiveCleaning.Width = TIleCustomSelection.Width = TileRegistrySelection.Width = TilePreview.Width = TileCleanNow.Width = TileClearSelection.Width = TileUninstall.Width = TileShredFileFolder.Width = TileScanMemory.Width =  197;
                 TileCleanDuplicates.Width = TileScanPC.Width = 400;
                 TileSafeCleaning.Height = TileMordrateCleaning.Height = TileAggressiveCleaning.Height = TileCleanDuplicates.Height = TIleCustomSelection.Height = TileRegistrySelection.Height = TilePreview.Height = TileCleanNow.Height = TileClearSelection.Height = TileUninstall.Height = TileShredFileFolder.Height = TileScanMemory.Height = TileScanPC.Height = 145;
                
             }
-            else if (this.WindowState == System.Windows.WindowState.Normal)
+            else if (this.WindowState == WindowState.Normal)
             {
                 TileSafeCleaning.Width = TileMordrateCleaning.Width = TileAggressiveCleaning.Width = TIleCustomSelection.Width = TileRegistrySelection.Width = TilePreview.Width = TileCleanNow.Width = TileClearSelection.Width = TileUninstall.Width = TileShredFileFolder.Width = TileScanMemory.Width =148;
                 TileCleanDuplicates.Width = TileScanPC.Width = 300;

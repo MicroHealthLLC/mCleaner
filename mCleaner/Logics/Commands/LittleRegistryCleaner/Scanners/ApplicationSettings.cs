@@ -1,6 +1,5 @@
 ﻿using mCleaner.Helpers;
 using Microsoft.Win32;
-using System.Threading.Tasks;
 
 namespace mCleaner.Logics.Commands.LittleRegistryCleaner.Scanners
 {

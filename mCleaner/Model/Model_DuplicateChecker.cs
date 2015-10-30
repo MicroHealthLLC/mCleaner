@@ -1,6 +1,4 @@
 ﻿using GalaSoft.MvvmLight;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 
 namespace mCleaner.Model
 {

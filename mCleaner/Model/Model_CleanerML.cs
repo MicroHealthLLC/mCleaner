@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Xml.Serialization;
+using mCleaner.Helpers;
 
 namespace mCleaner.Model
 {
@@ -166,7 +167,7 @@ namespace mCleaner.Model
             {
                 if (value[0] == '$')
                 {
-                    _path = mCleaner.Helpers.FileOperations.I.GetSpecialFolderPath(value);
+                    _path = FileOperations.I.GetSpecialFolderPath(value);
                 }
                 else if (value.Substring(0, 1) == "~" || value.Substring(0, 1) == "/") { 
                     if ( // we do not need linux paths

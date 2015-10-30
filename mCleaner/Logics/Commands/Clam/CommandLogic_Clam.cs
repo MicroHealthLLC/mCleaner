@@ -4,17 +4,15 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
+using System.Text;
 using System.Windows;
-
 using CodeBureau;
-
 using mCleaner.Helpers;
 using mCleaner.Logics.Commands;
 using mCleaner.Logics.Enumerations;
 using mCleaner.Model;
 using mCleaner.Properties;
 using mCleaner.ViewModel;
-
 using Microsoft.Practices.ServiceLocation;
 
 namespace mCleaner.Logics.Clam
@@ -51,6 +49,13 @@ namespace mCleaner.Logics.Clam
             }
         }
 
+        public ViewModel_CleanerML CleanerML
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<ViewModel_CleanerML>();
+            }
+        }
         private action _Action = new action();
         public action Action
         {
@@ -68,7 +73,7 @@ namespace mCleaner.Logics.Clam
         #region ctor
         public CommandLogic_Clam()
         {
-            this._exec_path = System.AppDomain.CurrentDomain.BaseDirectory;
+            this._exec_path = AppDomain.CurrentDomain.BaseDirectory;
             this._exec_clam = Path.Combine(this._exec_path, "Clam");
 
             this._exec_clam_db_path = Settings.Default.ClamWin_DB;  //Path.Combine(this._exec_clam, ".clamwin\\db");
@@ -276,6 +281,12 @@ namespace mCleaner.Logics.Clam
             if (Settings.Default.ClamWin_ScanLocations.Count != 0)
             {
                 this.Clam.ShowClamWinVirusScanner = true;
+                CleanerML.Run = false;
+                CleanerML.ShowCleanerDescription = false;
+                CleanerML.btnCleanNowPreviousState = CleanerML.btnPreviewCleanEnable;
+                CleanerML.btnPreviewCleanEnable = false;
+                CleanerML.btnCleaningOptionsEnable = false;
+                CleanerML.ShowFrontPage = false;
                 // get custom paths from settings
                 List<string> paths = new List<string>();
                 foreach (string path in Settings.Default.ClamWin_ScanLocations)
@@ -618,7 +629,7 @@ namespace mCleaner.Logics.Clam
 
         public void WriteConfig()
         {
-            var utf8wobom = new System.Text.UTF8Encoding(false);
+            var utf8wobom = new UTF8Encoding(false);
             using (var a = new StreamWriter(Path.Combine(this._exec_clam, "freshclam.conf"), false, utf8wobom))
             {
                 List<string> config = new List<string>();

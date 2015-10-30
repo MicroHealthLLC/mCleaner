@@ -1,12 +1,9 @@
-﻿using CodeBureau;
+﻿using System;
+using System.IO;
+using CodeBureau;
 using mCleaner.Helpers;
 using mCleaner.Logics.Enumerations;
 using mCleaner.Model;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
 
 namespace mCleaner.Logics.Commands
 {

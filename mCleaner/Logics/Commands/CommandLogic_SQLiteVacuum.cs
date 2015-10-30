@@ -1,9 +1,9 @@
-﻿using CodeBureau;
+﻿using System.Collections.Generic;
+using System.IO;
+using CodeBureau;
+using GlobDir;
 using mCleaner.Logics.Enumerations;
 using mCleaner.Model;
-using System;
-using System.Collections.Generic;
-using System.IO;
 
 namespace mCleaner.Logics.Commands
 {
@@ -69,7 +69,7 @@ namespace mCleaner.Logics.Commands
 
         public void EnqueueFiles(string regex = "")
         {
-            IEnumerable<string> path_and_file = GlobDir.Glob.GetMatches(Action.path.Replace('\\', '/'), GlobDir.Glob.Constants.IgnoreCase);
+            IEnumerable<string> path_and_file = Glob.GetMatches(Action.path.Replace('\\', '/'), Glob.Constants.IgnoreCase);
             foreach (string file in path_and_file)
             {
                 Worker.I.EnqueTTD(new Model_ThingsToDelete()

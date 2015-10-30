@@ -1,9 +1,11 @@
 ﻿
-using mCleaner.Helpers;
-using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
+using System.Diagnostics;
+using System.Security;
+using mCleaner.Helpers;
+using Microsoft.Win32;
+
 namespace mCleaner.Logics.Commands.LittleRegistryCleaner.Scanners
 {
     public class ActiveXComObjects : ScannerBase
@@ -940,9 +942,9 @@ namespace mCleaner.Logics.Commands.LittleRegistryCleaner.Scanners
                     }
                 }
             }
-            catch (System.Security.SecurityException ex)
+            catch (SecurityException ex)
             {
-                System.Diagnostics.Debug.WriteLine(ex.Message);
+                Debug.WriteLine(ex.Message);
             }
         }
     }

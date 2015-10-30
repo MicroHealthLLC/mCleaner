@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using mCleaner.Model;
+using mCleaner.Properties;
 
 namespace mCleaner.Cleaners
 {
@@ -17,9 +18,9 @@ namespace mCleaner.Cleaners
                 action = new List<action>()
             };
 
-            if (mCleaner.Properties.Settings.Default.CustomLocationForDeletion != null)
+            if (Settings.Default.CustomLocationForDeletion != null)
             {
-                foreach (string filepath in mCleaner.Properties.Settings.Default.CustomLocationForDeletion)
+                foreach (string filepath in Settings.Default.CustomLocationForDeletion)
                 {
                     if (File.Exists(filepath))
                     {
@@ -57,9 +58,9 @@ namespace mCleaner.Cleaners
                 action = new List<action>()
             };
 
-            if (mCleaner.Properties.Settings.Default.ClamWin_ScanLocations != null)
+            if (Settings.Default.ClamWin_ScanLocations != null)
             {
-                foreach (string filepath in mCleaner.Properties.Settings.Default.ClamWin_ScanLocations)
+                foreach (string filepath in Settings.Default.ClamWin_ScanLocations)
                 {
                     if (File.Exists(filepath))
                     {
@@ -415,7 +416,7 @@ namespace mCleaner.Cleaners
             List<string> drivenames = new List<string>();
             foreach (var drv in drvs)
             {
-                if (drv.DriveType == System.IO.DriveType.Fixed)
+                if (drv.DriveType == DriveType.Fixed)
                 {
                     drivenames.Add(drv.Name);
                 }

@@ -2,13 +2,15 @@
 using System.Collections.Specialized;
 using System.Linq;
 using System.Windows;
+using System.Windows.Forms;
 using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using mCleaner.Helpers;
 using mCleaner.Properties;
 using Microsoft.Practices.ServiceLocation;
-using Microsoft.Win32;
+using MessageBox = System.Windows.MessageBox;
+using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
 
 namespace mCleaner.ViewModel
 {
@@ -36,295 +38,289 @@ namespace mCleaner.ViewModel
         }
 
 
-        private bool _ShowWindow = false;
+        private bool _showWindow = false;
         public bool ShowWindow
         {
-            get { return _ShowWindow; }
+            get { return _showWindow; }
             set
             {
-                if (_ShowWindow != value)
+                if (_showWindow != value)
                 {
-                    _ShowWindow = value;
+                    _showWindow = value;
                     base.RaisePropertyChanged("ShowWindow");
                 }
             }
         }
 
-        private int _TabIndex = 0;
+        private int _tabIndex = 0;
         public int SelectedTabIndex
         {
-            get { return _TabIndex; }
+            get { return _tabIndex; }
             set
             {
-                if (_TabIndex != value)
+                if (_tabIndex != value)
                 {
-                    _TabIndex = value;
+                    _tabIndex = value;
                     base.RaisePropertyChanged("SelectedTabIndex");
                 }
             }
         }
 
-        private string _ProxyAddress = string.Empty;
+        private string _proxyAddress = string.Empty;
         public string ClamWin_Proxy_Address
         {
-            get { return _ProxyAddress; }
+            get { return _proxyAddress; }
             set
             {
-                if (_ProxyAddress != value)
+                if (_proxyAddress != value)
                 {
-                    _ProxyAddress = value;
+                    _proxyAddress = value;
                     base.RaisePropertyChanged("ProxyAddress");
                 }
             }
         }
 
-        private string _ProxyPort = string.Empty;
+        private string _proxyPort = string.Empty;
         public string ProxyPort
         {
-            get { return _ProxyPort; }
+            get { return _proxyPort; }
             set
             {
-                if (_ProxyPort != value)
+                if (_proxyPort != value)
                 {
-                    _ProxyPort = value;
+                    _proxyPort = value;
                     base.RaisePropertyChanged("ProxyPort");
                 }
             }
         }
 
-        private string _ProxyUsername = string.Empty;
+        private string _proxyUsername = string.Empty;
         public string ProxyUsername
         {
-            get { return _ProxyUsername; }
+            get { return _proxyUsername; }
             set
             {
-                if (_ProxyUsername != value)
+                if (_proxyUsername != value)
                 {
-                    _ProxyUsername = value;
+                    _proxyUsername = value;
                     base.RaisePropertyChanged("ProxyUsername");
                 }
             }
         }
 
-        private string _ProxyPassword = string.Empty;
+        private string _proxyPassword = string.Empty;
         public string ProxyPassword
         {
-            get { return _ProxyPassword; }
+            get { return _proxyPassword; }
             set
             {
-                if (_ProxyPassword != value)
+                if (_proxyPassword != value)
                 {
-                    _ProxyPassword = value;
+                    _proxyPassword = value;
                     base.RaisePropertyChanged("ProxyPassword");
                 }
             }
         }
 
-        private string _DatabaseMirror = string.Empty;
+        private string _databaseMirror = string.Empty;
         public string DatabaseMirror
         {
-            get { return _DatabaseMirror; }
+            get { return _databaseMirror; }
             set
             {
-                if (_DatabaseMirror != value)
+                if (_databaseMirror != value)
                 {
-                    _DatabaseMirror = value;
+                    _databaseMirror = value;
                     base.RaisePropertyChanged("DatabaseMirror");
                 }
             }
         }
 
-        private bool _AutoUpdateDBAtStartup = false;
+        private bool _autoUpdateDbAtStartup = false;
         public bool AutoUpdateDBAtStartup
         {
-            get { return _AutoUpdateDBAtStartup; }
+            get { return _autoUpdateDbAtStartup; }
             set
             {
-                if (_AutoUpdateDBAtStartup != value)
+                if (_autoUpdateDbAtStartup != value)
                 {
-                    _AutoUpdateDBAtStartup = value;
+                    _autoUpdateDbAtStartup = value;
                     base.RaisePropertyChanged("AutoUpdateDBAtStartup");
                 }
             }
         }
 
-        private bool _HideIrrelevantCleaners = true;
+        private bool _hideIrrelevantCleaners = true;
         public bool HideIrrelevantCleaners
         {
-            get { return _HideIrrelevantCleaners; }
+            get { return _hideIrrelevantCleaners; }
             set
             {
-                if (_HideIrrelevantCleaners != value)
+                if (_hideIrrelevantCleaners != value)
                 {
-                    _HideIrrelevantCleaners = value;
+                    _hideIrrelevantCleaners = value;
                     base.RaisePropertyChanged("HideIrrelevantCleaners");
                 }
             }
         }
 
-        private bool _DuplicateFilterFileSizeCriteara = true;
+        private bool _duplicateFilterFileSizeCriteara = true;
         public bool DuplicateFilterFileSizeCriteara
         {
-            get { return _DuplicateFilterFileSizeCriteara; }
+            get { return _duplicateFilterFileSizeCriteara; }
             set
             {
-                if (_DuplicateFilterFileSizeCriteara != value)
+                if (_duplicateFilterFileSizeCriteara != value)
                 {
-                    _DuplicateFilterFileSizeCriteara = value;
+                    _duplicateFilterFileSizeCriteara = value;
                     base.RaisePropertyChanged("DuplicateFilterFileSizeCriteara");
                 }
             }
         }
        
-        private bool _ShredFiles = false;
+        private bool _shredFiles = false;
         public bool ShredFiles
         {
-            get { return _ShredFiles; }
+            get { return _shredFiles; }
             set
             {
-                if (_ShredFiles != value)
+                if (_shredFiles != value)
                 {
-                    _ShredFiles = value;
+                    _shredFiles = value;
                     base.RaisePropertyChanged("ShredFiles");
                 }
             }
         }
 
-        private bool _StartWhenSystemStarts = false;
+        private bool _startWhenSystemStarts = false;
         public bool StartWhenSystemStarts
         {
-            get { return _StartWhenSystemStarts; }
+            get { return _startWhenSystemStarts; }
             set
             {
-                if (_StartWhenSystemStarts != value)
+                if (_startWhenSystemStarts != value)
                 {
-                    _StartWhenSystemStarts = value;
+                    _startWhenSystemStarts = value;
                     base.RaisePropertyChanged("StartWhenSystemStarts");
                 }
             }
         }
 
-        private ObservableCollection<string> _Whitelist = new ObservableCollection<string>();
+        private ObservableCollection<string> _whitelist = new ObservableCollection<string>();
         public ObservableCollection<string> Whitelist
         {
-            get { return _Whitelist; }
+            get { return _whitelist; }
             set
             {
-                if (_Whitelist != value)
+                if (_whitelist != value)
                 {
-                    _Whitelist = value;
+                    _whitelist = value;
                     base.RaisePropertyChanged("Whitelist");
                 }
             }
         }
 
-        private ObservableCollection<string> _CustomLocationList = new ObservableCollection<string>();
+        private ObservableCollection<string> _customLocationList = new ObservableCollection<string>();
         public ObservableCollection<string> CustomLocationList
         {
-            get { return _CustomLocationList; }
+            get { return _customLocationList; }
             set
             {
-                if (_CustomLocationList != value)
+                if (_customLocationList != value)
                 {
-                    _CustomLocationList = value;
+                    _customLocationList = value;
                     base.RaisePropertyChanged("CustomLocationList");
                 }
             }
         }
 
-        private ObservableCollection<string> _ClamWin_ScanLocations = new ObservableCollection<string>();
+        private ObservableCollection<string> _clamWinScanLocations = new ObservableCollection<string>();
         public ObservableCollection<string> ClamWinScanLocations
         {
-            get { return _ClamWin_ScanLocations; }
+            get { return _clamWinScanLocations; }
             set
             {
-                if (_ClamWin_ScanLocations != value)
+                if (_clamWinScanLocations != value)
                 {
-                    _CustomLocationList = value;
+                    _clamWinScanLocations = value;
                     base.RaisePropertyChanged("ClamWinScanLocations");
                 }
             }
         }
 
         #region DupChecker 
-        private ObservableCollection<string> _DupCheckerLocations = new ObservableCollection<string>();
+        private ObservableCollection<string> _dupCheckerLocations = new ObservableCollection<string>();
         public ObservableCollection<string> DupCheckerLocations
         {
-            get { return _DupCheckerLocations; }
-            set
-            {
-                if (_DupCheckerLocations != value)
-                {
-                    _DupCheckerLocations = value;
-                }
-            }
+            get { return _dupCheckerLocations; }
+            set { _dupCheckerLocations = value; }
         }
 
-        private int _DupChecker_MinSize = 0;
+        private int _dupCheckerMinSize = 0;
         public int DupChecker_MinSize
         {
-            get { return _DupChecker_MinSize; }
+            get { return _dupCheckerMinSize; }
             set
             {
-                if (_DupChecker_MinSize != value)
+                if (_dupCheckerMinSize != value)
                 {
-                    _DupChecker_MinSize = value;
+                    _dupCheckerMinSize = value;
                     base.RaisePropertyChanged("DupChecker_MinSize");
                 }
             }
         }
 
-        private int _DupChecker_MaxSize = 0;
+        private int _dupCheckerMaxSize = 0;
         public int DupChecker_MaxSize
         {
-            get { return _DupChecker_MaxSize; }
+            get { return _dupCheckerMaxSize; }
             set
             {
-                if (_DupChecker_MaxSize != value)
+                if (_dupCheckerMaxSize != value)
                 {
-                    _DupChecker_MaxSize = value;
+                    _dupCheckerMaxSize = value;
                     base.RaisePropertyChanged("DupChecker_MaxSize");
                 }
             }
         }
 
-        private string _DupChecker_FileContaining = string.Empty;
+        private string _dupCheckerFileContaining = string.Empty;
         public string DupChecker_FileContaining
         {
-            get { return _DupChecker_FileContaining; }
+            get { return _dupCheckerFileContaining; }
             set
             {
-                if (_DupChecker_FileContaining != value)
+                if (_dupCheckerFileContaining != value)
                 {
-                    _DupChecker_FileContaining = value;
+                    _dupCheckerFileContaining = value;
                     base.RaisePropertyChanged("DupChecker_FileContaining");
                 }
             }
         }
 
-        private string _DupChecker_FileExtensions = "*.*";
+        private string _dupCheckerFileExtensions = "*.*";
         public string DupChecker_FileExtensions
         {
-            get { return _DupChecker_FileExtensions; }
+            get { return _dupCheckerFileExtensions; }
             set
             {
-                if (_DupChecker_FileExtensions != value)
+                if (_dupCheckerFileExtensions != value)
                 {
-                    _DupChecker_FileExtensions = value;
+                    _dupCheckerFileExtensions = value;
                     base.RaisePropertyChanged("DupChecker_FileExtensions");
                 }
             }
         }
 
-        private string _DupChecker_DuplicateFolderPath = string.Empty;
+        private string _dupCheckerDuplicateFolderPath = string.Empty;
         public string DupChecker_DuplicateFolderPath
         {
-            get { return _DupChecker_DuplicateFolderPath; }
+            get { return _dupCheckerDuplicateFolderPath; }
             set
             {
-                if (_DupChecker_DuplicateFolderPath != value)
+                if (_dupCheckerDuplicateFolderPath != value)
                 {
-                    _DupChecker_DuplicateFolderPath = value;
+                    _dupCheckerDuplicateFolderPath = value;
                     base.RaisePropertyChanged("DupChecker_DuplicateFolderPath");
                 }
             }
@@ -429,7 +425,7 @@ namespace mCleaner.ViewModel
         }
         void Command_CustomLocation_AddFolder_Click()
         {
-            System.Windows.Forms.FolderBrowserDialog fbd = new System.Windows.Forms.FolderBrowserDialog();
+            FolderBrowserDialog fbd = new FolderBrowserDialog();
             fbd.ShowDialog();
             if (fbd.SelectedPath != string.Empty)
             {
@@ -469,7 +465,7 @@ namespace mCleaner.ViewModel
         }
         void Command_Whitelist_AddFolder_Click()
         {
-            System.Windows.Forms.FolderBrowserDialog fbd = new System.Windows.Forms.FolderBrowserDialog();
+            FolderBrowserDialog fbd = new FolderBrowserDialog();
             fbd.ShowDialog();
             if (fbd.SelectedPath != string.Empty)
             {
@@ -509,7 +505,7 @@ namespace mCleaner.ViewModel
         }
         void Command_ClamAV_ScanLocation_AddFolder_Click()
         {
-            System.Windows.Forms.FolderBrowserDialog fbd = new System.Windows.Forms.FolderBrowserDialog();
+            FolderBrowserDialog fbd = new FolderBrowserDialog();
             fbd.ShowDialog();
             if (fbd.SelectedPath != string.Empty)
             {
@@ -529,7 +525,7 @@ namespace mCleaner.ViewModel
 
         void Command_DupChecker_AddFolder_Click()
         {
-            System.Windows.Forms.FolderBrowserDialog fbd = new System.Windows.Forms.FolderBrowserDialog();
+            FolderBrowserDialog fbd = new FolderBrowserDialog();
             fbd.ShowDialog();
             if (fbd.SelectedPath != string.Empty)
             {
@@ -548,7 +544,7 @@ namespace mCleaner.ViewModel
         }
         void Command_DupChecker_BrowseFolder_Click()
         {
-            System.Windows.Forms.FolderBrowserDialog fbd = new System.Windows.Forms.FolderBrowserDialog();
+            FolderBrowserDialog fbd = new FolderBrowserDialog();
             fbd.ShowDialog();
             if (fbd.SelectedPath != string.Empty)
             {

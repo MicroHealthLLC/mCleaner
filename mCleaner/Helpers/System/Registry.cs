@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Microsoft.Win32;
-using System.Reflection;
 using System.Diagnostics;
+using System.IO;
+using IWshRuntimeLibrary;
+using Microsoft.Win32;
 
 namespace mCleaner.Helpers
 {
@@ -134,21 +133,22 @@ namespace mCleaner.Helpers
 
         public void RegisterStartup(bool create = true)
         {
-            using (RegistryKey key = Registry.CurrentUser.OpenSubKey("Software\\Microsoft\\Windows\\CurrentVersion\\Run", true))
+            string strStartUpFolderLocation = Environment.GetFolderPath(Environment.SpecialFolder.Startup);
+            string strshortcutAddress = strStartUpFolderLocation + @"\mCleaner.lnk";
+            if (create)
             {
-                if (create)
-                {
-                    key.SetValue("mCleaner", Process.GetCurrentProcess().MainModule.FileName);
-                }
-                else
-                {
-                    if (key.GetValue("mCleaner") != null)
-                    {
-                        key.DeleteValue("mCleaner");
-                    }
-                }
-                key.Close();
+                WshShell shell = new WshShell();
+                IWshShortcut shortcut = (IWshShortcut) shell.CreateShortcut(strshortcutAddress);
+                shortcut.Description = "mClener Shortcut for startup";
+                shortcut.TargetPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "mcleaner.exe");
+                shortcut.Save();
             }
+            else
+            {
+                if(System.IO.File.Exists(strshortcutAddress))
+                    System.IO.File.Delete(strshortcutAddress);
+            }
+
         }
     }
 }

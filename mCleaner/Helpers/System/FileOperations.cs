@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Security.Cryptography;
+using mCleaner.Properties;
 
 namespace mCleaner.Helpers
 {
@@ -257,11 +258,10 @@ namespace mCleaner.Helpers
             // examined for files.
             Stack<string> dirs = new Stack<string>(20);
 
-            if (!System.IO.Directory.Exists(b))
+            if (Directory.Exists(b))
             {
-                throw new ArgumentException();
+                dirs.Push(b);
             }
-            dirs.Push(b);
 
             while (dirs.Count > 0)
             {
@@ -273,7 +273,7 @@ namespace mCleaner.Helpers
                     {
                         progress_callback(currentDir);
                     }
-                    subDirs = System.IO.Directory.GetDirectories(currentDir);
+                    subDirs = Directory.GetDirectories(currentDir);
                 }
                 // An UnauthorizedAccessException exception will be thrown if we do not have 
                 // discovery permission on a folder or file. It may or may not be acceptable  
@@ -289,7 +289,7 @@ namespace mCleaner.Helpers
                     Console.WriteLine(e.Message);
                     continue;
                 }
-                catch (System.IO.DirectoryNotFoundException e)
+                catch (DirectoryNotFoundException e)
                 {
                     Console.WriteLine(e.Message);
                     continue;
@@ -298,7 +298,7 @@ namespace mCleaner.Helpers
                 string[] files = null;
                 try
                 {
-                    files = System.IO.Directory.GetFiles(currentDir);
+                    files = Directory.GetFiles(currentDir);
                 }
                 catch (UnauthorizedAccessException e)
                 {
@@ -306,7 +306,7 @@ namespace mCleaner.Helpers
                     Console.WriteLine(e.Message);
                     continue;
                 }
-                catch (System.IO.DirectoryNotFoundException e)
+                catch (DirectoryNotFoundException e)
                 {
                     Console.WriteLine(e.Message);
                     continue;
@@ -334,7 +334,7 @@ namespace mCleaner.Helpers
                             result.Add(file);
                         }
                     }
-                    catch (System.IO.FileNotFoundException e)
+                    catch (FileNotFoundException e)
                     {
                         // If file was deleted by a separate application 
                         //  or thread since the call to TraverseTree() 
@@ -361,7 +361,7 @@ namespace mCleaner.Helpers
             // examined for files.
             Stack<string> dirs = new Stack<string>();
 
-            if (!System.IO.Directory.Exists(b))
+            if (!Directory.Exists(b))
             {
                 throw new ArgumentException();
             }
@@ -373,7 +373,7 @@ namespace mCleaner.Helpers
                 string[] subDirs;
                 try
                 {
-                    subDirs = System.IO.Directory.GetDirectories(currentDir);
+                    subDirs = Directory.GetDirectories(currentDir);
                 }
 
                 // An UnauthorizedAccessException exception will be thrown if we do not have 
@@ -390,7 +390,7 @@ namespace mCleaner.Helpers
                     Console.WriteLine(e.Message);
                     continue;
                 }
-                catch (System.IO.DirectoryNotFoundException e)
+                catch (DirectoryNotFoundException e)
                 {
                     Console.WriteLine(e.Message);
                     continue;
@@ -729,7 +729,7 @@ namespace mCleaner.Helpers
 
             if (fi.Exists)
             {
-                if (Properties.Settings.Default.ShredFiles)
+                if (Settings.Default.ShredFiles)
                 {
                     WipeFile(fi.FullName, 5);
                 }

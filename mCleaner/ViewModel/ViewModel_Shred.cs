@@ -1,19 +1,19 @@
-﻿using GalaSoft.MvvmLight;
+﻿using System;
+using System.Collections.ObjectModel;
+using System.IO;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Forms;
+using System.Windows.Input;
+using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using mCleaner.Helpers;
 using mCleaner.Model;
 using Microsoft.Practices.ServiceLocation;
-using Microsoft.Win32;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Input;
+using MessageBox = System.Windows.MessageBox;
+using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
 
 namespace mCleaner.ViewModel
 {
@@ -239,7 +239,7 @@ namespace mCleaner.ViewModel
 
         public void Command_SelectFolder_Click()
         {
-            System.Windows.Forms.FolderBrowserDialog fbd = new System.Windows.Forms.FolderBrowserDialog();
+            FolderBrowserDialog fbd = new FolderBrowserDialog();
             fbd.ShowDialog();
             if (fbd.SelectedPath != string.Empty)
             {
@@ -252,7 +252,7 @@ namespace mCleaner.ViewModel
         public void Command_ShredRecycleBin_Click()
         {
 
-            if (System.Windows.MessageBox.Show("Are you sure you want to shred files that is in recycle bin?", "mCleaner", System.Windows.MessageBoxButton.YesNo, System.Windows.MessageBoxImage.Question) == System.Windows.MessageBoxResult.No)
+            if (MessageBox.Show("Are you sure you want to shred files that are in recycle bin?", "mCleaner", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
                 return;
 
             btnShreddingEnable = false;
@@ -282,6 +282,7 @@ namespace mCleaner.ViewModel
             CleanerML.ShowFrontPage = false;
             CleanerML.btnCleanNowPreviousState = CleanerML.btnPreviewCleanEnable;
             CleanerML.btnPreviewCleanEnable = false;
+            CleanerML.btnCleaningOptionsEnable = false;
 
             this.ShowWindow = true;
         }
@@ -292,6 +293,7 @@ namespace mCleaner.ViewModel
             CleanerML.ShowFrontPage = true;
             CleanerML.ShowCleanerDescription = false;
             CleanerML.btnPreviewCleanEnable = CleanerML.btnCleanNowPreviousState;
+            CleanerML.btnCleaningOptionsEnable = true;
             this.ShowWindow = false;
         }
 

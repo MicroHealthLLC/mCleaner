@@ -1,10 +1,12 @@
 ﻿
-using mCleaner.Helpers;
-using Microsoft.Win32;
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Security;
 using System.Text;
+using Microsoft.Win32;
+
 namespace mCleaner.Logics.Commands.LittleRegistryCleaner.Scanners
 {
     public class WindowsFonts : ScannerBase
@@ -93,9 +95,9 @@ namespace mCleaner.Logics.Commands.LittleRegistryCleaner.Scanners
 
                 }
             }
-            catch (System.Security.SecurityException ex)
+            catch (SecurityException ex)
             {
-                System.Diagnostics.Debug.WriteLine(ex.Message);
+                Debug.WriteLine(ex.Message);
             }
         }
     }

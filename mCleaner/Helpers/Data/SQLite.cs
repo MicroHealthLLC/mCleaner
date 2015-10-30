@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Data.SQLite;
 using System.Diagnostics;
 using System.IO;
@@ -29,7 +30,7 @@ namespace mCleaner.Helpers
                 {
                     Debug.WriteLine("executing non query");
                     comm.CommandText = "vacuum";
-                    comm.CommandType = System.Data.CommandType.Text;
+                    comm.CommandType = CommandType.Text;
 
                     try
                     {
@@ -63,7 +64,7 @@ namespace mCleaner.Helpers
 
                 Debug.WriteLine("query: " + sql);
                 comm.CommandText = sql;
-                comm.CommandType = System.Data.CommandType.Text;
+                comm.CommandType = CommandType.Text;
 
                 try
                 {

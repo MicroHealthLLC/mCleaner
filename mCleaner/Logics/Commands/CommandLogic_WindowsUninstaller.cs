@@ -1,19 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using CodeBureau;
-using mCleaner.Helpers;
+﻿using CodeBureau;
 using mCleaner.Logics.Enumerations;
 using mCleaner.Model;
-using mCleaner.Properties;
 using mCleaner.ViewModel;
 using Microsoft.Practices.ServiceLocation;
-using Microsoft.Win32;
 
 namespace mCleaner.Logics.Commands
 {

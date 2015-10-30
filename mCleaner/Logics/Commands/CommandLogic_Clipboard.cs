@@ -1,11 +1,9 @@
-﻿using CodeBureau;
-using mCleaner.Logics.Enumerations;
-using mCleaner.Model;
-using System;
-using System.Diagnostics;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using CodeBureau;
+using mCleaner.Logics.Enumerations;
+using mCleaner.Model;
 
 namespace mCleaner.Logics.Commands
 {

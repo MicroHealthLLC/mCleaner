@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using GalaSoft.MvvmLight;
@@ -283,9 +282,14 @@ namespace mCleaner.ViewModel
             CleanerML.ShowCleanerDescription = false;
             CleanerML.btnCleanNowPreviousState = CleanerML.btnPreviewCleanEnable;
             CleanerML.btnPreviewCleanEnable = false;
+            CleanerML.btnCleaningOptionsEnable = false;
             CleanerML.ShowFrontPage = false;
             this.EnableRemoveDuplicates = false;
-            this.EnableScanFolder = Settings.Default.DupChecker_CustomPath.Count > 0;
+            if (Settings.Default.DupChecker_CustomPath != null && Settings.Default.DupChecker_CustomPath.Count > 0)
+                this.EnableScanFolder = true;
+            else
+                this.EnableScanFolder = false;
+
             DupplicateCollection.Clear();
             this.ShowWindow = true;
         }
@@ -303,6 +307,7 @@ namespace mCleaner.ViewModel
             CleanerML.ShowCleanerDescription = false;
             CleanerML.ShowFrontPage = true;
             CleanerML.btnPreviewCleanEnable = CleanerML.btnCleanNowPreviousState;
+            CleanerML.btnCleaningOptionsEnable = true;
         }
 
         public void Command_Cancel_Click()

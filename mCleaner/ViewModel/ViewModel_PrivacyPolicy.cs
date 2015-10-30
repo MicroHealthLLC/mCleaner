@@ -13,9 +13,9 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using System.Windows.Input;
 
 namespace mCleaner.ViewModel
 {

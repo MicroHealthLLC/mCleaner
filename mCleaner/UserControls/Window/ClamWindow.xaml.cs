@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 
 namespace mCleaner.UserControls.Window
 {
