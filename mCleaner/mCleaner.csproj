@@ -27,7 +27,7 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.2.0.%2a</ApplicationVersion>
+    <ApplicationVersion>1.3.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -334,10 +334,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Helpers\Controls\VirtualToggleButton.cs" />
-    <Page Include="PreferencesWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="UserControls\Window\About.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -364,9 +360,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PreferencesWindow.xaml.cs">
-      <DependentUpon>PreferencesWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -392,19 +385,16 @@
     <Resource Include="Assets\clamwin_big.png" />
     <Resource Include="Assets\scan_for_memory.png" />
     <Resource Include="Assets\check_box_list.png" />
-    <Resource Include="Assets\document_shred.png" />
     <Resource Include="Assets\downarrow.png" />
     <Resource Include="Assets\MicroHealth_Logo_800.png" />
     <Resource Include="Assets\clean_aggresive.png" />
     <Resource Include="Assets\clean_moderate.png" />
-    <Resource Include="Assets\clean_safe.png" />
     <Resource Include="Assets\dupcheck.png" />
     <Resource Include="Assets\ReleaseNotesGNU.png" />
     <Resource Include="Assets\MicroHealth_Logo_200.png" />
     <Resource Include="Assets\infotip_customloc.png" />
     <Resource Include="Assets\clean_aggressive_2.png" />
     <Resource Include="Assets\clean_moderate_2.png" />
-    <Resource Include="Assets\cleam_safe_.png" />
     <Resource Include="Assets\clean_safe_2.png" />
     <Resource Include="Assets\Clean_now.png" />
     <Resource Include="Assets\ShredFile.png" />
@@ -423,6 +413,13 @@
     <Resource Include="Assets\ClearSelectionLarge.png" />
     <Resource Include="Assets\CollapseAll.png" />
     <Resource Include="Assets\mCleanerLarge.png" />
+    <Resource Include="Assets\shredder2.png" />
+    <Resource Include="Assets\SelectFiles.png" />
+    <Resource Include="Assets\SelectFolder.png" />
+    <Resource Include="Assets\SelectRecycleBin.png" />
+    <Resource Include="Assets\RemoveDuplicates.png" />
+    <Resource Include="Assets\Buttonuninstall.png" />
+    <Resource Include="Assets\buttonantivirus.png" />
     <Content Include="Clam\db\readme.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -451,7 +448,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\About.png" />
-    <Resource Include="Assets\Clean.png" />
     <Resource Include="Assets\Help.png" />
     <Resource Include="Assets\Preferences.png" />
     <Resource Include="Assets\Quit.png" />

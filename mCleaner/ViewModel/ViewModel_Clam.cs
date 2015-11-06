@@ -21,141 +21,141 @@ namespace mCleaner.ViewModel
             }
         }
 
-        private bool _ShowClamWinVirusUpdateWindow = false;
+        private bool _showClamWinVirusUpdateWindow = false;
         public bool ShowClamWinVirusUpdateWindow
         {
-            get { return _ShowClamWinVirusUpdateWindow; }
+            get { return _showClamWinVirusUpdateWindow; }
             set
             {
-                if (_ShowClamWinVirusUpdateWindow != value)
+                if (_showClamWinVirusUpdateWindow != value)
                 {
-                    _ShowClamWinVirusUpdateWindow = value;
+                    _showClamWinVirusUpdateWindow = value;
                     base.RaisePropertyChanged("ShowClamWinVirusUpdateWindow");
                 }
             }
         }
 
-        private bool _ShowClamWinVirusScanner = false;
+        private bool _showClamWinVirusScanner = false;
         public bool ShowClamWinVirusScanner
         {
-            get { return _ShowClamWinVirusScanner; }
+            get { return _showClamWinVirusScanner; }
             set
             {
-                if (_ShowClamWinVirusScanner != value)
+                if (_showClamWinVirusScanner != value)
                 {
-                    _ShowClamWinVirusScanner = value;
+                    _showClamWinVirusScanner = value;
                     base.RaisePropertyChanged("ShowClamWinVirusScanner");
                 }
             }
         }
 
-        private string _VirusDefUpdateLog = string.Empty;
+        private string _virusDefUpdateLog = string.Empty;
         public string VirusDefUpdateLog
         {
-            get { return _VirusDefUpdateLog; }
+            get { return _virusDefUpdateLog; }
             set
             {
-                if (_VirusDefUpdateLog != value)
+                if (_virusDefUpdateLog != value)
                 {
-                    _VirusDefUpdateLog = value;
+                    _virusDefUpdateLog = value;
                     base.RaisePropertyChanged("VirusDefUpdateLog");
                 }
             }
         }
 
-        private string _WindowTitle = "Update Virus Definition Database";
+        private string _windowTitle = "Update Virus Definition Database";
         public string WindowTitle
         {
-            get { return _WindowTitle; }
+            get { return _windowTitle; }
             set
             {
-                if (_WindowTitle != value)
+                if (_windowTitle != value)
                 {
-                    _WindowTitle = value;
+                    _windowTitle = value;
                     base.RaisePropertyChanged("WindowTitle");
                 }
             }
         }
 
-        private string _ProgressText = string.Empty;
+        private string _progressText = string.Empty;
         public string ProgressText
         {
-            get { return _ProgressText; }
+            get { return _progressText; }
             set
             {
-                if (_ProgressText != value)
+                if (_progressText != value)
                 {
-                    _ProgressText = value;
+                    _progressText = value;
                     base.RaisePropertyChanged("ProgressText");
                 }
             }
         }
 
-        private ObservableCollection<Model_VirusDetails> _InfectedFilesCollection = new ObservableCollection<Model_VirusDetails>();
+        private ObservableCollection<Model_VirusDetails> _infectedFilesCollection = new ObservableCollection<Model_VirusDetails>();
         public ObservableCollection<Model_VirusDetails> InfectedFilesCollection
         {
-            get { return _InfectedFilesCollection; }
+            get { return _infectedFilesCollection; }
             set
             {
-                if (_InfectedFilesCollection != value)
+                if (_infectedFilesCollection != value)
                 {
-                    _InfectedFilesCollection = value;
+                    _infectedFilesCollection = value;
                     base.RaisePropertyChanged("InfectedFilesCollection");
                 }
             }
         }
 
-        private bool _EnableCleanNowButton = false;
+        private bool _enableCleanNowButton = false;
         public bool EnableCleanNowButton
         {
-            get { return _EnableCleanNowButton; }
+            get { return _enableCleanNowButton; }
             set
             {
-                if (_EnableCleanNowButton != value)
+                if (_enableCleanNowButton != value)
                 {
-                    _EnableCleanNowButton = value;
+                    _enableCleanNowButton = value;
                     base.RaisePropertyChanged("EnableCleanNowButton");
                 }
             }
         }
 
-        private bool _EnableCancelButton = false;
+        private bool _enableCancelButton = false;
         public bool EnableCancelButton
         {
-            get { return _EnableCancelButton; }
+            get { return _enableCancelButton; }
             set
             {
-                if (_EnableCancelButton != value)
+                if (_enableCancelButton != value)
                 {
-                    _EnableCancelButton = value;
+                    _enableCancelButton = value;
                     base.RaisePropertyChanged("EnableCancelButton");
                 }
             }
         }
 
-        private bool _EnableCloseButton = false;
+        private bool _enableCloseButton = false;
         public bool EnableCloseButton
         {
-            get { return _EnableCloseButton; }
+            get { return _enableCloseButton; }
             set
             {
-                if (_EnableCloseButton != value)
+                if (_enableCloseButton != value)
                 {
-                    _EnableCloseButton = value;
+                    _enableCloseButton = value;
                     base.RaisePropertyChanged("EnableCloseButton");
                 }
             }
         }
 
-        private bool _ProgressIsIndeterminate = false;
+        private bool _progressIsIndeterminate = false;
         public bool ProgressIsIndeterminate
         {
-            get { return _ProgressIsIndeterminate; }
+            get { return _progressIsIndeterminate; }
             set
             {
-                if (_ProgressIsIndeterminate != value)
+                if (_progressIsIndeterminate != value)
                 {
-                    _ProgressIsIndeterminate = value;
+                    _progressIsIndeterminate = value;
                     base.RaisePropertyChanged("ProgressIsIndeterminate");
                 }
             }

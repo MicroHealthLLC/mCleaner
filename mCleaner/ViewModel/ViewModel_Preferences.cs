@@ -75,7 +75,7 @@ namespace mCleaner.ViewModel
                 if (_proxyAddress != value)
                 {
                     _proxyAddress = value;
-                    base.RaisePropertyChanged("ProxyAddress");
+                    base.RaisePropertyChanged("ClamWin_Proxy_Address");
                 }
             }
         }
@@ -207,6 +207,7 @@ namespace mCleaner.ViewModel
         }
 
         private ObservableCollection<string> _whitelist = new ObservableCollection<string>();
+
         public ObservableCollection<string> Whitelist
         {
             get { return _whitelist; }
@@ -235,6 +236,7 @@ namespace mCleaner.ViewModel
         }
 
         private ObservableCollection<string> _clamWinScanLocations = new ObservableCollection<string>();
+
         public ObservableCollection<string> ClamWinScanLocations
         {
             get { return _clamWinScanLocations; }
@@ -386,13 +388,30 @@ namespace mCleaner.ViewModel
         #endregion
 
         #region command methods
-        void Command_OK_Click()
+
+        private void Command_OK_Click()
         {
+            int nProxyPort = 0;
+            if (!string.IsNullOrEmpty(ProxyPort) && !int.TryParse(this.ProxyPort, out nProxyPort))
+            {
+                MessageBox.Show("Invaild proxy port plase enter valid numeric port.", "mCleaner", MessageBoxButton.OK,
+                    MessageBoxImage.Exclamation);
+                return;
+            }
+
+            if (Settings.Default.HideIrrelevantCleaners != this.HideIrrelevantCleaners)
+            {
+                Settings.Default.HideIrrelevantCleaners = this.HideIrrelevantCleaners;
+                this.CleanerML._nodes.Clear();
+                this.CleanerML.GetCleaners();
+            }
+
             WriteSettings();
             this.CleanerML.RefreshSystemCleaners();
             DupCheck.EnableScanFolder = Settings.Default.DupChecker_CustomPath.Count > 0;
             this.ShowWindow = false;
         }
+
         void Command_CloseWindow_Click()
         {
             this.ShowWindow = false;
@@ -503,6 +522,7 @@ namespace mCleaner.ViewModel
                 }
             }
         }
+
         void Command_ClamAV_ScanLocation_AddFolder_Click()
         {
             FolderBrowserDialog fbd = new FolderBrowserDialog();

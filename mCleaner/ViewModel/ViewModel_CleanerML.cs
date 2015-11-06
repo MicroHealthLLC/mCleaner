@@ -34,19 +34,19 @@ namespace mCleaner.ViewModel
     public class ViewModel_CleanerML : ViewModelBase
     {
         public event OnTreeNodeSelected TreeNodeSelected;
-        string _exec_path = string.Empty;
-        List<TreeNode> _nodes = new List<TreeNode>();
+        string _execPath = string.Empty;
+        public List<TreeNode> _nodes = new List<TreeNode>();
 
         #region properties
-        private ObservableCollection<TreeNode> _CleanersCollection = new ObservableCollection<TreeNode>();
+        private ObservableCollection<TreeNode> _cleanersCollection = new ObservableCollection<TreeNode>();
         public ObservableCollection<TreeNode> CleanersCollection
         {
-            get { return _CleanersCollection; }
+            get { return _cleanersCollection; }
             set
             {
-                if (_CleanersCollection != value)
+                if (_cleanersCollection != value)
                 {
-                    _CleanersCollection = value;
+                    _cleanersCollection = value;
                     base.RaisePropertyChanged("CleanersCollection");
                 }
             }
@@ -60,58 +60,58 @@ namespace mCleaner.ViewModel
             }
         }
 
-        private bool _Run = false;
+        private bool _run = false;
         public bool Run
         {
-            get { return _Run; }
+            get { return _run; }
             set
             {
-                if (_Run != value)
+                if (_run != value)
                 {
-                    _Run = value;
+                    _run = value;
                     base.RaisePropertyChanged("Run");
                 }
             }
         }
 
-        private bool _IsCancelProcessEnabled = false;
+        private bool _isCancelProcessEnabled = false;
         public bool IsCancelProcessEnabled
         {
-            get { return _IsCancelProcessEnabled; }
+            get { return _isCancelProcessEnabled; }
             set
             {
-                if (_IsCancelProcessEnabled != value)
+                if (_isCancelProcessEnabled != value)
                 {
-                    _IsCancelProcessEnabled = value;
+                    _isCancelProcessEnabled = value;
                     base.RaisePropertyChanged("IsCancelProcessEnabled");
                 }
             }
         }
 
 
-        private int _GridWidth =150;
+        private int _gridWidth =150;
         public int GridWidth
         {
-            get { return _GridWidth; }
+            get { return _gridWidth; }
             set
             {
-                if (_GridWidth != value)
+                if (_gridWidth != value)
                 {
-                    _GridWidth = value;
+                    _gridWidth = value;
                     base.RaisePropertyChanged("GridWidth");
                 }
             }
         }
 
-        private int _GridHeight = 120;
+        private int _gridHeight = 120;
         public int GridHeight
         {
-            get { return _GridHeight; }
+            get { return _gridHeight; }
             set
             {
-                if (_GridHeight != value)
+                if (_gridHeight != value)
                 {
-                    _GridHeight = value;
+                    _gridHeight = value;
                     base.RaisePropertyChanged("GridHeight");
                 }
             }
@@ -133,15 +133,15 @@ namespace mCleaner.ViewModel
             }
         }
 
-        private bool _blnCollapseALL = true;
+        private bool _blnCollapseAll = true;
         public bool blnCollapseALL
         {
-            get { return _blnCollapseALL; }
+            get { return _blnCollapseAll; }
             set
             {
-                if (_blnCollapseALL != value)
+                if (_blnCollapseAll != value)
                 {
-                    _blnCollapseALL = value;
+                    _blnCollapseAll = value;
                     base.RaisePropertyChanged("blnCollapseALL");
                 }
             }
@@ -162,15 +162,15 @@ namespace mCleaner.ViewModel
             }
         }
 
-        private string _UpdateAvailableText =string.Empty;
+        private string _updateAvailableText =string.Empty;
         public string UpdateAvailableText
         {
-            get { return _UpdateAvailableText; }
+            get { return _updateAvailableText; }
             set
             {
-                if (_UpdateAvailableText != value)
+                if (_updateAvailableText != value)
                 {
-                    _UpdateAvailableText = value;
+                    _updateAvailableText = value;
                     base.RaisePropertyChanged("UpdateAvailableText");
                 }
             }
@@ -232,183 +232,183 @@ namespace mCleaner.ViewModel
             }
         }
 
-        private bool _ShowFrontPage = false;
+        private bool _showFrontPage = false;
         public bool ShowFrontPage
         {
-            get { return _ShowFrontPage; }
+            get { return _showFrontPage; }
             set
             {
-                if (_ShowFrontPage != value)
+                if (_showFrontPage != value)
                 {
-                    _ShowFrontPage = value;
+                    _showFrontPage = value;
                     base.RaisePropertyChanged("ShowFrontPage");
                 }
             }
         }
 
-        private bool _ShowCleanLogBox = false;
+        private bool _showCleanLogBox = false;
         public bool ShowCleanLogBox
         {
-            get { return _ShowCleanLogBox; }
+            get { return _showCleanLogBox; }
             set
             {
-                if (_ShowCleanLogBox != value)
+                if (_showCleanLogBox != value)
                 {
-                    _ShowCleanLogBox = value;
+                    _showCleanLogBox = value;
                     base.RaisePropertyChanged("ShowCleanLogBox");
                 }
             }
         }
 
-        private bool _ShowCleanerDescription = false;
+        private bool _showCleanerDescription = false;
         public bool ShowCleanerDescription
         {
-            get { return _ShowCleanerDescription; }
+            get { return _showCleanerDescription; }
             set
             {
-                if (_ShowCleanerDescription != value)
+                if (_showCleanerDescription != value)
                 {
-                    _ShowCleanerDescription = value;
+                    _showCleanerDescription = value;
                     base.RaisePropertyChanged("ShowCleanerDescription");
                 }
             }
         }
 
-        private string _TextLog = string.Empty;
+        private string _textLog = string.Empty;
         public string TextLog
         {
-            get { return _TextLog; }
+            get { return _textLog; }
             set
             {
-                if (_TextLog != value)
+                if (_textLog != value)
                 {
-                    _TextLog = value + "\r\n";
+                    _textLog = value + "\r\n";
                     base.RaisePropertyChanged("TextLog");
                 }
             }
         }
 
-        private bool _ProgressIsIndeterminate = false;
+        private bool _progressIsIndeterminate = false;
         public bool ProgressIsIndeterminate
         {
-            get { return _ProgressIsIndeterminate; }
+            get { return _progressIsIndeterminate; }
             set
             {
-                if (_ProgressIsIndeterminate != value)
+                if (_progressIsIndeterminate != value)
                 {
-                    _ProgressIsIndeterminate = value;
-                    base.RaisePropertyChanged("ProgressIsIndefinite");
+                    _progressIsIndeterminate = value;
+                    base.RaisePropertyChanged("ProgressIsIndeterminate");
                 }
             }
         }
 
-        private int _MaxProgress = 0;
+        private int _maxProgress = 0;
         public int MaxProgress
         {
-            get { return _MaxProgress; }
+            get { return _maxProgress; }
             set
             {
-                if (_MaxProgress != value)
+                if (_maxProgress != value)
                 {
-                    _MaxProgress = value;
+                    _maxProgress = value;
                     base.RaisePropertyChanged("MaxProgress");
                 }
             }
         }
 
-        private int _ProgressIndex = 0;
+        private int _progressIndex = 0;
         public int ProgressIndex
         {
-            get { return _ProgressIndex; }
+            get { return _progressIndex; }
             set
             {
-                if (_ProgressIndex != value)
+                if (_progressIndex != value)
                 {
-                    _ProgressIndex = value;
+                    _progressIndex = value;
                     base.RaisePropertyChanged("ProgressIndex");
                 }
             }
         }
 
-        private string _ProgressText = string.Empty;
+        private string _progressText = string.Empty;
         public string ProgressText
         {
-            get { return _ProgressText; }
+            get { return _progressText; }
             set
             {
-                if (_ProgressText != value)
+                if (_progressText != value)
                 {
-                    _ProgressText = value;
+                    _progressText = value;
                     base.RaisePropertyChanged("ProgressText");
                 }
             }
         }
 
-        private bool _CleanOption_Safe = false;
+        private bool _cleanOptionSafe = false;
         public bool CleanOption_Safe
         {
-            get { return _CleanOption_Safe; }
+            get { return _cleanOptionSafe; }
             set
             {
-                if (_CleanOption_Safe != value)
+                if (_cleanOptionSafe != value)
                 {
-                    _CleanOption_Safe = value;
+                    _cleanOptionSafe = value;
                     base.RaisePropertyChanged("CleanOption_Safe");
                 }
             }
         }
 
-        private bool _CleanOption_Moderate = false;
+        private bool _cleanOptionModerate = false;
         public bool CleanOption_Moderate
         {
-            get { return _CleanOption_Moderate; }
+            get { return _cleanOptionModerate; }
             set
             {
-                if (_CleanOption_Moderate != value)
+                if (_cleanOptionModerate != value)
                 {
-                    _CleanOption_Moderate = value;
+                    _cleanOptionModerate = value;
                     base.RaisePropertyChanged("CleanOption_Moderate");
                 }
             }
         }
 
-        private bool _CleanOption_Aggressive = false;
+        private bool _cleanOptionAggressive = false;
         public bool CleanOption_Aggressive
         {
-            get { return _CleanOption_Aggressive; }
+            get { return _cleanOptionAggressive; }
             set
             {
-                if (_CleanOption_Aggressive != value)
+                if (_cleanOptionAggressive != value)
                 {
-                    _CleanOption_Aggressive = value;
+                    _cleanOptionAggressive = value;
                     base.RaisePropertyChanged("CleanOption_Aggressive");
                 }
             }
         }
 
-        private bool _CleanOption_Custom = false;
+        private bool _cleanOptionCustom = false;
         public bool CleanOption_Custom
         {
-            get { return _CleanOption_Custom; }
+            get { return _cleanOptionCustom; }
             set
             {
-                if (_CleanOption_Custom != value)
+                if (_cleanOptionCustom != value)
                 {
-                    _CleanOption_Custom = value;
+                    _cleanOptionCustom = value;
                     base.RaisePropertyChanged("CleanOption_Custom");
                 }
             }
         }
 
-        private bool _SaveCustom_Options = false;
+        private bool _saveCustomOptions = false;
         public bool SaveCustom_Options
         {
-            get { return _SaveCustom_Options; }
+            get { return _saveCustomOptions; }
             set
             {
-                if (_SaveCustom_Options != value)
+                if (_saveCustomOptions != value)
                 {
-                    _SaveCustom_Options = value;
+                    _saveCustomOptions = value;
                     base.RaisePropertyChanged("SaveCustom_Options");
                 }
             }
@@ -428,58 +428,60 @@ namespace mCleaner.ViewModel
             }
         }
 
-        private int _SelectedTabIndex = 0;
+        private int _selectedTabIndex = 0;
         public int SelectedTabIndex
         {
-            get { return _SelectedTabIndex; }
+            get { return _selectedTabIndex; }
             set
             {
-                if (_SelectedTabIndex != value)
+                if (_selectedTabIndex != value)
                 {
-                    _SelectedTabIndex = value;
+                    _selectedTabIndex = value;
                     base.RaisePropertyChanged("SelectedTabIndex");
                 }
             }
         }
 
-        private TreeNode _SelectedNode = new TreeNode();
+        private TreeNode _selectedNode = new TreeNode();
         public TreeNode SelectedNode
         {
-            get { return _SelectedNode; }
+            get { return _selectedNode; }
             set
             {
-                if (_SelectedNode != value)
+                if (_selectedNode != value)
                 {
-                    _SelectedNode = value;
+                    _selectedNode = value;
                     base.RaisePropertyChanged("SelectedNode");
                 }
             }
         }
 
 
-        private bool _BtnCancel = false;
+        private bool _btnCancel = false;
         public bool BtnCancel
         {
-            get { return _BtnCancel; }
+            get { return _btnCancel; }
             set
             {
-                if (_BtnCancel != value)
+                if (_btnCancel != value)
                 {
-                    _BtnCancel = value;
+                    _btnCancel = value;
+                    this.RaisePropertyChanged("BtnCancel");
                 }
             }
         }
         
 
-        private bool _Cancel = false;
+        private bool _cancel = false;
         public bool Cancel
         {
-            get { return _Cancel; }
+            get { return _cancel; }
             set
             {
-                if (_Cancel != value)
+                if (_cancel != value)
                 {
-                    _Cancel = value;
+                    _cancel = value;
+                    this.RaisePropertyChanged("Cancel");
                 }
             }
         }
@@ -488,7 +490,7 @@ namespace mCleaner.ViewModel
         #region ctor
         public ViewModel_CleanerML()
         {
-            _exec_path = AppDomain.CurrentDomain.BaseDirectory;
+            _execPath = AppDomain.CurrentDomain.BaseDirectory;
             GetCleaners();
 
             Run = false;
@@ -979,7 +981,7 @@ namespace mCleaner.ViewModel
                 XmlSerializer srlzr = new XmlSerializer(typeof(cleaner));
                 Model_CleanerML CleanerML = new Model_CleanerML();
 
-                string cleaners_folder = Path.Combine(this._exec_path, "cleaners");
+                string cleaners_folder = Path.Combine(this._execPath, "cleaners");
                 string[] files = Directory.GetFiles(cleaners_folder, "*.xml");
                 Array.Sort(files);
                 this._nodes.Clear();
@@ -1032,8 +1034,6 @@ namespace mCleaner.ViewModel
                         if (isSupported)
                         {
                             root = new TreeNode(clnr.label, clnr.id);
-                            //root.IsInitiallySelected = true;
-                            //root.IsChecked = true;
                             root.Tag = clnr;
                             root.TreeNodeChecked += TeeNode_TreeNodeChecked;
                             root.TreeNodeSelected += TreeNode_TreeNodeSelected;

@@ -198,10 +198,8 @@ namespace mCleaner.Logics.Commands
 
                     List<string> files = FileOperations.I.GetFilesRecursive(currPath, regex, (s) =>
                     {
-                        //if (!this.VMCleanerML.Cancel)
                         ProgressWorker.I.EnQ("Scanning directory " + s);
-                        //else
-                        //  ProgressWorker.I.EnQ("Operation Cancelled.");
+                        
                     });
 
                

@@ -4,43 +4,43 @@ namespace mCleaner.Model
 {
     public class Model_DuplicateChecker : ViewModelBase
     {
-        private Model_DuplicateChecker_FileDetails _FileDetails = new Model_DuplicateChecker_FileDetails();
+        private Model_DuplicateChecker_FileDetails _fileDetails = new Model_DuplicateChecker_FileDetails();
         public Model_DuplicateChecker_FileDetails FileDetails
         {
-            get { return _FileDetails; }
+            get { return _fileDetails; }
             set
             {
-                if (_FileDetails != value)
+                if (_fileDetails != value)
                 {
-                    _FileDetails = value;
+                    _fileDetails = value;
                     base.RaisePropertyChanged("FileDetails");
                 }
             }
         }
 
-        private bool _Selected = false;
+        private bool _selected = false;
         public bool Selected
         {
-            get { return _Selected; }
+            get { return _selected; }
             set
             {
-                if (_Selected != value)
+                if (_selected != value)
                 {
-                    _Selected = value;
+                    _selected = value;
                     base.RaisePropertyChanged("Selected");
                 }
             }
         }
 
-        private string _Hash = string.Empty;
+        private string _hash = string.Empty;
         public string Hash
         {
-            get { return _Hash; }
+            get { return _hash; }
             set
             {
-                if (_Hash != value)
+                if (_hash != value)
                 {
-                    _Hash = value;
+                    _hash = value;
                     base.RaisePropertyChanged("Hash");
                 }
             }
@@ -49,43 +49,25 @@ namespace mCleaner.Model
 
     public class Model_DuplicateChecker_FileDetails
     {
-        private string _Filename = string.Empty;
+        private string _filename = string.Empty;
         public string Filename
         {
-            get { return _Filename; }
-            set
-            {
-                if (_Filename != value)
-                {
-                    _Filename = value;
-                }
-            }
+            get { return _filename; }
+            set { _filename = value; }
         }
 
-        private string _Fullfilepath = string.Empty;
+        private string _fullfilepath = string.Empty;
         public string Fullfilepath
         {
-            get { return _Fullfilepath; }
-            set
-            {
-                if (_Fullfilepath != value)
-                {
-                    _Fullfilepath = value;
-                }
-            }
+            get { return _fullfilepath; }
+            set { _fullfilepath = value; }
         }
 
-        private string _ParentDirectory = string.Empty;
+        private string _parentDirectory = string.Empty;
         public string ParentDirectory
         {
-            get { return _ParentDirectory; }
-            set
-            {
-                if (_ParentDirectory != value)
-                {
-                    _ParentDirectory = value;
-                }
-            }
+            get { return _parentDirectory; }
+            set { _parentDirectory = value; }
         }
     }
 }

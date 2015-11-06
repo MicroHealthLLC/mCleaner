@@ -96,8 +96,12 @@ namespace mCleaner.Logics.Commands
                 }
                 await Task.Run(() => ScanPath(path));
             }
+            if (DupChecker.DupplicateCollection.Count > 0)
+            {
+                this.DupChecker.EnableRemoveDuplicates = true;
+                
+            }
 
-            this.DupChecker.EnableRemoveDuplicates = true;
             this.DupChecker.EnableScanFolder = true;
             this.DupChecker.EnableSelectFolder = true;
         }
@@ -109,7 +113,7 @@ namespace mCleaner.Logics.Commands
                        DupChecker.ProgressText="Retreiving files in: " + s;
             }));
 
-            Dictionary<string, List<string>> files_with_same_size = new Dictionary<string,List<string>>();
+            Dictionary<string, List<string>> files_with_same_size = new Dictionary<string, List<string>>(StringComparer.OrdinalIgnoreCase);
             DupChecker.ProgressText="Checking for same file size. This may take a while"; // to minimize work load looking for duplicate files
             this.DupChecker.ProgressMax = files.Count;
             this.DupChecker.ProgressIndex = 0;
@@ -148,7 +152,7 @@ namespace mCleaner.Logics.Commands
                             strKeytoAdd = fi.Name;
                         }
                         else
-                            strKeytoAdd = fi.Name;
+                            strKeytoAdd = fi.Length.ToString();
 
                         if (files_with_same_size.ContainsKey(strKeytoAdd))
                         {
@@ -313,7 +317,10 @@ namespace mCleaner.Logics.Commands
             files_to_hash.Clear();
             hashed_files.Clear();
             files_with_same_hash.Clear();
-            DupChecker.ProgressText ="Done click on remove duplicates to remove files.";
+            if (DupChecker.DupplicateCollection.Count > 0)
+                DupChecker.ProgressText = "Done. Select file(s) to be removed, then click on remove duplicates button.";
+            else
+                DupChecker.ProgressText = "Done. No duplicates found.";
         }
 
         public void Start(ObservableCollection<Model_DuplicateChecker> files, int operation = 0, BackgroundWorker bgWorker = null) // 0 = delete, 1 = move
@@ -360,9 +367,9 @@ namespace mCleaner.Logics.Commands
                             {
                                 DupChecker.ProgressText = "Moving file: " + fi.FullName + " to " + Settings.Default.DupChecker_DuplicateFolderPath;                                 string moveDir = Settings.Default.DupChecker_DuplicateFolderPath;
                                 moveDir = Path.Combine(moveDir, fi.Name);
-                                FileInfo fi_moveDir = new FileInfo(moveDir);
+                                FileInfo fiMoveDir = new FileInfo(moveDir);
 
-                                if (fi_moveDir.Exists)
+                                if (fiMoveDir.Exists)
                                 {
                                     fi.Delete();
                                 }

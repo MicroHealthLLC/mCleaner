@@ -139,10 +139,8 @@
                                 <Rectangle.Style>
                                     <Style TargetType="Rectangle">
                                         <Style.Triggers>
-                                            <DataTrigger Binding="{Binding ElementName=btnSafeCleaning , Path=IsEnabled}"
-                                     Value="False">
-                                                <Setter Property="Opacity"
-                                    Value="0.3" />
+                                            <DataTrigger Binding="{Binding ElementName=btnSafeCleaning , Path=IsEnabled}" Value="False">
+                                                <Setter Property="Opacity" Value="0.3" />
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
@@ -164,10 +162,8 @@
                                 <Rectangle.Style>
                                     <Style TargetType="Rectangle">
                                         <Style.Triggers>
-                                            <DataTrigger Binding="{Binding ElementName= btnModerateCleaningMenu, Path=IsEnabled}"
-                                     Value="False">
-                                                <Setter Property="Opacity"
-                                    Value="0.3" />
+                                            <DataTrigger Binding="{Binding ElementName= btnModerateCleaningMenu, Path=IsEnabled}" Value="False">
+                                                <Setter Property="Opacity" Value="0.3" />
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
@@ -189,10 +185,8 @@
                                 <Rectangle.Style>
                                     <Style TargetType="Rectangle">
                                         <Style.Triggers>
-                                            <DataTrigger Binding="{Binding ElementName=btnAggressiveCleaningMenu, Path=IsEnabled}"
-                                     Value="False">
-                                                <Setter Property="Opacity"
-                                    Value="0.3" />
+                                            <DataTrigger Binding="{Binding ElementName=btnAggressiveCleaningMenu, Path=IsEnabled}" Value="False">
+                                                <Setter Property="Opacity" Value="0.3" />
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
@@ -214,10 +208,8 @@
                                 <Rectangle.Style>
                                     <Style TargetType="Rectangle">
                                         <Style.Triggers>
-                                            <DataTrigger Binding="{Binding ElementName=btnRegistryeMenu, Path=IsEnabled}"
-                                     Value="False">
-                                                <Setter Property="Opacity"
-                                    Value="0.3" />
+                                            <DataTrigger Binding="{Binding ElementName=btnRegistryeMenu, Path=IsEnabled}" Value="False">
+                                                <Setter Property="Opacity" Value="0.3" />
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
@@ -239,10 +231,8 @@
                                 <Rectangle.Style>
                                     <Style TargetType="Rectangle">
                                         <Style.Triggers>
-                                            <DataTrigger Binding="{Binding ElementName=btnCustomCleanMenu, Path=IsEnabled}"
-                                     Value="False">
-                                                <Setter Property="Opacity"
-                                    Value="0.3" />
+                                            <DataTrigger Binding="{Binding ElementName=btnCustomCleanMenu, Path=IsEnabled}" Value="False">
+                                                <Setter Property="Opacity" Value="0.3" />
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
@@ -264,10 +254,8 @@
                                 <Rectangle.Style>
                                     <Style TargetType="Rectangle">
                                         <Style.Triggers>
-                                            <DataTrigger Binding="{Binding ElementName=btnPreviewMenu, Path=IsEnabled}"
-                                     Value="False">
-                                                <Setter Property="Opacity"
-                                    Value="0.3" />
+                                            <DataTrigger Binding="{Binding ElementName=btnPreviewMenu, Path=IsEnabled}" Value="False">
+                                                <Setter Property="Opacity" Value="0.3" />
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
@@ -290,10 +278,8 @@
                                 <Rectangle.Style>
                                     <Style TargetType="Rectangle">
                                         <Style.Triggers>
-                                            <DataTrigger Binding="{Binding ElementName=btnCleanNowMenu, Path=IsEnabled}"
-                                     Value="False">
-                                                <Setter Property="Opacity"
-                                    Value="0.3" />
+                                            <DataTrigger Binding="{Binding ElementName=btnCleanNowMenu, Path=IsEnabled}" Value="False">
+                                                <Setter Property="Opacity" Value="0.3" />
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
@@ -316,10 +302,8 @@
                                 <Rectangle.Style>
                                     <Style TargetType="Rectangle">
                                         <Style.Triggers>
-                                            <DataTrigger Binding="{Binding ElementName=btnCancelProcessMenu, Path=IsEnabled}"
-                                     Value="False">
-                                                <Setter Property="Opacity"
-                                    Value="0.3" />
+                                            <DataTrigger Binding="{Binding ElementName=btnCancelProcessMenu, Path=IsEnabled}" Value="False">
+                                                <Setter Property="Opacity" Value="0.3" />
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
@@ -343,10 +327,8 @@
                                 <Rectangle.Style>
                                     <Style TargetType="Rectangle">
                                         <Style.Triggers>
-                                            <DataTrigger Binding="{Binding ElementName=btnCleanDuplicatesMenu, Path=IsEnabled}"
-                                     Value="False">
-                                                <Setter Property="Opacity"
-                                    Value="0.3" />
+                                            <DataTrigger Binding="{Binding ElementName=btnCleanDuplicatesMenu, Path=IsEnabled}" Value="False">
+                                                <Setter Property="Opacity" Value="0.3" />
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
@@ -369,10 +351,8 @@
                                 <Rectangle.Style>
                                     <Style TargetType="Rectangle">
                                         <Style.Triggers>
-                                            <DataTrigger Binding="{Binding ElementName=btnUpdateVirusDefinationMenu, Path=IsEnabled}"
-                                     Value="False">
-                                                <Setter Property="Opacity"
-                                    Value="0.3" />
+                                            <DataTrigger Binding="{Binding ElementName=btnUpdateVirusDefinationMenu, Path=IsEnabled}" Value="False">
+                                                <Setter Property="Opacity" Value="0.3" />
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
@@ -395,10 +375,8 @@
                                 <Rectangle.Style>
                                     <Style TargetType="Rectangle">
                                         <Style.Triggers>
-                                            <DataTrigger Binding="{Binding ElementName=btnScanVirusMenu, Path=IsEnabled}"
-                                     Value="False">
-                                                <Setter Property="Opacity"
-                                    Value="0.3" />
+                                            <DataTrigger Binding="{Binding ElementName=btnScanVirusMenu, Path=IsEnabled}" Value="False">
+                                                <Setter Property="Opacity" Value="0.3" />
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
@@ -421,10 +399,8 @@
                                 <Rectangle.Style>
                                     <Style TargetType="Rectangle">
                                         <Style.Triggers>
-                                            <DataTrigger Binding="{Binding ElementName=btnScanMemoryVirusMenu, Path=IsEnabled}"
-                                     Value="False">
-                                                <Setter Property="Opacity"
-                                    Value="0.3" />
+                                            <DataTrigger Binding="{Binding ElementName=btnScanMemoryVirusMenu, Path=IsEnabled}" Value="False">
+                                                <Setter Property="Opacity" Value="0.3" />
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
@@ -448,10 +424,8 @@
                                 <Rectangle.Style>
                                     <Style TargetType="Rectangle">
                                         <Style.Triggers>
-                                            <DataTrigger Binding="{Binding ElementName=btnShredFilesMenu, Path=IsEnabled}"
-                                     Value="False">
-                                                <Setter Property="Opacity"
-                                    Value="0.3" />
+                                            <DataTrigger Binding="{Binding ElementName=btnShredFilesMenu, Path=IsEnabled}" Value="False">
+                                                <Setter Property="Opacity" Value="0.3" />
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
@@ -479,10 +453,8 @@
                                 <Rectangle.Style>
                                     <Style TargetType="Rectangle">
                                         <Style.Triggers>
-                                            <DataTrigger Binding="{Binding ElementName=btnMnuUninstaller, Path=IsEnabled}"
-                                     Value="False">
-                                                <Setter Property="Opacity"
-                                    Value="0.3" />
+                                            <DataTrigger Binding="{Binding ElementName=btnMnuUninstaller, Path=IsEnabled}" Value="False">
+                                                <Setter Property="Opacity" Value="0.3" />
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
@@ -585,7 +557,30 @@
                                                 <RadioButton IsChecked="{Binding DupChecker.IsMove, Mode=TwoWay}" Content="Move files" Tag="Move" x:Name="rbMoveFiles" GroupName="DupCheck_FileOperation" />
                                                 <RadioButton IsChecked="{Binding DupChecker.IsDelete, Mode=TwoWay}" Content="Delete files" Tag="Delete" x:Name="rbDeleteFiles" GroupName="DupCheck_FileOperation" />
                                                 <TextBlock Text=" " />
-                                                <Button x:Name="btnOK" Content="Remove Duplicates" Style="{DynamicResource ButtonStyle}" Command="{Binding DupChecker.Command_Start}" Visibility="Visible" IsEnabled="{Binding DupChecker.EnableRemoveDuplicates}" />
+                                                <Button  ToolTip="Remove Duplicates" Name="btnRemoveDuplicates" Command="{Binding DupChecker.Command_Start}" IsEnabled="{Binding DupChecker.EnableRemoveDuplicates}" >
+                                                    <StackPanel>
+
+                                                        <Rectangle  Fill="#4CAF50" Height="32" Width="32">
+                                                            <Rectangle.OpacityMask>
+                                                                <VisualBrush>
+                                                                    <VisualBrush.Visual>
+                                                                        <Image Width ="32" Height="32" Source="Assets/RemoveDuplicates.png" HorizontalAlignment="Center" />
+                                                                    </VisualBrush.Visual>
+                                                                </VisualBrush>
+                                                            </Rectangle.OpacityMask>
+                                                            <Rectangle.Style>
+                                                                <Style TargetType="Rectangle">
+                                                                    <Style.Triggers>
+                                                                        <DataTrigger Binding="{Binding ElementName=btnRemoveDuplicates, Path=IsEnabled}" Value="False">
+                                                                            <Setter Property="Opacity" Value="0.3" />
+                                                                        </DataTrigger>
+                                                                    </Style.Triggers>
+                                                                </Style>
+                                                            </Rectangle.Style>
+                                                        </Rectangle>
+                                                        <TextBlock Text="Remove Duplicates" HorizontalAlignment="Center"  TextWrapping="Wrap" TextAlignment="Center" Foreground="Black"/>
+                                                    </StackPanel>
+                                                </Button>
                                             </StackPanel>
                                         </Grid>
 
@@ -697,9 +692,36 @@
                                                 <TextBlock Text=" " />
                                                 <Button Content="Select Folders" Style="{StaticResource ButtonStyle}" Command="{Binding ShredWindow.Command_SelectFolders}" Visibility="Visible"/>
                                                 <TextBlock Text=" " />
-                                                <Button Content="Shred Recycle Bin" ToolTip="Shred the files in Recycle Bin" Style="{StaticResource ButtonStyle}" Command="{Binding ShredWindow.Command_ShredRecycleBin}" Visibility="Visible" />
+                                                <Button Content="Remove" Style="{StaticResource ButtonStyle}" IsEnabled="{Binding ShredWindow.btnIsListViewItemSelected}"  Command="{Binding ShredWindow.Command_RemoveFolder}" Visibility="Visible"/>
                                                 <TextBlock Text=" " />
-                                                <Button  Content="Start Shredding" Style="{DynamicResource ButtonStyle}" Command="{Binding ShredWindow.Command_ShredStart}" Visibility="Visible" IsEnabled="{Binding  ShredWindow.btnShreddingEnable}" />
+                                                <ToggleButton Content="{Binding ShredWindow.strSelectRecycleBinText}" ToolTip="Shred the files in Recycle Bin" Style="{StaticResource ToggleButtonStyle}" Command="{Binding ShredWindow.Command_ShredRecycleBin}" Visibility="Visible" />
+                                                <TextBlock Text=" " />
+                                                <Button  ToolTip="Start Shredding" Name="BtnStartShredding" Command="{Binding ShredWindow.Command_ShredStart}" IsEnabled="{Binding  ShredWindow.btnShreddingEnable}" >
+                                                    <StackPanel>
+
+                                                        <Rectangle  Fill="#081439" Height="32" Width="32">
+                                                            <Rectangle.OpacityMask>
+                                                                <VisualBrush>
+                                                                    <VisualBrush.Visual>
+                                                                        <Image Width ="32" Height="32" Source="Assets/shredder2.png" HorizontalAlignment="Center" />
+                                                                    </VisualBrush.Visual>
+                                                                </VisualBrush>
+                                                            </Rectangle.OpacityMask>
+                                                            <Rectangle.Style>
+                                                                <Style TargetType="Rectangle">
+                                                                    <Style.Triggers>
+                                                                        <DataTrigger Binding="{Binding ElementName=BtnStartShredding, Path=IsEnabled}"
+                                     Value="False">
+                                                                            <Setter Property="Opacity"
+                                    Value="0.3" />
+                                                                        </DataTrigger>
+                                                                    </Style.Triggers>
+                                                                </Style>
+                                                            </Rectangle.Style>
+                                                        </Rectangle>
+                                                        <TextBlock Text="Start Shredding" HorizontalAlignment="Center"  TextWrapping="Wrap" TextAlignment="Center" Foreground="Black"/>
+                                                    </StackPanel>
+                                                    </Button>
                                             </StackPanel>
                                         </Grid>
 
@@ -707,13 +729,14 @@
                                             <ListView Margin="5"
                           BorderThickness="0"
                           ItemsSource="{Binding ShredWindow.ShredFilesCollection}" AlternationCount="2"
-                          SelectedIndex="0">
+                          SelectedIndex="0" SelectedItem="{Binding ShredWindow.SelectedShredFile}" >
                                                 <ListView.View>
                                                     <GridView>
                                                         <GridViewColumn DisplayMemberBinding="{Binding FilePath }"
                                             Header="Folder\File Path"  />
                                                     </GridView>
                                                 </ListView.View>
+                                               
                                             </ListView>
                                         </Grid>
                                     </Grid>
@@ -782,7 +805,7 @@
                                         <Button x:Name="btnClose"  Content="Close" VerticalAlignment="Top" HorizontalAlignment="Right" Style="{StaticResource ButtonStyle}" Margin="0,0,10,0"  Command="{Binding Uninstaller.Command_CloseWindow}" />
                                     </Grid>
 
-                                    <Grid Grid.Row="1" Grid.Column="0" Background="{StaticResource DupChecker_Panel_FileOperation}" Visibility="{Binding DupChecker.FileOperationPanelShow, Converter={StaticResource boolTovis}}" Width="140">
+                                    <Grid Grid.Row="1" Grid.Column="0" Background="{StaticResource DupChecker_Panel_FileOperation}" Visibility="{Binding DupChecker.FileOperationPanelShow, Converter={StaticResource boolTovis}}" Width="160">
                                         <StackPanel Margin="5,20">
                                             <StackPanel.Resources>
                                                 <Style TargetType="{x:Type TextBlock}">
@@ -792,9 +815,32 @@
                                                     <Setter Property="Foreground" Value="{StaticResource DupChecker_Panel_FileOperation_Texts}" />
                                                 </Style>
                                             </StackPanel.Resources>
-                                            <Button x:Name="btnUninstall" Content="Uninstall" Style="{DynamicResource ButtonStyle}" IsEnabled="{Binding Uninstaller.BtnUninstall, Mode=TwoWay}" Command="{Binding Uninstaller.Command_UninstallProgram}" />
+                                            <Button x:Name="btnRefresh" Content="Refresh" IsEnabled="True"  Style="{DynamicResource ButtonStyle}" Command="{Binding Uninstaller.Command_Refresh}" />
                                             <TextBlock Text=" " />
-                                            <Button x:Name="btnRefresh" Content="Refresh" IsEnabled="True"  Style="{DynamicResource ButtonStyle}" Command="{Binding Uninstaller.Command_Refesh}" />
+                                            <Button  ToolTip="Uninstall Programs" Name="btnUninstall"  Command="{Binding Uninstaller.Command_UninstallProgram}" IsEnabled="{Binding Uninstaller.BtnUninstall, Mode=TwoWay}" >
+                                                <StackPanel>
+
+                                                    <Rectangle  Fill="#542702" Height="32" Width="32">
+                                                        <Rectangle.OpacityMask>
+                                                            <VisualBrush>
+                                                                <VisualBrush.Visual>
+                                                                    <Image Width ="32" Height="32" Source="Assets/Buttonuninstall.png" HorizontalAlignment="Center" />
+                                                                </VisualBrush.Visual>
+                                                            </VisualBrush>
+                                                        </Rectangle.OpacityMask>
+                                                        <Rectangle.Style>
+                                                            <Style TargetType="Rectangle">
+                                                                <Style.Triggers>
+                                                                    <DataTrigger Binding="{Binding ElementName=btnUninstall, Path=IsEnabled}" Value="False">
+                                                                        <Setter Property="Opacity" Value="0.3" />
+                                                                    </DataTrigger>
+                                                                </Style.Triggers>
+                                                            </Style>
+                                                        </Rectangle.Style>
+                                                    </Rectangle>
+                                                    <TextBlock Text="Uninstall" HorizontalAlignment="Center"  TextWrapping="Wrap" TextAlignment="Center" Foreground="Black"/>
+                                                </StackPanel>
+                                            </Button>
                                             <TextBlock Text=" " />
                                         </StackPanel>
                                     </Grid>
@@ -903,10 +949,33 @@
                                                 <Setter Property="Foreground" Value="{StaticResource DupChecker_Panel_FileOperation_Texts}" />
                                             </Style>
                                         </StackPanel.Resources>
-                                        <Button x:Name="btnStartClean" Content="Clean Now" Style="{DynamicResource ButtonStyle}" IsEnabled="{Binding Clam.EnableCleanNowButton}" Command="{Binding Clam.Command_CleanNow}"/>
-                                        <TextBlock Text=" " />
+                                        
                                         <Button x:Name="btnCancel" Content="_Cancel"  IsEnabled="{Binding Clam.EnableCancelButton}"  Style="{DynamicResource ButtonStyle}" Command="{Binding Clam.Command_CancelUpdate}" />
                                         <TextBlock Text=" " />
+                                        <Button  ToolTip="Clean Now" Name="btnStartClean"  IsEnabled="{Binding Clam.EnableCleanNowButton}" Command="{Binding Clam.Command_CleanNow}" >
+                                            <StackPanel>
+
+                                                <Rectangle  Fill="#8F71A5" Height="32" Width="32">
+                                                    <Rectangle.OpacityMask>
+                                                        <VisualBrush>
+                                                            <VisualBrush.Visual>
+                                                                <Image Width ="32" Height="32" Source="Assets/buttonantivirus.png" HorizontalAlignment="Center" />
+                                                            </VisualBrush.Visual>
+                                                        </VisualBrush>
+                                                    </Rectangle.OpacityMask>
+                                                    <Rectangle.Style>
+                                                        <Style TargetType="Rectangle">
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding ElementName=btnStartClean, Path=IsEnabled}" Value="False">
+                                                                    <Setter Property="Opacity" Value="0.3" />
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </Rectangle.Style>
+                                                </Rectangle>
+                                                <TextBlock Text="Clean Now" HorizontalAlignment="Center"  TextWrapping="Wrap" TextAlignment="Center" Foreground="Black"/>
+                                            </StackPanel>
+                                        </Button>
                                     </StackPanel>
                                 </Grid>
                                 <!-- main log panel -->
@@ -956,7 +1025,7 @@
                                 <StackPanel Width="250" HorizontalAlignment="Left">
                                     <TextBlock Text="mCleaner" Foreground="Black" FontSize="30"/>
                                     <TextBlock Text="A complete system cleaner for Windows!" />
-                                    <TextBlock>Copyright © 2015 <ctl:HyperlinkEx NavigateUri="http://www.microhealthllc.com">MicroHealth, LLC</ctl:HyperlinkEx></TextBlock>
+                                    <TextBlock>Copyright © 2015 <ctl:HyperlinkEx NavigateUri="https://www.microhealthllc.com">MicroHealth, LLC</ctl:HyperlinkEx></TextBlock>
                                     <TextBlock Text=" " />
                                 </StackPanel>
 

@@ -44,7 +44,7 @@
                                 <RichTextBox BorderThickness="0" IsReadOnly="True" IsDocumentEnabled="True">
                                     <FlowDocument>
                                         <Paragraph>
-                                            Copyright (C) 2015 MicroHealth, LLC
+                                            Copyright © 2015 MicroHealth, LLC
                                             <LineBreak />
                                             <LineBreak />
                                             This program is free software: you can redistribute it and/or modify
@@ -61,7 +61,7 @@
                                             <LineBreak />
                                             You should have received a copy of the GNU General Public License
                                             along with this program. If not, see
-                                            <ctl:HyperlinkEx NavigateUri="http://www.gnu.org/licenses">http://www.gnu.org/licenses.</ctl:HyperlinkEx>
+                                            <ctl:HyperlinkEx NavigateUri="http://www.gnu.org/licenses/gpl-3.0.html">http://www.gnu.org/licenses/gpl-3.0.html.</ctl:HyperlinkEx>
 
                                         </Paragraph>
                                     </FlowDocument>

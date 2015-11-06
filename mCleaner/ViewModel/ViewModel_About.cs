@@ -212,7 +212,7 @@ namespace mCleaner.ViewModel
             }
             catch (Exception ex)
             {
-                UpdateAvailableText = "An error occurred.Please check internet connection";
+                UpdateAvailableText = "An error occurred. Please check internet connection";
             }
         }
 
@@ -247,7 +247,6 @@ namespace mCleaner.ViewModel
                     webclient.DownloadFileCompleted += new AsyncCompletedEventHandler(client_DownloadFileCompleted);
                     webclient.DownloadFileAsync(new Uri(myAsset.BrowserDownloadUrl),
                         Path.Combine(Path.GetTempPath(), "mCleaner.zip"));
-                //thread.Start();
             }
             catch (Exception ex)
             {
@@ -294,10 +293,14 @@ namespace mCleaner.ViewModel
             if (e.Error == null)
             {
                 UpdateAvailableText = "Downloading Complete.";
-
                 UpdateButtonEnable = true;
                 var strZipDownloadingPath = Path.Combine(Path.GetTempPath(), "mCleaner.zip");
                 ExtractZipAndUpdate(strZipDownloadingPath);
+            }
+            else
+            {
+                UpdateAvailableText = "An error occured while downloading. Please try again.";
+                UpdateButtonEnable = true;
             }
             IsDownloadingRunning = false;
         }

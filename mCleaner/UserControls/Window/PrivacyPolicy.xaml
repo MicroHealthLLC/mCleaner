@@ -41,7 +41,6 @@
                     <TabControl.Items>
                         <TabItem Header="Privacy Policy">
                             <ScrollViewer>
-                                <!--<WebBrowser Source="https://www.microhealthllc.com/about/privacy-policy/" Name="MainBrowser"/>-->
                                 <RichTextBox BorderThickness="0" IsReadOnly="True" IsDocumentEnabled="True">
                                     <FlowDocument>
                                         <Paragraph>

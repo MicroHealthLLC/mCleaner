@@ -8,10 +8,10 @@
              
              DataContext="{Binding Source={StaticResource Locator}}"
              
-             d:DesignHeight="450" d:DesignWidth="700">
+             d:DesignHeight="457" d:DesignWidth="700">
     
     
-    <Border Width="700" Height="450" VerticalAlignment="Center" HorizontalAlignment="Center" BorderThickness="1" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}">
+    <Border Width="700" Height="457" VerticalAlignment="Center" HorizontalAlignment="Center" BorderThickness="1" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}">
         <Border.Effect>
             <DropShadowEffect Opacity="0.2" BlurRadius="10"/>
         </Border.Effect>
@@ -190,7 +190,7 @@
                                         </Grid.ColumnDefinitions>
 
                                         <TextBlock Text="Password" Grid.Column="0" />
-                                        <TextBox Text="{Binding Prefs.ProxyPassword, Mode=TwoWay}" Grid.Column="1" TextAlignment="Center" Margin="5,0" />
+                                        <PasswordBox Name="TxtPasswordbox" PasswordChanged="TxtPasswordbox_OnPasswordChanged"  PasswordChar="*" Grid.Column="1"  Margin="5,0" />
                                     </Grid>
                                 </StackPanel>
                             </TabItem>
@@ -231,7 +231,7 @@
                             <TabItem Header="Filters" Controls:ControlsHelper.HeaderFontSize="18">
                                 <StackPanel Margin="5">
                                     <TextBlock Text="Duplicate file search critera" />
-                                    <TextBlock Text="e.g. FileName and FileSize is selected then it will include the files only with same name and size." Opacity="0.70" />
+                                    <TextBlock Text="e.g When FileName and FileSize are selected, then it will only include the files with same name and size." Opacity="0.70" />
                                     <Grid Margin="5">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="220" />
@@ -275,10 +275,11 @@
                                     </Grid>
                                     <TextBlock Text="" />
                                     <TextBlock Text="File extension" />
-                                    <TextBlock Text="e.g. *.jpg;*.gif;*.exe and seprate extensions by semicolon" Opacity="0.70" />
+                                    <TextBlock Text="e.g. *.jpg;*.gif;*.exe and separate extensions by semicolon" Opacity="0.70" />
                                     <TextBox Text="{Binding Prefs.DupChecker_FileExtensions}" Margin="5,5" />
                                     <TextBlock Text="" />
                                     <TextBlock Text="Duplicate folder" />
+                                    <TextBlock Text="e.g. Used when 'Move files' option is selected for what to do with duplicate files." Opacity="0.70" />
                                     <Grid>
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*" />
@@ -286,7 +287,7 @@
                                         </Grid.ColumnDefinitions>
 
                                         <TextBox Text="{Binding Prefs.DupChecker_DuplicateFolderPath}" Margin="5,5" />
-                                        <Button Content="..." Grid.Column="1" Style="{StaticResource ButtonStyle}" Command="{Binding Prefs.Command_DupChecker_BrowseFolder}"/>
+                                        <Button Content="Browse" Grid.Column="1" Style="{StaticResource ButtonStyle}"  Command="{Binding Prefs.Command_DupChecker_BrowseFolder}"/>
                                     </Grid>
                                 </StackPanel>
                             </TabItem>

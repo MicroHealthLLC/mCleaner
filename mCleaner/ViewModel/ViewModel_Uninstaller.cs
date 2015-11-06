@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media.Imaging;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using mCleaner.Model;
@@ -23,15 +22,15 @@ namespace mCleaner.ViewModel
         private static extern IntPtr ExtractIcon(IntPtr hInst, string lpszExeFileName, int nIconIndex);
 
         #region properties
-        private ObservableCollection<Model_WindowsUninstaller> _ProgramCollection = new ObservableCollection<Model_WindowsUninstaller>();
+        private ObservableCollection<Model_WindowsUninstaller> _programCollection = new ObservableCollection<Model_WindowsUninstaller>();
         public ObservableCollection<Model_WindowsUninstaller> ProgramCollection
         {
-            get { return _ProgramCollection; }
+            get { return _programCollection; }
             set
             {
-                if (_ProgramCollection != value)
+                if (_programCollection != value)
                 {
-                    _ProgramCollection = value;
+                    _programCollection = value;
                     base.RaisePropertyChanged("ProgramCollection");
                 }
             }
@@ -45,15 +44,15 @@ namespace mCleaner.ViewModel
             }
         }
 
-        private bool _ShowWindow = false;
+        private bool _showWindow = false;
         public bool ShowWindow
         {
-            get { return _ShowWindow; }
+            get { return _showWindow; }
             set
             {
-                if (_ShowWindow != value)
+                if (_showWindow != value)
                 {
-                    _ShowWindow = value;
+                    _showWindow = value;
                     base.RaisePropertyChanged("ShowWindow");
                 }
             }
@@ -65,37 +64,44 @@ namespace mCleaner.ViewModel
            
         } 
 
-        private bool _BtnUninstall = false;
+        private bool _btnUninstall = false;
         public bool BtnUninstall
         {
-            get { return _BtnUninstall; }
+            get { return _btnUninstall; }
             set
             {
-                if (_BtnUninstall != value)
+                if (_btnUninstall != value)
                 {
-                    _BtnUninstall = value;
+                    _btnUninstall = value;
                     base.RaisePropertyChanged("BtnUninstall");
                 }
             }
         }
 
-        private Model_WindowsUninstaller _SelectedProgramDetails = new Model_WindowsUninstaller();
+        private Model_WindowsUninstaller _selectedProgramDetails = new Model_WindowsUninstaller();
         public Model_WindowsUninstaller SelectedProgramDetails
         {
-            get { return _SelectedProgramDetails; }
+            get { return _selectedProgramDetails; }
             set
             {
-                if (_SelectedProgramDetails != value)
+                if (_selectedProgramDetails != value)
                 {
-                    _SelectedProgramDetails = value;
-                    base.RaisePropertyChanged("Selected");
+                    _selectedProgramDetails = value;
+                    base.RaisePropertyChanged("SelectedProgramDetails");
                 }
             }
+        }
+
+        private bool _cancel = false;
+        public bool Cancel
+        {
+            get { return _cancel; }
+            set { _cancel = value; }
         }
         #endregion
 
         #region commands
-        public ICommand Command_Refesh { get; internal set; }
+        public ICommand Command_Refresh { get; internal set; }
         public ICommand Command_UninstallProgram { get; internal set; }
 
         public ICommand Command_ShowUninstaller { get; internal set; }
@@ -106,19 +112,28 @@ namespace mCleaner.ViewModel
         #region ctor
         public ViewModel_Uninstaller()
         {
-
             this.Command_ShowUninstaller = new RelayCommand(Command_ShowUninstaller_Click);
             this.Command_CloseWindow = new RelayCommand(Command_CloseWindow_Click);
-            this.Command_Refesh = new RelayCommand(Command_Refresh_Click);
+            this.Command_Refresh = new RelayCommand(Command_Refresh_Click);
             this.Command_UninstallProgram = new RelayCommand(Command_UninstallProgram_Click);
-            
-
         }
 
         public void Command_UninstallProgram_Click()
         {
             if (SelectedProgramDetails != null)
             {
+                bool blnIsmCleanerNeedsToClose = false;
+                if (SelectedProgramDetails.ProgramDetails.ProgramName.Equals("mCleaner",StringComparison.CurrentCultureIgnoreCase))
+                {
+                    if (MessageBox.Show("Are you about to uninstall the mCleaner to do this you need to close mCleaner. you want to continue?","mCleaner", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                    {
+                        blnIsmCleanerNeedsToClose = true;
+                    }
+                    else
+                        return;
+
+                }
+
                 var startInfo = new ProcessStartInfo
                 {
                     FileName = "cmd.exe",
@@ -131,7 +146,7 @@ namespace mCleaner.ViewModel
                 var process = new Process { StartInfo = startInfo };
 
                 process.Start();
-                if (!SelectedProgramDetails.ProgramDetails.UninstallString.StartsWith("\"") && !SelectedProgramDetails.ProgramDetails.UninstallString.EndsWith("\""))
+                if (!SelectedProgramDetails.ProgramDetails.UninstallString.StartsWith("MsiExec.exe",StringComparison.InvariantCultureIgnoreCase) && !SelectedProgramDetails.ProgramDetails.UninstallString.StartsWith("\"") && !SelectedProgramDetails.ProgramDetails.UninstallString.EndsWith("\""))
                     process.StandardInput.WriteLine("\""+SelectedProgramDetails.ProgramDetails.UninstallString+"\"");
                 else
                     process.StandardInput.WriteLine(SelectedProgramDetails.ProgramDetails.UninstallString);
@@ -139,7 +154,8 @@ namespace mCleaner.ViewModel
 
                 process.WaitForExit();
 
-
+                if(blnIsmCleanerNeedsToClose)
+                    Application.Current.Shutdown();
             }
         }
 
@@ -162,7 +178,7 @@ namespace mCleaner.ViewModel
             GetInstalledPrograms();
         }
 
-         const string registry_key = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall";
+         const string RegistryKey = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall";
 
          public void GetInstalledPrograms()
          {
@@ -174,17 +190,17 @@ namespace mCleaner.ViewModel
     private void GetInstalledProgramsFromRegistry(RegistryView registryView)
     {
 
-        using (RegistryKey key = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, registryView).OpenSubKey(registry_key))
+        using (RegistryKey key = Microsoft.Win32.RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, registryView).OpenSubKey(RegistryKey))
         {
-            foreach (string subkey_name in key.GetSubKeyNames())
+            foreach (string subkeyName in key.GetSubKeyNames())
             {
-                using (RegistryKey sk = key.OpenSubKey(subkey_name))
+                using (RegistryKey sk = key.OpenSubKey(subkeyName))
                 {
                     if (IsProgramVisible(sk))
                     {
                         var displayName = sk.GetValue("DisplayName");
                         var size = sk.GetValue("EstimatedSize",string.Empty);
-                        var Publisher = sk.GetValue("Publisher", string.Empty);
+                        var publisher = sk.GetValue("Publisher", string.Empty);
                         var strUninstallString = sk.GetValue("UninstallString", string.Empty);
                         var strVersion = sk.GetValue("DisplayVersion", string.Empty);
                         if (!string.IsNullOrEmpty(Convert.ToString(displayName)) && !string.IsNullOrEmpty(Convert.ToString(strUninstallString)))
@@ -194,7 +210,7 @@ namespace mCleaner.ViewModel
                             {
                                 ProgramName = displayName.ToString(),
                                 EstimatedSize = size.ToString(),
-                                PublisherName = Publisher.ToString(),
+                                PublisherName = publisher.ToString(),
                                 Version = strVersion.ToString(),
                                 UninstallString = strUninstallString.ToString(),
                             };
@@ -238,42 +254,12 @@ namespace mCleaner.ViewModel
             BtnUninstall = false;
         }
 
-        private static BitmapImage LoadImage(byte[] imageData)
-        {
-            if (imageData == null || imageData.Length == 0) return null;
-            var image = new BitmapImage();
-            using (var mem = new MemoryStream(imageData))
-            {
-                mem.Position = 0;
-                image.BeginInit();
-                image.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
-                image.CacheOption = BitmapCacheOption.OnLoad;
-                image.UriSource = null;
-                image.StreamSource = mem;
-                image.EndInit();
-            }
-            image.Freeze();
-            return image;
-        }
-
-
         #endregion
 
         #region methods
 
         #endregion
 
-        private bool _Cancel = false;
-        public bool Cancel
-        {
-            get { return _Cancel; }
-            set
-            {
-                if (_Cancel != value)
-                {
-                    _Cancel = value;
-                }
-            }
-        }
+       
     }
 }
