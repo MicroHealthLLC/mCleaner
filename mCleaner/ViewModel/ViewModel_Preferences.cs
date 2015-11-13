@@ -394,9 +394,8 @@ namespace mCleaner.ViewModel
             int nProxyPort = 0;
             if (!string.IsNullOrEmpty(ProxyPort) && !int.TryParse(this.ProxyPort, out nProxyPort))
             {
-                MessageBox.Show("Invaild proxy port plase enter valid numeric port.", "mCleaner", MessageBoxButton.OK,
-                    MessageBoxImage.Exclamation);
-                return;
+                MessageBox.Show("Invaild proxy port plase enter valid numeric port.", "mCleaner", MessageBoxButton.OK,MessageBoxImage.Exclamation);
+                    return;
             }
 
             if (Settings.Default.HideIrrelevantCleaners != this.HideIrrelevantCleaners)
@@ -404,10 +403,11 @@ namespace mCleaner.ViewModel
                 Settings.Default.HideIrrelevantCleaners = this.HideIrrelevantCleaners;
                 this.CleanerML._nodes.Clear();
                 this.CleanerML.GetCleaners();
+                this.CleanerML.txtCollapse = "Collapse All";
+                this.CleanerML.blnCollapseALL = true;
             }
 
             WriteSettings();
-            this.CleanerML.RefreshSystemCleaners();
             DupCheck.EnableScanFolder = Settings.Default.DupChecker_CustomPath.Count > 0;
             this.ShowWindow = false;
         }

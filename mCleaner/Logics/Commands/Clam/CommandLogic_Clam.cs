@@ -30,6 +30,7 @@ namespace mCleaner.Logics.Clam
         List<string> log = new List<string>();
 
         public bool isUpdate = false;
+        public bool blnIsCancel = false;
         bool IsRemove = false;
         #endregion
 
@@ -56,6 +57,7 @@ namespace mCleaner.Logics.Clam
                 return ServiceLocator.Current.GetInstance<ViewModel_CleanerML>();
             }
         }
+
         private action _Action = new action();
         public action Action
         {
@@ -131,7 +133,10 @@ namespace mCleaner.Logics.Clam
 
             if (this.Clam.InfectedFilesCollection.Count == 0)
             {
-                UpdateProgressLog("No virus found");
+                if(blnIsCancel)
+                    UpdateProgressLog("Operation Canceled.");
+                else
+                    UpdateProgressLog("No virus found");
                 this.Clam.EnableCleanNowButton = false;
                 this.Clam.EnableCancelButton = false;
                 this.Clam.EnableCloseButton = true;
@@ -217,59 +222,6 @@ namespace mCleaner.Logics.Clam
                     search = isRecursion ? SEARCH.clamscan_folder_recurse : SEARCH.clamscan_folder,
                     regex = Action.regex
                 });
-
-                //if (!isRecursion)
-                //{
-                //    IEnumerable<string> files = Directory.EnumerateFileSystemEntries(di.FullName);
-                //    List<string> files_to_scan = new List<string>();
-                //    foreach (string file in files)
-                //    {
-                //        if (Action.regex != null)
-                //        {
-                //            string regex = Action.regex;
-                //            RegexOptions options = ((RegexOptions.IgnorePatternWhitespace | RegexOptions.Multiline) | RegexOptions.IgnoreCase);
-                //            Regex reg = new Regex(regex, options);
-                //            if (reg.IsMatch(file))
-                //            {
-                //                files_to_scan.Add(file);
-                //            }
-                //        }
-                //        else
-                //        {
-                //            files_to_scan.Add(file);
-                //        }
-                //    }
-
-                //    foreach (string file in files_to_scan)
-                //    {
-                //        FileInfo fi = new FileInfo(file);
-                //        if (fi.Exists)
-                //        {
-                //            Worker.I.EnqueTTD(new Model_ThingsToDelete()
-                //            {
-                //                FullPathName = fi.FullName,
-                //                IsWhitelisted = false,
-                //                OverWrite = false,
-                //                WhatKind = THINGS_TO_DELETE.clamwin,
-                //                command = COMMANDS.clamscan,
-                //                search = SEARCH.clamscan_folder,
-                //                regex = Action.regex
-                //            });
-                //        }
-                //    }
-                //}
-                //else
-                //{
-                //    Worker.I.EnqueTTD(new Model_ThingsToDelete()
-                //    {
-                //        FullPathName = Action.path,
-                //        IsWhitelisted = false,
-                //        OverWrite = false,
-                //        WhatKind = THINGS_TO_DELETE.clamwin,
-                //        command = COMMANDS.clamscan,
-                //        search = SEARCH.clamscan_folder_recurse
-                //    });
-                //}
             }
         }
 
@@ -467,6 +419,8 @@ namespace mCleaner.Logics.Clam
             if (!this.update_process.HasExited)
             {
                 this.update_process.Kill();
+                blnIsCancel = true;
+                Clam.ProgressText = "Operation Canceled.";
                 UpdateProgressLog("Process terminated.");
             }
         }

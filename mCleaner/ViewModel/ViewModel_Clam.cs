@@ -91,6 +91,21 @@ namespace mCleaner.ViewModel
             }
         }
 
+         private string _infoTipText = string.Empty;
+        public string InfoTipText
+        {
+            get { return _infoTipText; }
+            set
+            {
+                if (_infoTipText != value)
+                {
+                    _infoTipText = value;
+                    base.RaisePropertyChanged("InfoTipText");
+                }
+            }
+        }
+
+
         private ObservableCollection<Model_VirusDetails> _infectedFilesCollection = new ObservableCollection<Model_VirusDetails>();
         public ObservableCollection<Model_VirusDetails> InfectedFilesCollection
         {
@@ -227,8 +242,10 @@ namespace mCleaner.ViewModel
             //MessageBox.Show("Scheduled for Sprint 3");
             //this.ShowClamWinVirusUpdateWindow = true;;
 
+            this.InfoTipText = "This will Scan PC for Virus.";
             this.ProgressIsIndeterminate = true;
             CommandLogic_Clam.I.isUpdate = false;
+            CommandLogic_Clam.I.blnIsCancel = false;
             CommandLogic_Clam.I.LaunchCleaner();
         }
 
@@ -252,6 +269,7 @@ namespace mCleaner.ViewModel
         public void Command_ScanMemory_Click()
         {
             //this.ShowClamWinVirusUpdateWindow = true;
+            this.InfoTipText = "This will Scan Memory for Virus.";
             this.ProgressIsIndeterminate = true;
             CleanerML.Run = false;
             CleanerML.ShowCleanerDescription = false;
@@ -260,6 +278,7 @@ namespace mCleaner.ViewModel
             CleanerML.btnCleaningOptionsEnable = false;
             CleanerML.ShowFrontPage = false;
             this.ShowClamWinVirusScanner = true;
+            CommandLogic_Clam.I.blnIsCancel = false;
             CommandLogic_Clam.I.isUpdate = false;
             CommandLogic_Clam.I.LaunchScanner(SEARCH.clamscan_memory, string.Empty, true);
         }

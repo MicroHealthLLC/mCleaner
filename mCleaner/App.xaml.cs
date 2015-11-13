@@ -28,6 +28,13 @@ namespace mCleaner
             if (e.Args.Length == 2 && e.Args[0] == "shred")
             {
                 StaticResources.strShredLocation = e.Args[1];
+                if (Directory.Exists(StaticResources.strShredLocation))
+                {
+                    var strSizeInMB = FileOperations.GetDirectorySizeInMB(StaticResources.strShredLocation);
+                    if (strSizeInMB > 64)
+                        if (MessageBox.Show("mCleaner can not shred more than 64 MB at a time if you still want to continue it can shred partial do you want to continue?","mCleaner", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
+                            Application.Current.Shutdown();
+                }
             }
             else
             {

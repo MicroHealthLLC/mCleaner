@@ -27,7 +27,9 @@
     <!--<action command="delete" search="file" path="~/.googleearth/Cache/dbCache.dat"/>
     <action command="delete" search="file" path="~/.googleearth/Cache/dbCache.dat.index"/>
     <action command="delete" search="walk.files" path="~/.googleearth/Temp"/>-->
-    <action command="delete" search="file" path="$USERPROFILE\Application Data\Google\GoogleEarth\dbCache.dat" level="2"/>
-    <action command="delete" search="file" path="$USERPROFILE\Application Data\Google\GoogleEarth\dbCache.dat.index" level="2"/>
+    <action command="delete" search="file" path="$USERPROFILE\AppData\LocalLow\Google\GoogleEarth\dbCache.dat" level="2"/>
+    <action command="delete" search="file" path="$USERPROFILE\AppData\LocalLow\Google\GoogleEarth\dbCache.dat.index" level="2"/>
+  <action command="delete" search="file" path="$USERPROFILE\AppData\Local\Google\GoogleEarth\dbCache.dat" level="2"/>
+    <action command="delete" search="file" path="$USERPROFILE\AppData\Local\Google\GoogleEarth\dbCache.dat.index" level="2"/>
   </option>
 </cleaner>

@@ -61,7 +61,7 @@
                             <Border Padding="5" Background="{StaticResource InfoTip_Background}">
                                 <StackPanel Orientation="Horizontal">
                                     <Image Height="80" Source="/mCleaner;component/Assets/infotip_customloc.png" HorizontalAlignment="Left" Margin="0,0,5,0" />
-                                    <TextBlock Text="These files and folders will be included for deletion if 'Custom Location' is selected" TextWrapping="Wrap" TextAlignment="Left" Width="350" />
+                                    <TextBlock Text="These files and folders will be included for deletion if 'Custom Location' is selected" TextWrapping="Wrap" TextAlignment="Left" Width="450" />
                                     
                                 </StackPanel>
                             </Border>

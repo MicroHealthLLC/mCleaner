@@ -481,8 +481,7 @@
 						ItemTemplate="{StaticResource CheckBoxItemTemplate}" 
 						ItemsSource="{Binding CleanerML.CleanersCollection, Mode=OneTime}"
                         BorderThickness="0"
-						x:Name="tvCleaners"
-                              />
+						x:Name="tvCleaners" />
                     </Grid>
 
                     <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" />
@@ -692,11 +691,11 @@
                                                 <TextBlock Text=" " />
                                                 <Button Content="Select Folders" Style="{StaticResource ButtonStyle}" Command="{Binding ShredWindow.Command_SelectFolders}" Visibility="Visible"/>
                                                 <TextBlock Text=" " />
-                                                <Button Content="Remove" Style="{StaticResource ButtonStyle}" IsEnabled="{Binding ShredWindow.btnIsListViewItemSelected}"  Command="{Binding ShredWindow.Command_RemoveFolder}" Visibility="Visible"/>
+                                                <Button Content="Remove" Style="{StaticResource ButtonStyle}" Name="btnRemoveShred" Click="BtnRemoveShred_OnClick"  IsEnabled="{Binding ShredWindow.btnIsListViewItemSelected}"  Visibility="Visible"/>
                                                 <TextBlock Text=" " />
-                                                <ToggleButton Content="{Binding ShredWindow.strSelectRecycleBinText}" ToolTip="Shred the files in Recycle Bin" Style="{StaticResource ToggleButtonStyle}" Command="{Binding ShredWindow.Command_ShredRecycleBin}" Visibility="Visible" />
+                                                <ToggleButton IsChecked="{Binding ShredWindow.btnShredRecycleBinEnable ,Mode=TwoWay}" Content="{Binding ShredWindow.strSelectRecycleBinText}" ToolTip="Shred the files in Recycle Bin" Style="{StaticResource ToggleButtonStyle}" Command="{Binding ShredWindow.Command_ShredRecycleBin}" Visibility="Visible" />
                                                 <TextBlock Text=" " />
-                                                <Button  ToolTip="Start Shredding" Name="BtnStartShredding" Command="{Binding ShredWindow.Command_ShredStart}" IsEnabled="{Binding  ShredWindow.btnShreddingEnable}" >
+                                                <Button  ToolTip="Start Shredding" Name="BtnStartShredding"  Command="{Binding ShredWindow.Command_ShredStart}" IsEnabled="{Binding  ShredWindow.btnShreddingEnable}" >
                                                     <StackPanel>
 
                                                         <Rectangle  Fill="#081439" Height="32" Width="32">
@@ -710,10 +709,8 @@
                                                             <Rectangle.Style>
                                                                 <Style TargetType="Rectangle">
                                                                     <Style.Triggers>
-                                                                        <DataTrigger Binding="{Binding ElementName=BtnStartShredding, Path=IsEnabled}"
-                                     Value="False">
-                                                                            <Setter Property="Opacity"
-                                    Value="0.3" />
+                                                                        <DataTrigger Binding="{Binding ElementName=BtnStartShredding, Path=IsEnabled}" Value="False">
+                                                                             <Setter Property="Opacity" Value="0.3" />
                                                                         </DataTrigger>
                                                                     </Style.Triggers>
                                                                 </Style>
@@ -726,13 +723,13 @@
                                         </Grid>
 
                                         <Grid Grid.Column="1" Grid.Row="2">
-                                            <ListView Margin="5"
-                          BorderThickness="0"
-                          ItemsSource="{Binding ShredWindow.ShredFilesCollection}" AlternationCount="2"
-                          SelectedIndex="0" SelectedItem="{Binding ShredWindow.SelectedShredFile}" >
+                                            <ListView Margin="5" Name="lvShredFolderPath"
+                                              BorderThickness="0"
+                                              ItemsSource="{Binding ShredWindow.ShredFilesCollection}" AlternationCount="2"
+                                              SelectedIndex="0" SelectedItem="{Binding ShredWindow.SelectedShredFile}"  >
                                                 <ListView.View>
                                                     <GridView>
-                                                        <GridViewColumn DisplayMemberBinding="{Binding FilePath }"
+                                                        <GridViewColumn DisplayMemberBinding="{Binding FilePath }" Width="500" 
                                             Header="Folder\File Path"  />
                                                     </GridView>
                                                 </ListView.View>
@@ -912,89 +909,85 @@
                         
                         <!-- ClamAV Virus Scan  -->
                         <Grid Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" Visibility="{Binding Clam.ShowClamWinVirusScanner, Converter={StaticResource boolTovis}}" >
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="auto" />
-                                    <RowDefinition Height="*" />
-                                    <RowDefinition Height="auto" />
-                                </Grid.RowDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="auto" />
+                            </Grid.RowDefinitions>
 
-                                <!-- header -->
-                                <Grid Grid.Row="0" Margin="5" Grid.ColumnSpan="2">
+                            <Grid Grid.Row="0" Margin="5">
+                                <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="auto" />
                                         <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="auto" />
                                     </Grid.ColumnDefinitions>
 
-                                    <Image Width="48" Height="48" Source="Assets/clamwin.png" Grid.Column="0" VerticalAlignment="Center" />
-                                    <StackPanel Grid.Column="1" Margin="10,0,0,0" VerticalAlignment="Top">
-                                        <TextBlock Text="{Binding Clam.WindowTitle}" FontSize="18" FontWeight="Bold" />
-                                        <TextBlock Text="Powered by ClamAV" FontSize="10" />
-                                    </StackPanel>
-                                    <Button x:Name="btnClamAVClose" Grid.Column="2" Content="C_lose" Margin="5,5" Command="{Binding Clam.Command_CloseWindow}" Style="{StaticResource ButtonStyle}" VerticalAlignment="Top" HorizontalAlignment="Right" IsEnabled="{Binding Clam.EnableCloseButton}" />
-                                    
-                                </Grid>
-                                <Grid Grid.Row="1" Grid.Column="0" Background="{StaticResource DupChecker_Panel_FileOperation}" Width="140">
-                                    <StackPanel Margin="5,20">
-                                        <StackPanel.Resources>
-                                            <Style TargetType="{x:Type TextBlock}">
-                                                <Setter Property="Foreground" Value="{StaticResource DupChecker_Panel_FileOperation_Texts}" />
-                                            </Style>
-                                            <Style TargetType="{x:Type RadioButton}">
-                                                <Setter Property="Foreground" Value="{StaticResource DupChecker_Panel_FileOperation_Texts}" />
-                                            </Style>
-                                        </StackPanel.Resources>
-                                        
-                                        <Button x:Name="btnCancel" Content="_Cancel"  IsEnabled="{Binding Clam.EnableCancelButton}"  Style="{DynamicResource ButtonStyle}" Command="{Binding Clam.Command_CancelUpdate}" />
-                                        <TextBlock Text=" " />
-                                        <Button  ToolTip="Clean Now" Name="btnStartClean"  IsEnabled="{Binding Clam.EnableCleanNowButton}" Command="{Binding Clam.Command_CleanNow}" >
-                                            <StackPanel>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="auto" />
+                                    </Grid.RowDefinitions>
 
-                                                <Rectangle  Fill="#8F71A5" Height="32" Width="32">
-                                                    <Rectangle.OpacityMask>
-                                                        <VisualBrush>
-                                                            <VisualBrush.Visual>
-                                                                <Image Width ="32" Height="32" Source="Assets/buttonantivirus.png" HorizontalAlignment="Center" />
-                                                            </VisualBrush.Visual>
-                                                        </VisualBrush>
-                                                    </Rectangle.OpacityMask>
-                                                    <Rectangle.Style>
-                                                        <Style TargetType="Rectangle">
-                                                            <Style.Triggers>
-                                                                <DataTrigger Binding="{Binding ElementName=btnStartClean, Path=IsEnabled}" Value="False">
-                                                                    <Setter Property="Opacity" Value="0.3" />
-                                                                </DataTrigger>
-                                                            </Style.Triggers>
-                                                        </Style>
-                                                    </Rectangle.Style>
-                                                </Rectangle>
-                                                <TextBlock Text="Clean Now" HorizontalAlignment="Center"  TextWrapping="Wrap" TextAlignment="Center" Foreground="Black"/>
-                                            </StackPanel>
-                                        </Button>
-                                    </StackPanel>
-                                </Grid>
-                                <!-- main log panel -->
-                                <Grid Grid.Column="1" Grid.Row="1">
+                                    <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,0,5">
+                                        <Border Padding="5" Background="{StaticResource InfoTip_Background}">
+                                            <TextBlock>
+                                        <Run Text="{Binding Clam.InfoTipText}" />
+                                            </TextBlock>
+                                        </Border>
+                                        <Button x:Name="btnClamAVClose"  Content="Close" VerticalAlignment="Top" HorizontalAlignment="Right" Style="{StaticResource ButtonStyle}" Margin="0,0,10,0"  Command="{Binding Clam.Command_CloseWindow}" />
+                                    </Grid>
+                                    <Grid Grid.Row="1" Grid.ColumnSpan="2" Margin="0,0,0,5">
+                                            <ProgressBar IsIndeterminate="{Binding Clam.ProgressIsIndeterminate}" Style="{StaticResource ProgressBarStyle}" />
+                                        <TextBlock Text="{Binding Clam.ProgressText}" Margin="0,5" TextAlignment="Center" />
+                                    </Grid>
+
+                                    <Grid Grid.Row="2" Grid.Column="0" Background="{StaticResource DupChecker_Panel_FileOperation}" Width="140">
+                                        <StackPanel Margin="5,20">
+                                            <StackPanel.Resources>
+                                                <Style TargetType="{x:Type TextBlock}">
+                                                    <Setter Property="Foreground" Value="{StaticResource DupChecker_Panel_FileOperation_Texts}" />
+                                                </Style>
+                                                <Style TargetType="{x:Type RadioButton}">
+                                                    <Setter Property="Foreground" Value="{StaticResource DupChecker_Panel_FileOperation_Texts}" />
+                                                </Style>
+                                            </StackPanel.Resources>
+
+                                            <Button x:Name="btnCancel" Content="_Cancel"  IsEnabled="{Binding Clam.EnableCancelButton}"  Style="{DynamicResource ButtonStyle}" Command="{Binding Clam.Command_CancelUpdate}" />
+                                            <TextBlock Text=" " />
+                                            <Button  ToolTip="Clean Now" Name="btnStartClean"  IsEnabled="{Binding Clam.EnableCleanNowButton}" Command="{Binding Clam.Command_CleanNow}" >
+                                                <StackPanel>
+
+                                                    <Rectangle  Fill="#8F71A5" Height="32" Width="32">
+                                                        <Rectangle.OpacityMask>
+                                                            <VisualBrush>
+                                                                <VisualBrush.Visual>
+                                                                    <Image Width ="32" Height="32" Source="Assets/buttonantivirus.png" HorizontalAlignment="Center" />
+                                                                </VisualBrush.Visual>
+                                                            </VisualBrush>
+                                                        </Rectangle.OpacityMask>
+                                                        <Rectangle.Style>
+                                                            <Style TargetType="Rectangle">
+                                                                <Style.Triggers>
+                                                                    <DataTrigger Binding="{Binding ElementName=btnStartClean, Path=IsEnabled}" Value="False">
+                                                                        <Setter Property="Opacity" Value="0.3" />
+                                                                    </DataTrigger>
+                                                                </Style.Triggers>
+                                                            </Style>
+                                                        </Rectangle.Style>
+                                                    </Rectangle>
+                                                    <TextBlock Text="Clean Now" HorizontalAlignment="Center"  TextWrapping="Wrap" TextAlignment="Center" Foreground="Black"/>
+                                                </StackPanel>
+                                            </Button>
+                                        </StackPanel>
+                                    </Grid>
+                                    <!-- main log panel -->
+                                <Grid Grid.Column="1" Grid.Row="2">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="auto" />
                                         <RowDefinition Height="auto" />
                                         <RowDefinition Height="*" />
                                     </Grid.RowDefinitions>
                                     <!--<Button x:Name="btnClamAVClose" Content="C_lose" Margin="5,5" Command="{Binding Clam.Command_CloseWindow}" Style="{StaticResource ButtonStyle}" IsEnabled="{Binding Clam.EnableCloseButton}" />-->
-                                    <Grid Grid.Row="0">
-                                        <ProgressBar IsIndeterminate="{Binding Clam.ProgressIsIndeterminate}" Style="{StaticResource ProgressBarStyle}" />
-                                        <TextBlock Text="{Binding Clam.ProgressText}" Margin="0,5" TextAlignment="Center" />
-                                    </Grid>
-
-                                    <Border Padding="5" Background="{StaticResource InfoTip_Background}" Grid.Row="1">
-                                        <TextBlock Text="Below are the list of infected files" TextAlignment="Left" />
-                                    </Border>
-
                                     <ListView Grid.Row="2" ItemsSource="{Binding Clam.InfectedFilesCollection}" ItemContainerStyle="{StaticResource ListViewItemStyle}">
                                         <ListView.View>
                                             <GridView>
@@ -1006,6 +999,7 @@
                                     </ListView>
                                 </Grid>
                             </Grid>
+                        </Grid>
                         </Grid>
                         <!-- front page -->
                         <Border x:Name="gridMain" Margin="0" Visibility="{Binding CleanerML.ShowFrontPage, Converter={StaticResource boolTovis}}">

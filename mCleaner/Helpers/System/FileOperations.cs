@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
+using mCleaner.Logics.Commands;
 using mCleaner.Properties;
 
 namespace mCleaner.Helpers
@@ -726,16 +728,18 @@ namespace mCleaner.Helpers
         public static void Delete(string filename)
         {
             FileInfo fi = new FileInfo(filename);
-
-            if (fi.Exists)
+            if (!CommandLogic_Delete.I.IsWhitelisted(fi.FullName))
             {
-                if (Settings.Default.ShredFiles)
+                if (fi.Exists)
                 {
-                    WipeFile(fi.FullName, 5);
-                }
-                else
-                {
-                    fi.Delete();
+                    if (Settings.Default.ShredFiles)
+                    {
+                        WipeFile(fi.FullName, 5);
+                    }
+                    else
+                    {
+                        fi.Delete();
+                    }
                 }
             }
         }
@@ -840,6 +844,11 @@ namespace mCleaner.Helpers
             }
 
             return sb.ToString();
+        }
+
+        public static long GetDirectorySizeInMB(string parentDirectory)
+        {
+            return (new DirectoryInfo(parentDirectory).GetFiles("*.*", SearchOption.AllDirectories).Sum(file => file.Length))/(1024 * 1024);
         }
     }
 }

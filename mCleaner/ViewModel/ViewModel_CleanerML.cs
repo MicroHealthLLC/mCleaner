@@ -1438,9 +1438,6 @@ namespace mCleaner.ViewModel
             root.Children = new List<TreeNode>();
 
             c.option.Add(MicrosoftWindows.AddClipboardCleaner());
-            //c.option.Add(AddClamAVCustomLocationsToTTD());
-            c.option.Add(MicrosoftWindows.AddCustomLocationsToTTD());
-            //c.option.Add(AddDuplicateCheckerCleaner());
 
             // deep scan options
             c.option.Add(MicrosoftWindows.AddDeepScan_Backup_Cleaner());

@@ -13,6 +13,8 @@ using mCleaner.Properties;
 using mCleaner.ViewModel;
 using MahApps.Metro.Controls;
 using Microsoft.Practices.ServiceLocation;
+using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace mCleaner
 {
@@ -38,6 +40,14 @@ namespace mCleaner
             get
             {
                 return ServiceLocator.Current.GetInstance<ViewModel_DuplicateChecker>();
+            }
+        }
+
+        public ViewModel_Shred Shred
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<ViewModel_Shred>();
             }
         }
         public MainWindow()
@@ -67,6 +77,7 @@ namespace mCleaner
 
         void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
+            Trace.WriteLine("Application Loaded");
             CleanerML.CommandCollapseAllClick();
             BackgroundWorker bgCheckforUpdatesWorker=new BackgroundWorker();
             bgCheckforUpdatesWorker.DoWork += new DoWorkEventHandler(bgCheckforUpdatesWorker_DoWork);
@@ -79,7 +90,8 @@ namespace mCleaner
                     CommandLogic_Clam.I.LaunchUpdater();
                 }
                 else // none
-                {   // then check if it requires an update at startup
+                {
+                    // then check if it requires an update at startup
                     if (Settings.Default.ClamWin_UpdateDBAtStartup)
                     {
                         CommandLogic_Clam.I.LaunchUpdater();
@@ -89,19 +101,22 @@ namespace mCleaner
             }
             else
             {
-                ServiceLocator.Current.GetInstance<ViewModel_Shred>().Command_ShowWindow_Click();
-                ServiceLocator.Current.GetInstance<ViewModel_Shred>().ShredFilesCollection.Add(new Model_Shred() { FilePath = StaticResources.strShredLocation });
-                ServiceLocator.Current.GetInstance<ViewModel_Shred>().Command_ShredStart_Click();
-                  FileAttributes attr = File.GetAttributes(StaticResources.strShredLocation);
-                  if (attr.HasFlag(FileAttributes.Directory))
-                  {
-                      MessageBox.Show("Shredding is done successfully for the folder: " + StaticResources.strShredLocation,"mCleaner",MessageBoxButton.OK,MessageBoxImage.Information);
-                  }
-                  else
-                      MessageBox.Show("Shredding is done successfully for file : " + StaticResources.strShredLocation, "mCleaner", MessageBoxButton.OK, MessageBoxImage.Information);
-                      
+                Shred.Command_ShowWindow_Click();
+                Shred.BlnIsApplicationNeedtoClose = true;
+                Shred.ShredFilesCollection.Add(new Model_Shred() {FilePath = StaticResources.strShredLocation});
+                Shred.Command_ShredStart_Click();
+                FileAttributes attr = File.GetAttributes(StaticResources.strShredLocation);
+                if (attr.HasFlag(FileAttributes.Directory))
+                {
+                    MessageBox.Show(
+                        "Shredding is done successfully for the folder: " + StaticResources.strShredLocation, "mCleaner",
+                        MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                else
+                    MessageBox.Show("Shredding is done successfully for file : " + StaticResources.strShredLocation,
+                        "mCleaner", MessageBoxButton.OK, MessageBoxImage.Information);
 
-                  Application.Current.Shutdown();
+                Application.Current.Shutdown();
             }
 
             ProgressWorker.I.Start();
@@ -185,6 +200,18 @@ namespace mCleaner
         {
             if (btnUninstall != null)
                 btnUninstall.IsEnabled = true;
+        }
+
+        private void BtnRemoveShred_OnClick(object sender, RoutedEventArgs e)
+        {
+            List<Model_Shred> lstSelectedItems = new List<Model_Shred>();
+
+            foreach (Model_Shred item in lvShredFolderPath.SelectedItems)
+            {
+                lstSelectedItems.Add(item);
+            }
+
+            Shred.Command_RemoveFolder_Click(lstSelectedItems);
         }
     }
 }

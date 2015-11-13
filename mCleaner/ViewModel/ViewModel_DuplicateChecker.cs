@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -274,6 +275,7 @@ namespace mCleaner.ViewModel
 
         public void Command_CheckDuplicate_Click()
         {
+            Trace.WriteLine("Check Duplicates Started.");
             CommandLogic_DuplicateChecker.I.CheckDuplicates();
 
             this.EnableRemoveDuplicates = false;

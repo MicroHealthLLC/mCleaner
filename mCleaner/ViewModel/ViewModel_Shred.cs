@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
@@ -9,6 +10,7 @@ using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using mCleaner.Helpers;
+using mCleaner.Logics.Commands;
 using mCleaner.Model;
 using Microsoft.Practices.ServiceLocation;
 using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
@@ -72,6 +74,20 @@ namespace mCleaner.ViewModel
             }
         }
 
+        private bool _blnIsApplicationNeedtoClose = false;
+
+        public bool BlnIsApplicationNeedtoClose
+        {
+            get { return _blnIsApplicationNeedtoClose; }
+            set
+            {
+                if (_blnIsApplicationNeedtoClose != value)
+                {
+                    _blnIsApplicationNeedtoClose = value;
+                    base.RaisePropertyChanged("BlnIsApplicationNeedtoClose");
+                }
+            }
+        }
 
 
 
@@ -109,6 +125,7 @@ namespace mCleaner.ViewModel
             }
         }
 
+       
         private int _progressMax = 0;
 
         public int ProgressMax
@@ -181,6 +198,7 @@ namespace mCleaner.ViewModel
                 {
                     _btnShredRecycleBinEnable = value;
                     base.RaisePropertyChanged("btnShredRecycleBinEnable");
+                    strSelectRecycleBinText = _btnShredRecycleBinEnable ? "Remove Recycle Bin" : "Select Recycle Bin";
                 }
             }
         }
@@ -247,7 +265,7 @@ namespace mCleaner.ViewModel
 
         public ICommand Command_ShredStart { get; set; }
         public ICommand Command_SelectFiles { get; set; }
-        public ICommand Command_RemoveFolder { get; set; }
+        //public ICommand Command_RemoveFolder { get; set; }
         public ICommand Command_SelectFolders { get; set; }
         public ICommand Command_ShredRecycleBin { get; set; }
         public ICommand Command_ShowWindow { get; set; }
@@ -266,7 +284,7 @@ namespace mCleaner.ViewModel
                 Command_ShredStart = new RelayCommand(() => Command_ShredStart_Click());
                 Command_ShowWindow = new RelayCommand(Command_ShowWindow_Click);
                 Command_SelectFiles = new RelayCommand(Command_SelectFiles_Click);
-                Command_RemoveFolder = new RelayCommand(Command_RemoveFolder_Click);
+                //Command_RemoveFolder = new RelayCommand(Command_RemoveFolder_Click);
                 Command_SelectFolders = new RelayCommand(Command_SelectFolder_Click);
                 Command_ShredRecycleBin = new RelayCommand(Command_ShredRecycleBin_Click);
                 Command_CloseWindow = new RelayCommand(Command_CloseWindow_Click);
@@ -290,11 +308,19 @@ namespace mCleaner.ViewModel
 
 
 
-        public void Command_RemoveFolder_Click()
+        public void Command_RemoveFolder_Click(List<Model_Shred> selectedItems)
         {
-            if (SelectedShredFile != null)
+            if (selectedItems.Count>0)
             {
-                ShredFilesCollection.Remove(SelectedShredFile);
+                foreach (Model_Shred shredItem in selectedItems)
+                {
+                    if (shredItem.FilePath == "Recycle Bin")
+                        btnShredRecycleBinEnable = false;
+
+                    ShredFilesCollection.Remove(shredItem); 
+                    
+                }
+
                 if (ShredFilesCollection.Count <= 0)
                     btnShreddingEnable = false;
             }
@@ -314,7 +340,7 @@ namespace mCleaner.ViewModel
                 {
                     foreach (string file in ofd.FileNames)
                     {
-                        if (!this.ShredFilesCollection.Where(dc => dc.FilePath == file).Any())
+                        if (!this.ShredFilesCollection.Any(dc => dc.FilePath == file))
                         {
                             this.ShredFilesCollection.Add(new Model_Shred() {FilePath = file});
                             btnShreddingEnable = true;
@@ -343,7 +369,6 @@ namespace mCleaner.ViewModel
 
         public void Command_ShredRecycleBin_Click()
         {
-            btnShredRecycleBinEnable = !btnShredRecycleBinEnable;
             strSelectRecycleBinText = btnShredRecycleBinEnable ? "Remove Recycle Bin" : "Select Recycle Bin";
             btnShreddingEnable = true;
             if (btnShredRecycleBinEnable)
@@ -390,7 +415,7 @@ namespace mCleaner.ViewModel
 
         private void StartShredding()
         {
-            btnShreddingEnable = true;
+            btnShreddingEnable = false;
             Wipe wiper = new Wipe();
             wiper.WipeErrorEvent += Wiper_WipeErrorEvent;
             wiper.PassInfoEvent += Wiper_PassInfoEvent;
@@ -406,18 +431,26 @@ namespace mCleaner.ViewModel
                     if (attr.HasFlag(FileAttributes.Directory))
                     {
                         this.ProgressText = "Started to Shred Folder" + MdlShared.FilePath + " Please Wait.";
+                        bool blndeleteFolder = true;
                         foreach (string file in Directory.EnumerateFiles(MdlShared.FilePath, "*.*", SearchOption.AllDirectories))
                         {
                             this.ProgressText = "Started to Shred File " + file + " inside folder " + MdlShared.FilePath +
                                                 " Please Wait.";
-                            wiper.WipeFile(file, 2);
+                            if (!CommandLogic_Delete.I.IsWhitelisted(file))
+                                    wiper.WipeFile(file, 2);
+                            else
+                            {
+                                blndeleteFolder = false;
+                            }
                         }
-                        Directory.Delete(MdlShared.FilePath, true);
+                        if(blndeleteFolder)
+                            Directory.Delete(MdlShared.FilePath, true);
                     }
                     else
                     {
                         this.ProgressText = "Started to Shred File " + MdlShared.FilePath + " Please Wait.";
-                        wiper.WipeFile(MdlShared.FilePath, 2);
+                        if (!CommandLogic_Delete.I.IsWhitelisted(MdlShared.FilePath))
+                                wiper.WipeFile(MdlShared.FilePath, 2);
                     }
                 }
 
@@ -437,7 +470,7 @@ namespace mCleaner.ViewModel
             }
 
 
-            btnShreddingEnable = true;
+            btnShreddingEnable = false;
             this.ProgressText = "Shredding is done.";
         }
 

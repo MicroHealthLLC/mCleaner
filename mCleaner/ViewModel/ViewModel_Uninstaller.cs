@@ -125,7 +125,7 @@ namespace mCleaner.ViewModel
                 bool blnIsmCleanerNeedsToClose = false;
                 if (SelectedProgramDetails.ProgramDetails.ProgramName.Equals("mCleaner",StringComparison.CurrentCultureIgnoreCase))
                 {
-                    if (MessageBox.Show("Are you about to uninstall the mCleaner to do this you need to close mCleaner. you want to continue?","mCleaner", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                    if (MessageBox.Show("mCleaner needs to close to be uninstalled. Do you want to continue?", "mCleaner", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                     {
                         blnIsmCleanerNeedsToClose = true;
                     }

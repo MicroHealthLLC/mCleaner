@@ -39,9 +39,4 @@
     <action command="winreg" path="HKCU\Software\Adobe\Acrobat Reader\8.0\AVGeneral\cRecentFiles" level="1"/>
     <action command="winreg" path="HKCU\Software\Adobe\Acrobat Reader\9.0\AVGeneral\cRecentFiles" level="1"/>
   </option>
-  <option id="tmp" level="1">
-    <label>Temporary files</label>
-    <description>Delete the temporary files</description>
-    <action command="delete" search="glob" path="/dev/shm/sem.ADBE_*_$LOGNAME" level="1"/>
-  </option>
 </cleaner>
