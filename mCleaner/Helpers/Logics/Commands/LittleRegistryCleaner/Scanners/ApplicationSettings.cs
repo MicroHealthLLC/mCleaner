@@ -37,6 +37,7 @@ namespace mCleaner.Logics.Commands.LittleRegistryCleaner.Scanners
             {
                 using (RegistryKey key = k.Root.OpenSubKey(k.Subkey, true))
                 {
+                    BackUpRegistrykey(k);
                     key.DeleteSubKey(k.Key);
                 }
             }

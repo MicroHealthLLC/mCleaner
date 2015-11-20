@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using mCleaner.Helpers;
 using mCleaner.Helpers.Data;
@@ -140,9 +142,13 @@ namespace mCleaner.Logics
             }
         }
 
-        void bgWorker_DoWork(object sender, DoWorkEventArgs e)
+        async void bgWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             string last_Log = string.Empty;
+            string strBackUpFolderName = DateTime.Now.ToString("yyyyMMddHHmmss");
+            string strRegistryDatSaveFolderPath = Path.Combine(Environment.GetEnvironmentVariable("APPDATA"), "mCleaner\\RegistryBackups\\" + strBackUpFolderName);
+            if (!Directory.Exists(strRegistryDatSaveFolderPath))
+                Directory.CreateDirectory(strRegistryDatSaveFolderPath);
 
             while (this.TTD.Count != 0)
             {
@@ -204,7 +210,7 @@ namespace mCleaner.Logics
 
                         #region // little registry cleaner
                         case COMMANDS.littleregistry:
-                            ExecuteLittleRegistryCleanerCommand(ttd, false);
+                          await ExecuteLittleRegistryCleanerCommand(ttd,strRegistryDatSaveFolderPath, false);
                             break;
                         #endregion
 
@@ -223,7 +229,30 @@ namespace mCleaner.Logics
                     #endregion
                 }
             }
+            if (!Preview && dtThingsDeleted != null && dtThingsDeleted.Rows.Count > 0)
+            {
+                string strRegistryFolderPath = Path.Combine(Environment.GetEnvironmentVariable("APPDATA"), "mCleaner\\RegistryBackups\\XMLInfo");
+                if (!Directory.Exists(strRegistryFolderPath))
+                    Directory.CreateDirectory(strRegistryFolderPath);
+                
+                DirectoryInfo di = new DirectoryInfo(strRegistryFolderPath);
+                FileSystemInfo[] files = di.GetFileSystemInfos();
+                var orderedFiles = files.OrderBy(f => f.Name);
+                if (orderedFiles.Count() > 4)
+                {
+                    orderedFiles.First().Delete();
+                   var strDirectory= Path.Combine(Environment.GetEnvironmentVariable("APPDATA"),"mCleaner\\RegistryBackups\\" + Path.GetFileNameWithoutExtension(orderedFiles.First().Name));
+                    if(Directory.Exists(strDirectory))
+                        Directory.Delete(strDirectory);
+                }
+                    
+               
+                dtThingsDeleted.WriteXml(Path.Combine(strRegistryFolderPath, strBackUpFolderName + ".mCleanerBak"),XmlWriteMode.WriteSchema);
+                dtThingsDeleted = null;
+            }
         }
+
+
         #endregion
 
         #region methods
@@ -295,7 +324,7 @@ namespace mCleaner.Logics
 
                     #region // little registry cleaner
                     case COMMANDS.littleregistry:
-                        await Task.Run(() => ExecuteLittleRegistryCleanerCommand(ttd, true));
+                        await Task.Run(() => ExecuteLittleRegistryCleanerCommand(ttd,String.Empty, true));
                         break;
                     #endregion
 
@@ -451,6 +480,10 @@ namespace mCleaner.Logics
             if (fi.Exists)
             {
                 text = string.Format(text, Win32API.FormatByteSize(fi.Length), ttd.FullPathName);
+            }
+            else
+            {
+                return;
             }
 
             if (preview)
@@ -682,69 +715,114 @@ namespace mCleaner.Logics
             }
         }
 
-        async Task<bool> ExecuteLittleRegistryCleanerCommand(Model_ThingsToDelete ttd, bool preview = false)
+
+        public DataTable CreateTableSchemaForRegistryStore()
         {
+            DataTable dtThingsDeleted = new DataTable("RegistryPaths");
+            dtThingsDeleted.Columns.Add("RegistryKeyFullPath");
+            dtThingsDeleted.Columns.Add("Location");
+            return dtThingsDeleted;
+
+        }
+        DataTable dtThingsDeleted = null;
+        async Task<bool> ExecuteLittleRegistryCleanerCommand(Model_ThingsToDelete ttd, string RegistryDatSaveFolderPath, bool preview = false)
+        {
+            try
+            {
             string text = "{0} {1}";
 
             List<ScannerBase.InvalidKeys> BadKeys = new List<ScannerBase.InvalidKeys>();
+            string strRegistryDatSaveFolderPath = RegistryDatSaveFolderPath;
+            if (!preview && dtThingsDeleted== null)
+            {
+                dtThingsDeleted = CreateTableSchemaForRegistryStore();
+            }
+
             switch (ttd.search)
             {
                 case SEARCH.lrc_activex_com:
+                    ActiveXComObjects.I.dtRegistryKeyDeleted = dtThingsDeleted;
+                    ActiveXComObjects.I.strRegistryBackupFolderPath = strRegistryDatSaveFolderPath;
                     await ActiveXComObjects.I.Clean(preview);
                     BadKeys.AddRange(ActiveXComObjects.I.BadKeys);
-
+                    dtThingsDeleted = ActiveXComObjects.I.dtRegistryKeyDeleted;
                     break;
                 case SEARCH.lrc_app_info:
+                    ApplicationInfo.I.dtRegistryKeyDeleted = dtThingsDeleted;
+                    ApplicationInfo.I.strRegistryBackupFolderPath = strRegistryDatSaveFolderPath;
                     await ApplicationInfo.I.Clean(preview);
                     BadKeys.AddRange(ApplicationInfo.I.BadKeys);
-
+                    dtThingsDeleted = ApplicationInfo.I.dtRegistryKeyDeleted;
                     break;
                 case SEARCH.lrc_progam_location:
+                    ApplicationPaths.I.dtRegistryKeyDeleted = dtThingsDeleted;
+                    ApplicationPaths.I.strRegistryBackupFolderPath = strRegistryDatSaveFolderPath;
                     await ApplicationPaths.I.Clean(preview);
                     BadKeys.AddRange(ApplicationPaths.I.BadKeys);
+                    dtThingsDeleted = ApplicationPaths.I.dtRegistryKeyDeleted;
 
                     break;
                 case SEARCH.lrc_software_settings:
+                    ApplicationSettings.I.dtRegistryKeyDeleted = dtThingsDeleted;
+                    ApplicationSettings.I.strRegistryBackupFolderPath = strRegistryDatSaveFolderPath;
                     await ApplicationSettings.I.Clean(preview);
                     BadKeys.AddRange(ApplicationSettings.I.BadKeys);
-
+                    dtThingsDeleted = ApplicationSettings.I.dtRegistryKeyDeleted;
                     break;
                 case SEARCH.lrc_startup:
+                    StartupFiles.I.dtRegistryKeyDeleted = dtThingsDeleted;
+                    StartupFiles.I.strRegistryBackupFolderPath = strRegistryDatSaveFolderPath;
                     await StartupFiles.I.Clean(preview);
                     BadKeys.AddRange(StartupFiles.I.BadKeys);
-
+                    dtThingsDeleted = StartupFiles.I.dtRegistryKeyDeleted;
                     break;
                 case SEARCH.lrc_system_drivers:
+                    SystemDrivers.I.dtRegistryKeyDeleted = dtThingsDeleted;
+                    SystemDrivers.I.strRegistryBackupFolderPath = strRegistryDatSaveFolderPath;
                     await SystemDrivers.I.Clean(preview);
                     BadKeys.AddRange(SystemDrivers.I.BadKeys);
-
+                    dtThingsDeleted = SystemDrivers.I.dtRegistryKeyDeleted;
                     break;
                 case SEARCH.lrc_shared_dll:
+                    SharedDLLs.I.dtRegistryKeyDeleted = dtThingsDeleted;
+                    SharedDLLs.I.strRegistryBackupFolderPath = strRegistryDatSaveFolderPath;
                     await SharedDLLs.I.Clean(preview);
                     BadKeys.AddRange(SharedDLLs.I.BadKeys);
+                    dtThingsDeleted = SharedDLLs.I.dtRegistryKeyDeleted;
 
                     break;
                 case SEARCH.lrc_help_file:
+                    WindowsHelpFiles.I.dtRegistryKeyDeleted = dtThingsDeleted;
+                    WindowsHelpFiles.I.strRegistryBackupFolderPath = strRegistryDatSaveFolderPath;
                     await WindowsHelpFiles.I.Clean(preview);
                     BadKeys.AddRange(WindowsHelpFiles.I.BadKeys);
-
+                    dtThingsDeleted = WindowsHelpFiles.I.dtRegistryKeyDeleted;
                     break;
                 case SEARCH.lrc_sound_event:
+                    WindowsSounds.I.dtRegistryKeyDeleted = dtThingsDeleted;
+                    WindowsSounds.I.strRegistryBackupFolderPath = strRegistryDatSaveFolderPath;
                     await WindowsSounds.I.Clean(preview);
                     BadKeys.AddRange(WindowsSounds.I.BadKeys);
+                    dtThingsDeleted = WindowsSounds.I.dtRegistryKeyDeleted;
 
                     break;
                 case SEARCH.lrc_history_list:
+                    RecentDocs.I.dtRegistryKeyDeleted = dtThingsDeleted;
+                    RecentDocs.I.strRegistryBackupFolderPath = strRegistryDatSaveFolderPath;
                     await RecentDocs.I.Clean(preview);
                     BadKeys.AddRange(RecentDocs.I.BadKeys);
-
+                    dtThingsDeleted = RecentDocs.I.dtRegistryKeyDeleted;
                     break;
                 case SEARCH.lrc_win_fonts:
+                    WindowsFonts.I.dtRegistryKeyDeleted = dtThingsDeleted;
+                    WindowsFonts.I.strRegistryBackupFolderPath = strRegistryDatSaveFolderPath;
                     await WindowsFonts.I.Clean(preview);
                     BadKeys.AddRange(WindowsFonts.I.BadKeys);
-
+                    dtThingsDeleted = WindowsFonts.I.dtRegistryKeyDeleted;
                     break;
             }
+
+            if(!Preview)
 
             foreach (ScannerBase.InvalidKeys badkey in BadKeys)
             {
@@ -765,6 +843,12 @@ namespace mCleaner.Logics
                 }
 
                 this.TotalSpecialOperations++;
+            }
+            }
+            catch (Exception)
+            {
+
+                throw;
             }
 
             return true;

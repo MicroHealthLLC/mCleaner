@@ -49,6 +49,7 @@ namespace mCleaner.ViewModel
             SimpleIoc.Default.Register<ViewModel_DuplicateChecker>();
             SimpleIoc.Default.Register<ViewModel_ReleaseNotes>();
             SimpleIoc.Default.Register<ViewModel_About>();
+            SimpleIoc.Default.Register<ViewModel_RestoreRegistryOptions>();
             SimpleIoc.Default.Register<ViewModel_PrivacyPolicy>();
             SimpleIoc.Default.Register<ViewModel_Uninstaller>();
         }
@@ -113,6 +114,14 @@ namespace mCleaner.ViewModel
             get
             {
                 return ServiceLocator.Current.GetInstance<ViewModel_About>();
+            }
+        }
+
+        public ViewModel_RestoreRegistryOptions RestoreRegistry
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<ViewModel_RestoreRegistryOptions>();
             }
         }
 

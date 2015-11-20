@@ -11,7 +11,7 @@
                       TitleCaps="False"
                       WindowStyle="ToolWindow"
                       StateChanged="MetroWindow_StateChanged"
-                     Height="700" Width="1200" Icon="appicon.ico" WindowStartupLocation="CenterScreen">
+                     Height="700" Width="1280" Icon="appicon.ico" WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
         <CollectionViewSource x:Key="ListViewSource" Source="{Binding DupChecker.DupplicateCollection}">
@@ -241,6 +241,30 @@
                             <TextBlock Text="Custom Selection" HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" Foreground="Black"/>
                         </StackPanel>
                     </Button>
+                    <Button Width="70" ToolTip="Restores earlier version windows registry" Name="btnRestoreRegistry" Command="{Binding RestoreRegistry.Command_ShowWindow}"  IsEnabled="{Binding CleanerML.btnCleaningOptionsEnable}" CommandParameter="3"  VerticalAlignment="Top" >
+                        <StackPanel>
+                            <Rectangle Fill="#2196F3" Height="32" Width="32">
+                                <Rectangle.OpacityMask>
+                                    <VisualBrush>
+                                        <VisualBrush.Visual>
+                                            <Image Width ="32" Height="32" Source="Assets/RestoreRegistry.png" HorizontalAlignment="Center" />
+                                        </VisualBrush.Visual>
+                                    </VisualBrush>
+                                </Rectangle.OpacityMask>
+                                <Rectangle.Style>
+                                    <Style TargetType="Rectangle">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding ElementName=btnRestoreRegistry, Path=IsEnabled}" Value="False">
+                                                <Setter Property="Opacity" Value="0.3" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Rectangle.Style>
+                            </Rectangle>
+                            <TextBlock Text="Restore Registry" HorizontalAlignment="Center"  TextWrapping="Wrap" TextAlignment="Center" Foreground="Black"/>
+                        </StackPanel>
+                    </Button>
+
                     <Button Width="70" x:Name="btnPreviewMenu" Command="{Binding CleanerML.Command_Preview}" ToolTip="Preview work" VerticalAlignment="Top" IsEnabled="{Binding CleanerML.btnPreviewCleanEnable}" >
                         <StackPanel>
                             <Rectangle Fill="#5AA552" Height="32" Width="32">
@@ -491,7 +515,7 @@
                         <Grid Visibility="{Binding CleanerML.ShowCleanerDescription, Converter={StaticResource boolTovis}}">
                             <Image Source="Assets/MicroHealth_Logo_800.png" Margin="50" Opacity="0.02" />
                             <RichTextBox x:Name="rtbCleanerDetails" BorderThickness="0" IsReadOnly="True" Background="Transparent" ScrollViewer.VerticalScrollBarVisibility="Auto" />
-                            <Button Content="Close" VerticalAlignment="Top" HorizontalAlignment="Right" Style="{StaticResource ButtonStyle}" Margin="0,0,10,0" Command="{Binding CleanerML.Command_CloseCleanerDescription}" />
+                            <Button Content="Close" VerticalAlignment="Top" HorizontalAlignment="Right" Style="{StaticResource ButtonStyle}" Margin="0,0,15,0" Command="{Binding CleanerML.Command_CloseCleanerDescription}" />
                         </Grid>
 
                         <!-- Duplicate Checker -->
@@ -729,7 +753,7 @@
                                               SelectedIndex="0" SelectedItem="{Binding ShredWindow.SelectedShredFile}"  >
                                                 <ListView.View>
                                                     <GridView>
-                                                        <GridViewColumn DisplayMemberBinding="{Binding FilePath }" Width="500" 
+                                                        <GridViewColumn DisplayMemberBinding="{Binding FilePath }" Width="5100" 
                                             Header="Folder\File Path"  />
                                                     </GridView>
                                                 </ListView.View>
@@ -1224,6 +1248,7 @@
         <ucw:PreferencesWindow      Visibility="{Binding Prefs.ShowWindow,                  Converter={StaticResource boolTovis}}" />
         <ucw:ReleaseNotesWindow     Visibility="{Binding ReleaseNote.ShowWindow,            Converter={StaticResource boolTovis}}" />
         <ucw:PrivacyPolicy          Visibility="{Binding PrivacyPolicy.ShowWindow,            Converter={StaticResource boolTovis}}" />
-        <ucw:About                  Visibility="{Binding About.ShowWindow,            Converter={StaticResource boolTovis}}" />
+        <ucw:About                 Visibility="{Binding About.ShowWindow,            Converter={StaticResource boolTovis}}" />
+        <ucw:RestoreRegistryOptions                 Visibility="{Binding RestoreRegistry.ShowWindow,            Converter={StaticResource boolTovis}}" />
     </Grid>
 </controls:MetroWindow>

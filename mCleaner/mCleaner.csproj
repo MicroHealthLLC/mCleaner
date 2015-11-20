@@ -27,7 +27,7 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.5.0.%2a</ApplicationVersion>
+    <ApplicationVersion>1.6.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -228,40 +228,43 @@
     <Compile Include="Helpers\PInvoke\Win32API.cs" />
     <Compile Include="Helpers\System\Shredder.cs" />
     <Compile Include="Helpers\System\Utils.cs" />
-    <Compile Include="Logics\AutoUpdate.cs" />
-    <Compile Include="Logics\Commands\Clam\CommandLogic_Clam.cs" />
-    <Compile Include="Logics\Commands\CommandLogic_Base.cs" />
-    <Compile Include="Logics\Commands\CommandLogic_Chrome.cs" />
-    <Compile Include="Logics\Commands\CommandLogic_Clipboard.cs" />
-    <Compile Include="Logics\Commands\CommandLogic_Delete.cs" />
-    <Compile Include="Logics\Commands\CommandLogic_WindowsUninstaller.cs" />
-    <Compile Include="Logics\Commands\CommandLogic_DuplicateChecker.cs" />
-    <Compile Include="Logics\Commands\CommandLogic_Ini.cs" />
-    <Compile Include="Logics\Commands\CommandLogic_JSON.cs" />
-    <Compile Include="Logics\Commands\LittleRegistryCleaner\CommandLogic_LittleRegistryCleaner.cs" />
-    <Compile Include="Logics\Commands\CommandLogic_SQLiteVacuum.cs" />
-    <Compile Include="Logics\Commands\CommandLogic_Winreg.cs" />
-    <Compile Include="Logics\Commands\iActions.cs" />
-    <Compile Include="Logics\Commands\LittleRegistryCleaner\Scanners\ActiveXComObjects.cs" />
-    <Compile Include="Logics\Commands\LittleRegistryCleaner\Scanners\ApplicationInfo.cs" />
-    <Compile Include="Logics\Commands\LittleRegistryCleaner\Scanners\ApplicationPaths.cs" />
-    <Compile Include="Logics\Commands\LittleRegistryCleaner\Scanners\ApplicationSettings.cs" />
-    <Compile Include="Logics\Commands\LittleRegistryCleaner\Scanners\RecentDocs.cs" />
-    <Compile Include="Logics\Commands\LittleRegistryCleaner\Scanners\ScannerBase.cs" />
-    <Compile Include="Logics\Commands\LittleRegistryCleaner\Scanners\SharedDLLs.cs" />
-    <Compile Include="Logics\Commands\LittleRegistryCleaner\Scanners\StartupFiles.cs" />
-    <Compile Include="Logics\Commands\LittleRegistryCleaner\Scanners\SystemDrivers.cs" />
-    <Compile Include="Logics\Commands\LittleRegistryCleaner\Scanners\WindowsFonts.cs" />
-    <Compile Include="Logics\Commands\LittleRegistryCleaner\Scanners\WindowsHelpFiles.cs" />
-    <Compile Include="Logics\Commands\LittleRegistryCleaner\Scanners\WindowsSounds.cs" />
-    <Compile Include="Logics\Enumerations\Enumerations.cs" />
-    <Compile Include="Logics\ProgressWorker.cs" />
-    <Compile Include="Logics\StaticResources.cs" />
-    <Compile Include="Logics\Worker.cs" />
+    <Compile Include="Helpers\Logics\AutoUpdate.cs" />
+    <Compile Include="Helpers\Logics\Commands\Clam\CommandLogic_Clam.cs" />
+    <Compile Include="Helpers\Logics\Commands\CommandLogic_Base.cs" />
+    <Compile Include="Helpers\Logics\Commands\CommandLogic_Chrome.cs" />
+    <Compile Include="Helpers\Logics\Commands\CommandLogic_Clipboard.cs" />
+    <Compile Include="Helpers\Logics\Commands\CommandLogic_Delete.cs" />
+    <Compile Include="Helpers\Logics\Commands\CommandLogic_WindowsUninstaller.cs" />
+    <Compile Include="Helpers\Logics\Commands\CommandLogic_DuplicateChecker.cs" />
+    <Compile Include="Helpers\Logics\Commands\CommandLogic_Ini.cs" />
+    <Compile Include="Helpers\Logics\Commands\CommandLogic_JSON.cs" />
+    <Compile Include="Helpers\Logics\Commands\LittleRegistryCleaner\CommandLogic_LittleRegistryCleaner.cs" />
+    <Compile Include="Helpers\Logics\Commands\CommandLogic_SQLiteVacuum.cs" />
+    <Compile Include="Helpers\Logics\Commands\CommandLogic_Winreg.cs" />
+    <Compile Include="Helpers\Logics\Commands\iActions.cs" />
+    <Compile Include="Helpers\Logics\Commands\LittleRegistryCleaner\Scanners\ActiveXComObjects.cs" />
+    <Compile Include="Helpers\Logics\Commands\LittleRegistryCleaner\Scanners\ApplicationInfo.cs" />
+    <Compile Include="Helpers\Logics\Commands\LittleRegistryCleaner\Scanners\ApplicationPaths.cs" />
+    <Compile Include="Helpers\Logics\Commands\LittleRegistryCleaner\Scanners\ApplicationSettings.cs" />
+    <Compile Include="Helpers\Logics\Commands\LittleRegistryCleaner\Scanners\RecentDocs.cs" />
+    <Compile Include="Helpers\Logics\Commands\LittleRegistryCleaner\Scanners\ScannerBase.cs" />
+    <Compile Include="Helpers\Logics\Commands\LittleRegistryCleaner\Scanners\SharedDLLs.cs" />
+    <Compile Include="Helpers\Logics\Commands\LittleRegistryCleaner\Scanners\StartupFiles.cs" />
+    <Compile Include="Helpers\Logics\Commands\LittleRegistryCleaner\Scanners\SystemDrivers.cs" />
+    <Compile Include="Helpers\Logics\Commands\LittleRegistryCleaner\Scanners\WindowsFonts.cs" />
+    <Compile Include="Helpers\Logics\Commands\LittleRegistryCleaner\Scanners\WindowsHelpFiles.cs" />
+    <Compile Include="Helpers\Logics\Commands\LittleRegistryCleaner\Scanners\WindowsSounds.cs" />
+    <Compile Include="Helpers\Logics\Enumerations\Enumerations.cs" />
+    <Compile Include="Helpers\Logics\ProgressWorker.cs" />
+    <Compile Include="Helpers\Logics\StaticResources.cs" />
+    <Compile Include="Helpers\Logics\Worker.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\Model_CleanerML.cs" />
+    <Compile Include="Model\Model_RestoreRegistry.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Model\Model_Shred.cs" />
     <Compile Include="Model\Model_WindowsUninstaller.cs" />
     <Compile Include="Model\Model_DuplicateChecker.cs" />
@@ -287,11 +290,18 @@
     <Compile Include="UserControls\Window\ReleaseNotesWindow.xaml.cs">
       <DependentUpon>ReleaseNotesWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\Window\RestoreRegistryOptions.xaml.cs">
+      <DependentUpon>RestoreRegistryOptions.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="ViewModel\ViewModel_Clam.cs" />
     <Compile Include="ViewModel\ViewModel_CleanerML.cs" />
     <Compile Include="ViewModel\ViewModel_About.cs" />
+    <Compile Include="ViewModel\ViewModel_RestoreRegistryOptions.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="ViewModel\ViewModel_Uninstaller.cs" />
     <Compile Include="ViewModel\ViewModel_DuplicateChecker.cs" />
     <Compile Include="ViewModel\ViewModel_Preferences.cs" />
@@ -367,6 +377,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UserControls\Window\RestoreRegistryOptions.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -386,6 +400,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <Content Include="Cleaners\mozilla_firefox.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Resource Include="Assets\RestoreRegistry.png" />
     <Resource Include="Resources\Entypo.ttf" />
     <Resource Include="appicon.ico" />
     <Resource Include="Assets\dl_vir_def.png" />
@@ -468,7 +486,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Clam\.clamwin\db\" />
-    <Folder Include="Logics\Structs\" />
+    <Folder Include="Helpers\Logics\Structs\" />
     <Folder Include="SQLite\" />
   </ItemGroup>
   <ItemGroup>
@@ -534,10 +552,6 @@
     </Content>
     <Content Include="Cleaners\miro.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Cleaners\mozilla_firefox.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <SubType>Designer</SubType>
     </Content>
     <Content Include="Cleaners\opera.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -619,6 +633,7 @@
     </Content>
     <Resource Include="Resources\WindowsIcons-license.txt" />
     <Resource Include="Resources\Entypo-license.txt" />
+    <Content Include="RegSaveRestore.exe" />
     <Content Include="SQLite.Interop.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

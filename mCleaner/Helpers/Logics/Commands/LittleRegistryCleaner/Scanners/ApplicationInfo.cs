@@ -83,6 +83,7 @@ namespace mCleaner.Logics.Commands.LittleRegistryCleaner.Scanners
                 {
                     if (root != null)
                     {
+                        BackUpRegistrykey(badkey);
                         root.DeleteSubKey(badkey.Key);
                     }
                 }

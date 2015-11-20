@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.Data;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Documents;
@@ -57,6 +59,14 @@ namespace mCleaner.ViewModel
             get
             {
                 return ServiceLocator.Current.GetInstance<ViewModel_DuplicateChecker>();
+            }
+        }
+
+        public ViewModel_RestoreRegistryOptions RestoreRegistry
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<ViewModel_RestoreRegistryOptions>();
             }
         }
 
@@ -514,6 +524,7 @@ namespace mCleaner.ViewModel
                 Command_Clean = new RelayCommand<string>(Command_Clean_Click);
                 Command_CustomCleaningSelection = new RelayCommand(Command_CustomCleaningSelection_Click);
                 Command_RegistrySelection= new RelayCommand(Command_RegitryClearner_Click);
+                //Command_RestoreRegistrySelection = new RelayCommand(CommandRe);
                 CommandClearSelection = new RelayCommand(Command_ClearSelection_Click);
                 Command_CleanNow = new RelayCommand(Command_CleanNow_Click);
                 Command_Quit = new RelayCommand(Command_Quit_Click);
@@ -556,6 +567,7 @@ namespace mCleaner.ViewModel
         public ICommand Command_Clean { get; internal set; }
         public ICommand Command_CustomCleaningSelection { get; internal set; }
         public ICommand Command_RegistrySelection { get; internal set; }
+        public ICommand Command_RestoreRegistrySelection { get; internal set; }
         public ICommand CommandClearSelection { get; internal set; }
         public ICommand Command_CleanNow { get; internal set; }
         public ICommand Command_CleanOption { get; internal set; }
@@ -596,7 +608,7 @@ namespace mCleaner.ViewModel
             btnCloseEnable = true;
             IsCancelProcessEnabled = false;
             btnCleaningOptionsEnable = true;
-
+            this.ProgressIsIndeterminate = false;
             if(Worker.I.TotalFileDelete>0 && MessageBox.Show("You want to clean this files?","mCleaner",MessageBoxButton.YesNo,MessageBoxImage.Question)==MessageBoxResult.Yes)
             {
                 Command_CleanNow_Click();
@@ -758,6 +770,76 @@ namespace mCleaner.ViewModel
             CommandExpandAllClick();
         }
 
+        public void Command_RestoreRegistrySelection_Click(string FullFilePathtoRestore)
+        {
+
+            try
+            {
+                this.Cancel = false;
+                Worker.I.Preview = false;
+                btnCloseEnable = false;
+                IsCancelProcessEnabled = false;
+                this.Run = true;
+                btnPreviewCleanEnable = false;
+                btnCleaningOptionsEnable = false;
+                this.ShowCleanerDescription = false;
+                this.ShowFrontPage = false;
+                txtLoForgoundColor = "Red";
+                DataTable dt = new DataTable("RegistryPaths");
+                dt.ReadXml(FullFilePathtoRestore);
+                MaxProgress = dt.Rows.Count;
+                foreach (DataRow dr in dt.Rows)
+                {
+                    if (!dr["RegistryKeyFullPath"].ToString().StartsWith("HKCR"))
+                    {
+                        ProgressWorker.I.EnQ("Restoring Key: " + dr["RegistryKeyFullPath"].ToString());
+                        TextLog += "Restoring Key: " + dr["RegistryKeyFullPath"].ToString();
+                        ProgressIndex++;
+                        RestoreRegistrykey(dr["RegistryKeyFullPath"].ToString(), dr["Location"].ToString());
+                        Thread.Sleep(25);
+                        ProgressWorker.I.EnQ("Restoring Key Success: " + dr["RegistryKeyFullPath"].ToString());
+                        TextLog += "Restoring Key Success: " + dr["RegistryKeyFullPath"].ToString();
+                    }
+                    else
+                        ProgressIndex++;
+                }
+            }
+            catch (Exception ex)
+            {
+                
+            }
+            btnCloseEnable = true;
+            this.ProgressIsIndeterminate = false;
+            IsCancelProcessEnabled = false;
+            btnCleaningOptionsEnable = true;
+            ProgressWorker.I.EnQ("Done");
+        }
+       
+
+
+        public void RestoreRegistrykey(String strKey,String strLocationToSave)
+        {
+
+            var strCommnd = "RegSaveRestore /R " + strKey + " " + strLocationToSave + " /F"; 
+            var startInfo = new ProcessStartInfo
+            {
+                FileName = "cmd.exe",
+                RedirectStandardInput = true,
+                RedirectStandardOutput = true,
+                UseShellExecute = false,
+                CreateNoWindow = true,
+                WorkingDirectory = AppDomain.CurrentDomain.BaseDirectory
+            };
+
+            var process = new Process {StartInfo = startInfo};
+
+            process.Start();
+            process.StandardInput.WriteLine("cd " + AppDomain.CurrentDomain.BaseDirectory);
+            process.StandardInput.WriteLine(strCommnd);
+            process.StandardInput.WriteLine("exit");
+            process.WaitForExit();
+        }
+
         public void Command_ClearSelection_Click()
         {
             btnPreviewCleanEnable = false;
@@ -797,6 +879,7 @@ namespace mCleaner.ViewModel
             Worker.I.DoWork();
 
             btnCloseEnable = true;
+            this.ProgressIsIndeterminate = false;
             IsCancelProcessEnabled = false;
             btnCleaningOptionsEnable = true;
         }

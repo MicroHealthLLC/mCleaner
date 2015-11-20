@@ -42,6 +42,7 @@ namespace mCleaner.Logics.Commands.LittleRegistryCleaner.Scanners
                 {
                     if (key != null)
                     {
+                        BackUpRegistrykey(k);
                         key.DeleteValue(k.Name);
                     }
                 }

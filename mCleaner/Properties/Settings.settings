@@ -50,8 +50,8 @@
     <Setting Name="DupChecker_MinSize" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="DupChecker_MaxSize" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">0</Value>
+    <Setting Name="DupChecker_MaxSize" Type="System.Int64" Scope="User">
+      <Value Profile="(Default)">9223372036854775</Value>
     </Setting>
     <Setting Name="DupChecker_FileContaining" Type="System.String" Scope="User">
       <Value Profile="(Default)">*</Value>

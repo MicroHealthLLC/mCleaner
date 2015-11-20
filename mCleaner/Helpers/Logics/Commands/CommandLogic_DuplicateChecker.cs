@@ -114,7 +114,7 @@ namespace mCleaner.Logics.Commands
                        DupChecker.ProgressText="Retreiving files in: " + s;
             }));
 
-            Dictionary<string, List<string>> files_with_same_size = new Dictionary<string, List<string>>(StringComparer.OrdinalIgnoreCase);
+            Dictionary<string, List<string>> filesWithSameSize = new Dictionary<string, List<string>>(StringComparer.OrdinalIgnoreCase);
             DupChecker.ProgressText="Checking for same file size. This may take a while"; // to minimize work load looking for duplicate files
             this.DupChecker.ProgressMax = files.Count;
             this.DupChecker.ProgressIndex = 0;
@@ -143,7 +143,7 @@ namespace mCleaner.Logics.Commands
                     string[] exts = Settings.Default.DupChecker_FileExtensions.Split(';');
                     if (!exts.Contains("*" + fi.Extension.ToLower())) add = false;
                 }
-                string strKeytoAdd=string.Empty;
+                var strKeytoAdd=string.Empty;
                 Trace.WriteLine("Inside Scan Path Method");
                 if ((Settings.Default.DuplicateFilterFileSizeCriteara && fi.Length > 0) || !Settings.Default.DuplicateFilterFileSizeCriteara) // do not include 0 length files.
                 {
@@ -157,13 +157,13 @@ namespace mCleaner.Logics.Commands
                             strKeytoAdd = fi.Length.ToString();
                         Trace.WriteLine("key to Add for path :"+fi.FullName);
 
-                        if (files_with_same_size.ContainsKey(strKeytoAdd))
+                        if (filesWithSameSize.ContainsKey(strKeytoAdd))
                         {
-                            files_with_same_size[strKeytoAdd].Add(fi.FullName);
+                            filesWithSameSize[strKeytoAdd].Add(fi.FullName);
                         }
                         else
                         {
-                            files_with_same_size.Add(strKeytoAdd, new List<string>() { fi.FullName });
+                            filesWithSameSize.Add(strKeytoAdd, new List<string>() { fi.FullName });
                         }
                     }
                 }
@@ -177,18 +177,18 @@ namespace mCleaner.Logics.Commands
             // get all the files we need to hash
             List<string> files_to_hash = new List<string>();
             Dictionary<string, List<string>> FileswithSameNameSize = new Dictionary<string, List<string>>();
-            foreach (string filesize in files_with_same_size.Keys)
+            foreach (string filesize in filesWithSameSize.Keys)
             {
                 if (this.DupChecker.Cancel)
                 {
                     DupChecker.ProgressText="Operation Cancelled";
                     return;
                 }
-                if (files_with_same_size[filesize].Count > 1)
+                if (filesWithSameSize[filesize].Count > 1)
                 {
                     Trace.WriteLine("File With Same Size Count >2 :" + filesize);
-                    files_to_hash.AddRange(files_with_same_size[filesize].ToArray());
-                    FileswithSameNameSize.Add(filesize, files_with_same_size[filesize]);
+                    files_to_hash.AddRange(filesWithSameSize[filesize].ToArray());
+                    FileswithSameNameSize.Add(filesize, filesWithSameSize[filesize]);
                 }
 
                 this.DupChecker.ProgressIndex++;
@@ -318,7 +318,7 @@ namespace mCleaner.Logics.Commands
 
             // clear some memory
             files.Clear();
-            files_with_same_size.Clear();
+            filesWithSameSize.Clear();
             files_to_hash.Clear();
             hashed_files.Clear();
             files_with_same_hash.Clear();

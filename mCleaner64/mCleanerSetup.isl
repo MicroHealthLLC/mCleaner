@@ -352,6 +352,7 @@
 		<row><td>MahApps.Metro.dll</td><td>{6AE8CC5B-FF4D-4CAB-B6DA-E7B949097125}</td><td>INSTALLDIR</td><td>2</td><td/><td>mahapps.metro.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>Microsoft.Practices.ServiceLocation.dll</td><td>{5ABEBF80-E1CA-4F8C-9457-EB3FF42A73F3}</td><td>INSTALLDIR</td><td>2</td><td/><td>microsoft.practices.servicel</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>Newtonsoft.Json.dll</td><td>{2A26ADB5-56F1-4DC7-90E3-7B595BF6E6D6}</td><td>INSTALLDIR</td><td>2</td><td/><td>newtonsoft.json.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>RegSaveRestore.exe</td><td>{90A5DD03-D819-4253-8BB5-E70DCF4A6996}</td><td>INSTALLDIR</td><td>2</td><td/><td>regsaverestore.exe</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>SQLite.Interop.dll</td><td>{3AEF778F-25AD-4338-B278-51F3420FA67A}</td><td>INSTALLDIR</td><td>2</td><td/><td>sqlite.interop.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>System.Data.SQLite.dll</td><td>{3DA0AD24-EEE0-4B07-BFCF-4E770DCA6AC5}</td><td>INSTALLDIR</td><td>2</td><td/><td>system.data.sqlite.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>System.Windows.Interactivity.dll</td><td>{9BE9EDD1-DDC4-4CD3-A611-57B3C3DB85A6}</td><td>INSTALLDIR</td><td>2</td><td/><td>system.windows.interactivity</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
@@ -1092,6 +1093,7 @@
 		<row><td>INSTALLDIR</td><td>MahApps.Metro.dll</td></row>
 		<row><td>INSTALLDIR</td><td>Microsoft.Practices.ServiceLocation.dll</td></row>
 		<row><td>INSTALLDIR</td><td>Newtonsoft.Json.dll</td></row>
+		<row><td>INSTALLDIR</td><td>RegSaveRestore.exe</td></row>
 		<row><td>INSTALLDIR</td><td>SQLite.Interop.dll</td></row>
 		<row><td>INSTALLDIR</td><td>System.Data.SQLite.dll</td></row>
 		<row><td>INSTALLDIR</td><td>System.Windows.Interactivity.dll</td></row>
@@ -1930,6 +1932,7 @@
 		<row><td>AlwaysInstall</td><td>MahApps.Metro.dll</td></row>
 		<row><td>AlwaysInstall</td><td>Microsoft.Practices.ServiceLocation.dll</td></row>
 		<row><td>AlwaysInstall</td><td>Newtonsoft.Json.dll</td></row>
+		<row><td>AlwaysInstall</td><td>RegSaveRestore.exe</td></row>
 		<row><td>AlwaysInstall</td><td>SQLite.Interop.dll</td></row>
 		<row><td>AlwaysInstall</td><td>System.Data.SQLite.dll</td></row>
 		<row><td>AlwaysInstall</td><td>System.Windows.Interactivity.dll</td></row>
@@ -1995,6 +1998,7 @@
 		<row><td>pidgin.xml</td><td>ISX_DEFAULTCOMPONENT2</td><td>pidgin.xml</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release\Cleaners\pidgin.xml</td><td>1</td><td/></row>
 		<row><td>readme.txt</td><td>ISX_DEFAULTCOMPONENT1</td><td>readme.txt</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release\Clam\db\readme.txt</td><td>1</td><td/></row>
 		<row><td>realplayer.xml</td><td>ISX_DEFAULTCOMPONENT2</td><td>REALPL~1.XML|realplayer.xml</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release\Cleaners\realplayer.xml</td><td>1</td><td/></row>
+		<row><td>regsaverestore.exe</td><td>RegSaveRestore.exe</td><td>REGSAV~1.EXE|RegSaveRestore.exe</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release\RegSaveRestore.exe</td><td>1</td><td/></row>
 		<row><td>safari.xml</td><td>ISX_DEFAULTCOMPONENT2</td><td>safari.xml</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release\Cleaners\safari.xml</td><td>1</td><td/></row>
 		<row><td>seamonkey.xml</td><td>ISX_DEFAULTCOMPONENT2</td><td>SEAMON~1.XML|seamonkey.xml</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release\Cleaners\seamonkey.xml</td><td>1</td><td/></row>
 		<row><td>secondlife_viewer.xml</td><td>ISX_DEFAULTCOMPONENT2</td><td>SECOND~1.XML|secondlife_viewer.xml</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release\Cleaners\secondlife_viewer.xml</td><td>1</td><td/></row>
@@ -2174,6 +2178,7 @@
 		<row><td>MahApps.Metro.dll</td><td/><td/><td>_4CDDFB6C_AC9B_456B_92EB_4A7935D0336F_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>Microsoft.Practices.ServiceLocation.dll</td><td/><td/><td>_67E9BA8B_24AC_4421_A380_3FDBCD008CA4_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>Newtonsoft.Json.dll</td><td/><td/><td>_982A5206_A64A_49B4_A3AD_917B1D91DCA3_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>RegSaveRestore.exe</td><td/><td/><td>_4343EC3B_F816_4C56_BA48_1A6C3E15DD5F_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>SQLite.Interop.dll</td><td/><td/><td>_19059921_30EF_4C12_9BFE_742F60799E87_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>System.Data.SQLite.dll</td><td/><td/><td>_5B5A9515_B05E_45D1_9524_0F6C9A86029C_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>System.Windows.Interactivity.dll</td><td/><td/><td>_3BCF9226_9A5E_4322_93A9_79A72B6D65C9_FILTER</td><td/><td/><td/><td/></row>
@@ -4522,9 +4527,9 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<row><td>PROGMSG_IIS_ROLLBACKVROOTS</td><td>##IDS_PROGMSG_IIS_ROLLBACKVROOTS##</td><td/></row>
 		<row><td>PROGMSG_IIS_ROLLBACKWEBSERVICEEXTENSIONS</td><td>##IDS_PROGMSG_IIS_ROLLBACKWEBSERVICEEXTENSIONS##</td><td/></row>
 		<row><td>PROGRAMFILETOLAUNCHATEND</td><td>[INSTALLDIR]mCleaner.exe</td><td/></row>
-		<row><td>ProductCode</td><td>{BA040046-4252-4271-9261-667F180C0134}</td><td/></row>
+		<row><td>ProductCode</td><td>{F0FAEC48-F28D-4807-A59B-14BFEC52C043}</td><td/></row>
 		<row><td>ProductName</td><td>mCleaner</td><td/></row>
-		<row><td>ProductVersion</td><td>1.5.0</td><td/></row>
+		<row><td>ProductVersion</td><td>1.6.1</td><td/></row>
 		<row><td>ProgressType0</td><td>install</td><td/></row>
 		<row><td>ProgressType1</td><td>Installing</td><td/></row>
 		<row><td>ProgressType2</td><td>installed</td><td/></row>
@@ -4815,7 +4820,7 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<col def="s72">ActionProperty</col>
 		<col def="S72">ISDisplayName</col>
 		<row><td>{00000000-0000-0000-0000-000000000000}</td><td>***ALL_VERSIONS***</td><td></td><td></td><td>2</td><td/><td>ISFOUNDNEWERPRODUCTVERSION</td><td>ISPreventDowngrade</td></row>
-		<row><td>{6EEA3CBA-4FF5-4862-B38D-45867E223975}</td><td></td><td>1.5.0</td><td></td><td>768</td><td/><td>ISACTIONPROP1</td><td>UpdateProduct</td></row>
+		<row><td>{6EEA3CBA-4FF5-4862-B38D-45867E223975}</td><td></td><td>1.6.1</td><td></td><td>768</td><td/><td>ISACTIONPROP1</td><td>UpdateProduct</td></row>
 	</table>
 
 	<table name="Verb">

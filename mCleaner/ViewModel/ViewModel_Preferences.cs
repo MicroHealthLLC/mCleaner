@@ -272,8 +272,8 @@ namespace mCleaner.ViewModel
             }
         }
 
-        private int _dupCheckerMaxSize = 0;
-        public int DupChecker_MaxSize
+        private long _dupCheckerMaxSize = 9223372036854775;
+        public long DupChecker_MaxSize
         {
             get { return _dupCheckerMaxSize; }
             set
@@ -395,7 +395,17 @@ namespace mCleaner.ViewModel
             if (!string.IsNullOrEmpty(ProxyPort) && !int.TryParse(this.ProxyPort, out nProxyPort))
             {
                 MessageBox.Show("Invaild proxy port plase enter valid numeric port.", "mCleaner", MessageBoxButton.OK,MessageBoxImage.Exclamation);
-                    return;
+                   return;
+            }
+            if (DupChecker_MaxSize <= 0 )
+            {
+                MessageBox.Show("Please enter MaxSize grater than 0 ", "mCleaner", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                return;
+            }
+            if (DupChecker_MaxSize > 9223372036854775)
+            {
+                MessageBox.Show("Please enter MaxSize less than 9223372036854775.", "mCleaner", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                return;
             }
 
             if (Settings.Default.HideIrrelevantCleaners != this.HideIrrelevantCleaners)

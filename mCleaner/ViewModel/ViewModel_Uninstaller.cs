@@ -118,12 +118,18 @@ namespace mCleaner.ViewModel
             this.Command_UninstallProgram = new RelayCommand(Command_UninstallProgram_Click);
         }
 
+     
+
+
+        #endregion
+
+        #region command methods
         public void Command_UninstallProgram_Click()
         {
             if (SelectedProgramDetails != null)
             {
                 bool blnIsmCleanerNeedsToClose = false;
-                if (SelectedProgramDetails.ProgramDetails.ProgramName.Equals("mCleaner",StringComparison.CurrentCultureIgnoreCase))
+                if (SelectedProgramDetails.ProgramDetails.ProgramName.Equals("mCleaner", StringComparison.CurrentCultureIgnoreCase))
                 {
                     if (MessageBox.Show("mCleaner needs to close to be uninstalled. Do you want to continue?", "mCleaner", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                     {
@@ -146,24 +152,18 @@ namespace mCleaner.ViewModel
                 var process = new Process { StartInfo = startInfo };
 
                 process.Start();
-                if (!SelectedProgramDetails.ProgramDetails.UninstallString.StartsWith("MsiExec.exe",StringComparison.InvariantCultureIgnoreCase) && !SelectedProgramDetails.ProgramDetails.UninstallString.StartsWith("\"") && !SelectedProgramDetails.ProgramDetails.UninstallString.EndsWith("\""))
-                    process.StandardInput.WriteLine("\""+SelectedProgramDetails.ProgramDetails.UninstallString+"\"");
+                if (!SelectedProgramDetails.ProgramDetails.UninstallString.StartsWith("MsiExec.exe", StringComparison.InvariantCultureIgnoreCase) && !SelectedProgramDetails.ProgramDetails.UninstallString.StartsWith("\"") && !SelectedProgramDetails.ProgramDetails.UninstallString.EndsWith("\""))
+                    process.StandardInput.WriteLine("\"" + SelectedProgramDetails.ProgramDetails.UninstallString + "\"");
                 else
                     process.StandardInput.WriteLine(SelectedProgramDetails.ProgramDetails.UninstallString);
                 process.StandardInput.WriteLine("exit");
 
                 process.WaitForExit();
 
-                if(blnIsmCleanerNeedsToClose)
+                if (blnIsmCleanerNeedsToClose)
                     Application.Current.Shutdown();
             }
         }
-
-
-        #endregion
-
-        #region command methods
-
         public void Command_ShowUninstaller_Click()
         {
             BtnUninstall = false;

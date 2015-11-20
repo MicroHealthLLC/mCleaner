@@ -38,6 +38,7 @@ namespace mCleaner.Logics.Commands.LittleRegistryCleaner.Scanners
             {
                 using (RegistryKey key = k.Root.OpenSubKey(k.Subkey, true))
                 {
+                    BackUpRegistrykey(k);
                     key.DeleteSubKey(k.Key);
                 }
             }
@@ -46,7 +47,6 @@ namespace mCleaner.Logics.Commands.LittleRegistryCleaner.Scanners
         public override void Preview()
         {
             this.BadKeys.Clear();
-
             ScanInstallFolders();
             ScanAppPaths();
         }

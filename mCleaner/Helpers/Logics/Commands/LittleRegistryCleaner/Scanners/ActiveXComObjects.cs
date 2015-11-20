@@ -1,7 +1,10 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Diagnostics;
+using System.IO;
+using System.Runtime.CompilerServices;
 using System.Security;
 using mCleaner.Helpers;
 using Microsoft.Win32;
@@ -36,19 +39,33 @@ namespace mCleaner.Logics.Commands.LittleRegistryCleaner.Scanners
         public override void Clean()
         {
             Preview();
-
-            foreach (InvalidKeys badkey in this.BadKeys)
+            try
             {
-                using (RegistryKey root = badkey.Root.OpenSubKey(badkey.Subkey, true))
+                foreach (InvalidKeys badkey in this.BadKeys)
                 {
-                    if (root != null)
+                    BackUpRegistrykey(badkey);
+                    try
                     {
-                        root.DeleteSubKey(badkey.Key);
+                        using (RegistryKey root = badkey.Root.OpenSubKey(badkey.Subkey, true))
+                        {
+                            if (root != null)
+                            {
+                                root.DeleteSubKey(badkey.Key);
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        
                     }
                 }
             }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                
+            }
         }
-
         public override void Preview()
         {
             this.BadKeys.Clear();
