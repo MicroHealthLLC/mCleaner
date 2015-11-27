@@ -20,7 +20,7 @@
 
 -->
 <cleaner id="deepscan">
-  <label translate="true">Deep scan</label>
+  <label translate="true">Deep Scan</label>
   <option id="backup">
     <label>Backup files</label>
     <description>Delete the backup files</description>

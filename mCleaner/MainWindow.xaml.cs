@@ -15,6 +15,7 @@ using MahApps.Metro.Controls;
 using Microsoft.Practices.ServiceLocation;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Windows.Controls.Primitives;
 
 namespace mCleaner
 {
@@ -188,6 +189,19 @@ namespace mCleaner
                 TileSafeCleaning.Height = TileMordrateCleaning.Height = TileAggressiveCleaning.Height = TileCleanDuplicates.Height = TIleCustomSelection.Height = TileRegistrySelection.Height = TilePreview.Height = TileCleanNow.Height = TileClearSelection.Height = TileUninstall.Height = TileShredFileFolder.Height = TileScanMemory.Height = TileScanPC.Height = 125;
                
             }
+        }
+        private void btnScanMemoryVirusMenu_Click(object sender, RoutedEventArgs e)
+        {
+            (sender as ToggleButton).ContextMenu.IsEnabled = true;
+            (sender as ToggleButton).ContextMenu.PlacementTarget = (sender as ToggleButton);
+            (sender as ToggleButton).ContextMenu.Placement = PlacementMode.Bottom;
+            (sender as ToggleButton).ContextMenu.IsOpen = true;
+            (sender as ToggleButton).ContextMenu.Closed += ContextMenu_Closed;
+        }
+
+        void ContextMenu_Closed(object sender, RoutedEventArgs e)
+        {
+            btnScanMemoryVirusMenu.IsChecked = false;
         }
 
         private void Row_DoubleClick(object sender, MouseButtonEventArgs e)

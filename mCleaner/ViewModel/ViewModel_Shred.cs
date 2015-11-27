@@ -396,6 +396,7 @@ namespace mCleaner.ViewModel
             CleanerML.Run = false;
             CleanerML.ShowCleanerDescription = false;
             DupChecker.ShowWindow = false;
+            this.ProgressText = string.Empty;
             CleanerML.ShowFrontPage = false;
             CleanerML.btnCleanNowPreviousState = CleanerML.btnPreviewCleanEnable;
             CleanerML.btnPreviewCleanEnable = false;

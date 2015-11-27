@@ -271,6 +271,7 @@ namespace mCleaner.ViewModel
             await Task.Run(() => CommandLogic_DuplicateChecker.I.Start(this.DupplicateCollection, IsMove ? 1 : 0));
 
             DupplicateCollection.Clear();
+            this.EnableRemoveDuplicates = false;
         }
 
         public void Command_CheckDuplicate_Click()

@@ -524,6 +524,7 @@ namespace mCleaner.ViewModel
                 Command_Clean = new RelayCommand<string>(Command_Clean_Click);
                 Command_CustomCleaningSelection = new RelayCommand(Command_CustomCleaningSelection_Click);
                 Command_RegistrySelection= new RelayCommand(Command_RegitryClearner_Click);
+                Command_CustomSaveAsSelection = new RelayCommand(Command_CustomSaveAsSelection_Click);
                 //Command_RestoreRegistrySelection = new RelayCommand(CommandRe);
                 CommandClearSelection = new RelayCommand(Command_ClearSelection_Click);
                 Command_CleanNow = new RelayCommand(Command_CleanNow_Click);
@@ -566,6 +567,7 @@ namespace mCleaner.ViewModel
         public ICommand Command_Preview { get; internal set; }
         public ICommand Command_Clean { get; internal set; }
         public ICommand Command_CustomCleaningSelection { get; internal set; }
+        public ICommand Command_CustomSaveAsSelection { get; internal set; }
         public ICommand Command_RegistrySelection { get; internal set; }
         public ICommand Command_RestoreRegistrySelection { get; internal set; }
         public ICommand CommandClearSelection { get; internal set; }
@@ -614,6 +616,7 @@ namespace mCleaner.ViewModel
                 Command_CleanNow_Click();
             }
         }
+
 
         public void Command_Clean_Click(string i)
         {
@@ -814,6 +817,35 @@ namespace mCleaner.ViewModel
             btnCleaningOptionsEnable = true;
             ProgressWorker.I.EnQ("Done");
         }
+
+
+         public void Command_CustomSaveAsSelection_Click()
+        {
+
+            if (Settings.Default.CustomCleanerSelections != null) 
+                Settings.Default.CustomCleanerSelections.Clear();
+           foreach (TreeNode tn in this.CleanersCollection)
+            {
+                foreach (TreeNode child in tn.Children)
+                {
+                    if (child.Tag is option)
+                    {
+                        option o = (option)child.Tag;
+                        if (child.IsChecked.HasValue && child.IsChecked.Value == true)
+                        {
+                            if (Settings.Default.CustomCleanerSelections == null) 
+                                Settings.Default.CustomCleanerSelections = new StringCollection();
+
+                            // then save it
+                            Settings.Default.CustomCleanerSelections.Add(o.id + "|" + o.parent_cleaner.id);
+                            Settings.Default.Save();
+                        }
+                    }
+                }
+                
+            }
+        }
+
        
 
 
@@ -908,11 +940,19 @@ namespace mCleaner.ViewModel
         public void CommandCollapseAllClick()
         {
             blnCollapseALL = !blnCollapseALL;
+              
             foreach (TreeNode tn in this.CleanersCollection)
             {
+                tn.IsInitiallySelected = false;
                 tn.IsExpanded = blnCollapseALL;
             }
+            if(!blnCollapseALL)
+            if(this.CleanersCollection.Where(dc=>dc.IsExpanded==true).Any())
+            {
+                this.CleanersCollection.Where(dc => dc.IsExpanded == true).First().IsExpanded = blnCollapseALL;
+                Command_CloseCleanerDescription_Click();
 
+            }
             txtCollapse = blnCollapseALL ? "Collapse All" : "Expand All";
         }
 
@@ -923,7 +963,7 @@ namespace mCleaner.ViewModel
                 tn.IsExpanded = true;
             }
             blnCollapseALL = true;
-
+            ShowCleanerDescription = false;
             txtCollapse = blnCollapseALL ? "Collapse All" : "Expand All";
         }
 
@@ -984,7 +1024,10 @@ namespace mCleaner.ViewModel
                             MessageBox.Show("Warning!\r\n" + o.warning, "mCleaner", MessageBoxButton.OK, MessageBoxImage.Information);
                         }
                     }
+                    this.btnPreviewCleanEnable = true;
                 }
+                else if (CleanersCollection.Where(dc => dc.IsChecked == true).Count() <= 0)
+                    this.btnPreviewCleanEnable = false;
 
                 // if the user selected custom cleaning
                 if (this.SaveCustom_Options)
@@ -998,6 +1041,7 @@ namespace mCleaner.ViewModel
                         Settings.Default.Save();
                     }
                 }
+                
             }
             else if (root.Tag is cleaner)
             {
@@ -1521,11 +1565,6 @@ namespace mCleaner.ViewModel
             root.Children = new List<TreeNode>();
 
             c.option.Add(MicrosoftWindows.AddClipboardCleaner());
-
-            // deep scan options
-            c.option.Add(MicrosoftWindows.AddDeepScan_Backup_Cleaner());
-            c.option.Add(MicrosoftWindows.AddDeepScan_OfficeTemp_Cleaner());
-            c.option.Add(MicrosoftWindows.AddDeepScan_ThumbsDB_Cleaner());
 
             c.option.Add(MicrosoftWindows.AddWindowsLogsCleaner());
             c.option.Add(MicrosoftWindows.AddMemoryDumpCleaner());
