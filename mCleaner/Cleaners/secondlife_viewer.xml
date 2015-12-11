@@ -19,7 +19,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 -->
-<cleaner id="secondlife_viewer">
+<cleaner id="secondlife_viewer" type="Application Cache">
   <label>Second Life Viewer</label>
   <description>Game</description>
   <option id="Cache" level="2">

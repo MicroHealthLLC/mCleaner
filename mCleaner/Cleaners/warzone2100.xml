@@ -21,7 +21,7 @@ BleachBit
 -->
 <!-- Gogeden (11/19/2011): tested on Trisquel GNUx and BleachBit 0.9.1 -->
 <!-- AZ (1/13/2013): tested on Warzone 2100 3.1, Ubuntu 12.10, BleachBit 0.9.5 -->
-<cleaner id="warzone2100">
+<cleaner id="warzone2100" type="Application Cache">
   <label>Warzone2100</label>
   <option id="logs" level="2">
     <label>Logs</label>

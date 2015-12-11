@@ -19,7 +19,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 -->
-<cleaner id="filezilla">
+<cleaner id="filezilla" type="Application Cache">
   <label>Filezilla</label>
   <description>File transfer client</description>
   <!-- fixme: in ~/.filezilla/filezilla.xml delete XML nodes

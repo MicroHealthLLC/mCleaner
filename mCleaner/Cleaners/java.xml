@@ -19,7 +19,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 -->
-<cleaner id="java">
+<cleaner id="java" type="Application Cache">
   <label>Java</label>
   <option id="cache" level="2">
     <label>Cache</label>

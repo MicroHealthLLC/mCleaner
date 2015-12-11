@@ -15,58 +15,54 @@ namespace mCleaner.Logics.Commands.LittleRegistryCleaner.Scanners
         static RecentDocs _i = new RecentDocs();
         public static RecentDocs I { get { return _i; } }
 
-        //public async Task<bool> Clean(bool preview)
-        //{
-        //    if (preview)
-        //    {
-        //        await PreviewAsync();
-        //    }
-        //    else
-        //    {
-        //        Clean();
-        //    }
-
-        //    return true;
-        //}
-
-        //public async Task<bool> PreviewAsync()
-        //{
-        //    await Task.Run(() => Preview());
-        //    return true;
-        //}
-
         public override void Clean()
         {
-            Preview();
-
-            foreach (InvalidKeys k in this.BadKeys)
+            try
             {
-                //using (RegistryKey key = k.Root.OpenSubKey(k.Subkey, true))
-                RegistryKey key = k.Root.OpenSubKey(k.Subkey, true);
+                Preview();
+
+                foreach (InvalidKeys k in this.BadKeys)
                 {
+                    try
+                    {
+                        //using (RegistryKey key = k.Root.OpenSubKey(k.Subkey, true))
+                        RegistryKey key = k.Root.OpenSubKey(k.Subkey, true);
+                        {
 
-                    if (k.Key == string.Empty)
-                    {
-                        // ?
-                    }
-                    else
-                    {
-                        key = key.OpenSubKey(k.Key, true);
-                    }
+                            if (k.Key == string.Empty)
+                            {
+                                // ?
+                            }
+                            else
+                            {
+                                key = key.OpenSubKey(k.Key, true);
+                            }
 
-                    if (k.Name != string.Empty)
-                    {
-                        BackUpRegistrykey(k);
-                        key.DeleteValue(k.Name);
+                            if (k.Name != string.Empty)
+                            {
+                                BackUpRegistrykey(k);
+                                key.DeleteValue(k.Name);
+                            }
+                            else
+                            {
+                                key.DeleteSubKey(k.Key);
+                            }
+                        }
+                        key.Close();
+                        key.Dispose();
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        key.DeleteSubKey(k.Key);
+                        Debug.WriteLine(ex.Message);
                     }
-                }
-                key.Close();
-                key.Dispose();
+                } 
+           
             }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+
         }
 
         public override void Preview()

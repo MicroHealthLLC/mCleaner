@@ -19,7 +19,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 -->
-<cleaner id="opera">
+<cleaner id="opera" type="Browser Cache">
   <label>Opera</label>
   <description>Web browser</description>
   <running type="exe">opera</running>
@@ -67,13 +67,13 @@
     <action command="delete" search="file" path="$appdata\Opera Software\Opera\profile\download.dat" level="1"/>
     <action command="delete" search="file" path="~/.opera/download.dat" level="1"/>
   </option>
-  <option id="search_history" level="1">
+  <option id="search_history" level="2">
     <label>Search history</label>
     <description>Delete the search history</description>
     <action command="delete" search="glob" path="$appdata\Opera Software\Opera*\search_field_history.dat" level="1"/>
     <action command="delete" search="glob" path="~/.opera/search_field_history.dat" level="1"/>
   </option>
-  <option id="url_history" level="1">
+  <option id="url_history" level="2">
     <label>URL history</label>
     <description>List of visited web pages</description>
     <!-- global.dat is in Opera 9, global_history.dat is in Opera 10 -->

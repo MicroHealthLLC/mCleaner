@@ -19,7 +19,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 -->
-<cleaner id="google_chrome">
+<cleaner id="google_chrome" type="Browser Cache">
   <label>Google Chrome</label>
   <description>Web browser</description>
   <running type="exe">chrome.exe</running>

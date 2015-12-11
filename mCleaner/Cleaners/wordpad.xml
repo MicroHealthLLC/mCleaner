@@ -19,7 +19,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 -->
-<cleaner id="wordpad" os="windows">
+<cleaner id="wordpad" os="windows" type="Application Cache">
   <label>Microsoft WordPad</label>
   <option id="mru" level="1">
     <label>Most recently used</label>

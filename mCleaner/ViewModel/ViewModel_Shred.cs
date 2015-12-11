@@ -12,6 +12,7 @@ using GalaSoft.MvvmLight.Command;
 using mCleaner.Helpers;
 using mCleaner.Logics.Commands;
 using mCleaner.Model;
+using mCleaner.Properties;
 using Microsoft.Practices.ServiceLocation;
 using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
 
@@ -422,10 +423,40 @@ namespace mCleaner.ViewModel
             wiper.PassInfoEvent += Wiper_PassInfoEvent;
             wiper.SectorInfoEvent += Wiper_SectorInfoEvent;
             wiper.WipeDoneEvent += Wiper_WipeDoneEvent;
+            bool isWhiteListed = false;
             foreach (Model_Shred MdlShared in ShredFilesCollection)
             {
+                FileAttributes attr = File.GetAttributes(MdlShared.FilePath);
+                if (attr.HasFlag(FileAttributes.Directory))
+                {
+                    foreach (
+                        string file in
+                            Directory.EnumerateFiles(MdlShared.FilePath, "*.*", SearchOption.AllDirectories))
+                    {
+                        if (CommandLogic_Delete.I.IsWhitelisted(file))
+                        {
+                            isWhiteListed = true;
+                            break;
+                        }
+                    }
+                    if(isWhiteListed)
+                        break;
+                }
+                else
+                {
+                    if (CommandLogic_Delete.I.IsWhitelisted(MdlShared.FilePath))
+                    {
+                        isWhiteListed = true;
+                        break;
+                    }
+                }
 
-                string full_param = string.Empty;
+            }
+            if(isWhiteListed)
+                MessageBox.Show("Items on Whitelist will not be removed.", "mCleaner", MessageBoxButtons.OK);
+
+            foreach (Model_Shred MdlShared in ShredFilesCollection)
+            {
                 if (MdlShared.FilePath != "Recycle Bin")
                 {
                     FileAttributes attr = File.GetAttributes(MdlShared.FilePath);
@@ -462,8 +493,7 @@ namespace mCleaner.ViewModel
                 this.ProgressText = "Started to Shreding recyclebin please Wait.";
 
                 Thread.Sleep(2000);
-                foreach (string file in Directory.EnumerateFiles("C:\\$RECYCLE.BIN", "*.*", SearchOption.AllDirectories)
-                    )
+                foreach (string file in Directory.EnumerateFiles("C:\\$RECYCLE.BIN", "*.*", SearchOption.AllDirectories))
                 {
                     this.ProgressText = "Started to Shred File " + file + " please Wait.";
                     wiper.WipeFile(file, 2);

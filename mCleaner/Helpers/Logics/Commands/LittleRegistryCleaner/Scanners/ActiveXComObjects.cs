@@ -42,10 +42,10 @@ namespace mCleaner.Logics.Commands.LittleRegistryCleaner.Scanners
             try
             {
                 foreach (InvalidKeys badkey in this.BadKeys)
-                {
-                    BackUpRegistrykey(badkey);
+                {                    
                     try
                     {
+                        BackUpRegistrykey(badkey);
                         using (RegistryKey root = badkey.Root.OpenSubKey(badkey.Subkey, true))
                         {
                             if (root != null)

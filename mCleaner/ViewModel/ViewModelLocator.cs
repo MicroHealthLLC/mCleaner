@@ -45,6 +45,7 @@ namespace mCleaner.ViewModel
             SimpleIoc.Default.Register<ViewModel_CleanerML>();
             SimpleIoc.Default.Register<ViewModel_Clam>();
             SimpleIoc.Default.Register<ViewModel_Preferences>();
+            SimpleIoc.Default.Register<ViewModel_HomeScreen>();
             SimpleIoc.Default.Register<ViewModel_Shred>();
             SimpleIoc.Default.Register<ViewModel_DuplicateChecker>();
             SimpleIoc.Default.Register<ViewModel_ReleaseNotes>();
@@ -83,6 +84,15 @@ namespace mCleaner.ViewModel
             get
             {
                 return ServiceLocator.Current.GetInstance<ViewModel_Preferences>();
+            }
+        }
+
+
+        public ViewModel_HomeScreen Home
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<ViewModel_HomeScreen>();
             }
         }
 

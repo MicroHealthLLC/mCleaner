@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using mCleaner.Model;
 
 namespace mCleaner.Helpers.Controls
 {
@@ -43,6 +44,8 @@ namespace mCleaner.Helpers.Controls
         public string Name { get; set; }
 
         public object Tag { get; set; }
+
+       public cleaner Cleaner { get; set; }
 
         public object IsAccordionHeader { get; set; }
 

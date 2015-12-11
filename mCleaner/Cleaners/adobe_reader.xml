@@ -19,7 +19,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 -->
-<cleaner id="adobe_reader">
+<cleaner id="adobe_reader" type="Application Cache">
   <label>Adobe Reader</label>
   <running type="exe">acroread</running>
   <option id="cache" level="2">

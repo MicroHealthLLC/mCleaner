@@ -19,7 +19,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 -->
-<cleaner id="xchat">
+<cleaner id="xchat" type="Application Cache">
   <label>XChat</label>
   <description>Chat client</description>
   <option id="logs" level="2">

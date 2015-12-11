@@ -38,6 +38,14 @@ namespace mCleaner.Logics
             }
         }
 
+        ViewModel_HomeScreen Home
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<ViewModel_HomeScreen>();
+            }
+        }
+
         ViewModel_Clam Clam
         {
             get
@@ -129,6 +137,7 @@ namespace mCleaner.Logics
             this.TotalSpecialOperations = 0;
             VMCleanerML.btnCloseEnable = true;
             VMCleanerML.IsCancelProcessEnabled = false;
+
         }
 
         void bgWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -889,11 +898,7 @@ namespace mCleaner.Logics
                     else
                     {
                         FileInfo fi = new FileInfo(ttd.FullPathName);
-                        if (fi.Exists)
-                        {
-                            this.TotalFileSize += fi.Length;
-                            this.TotalFileDelete++;
-                        }
+                        
                     }
                 }
                 else if (

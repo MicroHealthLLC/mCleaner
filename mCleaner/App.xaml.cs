@@ -80,6 +80,12 @@ namespace mCleaner
                 Settings.Default.Version = s_version;
                 Settings.Default.Save();
             }
+            if (Settings.Default.DupChecker_MaxSize <= 0)
+            {
+                Settings.Default.DupChecker_MaxSize = 9223372036854775;
+                Settings.Default.Save();
+            }
+
 
             // check for clamwin installation and
             // decide which database to use

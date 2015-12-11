@@ -816,14 +816,14 @@ namespace mCleaner.ViewModel
             IsCancelProcessEnabled = false;
             btnCleaningOptionsEnable = true;
             ProgressWorker.I.EnQ("Done");
+            ProgressText = "Done";
         }
 
 
          public void Command_CustomSaveAsSelection_Click()
         {
 
-            if (Settings.Default.CustomCleanerSelections != null) 
-                Settings.Default.CustomCleanerSelections.Clear();
+           var ListofStrgingCollecion= new StringCollection();
            foreach (TreeNode tn in this.CleanersCollection)
             {
                 foreach (TreeNode child in tn.Children)
@@ -835,15 +835,24 @@ namespace mCleaner.ViewModel
                         {
                             if (Settings.Default.CustomCleanerSelections == null) 
                                 Settings.Default.CustomCleanerSelections = new StringCollection();
-
+                            ListofStrgingCollecion.Add(o.id + "|" + o.parent_cleaner.id);
                             // then save it
-                            Settings.Default.CustomCleanerSelections.Add(o.id + "|" + o.parent_cleaner.id);
-                            Settings.Default.Save();
+                            
                         }
                     }
                 }
                 
             }
+             if (ListofStrgingCollecion.Count > 0)
+             {
+                 if (Settings.Default.CustomCleanerSelections != null)
+                     Settings.Default.CustomCleanerSelections.Clear();
+
+                 Settings.Default.CustomCleanerSelections = ListofStrgingCollecion;
+                 Settings.Default.Save();
+             }
+             else
+                 MessageBox.Show("There are no cleaning options selected.", "mCleaner", MessageBoxButton.OK,MessageBoxImage.Information);
         }
 
        
@@ -914,6 +923,7 @@ namespace mCleaner.ViewModel
             this.ProgressIsIndeterminate = false;
             IsCancelProcessEnabled = false;
             btnCleaningOptionsEnable = true;
+            ProgressText = "Done";
         }
 
         public void Command_Quit_Click()
@@ -1161,6 +1171,7 @@ namespace mCleaner.ViewModel
                         if (isSupported)
                         {
                             root = new TreeNode(clnr.label, clnr.id);
+                            root.Cleaner = clnr;
                             root.Tag = clnr;
                             root.TreeNodeChecked += TeeNode_TreeNodeChecked;
                             root.TreeNodeSelected += TreeNode_TreeNodeSelected;
@@ -1392,7 +1403,6 @@ namespace mCleaner.ViewModel
 
             return true;
 
-            //AddCustomLocationsToTTD();
         }
 
         public void EnqueueOption(option o)
@@ -1550,6 +1560,7 @@ namespace mCleaner.ViewModel
             cleaner c = new cleaner()
             {
                 id = "system",
+                type = "Windows Temp and  Cache",
                 label = "Microsoft Windows System",
                 description = "General Windows system cleaners",
                 option = new List<option>()
@@ -1560,6 +1571,7 @@ namespace mCleaner.ViewModel
             root.IsAccordionHeader = true;
             root.IsExpanded = true;
             root.Tag = c;
+            root.Cleaner = c;
             root.TreeNodeChecked += TeeNode_TreeNodeChecked;
             root.TreeNodeSelected += TreeNode_TreeNodeSelected;
             root.Children = new List<TreeNode>();

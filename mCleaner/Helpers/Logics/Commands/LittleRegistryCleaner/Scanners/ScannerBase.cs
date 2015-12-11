@@ -25,13 +25,20 @@ namespace mCleaner.Logics.Commands.LittleRegistryCleaner.Scanners
 
         public async Task<bool> Clean(bool preview)
         {
-            if (preview)
+            try
             {
-                await PreviewAsync();
+                if (preview)
+                {
+                    await PreviewAsync();
+                }
+                else
+                {
+                    Clean();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                Clean();
+                Debug.WriteLine(ex.Message);
             }
 
             return true;

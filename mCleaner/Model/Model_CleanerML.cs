@@ -86,6 +86,9 @@ namespace mCleaner.Model
         [XmlAttribute("id")]
         public string id { get; set; }
 
+        [XmlAttribute("type")]
+        public string type { get; set; }
+
         [XmlAttribute("os")]
         public string os { get; set; }
 

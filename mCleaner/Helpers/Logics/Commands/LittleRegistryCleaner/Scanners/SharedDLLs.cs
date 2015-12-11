@@ -1,4 +1,5 @@
 ﻿
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Security;
@@ -12,40 +13,36 @@ namespace mCleaner.Logics.Commands.LittleRegistryCleaner.Scanners
         static SharedDLLs _i = new SharedDLLs();
         public static SharedDLLs I { get { return _i; } }
 
-        //public async Task<bool> Clean(bool preview)
-        //{
-        //    if (preview)
-        //    {
-        //        await PreviewAsync();
-        //    }
-        //    else
-        //    {
-        //        Clean();
-        //    }
-
-        //    return true;
-        //}
-
-        //public async Task<bool> PreviewAsync()
-        //{
-        //    await Task.Run(() => Preview());
-        //    return true;
-        //}
-
         public override void Clean()
         {
-            Preview();
-
-            foreach (InvalidKeys k in this.BadKeys)
+            try
             {
-                using (RegistryKey key = k.Root.OpenSubKey(k.Subkey, true))
+
+                Preview();
+
+                foreach (InvalidKeys k in this.BadKeys)
                 {
-                    if (key != null)
+                    try
                     {
-                        BackUpRegistrykey(k);
-                        key.DeleteValue(k.Name);
+
+                        using (RegistryKey key = k.Root.OpenSubKey(k.Subkey, true))
+                        {
+                            if (key != null)
+                            {
+                                BackUpRegistrykey(k);
+                                key.DeleteValue(k.Name);
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.WriteLine(ex.Message);
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
             }
         }
 

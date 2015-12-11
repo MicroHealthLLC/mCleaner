@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Diagnostics;
+using System.Linq;
 using Microsoft.Win32;
 
 namespace mCleaner.Logics.Commands.LittleRegistryCleaner.Scanners
@@ -12,25 +14,6 @@ namespace mCleaner.Logics.Commands.LittleRegistryCleaner.Scanners
         static ApplicationInfo _i = new ApplicationInfo();
         public static ApplicationInfo I { get { return _i; } }
 
-        //public async Task<bool> Clean(bool preview)
-        //{
-        //    if (preview)
-        //    {
-        //        await PreviewAsync();
-        //    }
-        //    else
-        //    {
-        //        Clean();
-        //    }
-
-        //    return true;
-        //}
-
-        //public async Task<bool> PreviewAsync()
-        //{
-        //    await Task.Run(() => Preview());
-        //    return true;
-        //}
 
         public override void Preview()
         {
@@ -75,18 +58,32 @@ namespace mCleaner.Logics.Commands.LittleRegistryCleaner.Scanners
 
         public override void Clean()
         {
-            Preview();
-
-            foreach (InvalidKeys badkey in this.BadKeys)
+            try
             {
-                using (RegistryKey root = badkey.Root.OpenSubKey(badkey.Subkey, true))
+                Preview();
+
+                foreach (InvalidKeys badkey in this.BadKeys)
                 {
-                    if (root != null)
+                    try
                     {
-                        BackUpRegistrykey(badkey);
-                        root.DeleteSubKey(badkey.Key);
+                        using (RegistryKey root = badkey.Root.OpenSubKey(badkey.Subkey, true))
+                        {
+                            if (root != null)
+                            {
+                                BackUpRegistrykey(badkey);
+                                root.DeleteSubKey(badkey.Key);
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.WriteLine(ex.Message);
                     }
                 }
+            }
+            catch (Exception)
+            {
+                
             }
         }
 

@@ -19,7 +19,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 -->
-<cleaner id="gimp">
+<cleaner id="gimp" type="Application Cache">
   <label>GIMP</label>
   <option id="tmp">
     <label>Temporary files</label>

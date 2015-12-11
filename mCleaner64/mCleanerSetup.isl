@@ -341,6 +341,7 @@
 		<col def="S0">ISDotNetInstallerArgsCommit</col>
 		<col def="S0">ISDotNetInstallerArgsUninstall</col>
 		<col def="S0">ISDotNetInstallerArgsRollback</col>
+		<row><td>Aga.Controls.dll</td><td>{D27A4155-7ADA-49DC-B8E5-3D277B9EB28E}</td><td>INSTALLDIR</td><td>2</td><td/><td>aga.controls.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>CSShellExtContextMenuHandler.dll</td><td>{8F2ABC07-B61E-4069-AFEC-E865AE70E4B6}</td><td>INSTALLDIR</td><td>2</td><td/><td>csshellextcontextmenuhandler</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>GalaSoft.MvvmLight.Extras.dll</td><td>{582267E4-B057-4257-99DA-F5D789DB2A1E}</td><td>INSTALLDIR</td><td>2</td><td/><td>galasoft.mvvmlight.extras.dl</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>GalaSoft.MvvmLight.Platform.dll</td><td>{5A77EFFF-4AF7-4440-A458-C3881330D1CD}</td><td>INSTALLDIR</td><td>2</td><td/><td>galasoft.mvvmlight.platform.</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
@@ -1082,6 +1083,7 @@
 		<row><td>CLAM</td><td>msvcr80.dll</td></row>
 		<row><td>CLEANERS</td><td>ISX_DEFAULTCOMPONENT2</td></row>
 		<row><td>DB</td><td>ISX_DEFAULTCOMPONENT1</td></row>
+		<row><td>INSTALLDIR</td><td>Aga.Controls.dll</td></row>
 		<row><td>INSTALLDIR</td><td>CSShellExtContextMenuHandler.dll</td></row>
 		<row><td>INSTALLDIR</td><td>GalaSoft.MvvmLight.Extras.dll</td></row>
 		<row><td>INSTALLDIR</td><td>GalaSoft.MvvmLight.Platform.dll</td></row>
@@ -1921,6 +1923,7 @@
 	<table name="FeatureComponents">
 		<col key="yes" def="s38">Feature_</col>
 		<col key="yes" def="s72">Component_</col>
+		<row><td>AlwaysInstall</td><td>Aga.Controls.dll</td></row>
 		<row><td>AlwaysInstall</td><td>CSShellExtContextMenuHandler.dll</td></row>
 		<row><td>AlwaysInstall</td><td>GalaSoft.MvvmLight.Extras.dll</td></row>
 		<row><td>AlwaysInstall</td><td>GalaSoft.MvvmLight.Platform.dll</td></row>
@@ -1959,6 +1962,7 @@
 		<col def="I4">ISAttributes</col>
 		<col def="S72">ISComponentSubFolder_</col>
 		<row><td>adobe_reader.xml</td><td>ISX_DEFAULTCOMPONENT2</td><td>ADOBE_~1.XML|adobe_reader.xml</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release\Cleaners\adobe_reader.xml</td><td>1</td><td/></row>
+		<row><td>aga.controls.dll</td><td>Aga.Controls.dll</td><td>AGACON~1.DLL|Aga.Controls.dll</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release\Aga.Controls.dll</td><td>1</td><td/></row>
 		<row><td>amule.xml</td><td>ISX_DEFAULTCOMPONENT2</td><td>amule.xml</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release\Cleaners\amule.xml</td><td>1</td><td/></row>
 		<row><td>appicon.ico</td><td>ISX_DEFAULTCOMPONENT3</td><td>appicon.ico</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\appicon.ico</td><td>1</td><td/></row>
 		<row><td>chromium.xml</td><td>ISX_DEFAULTCOMPONENT2</td><td>chromium.xml</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release\Cleaners\chromium.xml</td><td>1</td><td/></row>
@@ -2168,6 +2172,7 @@
 		<col def="S0">FTPLocation</col>
 		<col def="S0">HTTPLocation</col>
 		<col def="S0">Miscellaneous</col>
+		<row><td>Aga.Controls.dll</td><td/><td/><td>_88E133E5_E2F8_49C9_B9C5_D7F7EE1EBB83_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>CSShellExtContextMenuHandler.dll</td><td/><td/><td>_3BFAC6D8_3B48_4FC0_A7DE_1F33287CC923_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>GalaSoft.MvvmLight.Extras.dll</td><td/><td/><td>_2D677A95_4DF0_470A_9EB3_8A6C75BCA0AD_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>GalaSoft.MvvmLight.Platform.dll</td><td/><td/><td>_4808FFD4_FF38_4E05_A6C6_3B491C670DEA_FILTER</td><td/><td/><td/><td/></row>
@@ -4528,9 +4533,9 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<row><td>PROGMSG_IIS_ROLLBACKVROOTS</td><td>##IDS_PROGMSG_IIS_ROLLBACKVROOTS##</td><td/></row>
 		<row><td>PROGMSG_IIS_ROLLBACKWEBSERVICEEXTENSIONS</td><td>##IDS_PROGMSG_IIS_ROLLBACKWEBSERVICEEXTENSIONS##</td><td/></row>
 		<row><td>PROGRAMFILETOLAUNCHATEND</td><td>[INSTALLDIR]mCleaner.exe</td><td/></row>
-		<row><td>ProductCode</td><td>{72DED72A-A61D-4E00-AC7E-E493EC8C97BF}</td><td/></row>
+		<row><td>ProductCode</td><td>{1AE8C170-C6C3-4D30-8B8D-8AA0A7FEB99B}</td><td/></row>
 		<row><td>ProductName</td><td>mCleaner</td><td/></row>
-		<row><td>ProductVersion</td><td>1.7.0</td><td/></row>
+		<row><td>ProductVersion</td><td>1.8.0</td><td/></row>
 		<row><td>ProgressType0</td><td>install</td><td/></row>
 		<row><td>ProgressType1</td><td>Installing</td><td/></row>
 		<row><td>ProgressType2</td><td>installed</td><td/></row>
@@ -4821,7 +4826,7 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<col def="s72">ActionProperty</col>
 		<col def="S72">ISDisplayName</col>
 		<row><td>{00000000-0000-0000-0000-000000000000}</td><td>***ALL_VERSIONS***</td><td></td><td></td><td>2</td><td/><td>ISFOUNDNEWERPRODUCTVERSION</td><td>ISPreventDowngrade</td></row>
-		<row><td>{6EEA3CBA-4FF5-4862-B38D-45867E223975}</td><td></td><td>1.7.0</td><td></td><td>768</td><td/><td>ISACTIONPROP1</td><td>UpdateProduct</td></row>
+		<row><td>{6EEA3CBA-4FF5-4862-B38D-45867E223975}</td><td></td><td>1.8.0</td><td></td><td>768</td><td/><td>ISACTIONPROP1</td><td>UpdateProduct</td></row>
 	</table>
 
 	<table name="Verb">

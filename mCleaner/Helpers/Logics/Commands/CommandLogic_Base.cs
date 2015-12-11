@@ -29,6 +29,7 @@ namespace mCleaner.Logics.Commands
             }
         }
 
+
         public void UpdateProgressLog(string WindowLogText, string ProgressText, bool update_progress_text = true)
         {
             if (update_progress_text) ProgressWorker.I.EnQ(ProgressText);

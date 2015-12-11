@@ -19,7 +19,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 -->
-<cleaner id="skype">
+<cleaner id="skype" type="Application Cache">
   <label>Skype</label>
   <running type="exe">skype</running>
   <option id="chat_logs" level="2">

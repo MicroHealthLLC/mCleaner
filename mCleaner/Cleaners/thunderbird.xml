@@ -19,7 +19,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 -->
-<cleaner id="thunderbird">
+<cleaner id="thunderbird" type="Application Cache">
   <label>Thunderbird</label>
   <running type="exe">thunderbird.exe</running>
   <running type="exe">thunderbird-bin</running>

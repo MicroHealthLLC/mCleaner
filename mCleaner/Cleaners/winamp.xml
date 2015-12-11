@@ -19,7 +19,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 -->
-<cleaner id="winamp" os="windows">
+<cleaner id="winamp" os="windows" type="Application Cache">
   <label>Winamp</label>
   <option id="mru" level="1">
     <label>Most recently used</label>

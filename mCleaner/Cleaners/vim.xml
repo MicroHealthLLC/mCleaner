@@ -19,7 +19,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 -->
-<cleaner id="vim">
+<cleaner id="vim" type="Application Cache">
   <label>VIM</label>
   <description>Editor</description>
   <option id="history" level="2">

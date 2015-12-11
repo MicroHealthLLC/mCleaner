@@ -27,7 +27,7 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.7.0.%2a</ApplicationVersion>
+    <ApplicationVersion>1.8.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -159,6 +159,9 @@
     <GenerateManifests>false</GenerateManifests>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Aga.Controls">
+      <HintPath>..\..\..\Users\administrator\Downloads\wpftreelistview_src\Aga.Controls\bin\Debug\Aga.Controls.dll</HintPath>
+    </Reference>
     <Reference Include="GalaSoft.MvvmLight">
       <HintPath>..\packages\MvvmLightLibs.5.2.0.0\lib\net45\GalaSoft.MvvmLight.dll</HintPath>
     </Reference>
@@ -172,6 +175,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\MahApps.Metro.1.1.2.0\lib\net45\MahApps.Metro.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Expression.Drawing, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Users\administrator\Downloads\PieControls_Code\PieControls_Code\PieControls\bin\Debug\Microsoft.Expression.Drawing.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation">
       <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
@@ -181,6 +188,9 @@
     </Reference>
     <Reference Include="Octokit">
       <HintPath>..\packages\Octokit.0.16.0\lib\net45\Octokit.dll</HintPath>
+    </Reference>
+    <Reference Include="PieControls">
+      <HintPath>..\..\..\Users\administrator\Downloads\PieControls_Code\PieControls_Code\PieControls\bin\Debug\PieControls.dll</HintPath>
     </Reference>
     <Reference Include="PresentationFramework.Aero" />
     <Reference Include="System" />
@@ -218,6 +228,7 @@
     <Compile Include="Helpers\Controls\TreeNode.cs" />
     <Compile Include="Helpers\Converters\Converter_BooleanToVisibility.cs" />
     <Compile Include="Helpers\Data\JSON.cs" />
+    <Compile Include="Helpers\Logics\Commands\CommandLogic_Delete_CalculateSpace.cs" />
     <Compile Include="Helpers\System\FileOperations.cs" />
     <Compile Include="Helpers\Python\Glob.cs" />
     <Compile Include="Helpers\Help.cs" />
@@ -262,6 +273,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\Model_CleanerML.cs" />
+    <Compile Include="Model\Model_HomeScreenGrid.cs" />
     <Compile Include="Model\Model_RestoreRegistry.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -299,6 +311,9 @@
     <Compile Include="ViewModel\ViewModel_Clam.cs" />
     <Compile Include="ViewModel\ViewModel_CleanerML.cs" />
     <Compile Include="ViewModel\ViewModel_About.cs" />
+    <Compile Include="ViewModel\ViewModel_HomeScreen.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="ViewModel\ViewModel_RestoreRegistryOptions.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -400,13 +415,19 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <Resource Include="Assets\ApplicationCache.png" />
+    <Resource Include="Assets\Browser.png" />
+    <Resource Include="Assets\btnSaveAs.png" />
+    <Resource Include="Assets\WindowsCache.png" />
     <Resource Include="Cleaners\LittleRegistry.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Assets\btnSaveAs.png" />
     <Content Include="Cleaners\deepscan.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Cleaners\google_chrome.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Content Include="Cleaners\mozilla_firefox.xml">
       <SubType>Designer</SubType>
     </Content>
@@ -531,9 +552,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Cleaners\gimp.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Cleaners\google_chrome.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Cleaners\google_earth.xml">

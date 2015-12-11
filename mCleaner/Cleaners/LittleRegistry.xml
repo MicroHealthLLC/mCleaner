@@ -3,7 +3,7 @@
 	this is Registry Cleaner
 	DO NOT CHANGE THE PATH ATTRIBUTE VALUE
 -->
-<cleaner id="little_reg" os="windows">
+<cleaner id="little_reg" os="windows" type="Application Cache">
   <label>Windows Registry Cleaner</label>
   <description>Registry Cleaner</description>
   <option id="activex">

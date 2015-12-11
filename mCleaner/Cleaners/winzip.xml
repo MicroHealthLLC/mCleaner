@@ -19,7 +19,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 -->
-<cleaner id="winzip" os="windows">
+<cleaner id="winzip" os="windows" type="Application Cache">
   <label>WinZip</label>
   <option id="mru" level="1">
     <label>Most recently used</label>

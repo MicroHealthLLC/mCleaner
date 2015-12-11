@@ -20,29 +20,32 @@ namespace mCleaner.Logics.Commands.LittleRegistryCleaner.Scanners
         static WindowsFonts _i = new WindowsFonts();
         public static WindowsFonts I { get { return _i; } }
 
-        //public void Clean(bool preview)
-        //{
-        //    if (preview)
-        //    {
-        //        Preview(); 
-        //    }
-        //    else
-        //    {
-        //        Clean();
-        //    }
-        //}
-
         public override void Clean()
         {
-            Preview();
-
-            foreach (InvalidKeys k in this.BadKeys)
+            try
             {
-                using (RegistryKey key = k.Root.OpenSubKey(k.Subkey, true))
+
+                Preview();
+
+                foreach (InvalidKeys k in this.BadKeys)
                 {
-                    BackUpRegistrykey(k);
-                    key.DeleteValue(k.Name);
+                    try
+                    {
+                        using (RegistryKey key = k.Root.OpenSubKey(k.Subkey, true))
+                        {
+                            BackUpRegistrykey(k);
+                            key.DeleteValue(k.Name);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.WriteLine(ex.Message);
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
             }
         }
 

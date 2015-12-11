@@ -19,7 +19,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 -->
-<cleaner id="windows_explorer" os="windows">
+<cleaner id="windows_explorer" os="windows" type="Browser Cache">
   <label>Mozilla Firefox</label>
   <running type="exe">firefox.exe</running>
   <option id="cache" level="2">

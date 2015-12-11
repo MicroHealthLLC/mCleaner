@@ -92,7 +92,8 @@ namespace mCleaner.Logics.Commands
                 Trace.WriteLine("Check Duplicates Started. for Path "+path);
                 if (this.DupChecker.Cancel)
                 {
-                    DupChecker.ProgressText = "Operation Cancelled";
+                    DupChecker.ProgressText = "Operation Canceled";
+                    DupChecker.ProgressIndex = this.DupChecker.ProgressMax;
                     return;
                 }
                 await Task.Run(() => ScanPath(path));
@@ -122,7 +123,8 @@ namespace mCleaner.Logics.Commands
             {
                 if (this.DupChecker.Cancel)
                 {
-                    DupChecker.ProgressText="Operation Cancelled.";
+                    DupChecker.ProgressText="Operation Canceled.";
+                    DupChecker.ProgressIndex = this.DupChecker.ProgressMax;
                     return;
                 }
 
@@ -181,7 +183,8 @@ namespace mCleaner.Logics.Commands
             {
                 if (this.DupChecker.Cancel)
                 {
-                    DupChecker.ProgressText="Operation Cancelled";
+                    DupChecker.ProgressText="Operation Canceled";
+                    DupChecker.ProgressIndex = this.DupChecker.ProgressMax;
                     return;
                 }
                 if (filesWithSameSize[filesize].Count > 1)
@@ -209,7 +212,8 @@ namespace mCleaner.Logics.Commands
 
                         if (this.DupChecker.Cancel)
                         {
-                            DupChecker.ProgressText = "Operation Cancelled";
+                            DupChecker.ProgressText = "Operation Canceled";
+                            DupChecker.ProgressIndex = this.DupChecker.ProgressMax;
                             return;
                         }
                         string hash = FileOperations.I.HashFile(filename);
@@ -234,7 +238,8 @@ namespace mCleaner.Logics.Commands
                 {
                     if (this.DupChecker.Cancel)
                     {
-                        DupChecker.ProgressText = "Operation Cancelled";
+                        DupChecker.ProgressText = "Operation Canceled";
+                        DupChecker.ProgressIndex = this.DupChecker.ProgressMax;
                         return;
                     }
                     string[] tmp = hashedfile.Split('|');
@@ -261,7 +266,8 @@ namespace mCleaner.Logics.Commands
                 {
                     if (this.DupChecker.Cancel)
                     {
-                        DupChecker.ProgressText = "Operation Cancelled";
+                        DupChecker.ProgressText = "Operation Canceled";
+                        DupChecker.ProgressIndex = this.DupChecker.ProgressMax;
                         return;
                     }
                     if (files_with_same_hash[key].Count == 1) teremove.Add(key);
@@ -287,14 +293,16 @@ namespace mCleaner.Logics.Commands
                     DupChecker.ProgressText = "Adding Files to collection " + entry;
                     if (this.DupChecker.Cancel)
                     {
-                        DupChecker.ProgressText = "Operation Cancelled";
+                        DupChecker.ProgressText = "Operation Canceled";
+                        DupChecker.ProgressIndex = this.DupChecker.ProgressMax;
                         return;
                     }
                     for (int i = 0; i < files_with_same_hash[entry].ToArray().Length; i++)
                     {
                         if (this.DupChecker.Cancel)
                         {
-                            DupChecker.ProgressText = "Operation Cancelled";
+                            DupChecker.ProgressText = "Operation Canceled";
+                            DupChecker.ProgressIndex = this.DupChecker.ProgressMax;
                             return;
                         }
                         string file_entries = files_with_same_hash[entry][i];
@@ -340,7 +348,8 @@ namespace mCleaner.Logics.Commands
             {
                 if (this.DupChecker.Cancel)
                 {
-                    DupChecker.ProgressText="Operation Cancelled.";
+                    DupChecker.ProgressText="Operation Canceled.";
+                    DupChecker.ProgressIndex = this.DupChecker.ProgressMax;
                     break;
                 }
                 if (dc.Selected)

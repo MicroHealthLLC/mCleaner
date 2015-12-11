@@ -19,7 +19,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 -->
-<cleaner id="google_earth">
+<cleaner id="google_earth" type="Application Cache">
   <label>Google Earth</label>
   <option id="cache_files" level="2">
     <label>Cache files</label>

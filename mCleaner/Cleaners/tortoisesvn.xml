@@ -19,7 +19,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 -->
-<cleaner id="tortoisesvn" os="windows">
+<cleaner id="tortoisesvn" os="windows" type="Application Cache">
   <label>TortoiseSVN</label>
   <option id="history" level="1">
     <label>History</label>

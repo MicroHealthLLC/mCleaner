@@ -1,4 +1,6 @@
-﻿using mCleaner.Helpers;
+﻿using System;
+using System.Diagnostics;
+using mCleaner.Helpers;
 using Microsoft.Win32;
 
 namespace mCleaner.Logics.Commands.LittleRegistryCleaner.Scanners
@@ -9,38 +11,36 @@ namespace mCleaner.Logics.Commands.LittleRegistryCleaner.Scanners
         static ApplicationSettings _i = new ApplicationSettings();
         public static ApplicationSettings I { get { return _i; } }
 
-        //public async Task<bool> Clean(bool preview)
-        //{
-        //    if (preview)
-        //    {
-        //        await PreviewAsync();
-        //    }
-        //    else
-        //    {
-        //        Clean();
-        //    }
-
-        //    return true;
-        //}
-
-        //public async Task<bool> PreviewAsync()
-        //{
-        //    await Task.Run(() => Preview());
-        //    return true;
-        //}
-
         public override void Clean()
         {
-            Preview();
-
-            foreach (InvalidKeys k in this.BadKeys)
+            try
             {
-                using (RegistryKey key = k.Root.OpenSubKey(k.Subkey, true))
+                Preview();
+
+                foreach (InvalidKeys k in this.BadKeys)
                 {
-                    BackUpRegistrykey(k);
-                    key.DeleteSubKey(k.Key);
+                    try
+                    {
+
+                        using (RegistryKey key = k.Root.OpenSubKey(k.Subkey, true))
+                        {
+                            BackUpRegistrykey(k);
+                            key.DeleteSubKey(k.Key);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.WriteLine(ex.Message);
+                    }
+
                 }
             }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+                
+
         }
 
         public override void Preview()

@@ -19,7 +19,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 -->
-<cleaner id="seamonkey">
+<cleaner id="seamonkey" type="Application Cache">
   <label>SeaMonkey</label>
   <description>Web browser</description>
   <running type="exe">seamonkey.exe</running>

@@ -19,7 +19,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 -->
-<cleaner id="internet_explorer" os="windows">
+<cleaner id="internet_explorer" os="windows" type="Browser Cache">
   <label>Microsoft Internet Explorer</label>
   <description>Web browser</description>
   <option id="cookies" level="2">
@@ -37,7 +37,7 @@
     <action command="winreg" path="HKCU\Software\Microsoft\Internet Explorer\IntelliForms\Storage1"/>
     <action command="winreg" path="HKCU\Software\Microsoft\Internet Explorer\IntelliForms\Storage2"/>
   </option>
-  <option id="history" level="1">
+  <option id="history" level="2">
     <label>History</label>
     <description>List of visited web pages</description>
     <action command="delete" search="walk.files" path="$USERPROFILE\AppData\Local\Microsoft\Windows\History\"/>

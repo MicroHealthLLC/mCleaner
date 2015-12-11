@@ -91,10 +91,15 @@ namespace mCleaner.Logics.Commands
 
                         //// then report to the gui
                         //bgWorker.ReportProgress(-1, text);
+                        if (fi.Exists)
+                        {
+                            Worker.I.TotalFileSize += fi.Length;
+                            Worker.I.TotalFileDelete++;
+                        }
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine("ERROR while deleting a file: " + ex.Message);
+                        ProgressWorker.I.EnQ("ERROR while deleting a file: " + ex.Message);
                     }
                 }
 
@@ -317,18 +322,27 @@ namespace mCleaner.Logics.Commands
                 {
                     if (path.ToLower() == f.ToLower()) { ret = true; break; }
                 }
-                else if(Directory.Exists(f))
+                else if (Directory.Exists(f))
                 {
                     // eg
-                    // whitelisted directory: C:\Users\Jayson\AppData\Local\Temp\ALM
-                    // path to be deleted   : C:\Users\Jayson\AppData\Local\Temp\ALM\ShadowCopies\d926192406574f99b57077a37efb88b7
-                    string p = path.Substring(0, f.Length);
-                    // p will be            : C:\Users\Jayson\AppData\Local\Temp\ALM
-                    if (p == f) { ret = true; break; }
+                    // whitelisted directory: C:\Users\Administrator\AppData\Local\Temp\ALM
+                    // path to be deleted   : C:\Users\Administrator\AppData\Local\Temp\ALM\ShadowCopies\d926192406574f99b57077a37efb88b7
+                    if (f.Length <= path.Length)
+                    {
+                        string p = path.Substring(0, f.Length);
+
+                        // p will be            : C:\Users\Administrator\AppData\Local\Temp\ALM
+                        if (p.ToLower() == f.ToLower())
+                        {
+                            ret = true;
+                            break;
+                        }
+                    }
                 }
             }
 
             return ret;
         }
+
     }
 }

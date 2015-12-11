@@ -19,7 +19,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 -->
-<cleaner id="teamviewer" os="windows">
+<cleaner id="teamviewer" os="windows" type="Application Cache">
   <label>TeamViewer</label>
   <option id="logs" level="2">
     <label>Logs</label>

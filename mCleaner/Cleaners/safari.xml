@@ -19,7 +19,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 -->
-<cleaner id="safari" os="windows">
+<cleaner id="safari" os="windows" type="Browser Cache">
   <label>Safari</label>
   <description>Web browser</description>
   <option id="cache" level="2">

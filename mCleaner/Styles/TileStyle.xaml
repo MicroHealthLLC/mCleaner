@@ -25,9 +25,9 @@
     <Style x:Key="LargeTileStyle"
                    TargetType="controls:Tile">
         <Setter Property="Width"
-                        Value="300" />
+                        Value="150" />
         <Setter Property="Height"
-                        Value="125" />
+                        Value="50" />
         <Setter Property="TitleFontSize"
                         Value="12" />
 
@@ -43,17 +43,17 @@
                                 <StackPanel VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                             Orientation="Horizontal">
-                                    <ContentPresenter RecognizesAccessKey="True" />
+                                    <ContentPresenter RecognizesAccessKey="True" Margin="0,0,5,5"/>
                                     <TextBlock Text="{TemplateBinding Count}"
                                                FontSize="{Binding CountFontSize, RelativeSource={RelativeSource TemplatedParent}}"
                                                VerticalAlignment="Center" />
                                 </StackPanel>
 
-                                <Label HorizontalAlignment="Left"
+                                <Label HorizontalAlignment="Left" Margin="2,0,0,5"
                                        VerticalAlignment="Bottom"
                                        Foreground="{TemplateBinding Foreground}">
                                     <AccessText Text="{Binding Title, RelativeSource={RelativeSource TemplatedParent}}"
-                                                Foreground="{TemplateBinding Foreground}"
+                                                Foreground="{TemplateBinding Foreground}" 
                                                 TextWrapping="Wrap"
                                                 FontSize="{Binding TitleFontSize, RelativeSource={RelativeSource TemplatedParent}}"
                                                 Margin="3" />
@@ -88,11 +88,11 @@
     <Style x:Key="SmallTileStyle"
                    TargetType="controls:Tile">
         <Setter Property="Width"
-                        Value="148" />
+                        Value="130" />
         <Setter Property="Height"
-                        Value="125" />
+                        Value="100" />
         <Setter Property="TitleFontSize"
-                        Value="12" />
+                        Value="18" />
 
         <Setter Property="Template">
             <Setter.Value>

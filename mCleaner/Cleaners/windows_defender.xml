@@ -19,7 +19,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 -->
-<cleaner id="windows_defender" os="windows">
+<cleaner id="windows_defender" os="windows" type="Application Cache">
   <label>Microsoft Windows Defender</label>
   <option id="history" level="2">
     <label>History</label>

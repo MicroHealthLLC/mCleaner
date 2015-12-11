@@ -1,4 +1,5 @@
 ﻿
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Security;
@@ -13,29 +14,33 @@ namespace mCleaner.Logics.Commands.LittleRegistryCleaner.Scanners
         static WindowsHelpFiles _i = new WindowsHelpFiles();
         public static WindowsHelpFiles I { get { return _i; } }
 
-        //public void Clean(bool preview)
-        //{
-        //    if (preview)
-        //    {
-        //        Preview(); 
-        //    }
-        //    else
-        //    {
-        //        Clean();
-        //    }
-        //}
-
         public override void Clean()
         {
-            Preview();
-
-            foreach (InvalidKeys k in this.BadKeys)
+            try
             {
-                using (RegistryKey key = k.Root.OpenSubKey(k.Subkey, true))
+
+                Preview();
+
+                foreach (InvalidKeys k in this.BadKeys)
                 {
-                    BackUpRegistrykey(k);
-                    key.DeleteValue(k.Name);
+                    try
+                    {
+
+                        using (RegistryKey key = k.Root.OpenSubKey(k.Subkey, true))
+                        {
+                            BackUpRegistrykey(k);
+                            key.DeleteValue(k.Name);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.WriteLine(ex.Message);
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
             }
         }
 

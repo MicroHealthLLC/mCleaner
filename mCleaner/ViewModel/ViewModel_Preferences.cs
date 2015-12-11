@@ -399,12 +399,15 @@ namespace mCleaner.ViewModel
             }
             if (DupChecker_MaxSize <= 0 )
             {
-                MessageBox.Show("Please enter MaxSize grater than 0 ", "mCleaner", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                MessageBox.Show("Please enter Maximum Kb greater than 0", "mCleaner", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                DupChecker_MaxSize = 1;
                 return;
             }
             if (DupChecker_MaxSize > 9223372036854775)
             {
-                MessageBox.Show("Please enter MaxSize less than 9223372036854775.", "mCleaner", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                MessageBox.Show("Exceeds Maximum Kb allowed.", "mCleaner", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                DupChecker_MaxSize = 9223372036854775;
+
                 return;
             }
 

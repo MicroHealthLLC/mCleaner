@@ -25,7 +25,7 @@
 
 
 -->
-<cleaner id="vlc">
+<cleaner id="vlc" type="Application Cache">
   <label>VLC media player</label>
   <running type="exe">vlc.exe</running>
   <running type="exe">vlc</running>

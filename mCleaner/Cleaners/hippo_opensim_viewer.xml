@@ -19,7 +19,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 -->
-<cleaner id="hippo_opensim_viewer">
+<cleaner id="hippo_opensim_viewer" type="Application Cache">
   <label>Hippo OpenSim Viewer</label>
   <description>Game</description>
   <option id="cache" level="2">

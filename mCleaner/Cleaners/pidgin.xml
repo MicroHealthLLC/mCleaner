@@ -19,7 +19,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 -->
-<cleaner id="pidgin">
+<cleaner id="pidgin" type="Application Cache">
   <label>Pidgin</label>
   <description>Chat client</description>
   <option id="cache" level="2">

@@ -159,7 +159,7 @@ namespace mCleaner.Cleaners
                 label = "Backup Files",
                 description = "It will scan the entire system drive and look for .bak files",
                 warning = "This option will be very slow.",
-                level = 1,
+                level = 3,
                 action = new List<action>()
             };
 
@@ -327,7 +327,7 @@ namespace mCleaner.Cleaners
                 id = "windows_recyclebin",
                 label = "Recycle bin",
                 description = "Empty the recycle bin",
-                level = 1,
+                level = 2,
                 action = new List<action>()
             };
 
