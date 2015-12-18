@@ -21,10 +21,12 @@ namespace mCleaner.Logics
     public class Worker
     {
         #region vars
-        BackgroundWorker bgWorker;
+       public BackgroundWorker bgWorker;
 
         public int  TotalFileDelete = 0;
+        public int TotalFileSkipped = 0;
         public long TotalFileSize = 0;
+        public long TotalSkippedFileSize = 0;
         public int  TotalWork = 0;
         public int  TotalSpecialOperations = 0;
         #endregion
@@ -137,6 +139,10 @@ namespace mCleaner.Logics
             this.TotalSpecialOperations = 0;
             VMCleanerML.btnCloseEnable = true;
             VMCleanerML.IsCancelProcessEnabled = false;
+            ProgressWorker.I.EnQ("Done");
+            VMCleanerML.ProgressIsIndeterminate = false;
+            VMCleanerML.btnCleaningOptionsEnable = true;
+            VMCleanerML.ProgressText = "Done";
 
         }
 
@@ -153,111 +159,145 @@ namespace mCleaner.Logics
 
         async void bgWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            string last_Log = string.Empty;
-            string strBackUpFolderName = DateTime.Now.ToString("yyyyMMddHHmmss");
-            string strRegistryDatSaveFolderPath = Path.Combine(Environment.GetEnvironmentVariable("APPDATA"), "mCleaner\\RegistryBackups\\" + strBackUpFolderName);
-            if (!Directory.Exists(strRegistryDatSaveFolderPath))
-                Directory.CreateDirectory(strRegistryDatSaveFolderPath);
-
-            while (this.TTD.Count != 0)
+            try
             {
-                if (bgWorker.CancellationPending || this.VMCleanerML.Cancel) break;
 
-                if (!this.Preview)
+                string last_Log = string.Empty;
+                string strBackUpFolderName = DateTime.Now.ToString("yyyyMMddHHmmss");
+                string strRegistryDatSaveFolderPath = Path.Combine(Environment.GetEnvironmentVariable("APPDATA"),
+                    "mCleaner\\RegistryBackups\\" + strBackUpFolderName);
+                if (!Directory.Exists(strRegistryDatSaveFolderPath))
+                    Directory.CreateDirectory(strRegistryDatSaveFolderPath);
+
+                while (this.TTD.Count != 0)
                 {
-                    Model_ThingsToDelete ttd = this.TTD.Dequeue();
-
-                    #region // execute cleaning commands
-                    switch (ttd.command)
+                    try
                     {
-                        case COMMANDS.delete:
-                            //ExecuteDeleteCommand(ttd);
-                            CommandLogic_Delete.I.ExecuteDeleteCommand(ttd, this.bgWorker, this.TTD);
-                            break;
 
-                        #region // special commands
-                        case COMMANDS.winreg:
-                            ExecuteWinRegCommand(ttd);
-                            break;
-                        case COMMANDS.sqlite_vacuum:
-                            ExecuteSQLiteVacuumCommand(ttd);
-                            break;
-                        #endregion
 
-                        #region // other special commands
-                        case COMMANDS.ini:
-                            ExecuteIniCommand(ttd);
-                            break;
-                        case COMMANDS.json:
-                            ExecuteJSONCommand(ttd);
-                            break;
-                        #endregion
+                        if (bgWorker.CancellationPending || this.VMCleanerML.Cancel) break;
 
-                        #region // Google Chrome commands
-                        case COMMANDS.chrome_autofill:
-                            ExecuteChromeCommand(ttd);
-                            break;
-                        case COMMANDS.chrome_database_db:
-                            ExecuteChromeCommand(ttd);
-                            break;
-                        case COMMANDS.chrome_favicons:
-                            ExecuteChromeCommand(ttd);
-                            break;
-                        case COMMANDS.chrome_history:
-                            ExecuteChromeCommand(ttd);
-                            break;
-                        case COMMANDS.chrome_keywords:
-                            ExecuteChromeCommand(ttd);
-                            break;
-                        #endregion
+                        if (!this.Preview)
+                        {
+                            Model_ThingsToDelete ttd = this.TTD.Dequeue();
 
-                        #region // clamwin commands
-                        case COMMANDS.clamscan:
-                            ExecuteClamWinCommand(ttd, false);
-                            break;
-                        #endregion
+                            #region // execute cleaning commands
 
-                        #region // little registry cleaner
-                        case COMMANDS.littleregistry:
-                          await ExecuteLittleRegistryCleanerCommand(ttd,strRegistryDatSaveFolderPath, false);
-                            break;
-                        #endregion
+                            switch (ttd.command)
+                            {
+                                case COMMANDS.delete:
+                                    //ExecuteDeleteCommand(ttd);
+                                    CommandLogic_Delete.I.ExecuteDeleteCommand(ttd, this.bgWorker, this.TTD);
+                                    break;
 
-                        case COMMANDS.clipboard:
-                            CommandLogic_Clipboard.I.ExecuteCommand();
-                            break;
+                                    #region // special commands
 
-                        case COMMANDS.dupchecker:
-                            CommandLogic_DuplicateChecker.I.ScanPath(ttd.FullPathName);
-                            CommandLogic_DuplicateChecker.I.Start(this.DupChecker.DupplicateCollection, this.DupChecker.IsMove ? 1 : 0, this.bgWorker);
-                            CommandLogic_DuplicateChecker.I.ScanPath(ttd.FullPathName);
-                            this.DupChecker.FileOperationPanelShow = true;
-                            
-                            break;
+                                case COMMANDS.winreg:
+                                    ExecuteWinRegCommand(ttd);
+                                    break;
+                                case COMMANDS.sqlite_vacuum:
+                                    ExecuteSQLiteVacuumCommand(ttd);
+                                    break;
+
+                                    #endregion
+
+                                    #region // other special commands
+
+                                case COMMANDS.ini:
+                                    ExecuteIniCommand(ttd);
+                                    break;
+                                case COMMANDS.json:
+                                    ExecuteJSONCommand(ttd);
+                                    break;
+
+                                    #endregion
+
+                                    #region // Google Chrome commands
+
+                                case COMMANDS.chrome_autofill:
+                                    ExecuteChromeCommand(ttd);
+                                    break;
+                                case COMMANDS.chrome_database_db:
+                                    ExecuteChromeCommand(ttd);
+                                    break;
+                                case COMMANDS.chrome_favicons:
+                                    ExecuteChromeCommand(ttd);
+                                    break;
+                                case COMMANDS.chrome_history:
+                                    ExecuteChromeCommand(ttd);
+                                    break;
+                                case COMMANDS.chrome_keywords:
+                                    ExecuteChromeCommand(ttd);
+                                    break;
+
+                                    #endregion
+
+                                    #region // clamwin commands
+
+                                case COMMANDS.clamscan:
+                                    ExecuteClamWinCommand(ttd, false);
+                                    break;
+
+                                    #endregion
+
+                                    #region // little registry cleaner
+
+                                case COMMANDS.littleregistry:
+                                    await ExecuteLittleRegistryCleanerCommand(ttd, strRegistryDatSaveFolderPath, false);
+                                    break;
+
+                                    #endregion
+
+                                case COMMANDS.clipboard:
+                                    CommandLogic_Clipboard.I.ExecuteCommand();
+                                    break;
+
+                                case COMMANDS.dupchecker:
+                                    CommandLogic_DuplicateChecker.I.ScanPath(ttd.FullPathName);
+                                    CommandLogic_DuplicateChecker.I.Start(this.DupChecker.DupplicateCollection,
+                                        this.DupChecker.IsMove ? 1 : 0, this.bgWorker);
+                                    CommandLogic_DuplicateChecker.I.ScanPath(ttd.FullPathName);
+                                    this.DupChecker.FileOperationPanelShow = true;
+
+                                    break;
+                            }
+
+                            #endregion
+                        }
                     }
-                    #endregion
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
+                }
+                if (!Preview && dtThingsDeleted != null && dtThingsDeleted.Rows.Count > 0)
+                {
+                    string strRegistryFolderPath = Path.Combine(Environment.GetEnvironmentVariable("APPDATA"),
+                        "mCleaner\\RegistryBackups\\XMLInfo");
+                    if (!Directory.Exists(strRegistryFolderPath))
+                        Directory.CreateDirectory(strRegistryFolderPath);
+
+                    DirectoryInfo di = new DirectoryInfo(strRegistryFolderPath);
+                    FileSystemInfo[] files = di.GetFileSystemInfos();
+                    var orderedFiles = files.OrderBy(f => f.Name);
+                    if (orderedFiles.Count() > 4)
+                    {
+                        orderedFiles.First().Delete();
+                        var strDirectory = Path.Combine(Environment.GetEnvironmentVariable("APPDATA"),
+                            "mCleaner\\RegistryBackups\\" + Path.GetFileNameWithoutExtension(orderedFiles.First().Name));
+                        if (Directory.Exists(strDirectory))
+                            Directory.Delete(strDirectory);
+                    }
+
+
+                    dtThingsDeleted.WriteXml(Path.Combine(strRegistryFolderPath, strBackUpFolderName + ".mCleanerBak"),
+                        XmlWriteMode.WriteSchema);
+                    dtThingsDeleted = null;
                 }
             }
-            if (!Preview && dtThingsDeleted != null && dtThingsDeleted.Rows.Count > 0)
+            catch (Exception ex)
             {
-                string strRegistryFolderPath = Path.Combine(Environment.GetEnvironmentVariable("APPDATA"), "mCleaner\\RegistryBackups\\XMLInfo");
-                if (!Directory.Exists(strRegistryFolderPath))
-                    Directory.CreateDirectory(strRegistryFolderPath);
-                
-                DirectoryInfo di = new DirectoryInfo(strRegistryFolderPath);
-                FileSystemInfo[] files = di.GetFileSystemInfos();
-                var orderedFiles = files.OrderBy(f => f.Name);
-                if (orderedFiles.Count() > 4)
-                {
-                    orderedFiles.First().Delete();
-                   var strDirectory= Path.Combine(Environment.GetEnvironmentVariable("APPDATA"),"mCleaner\\RegistryBackups\\" + Path.GetFileNameWithoutExtension(orderedFiles.First().Name));
-                    if(Directory.Exists(strDirectory))
-                        Directory.Delete(strDirectory);
-                }
-                    
-               
-                dtThingsDeleted.WriteXml(Path.Combine(strRegistryFolderPath, strBackUpFolderName + ".mCleanerBak"),XmlWriteMode.WriteSchema);
-                dtThingsDeleted = null;
+                Console.WriteLine(ex.Message);
             }
         }
 
@@ -384,23 +424,38 @@ namespace mCleaner.Logics
                 FileInfo fi = new FileInfo(ttd.FullPathName);
                 if (fi.Exists)
                 {
+                    long FileSize = 0;
                     try
                     {
-                        string text = string.Format("{0} {1} {2}", "Delete", Win32API.FormatByteSize(fi.Length), ttd.FullPathName);
+                        string text = string.Format("{0} {1} {2}", "Delete", Win32API.FormatByteSize(fi.Length),
+                            ttd.FullPathName);
                         // then report to the gui
                         bgWorker.ReportProgress(-1, text);
 
-                        // then we delete it.
+                        if (fi.Exists)
+                            FileSize = fi.Length;
+
                         FileOperations.Delete(fi.FullName);
 
                         text = string.Format(" - DELETED");
-                        // then report to the gui
+
+                        //// then report to the gui
                         bgWorker.ReportProgress(-1, text);
+
+                        Worker.I.TotalFileSize += FileSize;
+                        Worker.I.TotalFileDelete++;
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine("ERROR while deleting a file: " + ex.Message);
+                        Worker.I.TotalFileSkipped++;
+                        Worker.I.TotalSkippedFileSize += FileSize;
+                        var text =
+                            "-ERROR while deleting a above file please close application which may lock this file " +
+                            ex.Message;
+                        bgWorker.ReportProgress(-1, text);
                     }
+
+
                 }
 
                 // delete directories as well if search parameter is walk.all
@@ -936,16 +991,17 @@ namespace mCleaner.Logics
 
         void ShowTotalOperations(bool preview = true)
         {
-            string final_note = "\r\nDisk space {3}recovered: {0}\r\nFiles {3}deleted: {1}\r\nSpecial operations: {2}";
+            string final_note = "\r\nDisk space {3}recovered: {0}\r\nFiles {3}deleted: {1}\r\nFiles Locked by another program during delete: {4} \r\n Disk Space by another program during delete: {5}\r\nSpecial operations: {2}";
+            string final_notePreview = "\r\nDisk space {3}recovered: {0}\r\nFiles {3}deleted: {1}\r\nSpecial operations: {2}";
             string text = string.Empty;
 
             if (preview)
             {
-                text = string.Format(final_note, Win32API.FormatByteSize(this.TotalFileSize), this.TotalFileDelete, this.TotalSpecialOperations, "to be ");
+                text = string.Format(final_notePreview, Win32API.FormatByteSize(this.TotalFileSize), this.TotalFileDelete, this.TotalSpecialOperations, "to be ");
             }
             else
             {
-                text = string.Format(final_note, Win32API.FormatByteSize(this.TotalFileSize), this.TotalFileDelete, this.TotalSpecialOperations, string.Empty);
+                text = string.Format(final_note, Win32API.FormatByteSize(this.TotalFileSize), this.TotalFileDelete, this.TotalSpecialOperations, string.Empty, this.TotalFileSkipped, Win32API.FormatByteSize(this.TotalSkippedFileSize));
             }
 
             //ExecuteLog += string.Format(final_note, Win32API.FormatByteSize(this.TotalFileSize), this.TotalFileDelete, this.TotalSpecialOperations);

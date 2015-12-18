@@ -27,7 +27,15 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
-                <Image Width="32" Height="32" Source="/mCleaner;component/Assets/RestoreRegistry.png" Grid.Column="0" VerticalAlignment="Center" />
+                <Rectangle Fill="#DD9036" Height="32" Width="32">
+                    <Rectangle.OpacityMask>
+                        <VisualBrush>
+                            <VisualBrush.Visual>
+                                <Image Width ="32" Height="32" Source="/mCleaner;component/Assets/RestoreRegistry.png" HorizontalAlignment="Center" />
+                            </VisualBrush.Visual>
+                        </VisualBrush>
+                    </Rectangle.OpacityMask>
+                </Rectangle>
                 <StackPanel Grid.Column="1" Margin="10,0,0,0" VerticalAlignment="Top">
                     <TextBlock Text="Choose Restore Options" FontSize="18" FontWeight="Bold" />
                 </StackPanel>

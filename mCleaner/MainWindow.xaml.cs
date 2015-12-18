@@ -15,8 +15,10 @@ using MahApps.Metro.Controls;
 using Microsoft.Practices.ServiceLocation;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Net.Mime;
 using System.Timers;
 using System.Windows.Controls.Primitives;
+using mCleaner.Helpers;
 using mCleaner.Logics.Commands;
 using PieControls;
 
@@ -207,6 +209,8 @@ namespace mCleaner
 
         public async void Command_CleanNow_Click(object sender, RoutedEventArgs e)
         {
+            Worker.I.bgWorker.RunWorkerCompleted -= bgWorkerCleaner_RunWorkerCompleted;
+            Worker.I.bgWorker.RunWorkerCompleted += bgWorkerCleaner_RunWorkerCompleted;
             CleanerML.Cancel = false;
             Worker.I.Preview = false;
             CleanerML.btnCloseEnable = false;
@@ -232,6 +236,11 @@ namespace mCleaner
             CleanerML.IsCancelProcessEnabled = false;
             CleanerML.btnCleaningOptionsEnable = true;
             CleanerML.ProgressText = "Done";
+
+        }
+
+        private void bgWorkerCleaner_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
             Command_Start_Click();
         }
 
@@ -260,7 +269,7 @@ namespace mCleaner
                 ImagePath = "Assets/Browser.png",
                 Name = "Browser Cache",
                 Size =
-                    (CommandLogic_Delete_CalculateSpace.BrowserCache_AggressiveCleaning_Space / 1024).ToString("N0") + "KB"
+                    Win32API.FormatByteSize(CommandLogic_Delete_CalculateSpace.BrowserCache_AggressiveCleaning_Space)
             };
 
             Home.AggressiveCleaningCollection[1].Details = new Model_HomeScreenGrid_FileDetails()
@@ -270,7 +279,7 @@ namespace mCleaner
                 ImagePath = "Assets/ApplicationCache.png",
                 Name = "Application Cache",
                 Size =
-                    (CommandLogic_Delete_CalculateSpace.ApplicationCache_AggressiveCleaning_Space / 1024).ToString("N0") + "KB"
+                    Win32API.FormatByteSize(CommandLogic_Delete_CalculateSpace.ApplicationCache_AggressiveCleaning_Space)
             };
 
             Home.AggressiveCleaningCollection[2].Details = new Model_HomeScreenGrid_FileDetails()
@@ -278,45 +287,44 @@ namespace mCleaner
                 FileCount =
                     CommandLogic_Delete_CalculateSpace.WindowsTemp_AggressiveCleaning_FilesCount.ToString(),
                 ImagePath = "Assets/WindowsCache.png",
-                Name = "Windows Temp and  Cache",
+                Name = "Windows Temp and Cache",
                 Size =
-                    ((CommandLogic_Delete_CalculateSpace.WindowsTemp_AggressiveCleaning_Space - CommandLogic_Delete_CalculateSpace.RecycleBin_Space) / 1024).ToString("N0") + "KB"
+                    Win32API.FormatByteSize((CommandLogic_Delete_CalculateSpace.WindowsTemp_AggressiveCleaning_Space - CommandLogic_Delete_CalculateSpace.RecycleBin_Space))
             };
             Home.AggressiveCleaningCollection[3].Details = new Model_HomeScreenGrid_FileDetails()
             {
                 FileCount =
                     CommandLogic_Delete_CalculateSpace.RecycleBin_FileCount.ToString(),
                 ImagePath = "Assets/SelectRecycleBin.png",
-                Name = "RecycleBin",
+                Name = "Recycle Bin",
                 Size =
-                    (CommandLogic_Delete_CalculateSpace.RecycleBin_Space / 1024).ToString("N0") + "KB"
+                    Win32API.FormatByteSize(CommandLogic_Delete_CalculateSpace.RecycleBin_Space)
             };
 
             Home.TotalSpaceCanBeRecoveredAggressive =
-               ((CommandLogic_Delete_CalculateSpace.WindowsTemp_AggressiveCleaning_Space +
+               Win32API.FormatByteSize((CommandLogic_Delete_CalculateSpace.WindowsTemp_AggressiveCleaning_Space +
                   CommandLogic_Delete_CalculateSpace.ApplicationCache_AggressiveCleaning_Space +
-                  CommandLogic_Delete_CalculateSpace.BrowserCache_AggressiveCleaning_Space) / 1048576).ToString();
+                  CommandLogic_Delete_CalculateSpace.BrowserCache_AggressiveCleaning_Space));
 
             Home.TotalSpaceCanBeRecoveredMorderate =
-              ((CommandLogic_Delete_CalculateSpace.WindowsTemp_MordrateCleaning_Space +
+              Win32API.FormatByteSize((CommandLogic_Delete_CalculateSpace.WindowsTemp_MordrateCleaning_Space +
                  CommandLogic_Delete_CalculateSpace.ApplicationCache_MordrateCleaning_Space +
-                 CommandLogic_Delete_CalculateSpace.BrowserCache_MordrateCleaning_Space) / 1048576).ToString();
+                 CommandLogic_Delete_CalculateSpace.BrowserCache_MordrateCleaning_Space));
 
             Home.TotalSpaceCanBeRecoveredSafe =
-              ((CommandLogic_Delete_CalculateSpace.WindowsTemp_SafeCleaning_Space +
+              Win32API.FormatByteSize((CommandLogic_Delete_CalculateSpace.WindowsTemp_SafeCleaning_Space +
                  CommandLogic_Delete_CalculateSpace.ApplicationCache_SafeCleaning_Space +
-                 CommandLogic_Delete_CalculateSpace.BrowserCache_SafeCleaning_Space) / 1048576).ToString();
-
+                 CommandLogic_Delete_CalculateSpace.BrowserCache_SafeCleaning_Space));
             
 
             Home.SafeCleaningData.Clear();
-            //CommandLogic_Delete_CalculateSpace.ApplicationCache_AggressiveCleaning_Space / 1024
             Home.SafeCleaningData.Add(new PieSegment { Color = Color.FromRgb(255, 152, 0), Value = CommandLogic_Delete_CalculateSpace.BrowserCache_AggressiveCleaning_Space / 1024, Name = "Browser Cache" });
             Home.SafeCleaningData.Add(new PieSegment { Color = Color.FromRgb(75, 91, 136), Value = CommandLogic_Delete_CalculateSpace.ApplicationCache_AggressiveCleaning_Space / 1024, Name = "Application Cache" });
             Home.SafeCleaningData.Add(new PieSegment { Color = Color.FromRgb(76, 175, 80), Value = (CommandLogic_Delete_CalculateSpace.WindowsTemp_AggressiveCleaning_Space - CommandLogic_Delete_CalculateSpace.RecycleBin_Space) / 1024, Name = "Windows Temp and Cache" });
             Home.SafeCleaningData.Add(new PieSegment { Color = Color.FromRgb(143, 113, 165), Value = CommandLogic_Delete_CalculateSpace.RecycleBin_Space / 1024, Name = "Recycle Bin" });
             Pie3.Data = Home.SafeCleaningData;
 
+            CleanerML.ProgressText = "Done";
         }
 
         void bgWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -330,7 +338,7 @@ namespace mCleaner
                 ImagePath = "Assets/Browser.png",
                 Name = "Browser Cache",
                 Size =
-                    CommandLogic_Delete_CalculateSpace.BrowserCache_AggressiveCleaning_Space.ToString() +
+                    Win32API.FormatByteSize(CommandLogic_Delete_CalculateSpace.BrowserCache_AggressiveCleaning_Space) +
                     "(Calculating..)"
             };
 
@@ -342,7 +350,7 @@ namespace mCleaner
                 ImagePath = "Assets/ApplicationCache.png",
                 Name = "Application Cache",
                 Size =
-                    CommandLogic_Delete_CalculateSpace.ApplicationCache_AggressiveCleaning_Space.ToString() +
+                    Win32API.FormatByteSize(CommandLogic_Delete_CalculateSpace.ApplicationCache_AggressiveCleaning_Space) +
                     "(Calculating..)"
             };
             Home.AggressiveCleaningCollection[2].Details = new Model_HomeScreenGrid_FileDetails()
@@ -350,20 +358,35 @@ namespace mCleaner
                 FileCount =
                     CommandLogic_Delete_CalculateSpace.WindowsTemp_AggressiveCleaning_FilesCount.ToString() + "(Calculating..)",
                 ImagePath = "Assets/WindowsCache.png",
-                Name = "Windows Temp and  Cache",
+                Name = "Windows Temp and Cache",
                 Size =
-                    (CommandLogic_Delete_CalculateSpace.WindowsTemp_AggressiveCleaning_Space / 1024).ToString("N0") + "KB " + "(Calculating..)"
+                    Win32API.FormatByteSize(CommandLogic_Delete_CalculateSpace.WindowsTemp_AggressiveCleaning_Space) + "(Calculating..)"
             };
             Home.AggressiveCleaningCollection[3].Details = new Model_HomeScreenGrid_FileDetails()
             {
                 FileCount =
                     CommandLogic_Delete_CalculateSpace.RecycleBin_FileCount.ToString() + "(Calculating..)",
                 ImagePath = "Assets/SelectRecycleBin.png",
-                Name = "RecycleBin",
+                Name = "Recycle Bin",
                 Size =
-                    (CommandLogic_Delete_CalculateSpace.RecycleBin_Space / 1024).ToString("N0") + "KB " + "(Calculating..)",
+                    Win32API.FormatByteSize(CommandLogic_Delete_CalculateSpace.RecycleBin_Space) + "(Calculating..)",
             };
 
+
+            Home.TotalSpaceCanBeRecoveredAggressive ="..."+
+            Win32API.FormatByteSize((CommandLogic_Delete_CalculateSpace.WindowsTemp_AggressiveCleaning_Space +
+               CommandLogic_Delete_CalculateSpace.ApplicationCache_AggressiveCleaning_Space +
+               CommandLogic_Delete_CalculateSpace.BrowserCache_AggressiveCleaning_Space));
+
+            Home.TotalSpaceCanBeRecoveredMorderate = "..." +
+              Win32API.FormatByteSize((CommandLogic_Delete_CalculateSpace.WindowsTemp_MordrateCleaning_Space +
+                 CommandLogic_Delete_CalculateSpace.ApplicationCache_MordrateCleaning_Space +
+                 CommandLogic_Delete_CalculateSpace.BrowserCache_MordrateCleaning_Space));
+
+            Home.TotalSpaceCanBeRecoveredSafe = "..." +
+              Win32API.FormatByteSize((CommandLogic_Delete_CalculateSpace.WindowsTemp_SafeCleaning_Space +
+                 CommandLogic_Delete_CalculateSpace.ApplicationCache_SafeCleaning_Space +
+                 CommandLogic_Delete_CalculateSpace.BrowserCache_SafeCleaning_Space));
         }
 
         private async void bgWorker_DoWork(object sender, DoWorkEventArgs e)
@@ -406,6 +429,11 @@ namespace mCleaner
             }
 
             Shred.Command_RemoveFolder_Click(lstSelectedItems);
+        }
+
+        private void TxtLog_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+              txtLog.ScrollToEnd();
         }
     }
 }

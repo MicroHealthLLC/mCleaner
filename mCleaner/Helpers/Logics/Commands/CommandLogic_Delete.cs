@@ -78,28 +78,36 @@ namespace mCleaner.Logics.Commands
                 FileInfo fi = new FileInfo(ttd.FullPathName);
                 if (fi.Exists)
                 {
+                    long FileSize = 0;
                     try
                     {
-                        string text = string.Format("{0} {1} {2}", "Delete", Win32API.FormatByteSize(fi.Length), ttd.FullPathName);
+                        string text = string.Format("{0} {1} {2}", "Delete", Win32API.FormatByteSize(fi.Length),
+                            ttd.FullPathName);
                         // then report to the gui
                         bgWorker.ReportProgress(-1, text);
 
                         // then we delete it.
+                        if (fi.Exists)
+                            FileSize = fi.Length;
+
                         FileOperations.Delete(fi.FullName);
 
-                        //text = string.Format(" - DELETED");
+                        text = string.Format(" - DELETED");
 
                         //// then report to the gui
-                        //bgWorker.ReportProgress(-1, text);
-                        if (fi.Exists)
-                        {
-                            Worker.I.TotalFileSize += fi.Length;
-                            Worker.I.TotalFileDelete++;
-                        }
+                        bgWorker.ReportProgress(-1, text);
+
+                        Worker.I.TotalFileSize += FileSize;
+                        Worker.I.TotalFileDelete++;
                     }
                     catch (Exception ex)
                     {
-                        ProgressWorker.I.EnQ("ERROR while deleting a file: " + ex.Message);
+                        Worker.I.TotalFileSkipped++;
+                        Worker.I.TotalSkippedFileSize += FileSize;
+                        var text =
+                            "-ERROR while deleting a above file please close application which may lock this file " +
+                            ex.Message;
+                        bgWorker.ReportProgress(-1, text);
                     }
                 }
 

@@ -153,7 +153,7 @@ namespace mCleaner.ViewModel
                     new Model_HomeScreenGrid_FileDetails()
                     {
                         FileCount = "Calculating..",
-                        Name = "Windows Temp and  Cache",
+                        Name = "Windows Temp and Cache",
                         Size = "Calculating..",
                         ImagePath = "Assets/WindowsCache.png"
                     },
@@ -164,7 +164,7 @@ namespace mCleaner.ViewModel
                     new Model_HomeScreenGrid_FileDetails()
                     {
                         FileCount = "Calculating..",
-                        Name = "RecycleBin",
+                        Name = "Recycle Bin",
                         Size = "Calculating..",
                         ImagePath = "Assets/SelectRecycleBin.png"
                     },
@@ -184,6 +184,9 @@ namespace mCleaner.ViewModel
         public BackgroundWorker bgWorker = null;
         public async Task<bool> Start()
         {
+            TotalSpaceCanBeRecoveredSafe = "..";
+            TotalSpaceCanBeRecoveredMorderate = "..";
+            TotalSpaceCanBeRecoveredAggressive = "..";
 
             CommandLogic_Delete_CalculateSpace.ApplicationCache_SafeCleaning_Space = 0;
             CommandLogic_Delete_CalculateSpace.ApplicationCache_SafeCleaning_FilesCount = 0;

@@ -918,12 +918,7 @@ namespace mCleaner.ViewModel
             }
 
             Worker.I.DoWork();
-
-            btnCloseEnable = true;
-            this.ProgressIsIndeterminate = false;
-            IsCancelProcessEnabled = false;
-            btnCleaningOptionsEnable = true;
-            ProgressText = "Done";
+           
         }
 
         public void Command_Quit_Click()
@@ -959,7 +954,10 @@ namespace mCleaner.ViewModel
             if(!blnCollapseALL)
             if(this.CleanersCollection.Where(dc=>dc.IsExpanded==true).Any())
             {
+                this.CleanersCollection.Where(dc => dc.IsExpanded == true).First().IsInitiallySelected = blnCollapseALL;
+                this.CleanersCollection.Where(dc => dc.IsExpanded == true).First().IsChecked = blnCollapseALL;
                 this.CleanersCollection.Where(dc => dc.IsExpanded == true).First().IsExpanded = blnCollapseALL;
+                
                 Command_CloseCleanerDescription_Click();
 
             }
@@ -1019,6 +1017,7 @@ namespace mCleaner.ViewModel
 
         void TeeNode_TreeNodeChecked(object sender, EventArgs e)
         {
+            this.btnPreviewCleanEnable = false;
             TreeNode root = sender as TreeNode;
 
             if (root.Tag is option)
@@ -1036,22 +1035,26 @@ namespace mCleaner.ViewModel
                     }
                     this.btnPreviewCleanEnable = true;
                 }
-                else if (CleanersCollection.Where(dc => dc.IsChecked == true).Count() <= 0)
-                    this.btnPreviewCleanEnable = false;
 
-                // if the user selected custom cleaning
-                if (this.SaveCustom_Options)
-                {
-                    if (root.IsChecked.Value == true)
+                if (!this.btnPreviewCleanEnable)
+                    if (CleanersCollection.Where(dc => dc.IsChecked == true).Count() <= 0)
                     {
-                        if (Settings.Default.CustomCleanerSelections == null) Settings.Default.CustomCleanerSelections = new StringCollection();
-
-                        // then save it
-                        Settings.Default.CustomCleanerSelections.Add(o.id + "|" + o.parent_cleaner.id);
-                        Settings.Default.Save();
+                        foreach (TreeNode tn in this.CleanersCollection)
+                        {
+                            foreach (TreeNode child in tn.Children)
+                            {
+                                if (child.IsChecked == true)
+                                {
+                                    this.btnPreviewCleanEnable = true;
+                                    break;
+                                }
+                            }
+                            if (btnPreviewCleanEnable)
+                                break;
+                        }
                     }
-                }
-                
+                    else
+                        this.btnPreviewCleanEnable = true;
             }
             else if (root.Tag is cleaner)
             {
@@ -1346,7 +1349,7 @@ namespace mCleaner.ViewModel
                                 {
                                     if (CommandLogic_Chrome.IsChromeRunning())
                                     {
-                                        if (MessageBox.Show("It seems google chrome is running to perform google chrome cleaning you need to close chrome. are you sure you want to continue anyway?", "mCleaner", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
+                                        if (MessageBox.Show("It seems Google Chrome is running. To perform Google Chrome cleaning, you need to close Chrome. Are you sure you want to continue anyway?", "mCleaner", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
                                             return false;
                                         else
                                             break;
@@ -1356,7 +1359,7 @@ namespace mCleaner.ViewModel
                                 {
                                     if (CommandLogic_Chrome.IsFirefoxRunning())
                                     {
-                                        if (MessageBox.Show("It seems firefox is running to perform firefox cleaning you need to close firefox. are you sure you want to continue anyway?", "mCleaner", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
+                                        if (MessageBox.Show("It seems Firefox is running. To perform Firefox cleaning, you need to close Firefox. Are you sure you want to continue anyway", "mCleaner", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
                                             return false;
                                         else
                                             break;
@@ -1411,48 +1414,6 @@ namespace mCleaner.ViewModel
 
             foreach (action _a in o.action)
             {
-                if (!Worker.I.Preview) // check only when not in preview mode
-                {
-                    // if not in custom, check for cleaning level
-                    if (!this.CleanOption_Custom)
-                    {
-                        #region // check cleaning level
-                        int level = 3; // let it be the default
-                        int curlevel = Settings.Default.CleanOption;
-
-                        if (_a.parent_option.level == 0)
-                        {
-                            level = 3;
-                        }
-                        else
-                        {
-                            level = _a.parent_option.level;
-                        }
-
-                        if (level > curlevel)
-                        {
-                            // do not execute the cleaner when the level set is greater than
-                            // what is in current setting.
-
-                            string level_name = "Aggressive";
-                            if (level == 1) level_name = "Safe";
-                            else if (level == 2) level_name = "Moderate";
-
-                            string text = string.Format("\"{0}\" cleaner skipped because it is set for {1} cleaning level", _a.parent_option.label, level_name);
-
-                            if (last_Log != text)
-                            {
-                                last_Log = text;
-
-                                this.TextLog += text;
-                            }
-
-                            continue;
-                        }
-                        #endregion
-                    }
-                }
-
                 Console.WriteLine("Executing '{0}' action from '{3}' option in '{4}' cleaner, command with '{1}' search parameter in '{2}' path", _a.command, _a.search, _a.path, _a.parent_option.label, _a.parent_option.parent_cleaner.label);
 
                 COMMANDS cmd = (COMMANDS)StringEnum.Parse(typeof(COMMANDS), _a.command);
@@ -1560,7 +1521,7 @@ namespace mCleaner.ViewModel
             cleaner c = new cleaner()
             {
                 id = "system",
-                type = "Windows Temp and  Cache",
+                type = "Windows Temp and Cache",
                 label = "Microsoft Windows System",
                 description = "General Windows system cleaners",
                 option = new List<option>()

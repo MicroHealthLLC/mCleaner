@@ -327,7 +327,7 @@ namespace mCleaner.Cleaners
                 id = "windows_recyclebin",
                 label = "Recycle bin",
                 description = "Empty the recycle bin",
-                level = 2,
+                level = 1,
                 action = new List<action>()
             };
 

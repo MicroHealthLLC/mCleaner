@@ -814,7 +814,7 @@
                                 </Grid>
                             </Grid>
                             <Border Grid.Row="1" Background="White">
-                                <TextBox x:Name="txtLog" IsReadOnly="True" BorderThickness="0" Text="{Binding CleanerML.TextLog}" AllowDrop="False" IsTabStop="False" Foreground="{Binding CleanerML.txtLoForgoundColor}" ScrollViewer.VerticalScrollBarVisibility="Auto" />
+                                <TextBox x:Name="txtLog" IsReadOnly="True" BorderThickness="0" Text="{Binding CleanerML.TextLog}" TextChanged="TxtLog_OnTextChanged" AllowDrop="False" IsTabStop="False" Foreground="{Binding CleanerML.txtLoForgoundColor}" ScrollViewer.VerticalScrollBarVisibility="Auto" />
                             </Border>
                         </Grid>
 
@@ -1099,7 +1099,7 @@
                                             <Grid>
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition />
-                                                    <ColumnDefinition Width="100" />
+                                                    <ColumnDefinition Width="Auto" />
                                                 </Grid.ColumnDefinitions>
                                                 <controls:Tile Title="Safe Cleaning" Name="TileSafeCleaning" Grid.Column="0"
                                Style="{StaticResource LargeTileStyle}" TiltFactor="2" Command="{Binding CleanerML.Command_Clean}" HorizontalAlignment="Center"
@@ -1117,7 +1117,6 @@
                                                 <TextBlock FontWeight="Bold" FontSize="18" Foreground="#192855" VerticalAlignment="Center" TextAlignment="Right" HorizontalAlignment="Right " Grid.Column="1">  
                                                 <Run Text="     "></Run>
                                                 <Run Text="{Binding Home.TotalSpaceCanBeRecoveredSafe}"></Run>
-                                                <Run Text=" MB"></Run>
                                             </TextBlock>
                                             </Grid>
                                         </StackPanel>
@@ -1125,7 +1124,7 @@
                                             <Grid>
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition />
-                                                    <ColumnDefinition Width="100" />
+                                                    <ColumnDefinition Width="Auto" />
                                                 </Grid.ColumnDefinitions>
                                                 <controls:Tile Title="Moderate Cleaning" Name="TileMordrateCleaning" Grid.Column="0"
                                Style="{StaticResource LargeTileStyle}" TiltFactor="2" Command="{Binding CleanerML.Command_Clean}" HorizontalAlignment="Center" HorizontalContentAlignment="Right" CommandParameter="2"
@@ -1143,7 +1142,6 @@
                                                 <TextBlock FontWeight="Bold" VerticalAlignment="Center" FontSize="18" Foreground="#192855" TextAlignment="Right" HorizontalAlignment="Center" Grid.Column="1">  
                                                 <Run Text="     "></Run>
                                                 <Run Text="{Binding Home.TotalSpaceCanBeRecoveredMorderate}"></Run>
-                                                <Run Text=" MB"></Run>
                                             </TextBlock>
                                                 </Grid>
                                         </StackPanel>
@@ -1151,7 +1149,7 @@
                                             <Grid>
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition />
-                                                    <ColumnDefinition Width="100" />
+                                                    <ColumnDefinition Width="Auto" />
                                                 </Grid.ColumnDefinitions>
                                             <controls:Tile Title="Aggressive Cleaning" Name="TileAggressiveCleaning" Grid.Column="0"
                                Style="{StaticResource LargeTileStyle}" TiltFactor="2" Command="{Binding CleanerML.Command_Clean}" HorizontalAlignment="Left" HorizontalContentAlignment="Right" CommandParameter="3"
@@ -1169,7 +1167,6 @@
                                                 <TextBlock FontWeight="Bold" FontSize="18" Foreground="#192855" HorizontalAlignment="Right" TextAlignment="Right" VerticalAlignment="Center" Grid.Column="1" >  
                                                 <Run Text="     "></Run>
                                                 <Run Text="{Binding Home.TotalSpaceCanBeRecoveredAggressive}"></Run>
-                                                <Run Text=" MB"></Run>
                                                 </TextBlock>
                                                 </Grid>
                                             </StackPanel>
@@ -1192,15 +1189,14 @@
                                                 <TextBlock Text=" " />
                                                 <TextBlock FontWeight="Bold" FontSize="20" HorizontalAlignment="Center" >
                                                 <Run Text="Maximum space recoverable: " />
-                                                    <Run Text="{Binding Home.TotalSpaceCanBeRecoveredAggressive}" />
-                                                    <Run Text=" MB" />
+                                                <Run Text="{Binding Home.TotalSpaceCanBeRecoveredAggressive}" />
                                             </TextBlock>
                                                 <TextBlock Text=" " />
                                                 <pie:PieControl  x:Name="Pie3" PopupBrush="#d3d3d3"  Width="200" Height="200" />
                                                 <TextBlock Text=" " />
                                                 <ListView ItemsSource="{Binding Home.AggressiveCleaningCollection}" 
                                                       ItemContainerStyle="{StaticResource ListViewItemStyle}"
-                                                      x:Name="lvHomeScreenAggressive">
+                                                      x:Name="lvHomeScreenAggressive" Width="auto">
                                                 <ListView.View>
                                                     <GridView>
                                                         <GridViewColumn Header="Name" Width="190">
@@ -1215,8 +1211,8 @@
                                                                 </DataTemplate>
                                                             </GridViewColumn.CellTemplate>
                                                         </GridViewColumn>
-                                                        <GridViewColumn Header="Size" DisplayMemberBinding="{Binding Details.Size}"  Width="90"/>
-                                                            <GridViewColumn Header="Files"  DisplayMemberBinding="{Binding Details.FileCount}" Width="50" />
+                                                        <GridViewColumn Header="Size" DisplayMemberBinding="{Binding Details.Size}"  Width="120"/>
+                                                        <GridViewColumn Header="Files"  DisplayMemberBinding="{Binding Details.FileCount}" Width="80"  />
                                                     </GridView>
                                                 </ListView.View>
                                             </ListView>
