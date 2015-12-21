@@ -1172,7 +1172,7 @@
                                             </StackPanel>
                                         <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="4" HorizontalAlignment="left" Margin="100,0,0,0" >
                                             <controls:Tile Title="Clean Now" Name="TileCleanNow" Width="270" Height="120"
-                               Style="{StaticResource SmallTileStyle}" TiltFactor="2" Command="{Binding CleanerML.Command_CleanNow}" HorizontalAlignment="Center" HorizontalContentAlignment="Center" CommandParameter="3"
+                               Style="{StaticResource SmallTileStyle}" TiltFactor="2" Click="Command_CleanNow_Click" HorizontalAlignment="Center" HorizontalContentAlignment="Center" CommandParameter="3"
                                                        Background="#084502" IsEnabled="{Binding CleanerML.btnPreviewCleanEnable}" Foreground="White" Margin="3">
                                                 <Rectangle Fill="White" Height="60" Width="60">
                                                     <Rectangle.OpacityMask>

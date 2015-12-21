@@ -1359,7 +1359,7 @@ namespace mCleaner.ViewModel
                                 {
                                     if (CommandLogic_Chrome.IsFirefoxRunning())
                                     {
-                                        if (MessageBox.Show("It seems Firefox is running. To perform Firefox cleaning, you need to close Firefox. Are you sure you want to continue anyway", "mCleaner", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
+                                        if (MessageBox.Show("It seems Firefox is running. To perform Firefox cleaning, you need to close Firefox. Are you sure you want to continue anyway?", "mCleaner", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
                                             return false;
                                         else
                                             break;
