@@ -231,11 +231,11 @@ namespace mCleaner
 
             Worker.I.DoWork();
 
-            CleanerML.btnCloseEnable = true;
-            CleanerML.ProgressIsIndeterminate = false;
-            CleanerML.IsCancelProcessEnabled = false;
-            CleanerML.btnCleaningOptionsEnable = true;
-            CleanerML.ProgressText = "Done";
+           // CleanerML.btnCloseEnable = true;
+          //  CleanerML.ProgressIsIndeterminate = false;
+          //  CleanerML.IsCancelProcessEnabled = false;
+           // CleanerML.btnCleaningOptionsEnable = true;
+            //CleanerML.ProgressText = "Done";
 
         }
 
