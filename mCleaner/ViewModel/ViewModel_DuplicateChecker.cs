@@ -264,7 +264,7 @@ namespace mCleaner.ViewModel
         {
             if (this.DupplicateCollection.Where(dc => dc.Selected == true).Count() == this.DupplicateCollection.Count())
             {
-                if(MessageBox.Show("Are you about to delete all the files. you sure that you want to continue?","mCleaner",MessageBoxButton.YesNo,MessageBoxImage.Warning)==MessageBoxResult.No)
+                if (MessageBox.Show("You are about to delete all the files. Are you sure that you want to continue?", "mCleaner", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
                     return;
 
             }

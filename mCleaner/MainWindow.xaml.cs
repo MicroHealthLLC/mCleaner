@@ -16,6 +16,7 @@ using Microsoft.Practices.ServiceLocation;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net.Mime;
+using System.Threading;
 using System.Timers;
 using System.Windows.Controls.Primitives;
 using mCleaner.Helpers;
@@ -391,7 +392,7 @@ namespace mCleaner
 
         private async void bgWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            Home.Start();
+            await Home.Start();
         }
         private void btnScanMemoryVirusMenu_Click(object sender, RoutedEventArgs e)
         {

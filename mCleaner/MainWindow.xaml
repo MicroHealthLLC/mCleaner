@@ -808,7 +808,7 @@
                                             <DropShadowEffect ShadowDepth="2" BlurRadius="3" Color="{DynamicResource {x:Static SystemColors.ActiveCaptionTextColorKey}}" Opacity="0.2"/>
                                         </TextBlock.Effect>
                                     </TextBlock>
-                                    <Button Content="SaveLog" VerticalAlignment="Top" HorizontalAlignment="Right" Style="{StaticResource ButtonStyle}" Margin="0,0,90,0"  IsEnabled="{Binding CleanerML.btnCloseEnable}" Command="{Binding CleanerML.Command_SaveLog}" />
+                                    <Button Content="Save Log" VerticalAlignment="Top" HorizontalAlignment="Right" Style="{StaticResource ButtonStyle}" Margin="0,0,90,0"  IsEnabled="{Binding CleanerML.btnCloseEnable}" Command="{Binding CleanerML.Command_SaveLog}" />
                                     <Button Content="Close" VerticalAlignment="Top" HorizontalAlignment="Right" Style="{StaticResource ButtonStyle}" Margin="0,0,10,0" IsEnabled="{Binding CleanerML.btnCloseEnable}" Command="{Binding CleanerML.Command_CloseWindow}" />
                                     
                                 </Grid>

@@ -394,7 +394,7 @@ namespace mCleaner.ViewModel
             int nProxyPort = 0;
             if (!string.IsNullOrEmpty(ProxyPort) && !int.TryParse(this.ProxyPort, out nProxyPort))
             {
-                MessageBox.Show("Invaild proxy port plase enter valid numeric port.", "mCleaner", MessageBoxButton.OK,MessageBoxImage.Exclamation);
+                MessageBox.Show("Invaild proxy port please enter valid numeric port.", "mCleaner", MessageBoxButton.OK,MessageBoxImage.Exclamation);
                    return;
             }
             if (DupChecker_MaxSize <= 0 )
