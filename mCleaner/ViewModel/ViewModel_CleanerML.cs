@@ -1349,20 +1349,21 @@ namespace mCleaner.ViewModel
                                 {
                                     if (CommandLogic_Chrome.IsChromeRunning())
                                     {
-                                        if (MessageBox.Show("It seems Google Chrome is running. To perform Google Chrome cleaning, you need to close Chrome. Are you sure you want to continue anyway?", "mCleaner", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
+                                        if (MessageBox.Show("It seems Google Chrome is running. To perform Google Chrome cleaning, you need to close Chrome. Are you sure you want to continue anyway this wil close all chrome instances?", "mCleaner", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
                                             return false;
                                         else
-                                            break;
+                                        {
+                                            CommandLogic_Chrome.CloseAllChromeBrowsers();
+                                        }
                                     }
                                 }
                                 else if (node.Name == "Mozilla Firefox")
                                 {
-                                    if (CommandLogic_Chrome.IsFirefoxRunning())
+                                    if (MessageBox.Show("It seems Firefox is running. To perform Firefox cleaning, you need to close Firefox. Are you sure you want to continue anyway this wil close all Firefox instances?", "mCleaner", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
+                                        return false;
+                                    else
                                     {
-                                        if (MessageBox.Show("It seems Firefox is running. To perform Firefox cleaning, you need to close Firefox. Are you sure you want to continue anyway?", "mCleaner", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
-                                            return false;
-                                        else
-                                            break;
+                                        CommandLogic_Chrome.CloseAllFireFoxBrowsers();
                                     }
                                 }
                             }

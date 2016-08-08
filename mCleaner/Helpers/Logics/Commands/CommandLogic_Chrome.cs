@@ -429,6 +429,14 @@ namespace mCleaner.Logics.Commands
             return ret;
         }
 
+        public static void CloseAllChromeBrowsers()
+        {
+            foreach (Process process in Process.GetProcessesByName("chrome"))
+            {
+                process.Kill();
+            }
+        }
+
         public static bool IsFirefoxRunning()
         {
             bool ret = false;
@@ -444,6 +452,14 @@ namespace mCleaner.Logics.Commands
                 }
             }
             return ret;
+        }
+
+        public static void CloseAllFireFoxBrowsers()
+        {
+            foreach (Process process in Process.GetProcessesByName("firefox"))
+            {
+                process.Kill();
+            }
         }
     }
 }

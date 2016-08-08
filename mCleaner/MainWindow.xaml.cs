@@ -434,7 +434,7 @@ namespace mCleaner
 
         private void TxtLog_OnTextChanged(object sender, TextChangedEventArgs e)
         {
-              txtLog.ScrollToEnd();
+              //txtLog.ScrollToEnd();
         }
     }
 }
