@@ -1976,6 +1976,7 @@
 		<row><td>chromium.xml</td><td>ISX_DEFAULTCOMPONENT2</td><td>chromium.xml</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release\Cleaners\chromium.xml</td><td>1</td><td/></row>
 		<row><td>clamscan.exe</td><td>clamscan.exe</td><td>clamscan.exe</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release\Clam\clamscan.exe</td><td>1</td><td/></row>
 		<row><td>csshellextcontextmenuhandler</td><td>CSShellExtContextMenuHandler.dll</td><td>CSSHEL~1.DLL|CSShellExtContextMenuHandler.dll</td><td>0</td><td/><td/><td>0</td><td>1</td><td>C:\Code\Mcleaner\mCleaner\Release\CSShellExtContextMenuHandler.dll</td><td>1</td><td/></row>
+		<row><td>deepscan.xml</td><td>ISX_DEFAULTCOMPONENT2</td><td>deepscan.xml</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\Cleaners\deepscan.xml</td><td>1</td><td/></row>
 		<row><td>filezilla.xml</td><td>ISX_DEFAULTCOMPONENT2</td><td>FILEZI~1.XML|filezilla.xml</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release\Cleaners\filezilla.xml</td><td>1</td><td/></row>
 		<row><td>flash.xml</td><td>ISX_DEFAULTCOMPONENT2</td><td>flash.xml</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release\Cleaners\flash.xml</td><td>1</td><td/></row>
 		<row><td>freshclam.conf</td><td>ISX_DEFAULTCOMPONENT</td><td>FRESHC~1.CON|freshclam.conf</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release\Clam\freshclam.conf</td><td>1</td><td/></row>
@@ -4544,9 +4545,9 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<row><td>PROGMSG_IIS_ROLLBACKVROOTS</td><td>##IDS_PROGMSG_IIS_ROLLBACKVROOTS##</td><td/></row>
 		<row><td>PROGMSG_IIS_ROLLBACKWEBSERVICEEXTENSIONS</td><td>##IDS_PROGMSG_IIS_ROLLBACKWEBSERVICEEXTENSIONS##</td><td/></row>
 		<row><td>PROGRAMFILETOLAUNCHATEND</td><td>[INSTALLDIR]mCleaner.exe</td><td/></row>
-		<row><td>ProductCode</td><td>{59AAEF72-25EC-4F0E-A76D-9D1017FE2AEA}</td><td/></row>
+		<row><td>ProductCode</td><td>{70014584-33E7-44BE-8590-D7F62278E51B}</td><td/></row>
 		<row><td>ProductName</td><td>mCleaner</td><td/></row>
-		<row><td>ProductVersion</td><td>1.10.0</td><td/></row>
+		<row><td>ProductVersion</td><td>1.10.1</td><td/></row>
 		<row><td>ProgressType0</td><td>install</td><td/></row>
 		<row><td>ProgressType1</td><td>Installing</td><td/></row>
 		<row><td>ProgressType2</td><td>installed</td><td/></row>
@@ -4837,7 +4838,7 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<col def="s72">ActionProperty</col>
 		<col def="S72">ISDisplayName</col>
 		<row><td>{00000000-0000-0000-0000-000000000000}</td><td>***ALL_VERSIONS***</td><td></td><td></td><td>2</td><td/><td>ISFOUNDNEWERPRODUCTVERSION</td><td>ISPreventDowngrade</td></row>
-		<row><td>{6EEA3CBA-4FF5-4862-B38D-45867E223975}</td><td></td><td>1.10.0</td><td></td><td>768</td><td/><td>ISACTIONPROP1</td><td>UpdateProduct</td></row>
+		<row><td>{6EEA3CBA-4FF5-4862-B38D-45867E223975}</td><td></td><td>1.10.1</td><td></td><td>768</td><td/><td>ISACTIONPROP1</td><td>UpdateProduct</td></row>
 	</table>
 
 	<table name="Verb">

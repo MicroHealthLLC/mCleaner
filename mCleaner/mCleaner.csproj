@@ -440,6 +440,9 @@
     <Resource Include="Cleaners\google_chrome.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Content Include="Cleaners\deepscan.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Cleaners\mozilla_firefox.xml">
       <SubType>Designer</SubType>
     </Content>

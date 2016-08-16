@@ -1359,11 +1359,18 @@ namespace mCleaner.ViewModel
                                 }
                                 else if (node.Name == "Mozilla Firefox")
                                 {
-                                    if (MessageBox.Show("It seems Firefox is running. To perform Firefox cleaning, you need to close Firefox. Are you sure you want to continue anyway this wil close all Firefox instances?", "mCleaner", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
-                                        return false;
-                                    else
+                                    if (CommandLogic_Chrome.IsFirefoxRunning())
                                     {
-                                        CommandLogic_Chrome.CloseAllFireFoxBrowsers();
+                                        if (
+                                            MessageBox.Show(
+                                                "It seems Firefox is running. To perform Firefox cleaning, you need to close Firefox. Are you sure you want to continue anyway this wil close all Firefox instances?",
+                                                "mCleaner", MessageBoxButton.YesNo, MessageBoxImage.Question) ==
+                                            MessageBoxResult.No)
+                                            return false;
+                                        else
+                                        {
+                                            CommandLogic_Chrome.CloseAllFireFoxBrowsers();
+                                        }
                                     }
                                 }
                             }
