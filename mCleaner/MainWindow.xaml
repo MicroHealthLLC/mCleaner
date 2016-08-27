@@ -439,7 +439,7 @@
                                         </Rectangle>
                                     </MenuItem.Icon>
                                 </MenuItem>
-                                <MenuItem Header="Scan Memory for Viruses" ToolTip="Scan system memory for virus" Foreground="Black" Command="{Binding Clam.Command_ScanMemory}"  >
+                                <!--<MenuItem Header="Scan Memory for Viruses" ToolTip="Scan system memory for virus" Foreground="Black" Command="{Binding Clam.Command_ScanMemory}"  >
                                     <MenuItem.Icon>
                                         <Rectangle Fill="#522B6E" Height="25" Width="25">
                                             <Rectangle.OpacityMask>
@@ -451,7 +451,7 @@
                                             </Rectangle.OpacityMask>
                                         </Rectangle>
                                     </MenuItem.Icon>
-                                </MenuItem>
+                                </MenuItem>-->
                             </ContextMenu>
                         </ToggleButton.ContextMenu>
                     </ToggleButton>
@@ -1033,16 +1033,12 @@
                                         <RowDefinition Height="*" />
                                     </Grid.RowDefinitions>
                                     <!--<Button x:Name="btnClamAVClose" Content="C_lose" Margin="5,5" Command="{Binding Clam.Command_CloseWindow}" Style="{StaticResource ButtonStyle}" IsEnabled="{Binding Clam.EnableCloseButton}" />-->
-                                    <ListView Grid.Row="2" ItemsSource="{Binding Clam.InfectedFilesCollection}" ItemContainerStyle="{StaticResource ListViewItemStyle}">
-                                        <ListView.View>
-                                            <GridView>
-                                                <GridViewColumn Header="Filename" Width="auto" DisplayMemberBinding="{Binding File}" />
-                                                <GridViewColumn Header="Virus Name" Width="auto" DisplayMemberBinding="{Binding VirusName}" />
-                                                <GridViewColumn Header="Status" Width="auto" DisplayMemberBinding="{Binding Status}" />
-                                            </GridView>
-                                        </ListView.View>
-                                    </ListView>
-                                </Grid>
+                                        <Grid Grid.Row="1" Margin="5">
+                                            <ScrollViewer x:Name="scrollviewer">
+                                                <TextBlock Text="{Binding Clam.VirusScanUpdateLog}" FontFamily="Consolas" TextWrapping="Wrap" />
+                                            </ScrollViewer>
+                                        </Grid>
+                                    </Grid>
                             </Grid>
                         </Grid>
                         </Grid>

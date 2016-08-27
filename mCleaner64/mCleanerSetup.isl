@@ -360,6 +360,8 @@
 		<row><td>clamscan.exe</td><td>{3E52D912-136D-4937-90AC-28E6069D9D55}</td><td>CLAM</td><td>2</td><td/><td>clamscan.exe</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>freshclam.exe</td><td>{B311C36B-66DB-4F3B-8B3A-F5735ACA3116}</td><td>CLAM</td><td>2</td><td/><td>freshclam.exe</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>libclamav.dll</td><td>{B2D60FCD-17D5-47FC-9FD5-44622E105D15}</td><td>CLAM</td><td>2</td><td/><td>libclamav.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>libclamunrar.dll</td><td>{02845E16-4533-43C5-AD9B-48D7AAAC0561}</td><td>CLAM</td><td>2</td><td/><td>libclamunrar.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>libclamunrar_iface.dll</td><td>{0055571C-672F-4F6C-89FC-0ED9D2DB2986}</td><td>CLAM</td><td>2</td><td/><td>libclamunrar_iface.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>libeay32.dll</td><td>{90118F01-DDFE-49F1-B62B-1DA4A7C2228C}</td><td>CLAM</td><td>2</td><td/><td>libeay32.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>mCleaner.exe</td><td>{E8D3655C-E2EF-4EE8-B4DD-F71DCDDF6058}</td><td>INSTALLDIR</td><td>2</td><td/><td>mcleaner.exe</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>msvcm80.dll</td><td>{90B9748E-EF32-4777-ABEC-691F175E7EEC}</td><td>CLAM</td><td>2</td><td/><td>msvcm80.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
@@ -1080,6 +1082,8 @@
 		<row><td>CLAM</td><td>clamscan.exe</td></row>
 		<row><td>CLAM</td><td>freshclam.exe</td></row>
 		<row><td>CLAM</td><td>libclamav.dll</td></row>
+		<row><td>CLAM</td><td>libclamunrar.dll</td></row>
+		<row><td>CLAM</td><td>libclamunrar_iface.dll</td></row>
 		<row><td>CLAM</td><td>libeay32.dll</td></row>
 		<row><td>CLAM</td><td>msvcm80.dll</td></row>
 		<row><td>CLAM</td><td>msvcp80.dll</td></row>
@@ -1106,6 +1110,8 @@
 		<row><td>INSTALLDIR</td><td>clamscan.exe</td></row>
 		<row><td>INSTALLDIR</td><td>freshclam.exe</td></row>
 		<row><td>INSTALLDIR</td><td>libclamav.dll</td></row>
+		<row><td>INSTALLDIR</td><td>libclamunrar.dll</td></row>
+		<row><td>INSTALLDIR</td><td>libclamunrar_iface.dll</td></row>
 		<row><td>INSTALLDIR</td><td>libeay32.dll</td></row>
 		<row><td>INSTALLDIR</td><td>mCleaner.exe</td></row>
 		<row><td>INSTALLDIR</td><td>msvcm80.dll</td></row>
@@ -1948,6 +1954,8 @@
 		<row><td>AlwaysInstall</td><td>clamscan.exe</td></row>
 		<row><td>AlwaysInstall</td><td>freshclam.exe</td></row>
 		<row><td>AlwaysInstall</td><td>libclamav.dll</td></row>
+		<row><td>AlwaysInstall</td><td>libclamunrar.dll</td></row>
+		<row><td>AlwaysInstall</td><td>libclamunrar_iface.dll</td></row>
 		<row><td>AlwaysInstall</td><td>libeay32.dll</td></row>
 		<row><td>AlwaysInstall</td><td>mCleaner.exe</td></row>
 		<row><td>AlwaysInstall</td><td>msvcm80.dll</td></row>
@@ -1993,6 +2001,8 @@
 		<row><td>internet_explorer.xml</td><td>ISX_DEFAULTCOMPONENT2</td><td>INTERN~1.XML|internet_explorer.xml</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release\Cleaners\internet_explorer.xml</td><td>1</td><td/></row>
 		<row><td>java.xml</td><td>ISX_DEFAULTCOMPONENT2</td><td>java.xml</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release\Cleaners\java.xml</td><td>1</td><td/></row>
 		<row><td>libclamav.dll</td><td>libclamav.dll</td><td>LIBCLA~1.DLL|libclamav.dll</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release\Clam\libclamav.dll</td><td>1</td><td/></row>
+		<row><td>libclamunrar.dll</td><td>libclamunrar.dll</td><td>LIBCLA~1.DLL|libclamunrar.dll</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release\Clam\libclamunrar.dll</td><td>1</td><td/></row>
+		<row><td>libclamunrar_iface.dll</td><td>libclamunrar_iface.dll</td><td>LIBCLA~1.DLL|libclamunrar_iface.dll</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release\Clam\libclamunrar_iface.dll</td><td>1</td><td/></row>
 		<row><td>libeay32.dll</td><td>libeay32.dll</td><td>libeay32.dll</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release\Clam\libeay32.dll</td><td>1</td><td/></row>
 		<row><td>littleregistry.xml</td><td>ISX_DEFAULTCOMPONENT2</td><td>LITTLE~1.XML|LittleRegistry.xml</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release\Cleaners\LittleRegistry.xml</td><td>1</td><td/></row>
 		<row><td>mahapps.metro.dll</td><td>MahApps.Metro.dll</td><td>MAHAPP~1.DLL|MahApps.Metro.dll</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Code\Mcleaner\mCleaner\bin\Release\MahApps.Metro.dll</td><td>1</td><td/></row>
@@ -2201,6 +2211,8 @@
 		<row><td>clamscan.exe</td><td/><td/><td>_54A262F6_ED69_461E_AB77_52D39601B1FC_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>freshclam.exe</td><td/><td/><td>_24688A09_4197_49A7_BB00_00B26E02634C_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>libclamav.dll</td><td/><td/><td>_CE27A761_5A50_4208_8770_8CC5967C5539_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>libclamunrar.dll</td><td/><td/><td>_2557E1FE_CC01_45D3_B0BC_B23597EB4FC5_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>libclamunrar_iface.dll</td><td/><td/><td>_5E0026B5_B071_48B0_A57C_60BF04F5016A_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>libeay32.dll</td><td/><td/><td>_41A09C83_0FF1_479F_A18E_C07AC04F1C13_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>mCleaner.exe</td><td/><td/><td>_5B16DA52_993B_46DF_AC19_C5B508F53BB5_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>msvcm80.dll</td><td/><td/><td>_798813B1_E73C_47C4_93CB_DBEB89AFE95C_FILTER</td><td/><td/><td/><td/></row>
@@ -4545,9 +4557,9 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<row><td>PROGMSG_IIS_ROLLBACKVROOTS</td><td>##IDS_PROGMSG_IIS_ROLLBACKVROOTS##</td><td/></row>
 		<row><td>PROGMSG_IIS_ROLLBACKWEBSERVICEEXTENSIONS</td><td>##IDS_PROGMSG_IIS_ROLLBACKWEBSERVICEEXTENSIONS##</td><td/></row>
 		<row><td>PROGRAMFILETOLAUNCHATEND</td><td>[INSTALLDIR]mCleaner.exe</td><td/></row>
-		<row><td>ProductCode</td><td>{70014584-33E7-44BE-8590-D7F62278E51B}</td><td/></row>
+		<row><td>ProductCode</td><td>{D35D0FD5-934B-4C50-85F9-9A3E4C3765AA}</td><td/></row>
 		<row><td>ProductName</td><td>mCleaner</td><td/></row>
-		<row><td>ProductVersion</td><td>1.10.1</td><td/></row>
+		<row><td>ProductVersion</td><td>1.10.2</td><td/></row>
 		<row><td>ProgressType0</td><td>install</td><td/></row>
 		<row><td>ProgressType1</td><td>Installing</td><td/></row>
 		<row><td>ProgressType2</td><td>installed</td><td/></row>
@@ -4838,7 +4850,7 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<col def="s72">ActionProperty</col>
 		<col def="S72">ISDisplayName</col>
 		<row><td>{00000000-0000-0000-0000-000000000000}</td><td>***ALL_VERSIONS***</td><td></td><td></td><td>2</td><td/><td>ISFOUNDNEWERPRODUCTVERSION</td><td>ISPreventDowngrade</td></row>
-		<row><td>{6EEA3CBA-4FF5-4862-B38D-45867E223975}</td><td></td><td>1.10.1</td><td></td><td>768</td><td/><td>ISACTIONPROP1</td><td>UpdateProduct</td></row>
+		<row><td>{6EEA3CBA-4FF5-4862-B38D-45867E223975}</td><td></td><td>1.10.2</td><td></td><td>768</td><td/><td>ISACTIONPROP1</td><td>UpdateProduct</td></row>
 	</table>
 
 	<table name="Verb">

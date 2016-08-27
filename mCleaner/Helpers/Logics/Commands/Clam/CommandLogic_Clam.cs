@@ -131,7 +131,7 @@ namespace mCleaner.Logics.Clam
             this.Clam.ShowClamWinVirusUpdateWindow = false;
             this.Clam.ProgressIsIndeterminate = false;
 
-            if (this.Clam.InfectedFilesCollection.Count == 0)
+            if (this.Clam.InfectedFilesCount == 0)
             {
                 if(blnIsCancel)
                     UpdateProgressLog("Operation Canceled.");
@@ -150,22 +150,23 @@ namespace mCleaner.Logics.Clam
 
                 if (this.IsRemove)
                 {
-                    UpdateProgressLog(string.Format("{0} virus removed", this.Clam.InfectedFilesCollection.Count));
+                    UpdateProgressLog(string.Format("{0} virus removed", this.Clam.InfectedFilesCount));
                 }
                 else
                 {
-                    UpdateProgressLog(string.Format("{0} virus found! Click 'Clean Now'!", this.Clam.InfectedFilesCollection.Count));
+                    UpdateProgressLog(string.Format("{0} virus found! Click 'Clean Now'!", this.Clam.InfectedFilesCount));
                 }
             }
         }
 
         void process_OutputDataReceived(object sender, DataReceivedEventArgs e)
         {
-
-            if (!this.update_process.HasExited)
+            if (e.Data!=null && e.Data.Contains("Infected files:"))
             {
-                UpdateProgressLog(e.Data);
+               this.Clam.InfectedFilesCount =Convert.ToInt32(e.Data.Replace("Infected files:", String.Empty).Trim());
+
             }
+            UpdateProgressLog(e.Data);
         }
         #endregion
 
@@ -289,7 +290,7 @@ namespace mCleaner.Logics.Clam
 
         public void LaunchScanner(SEARCH search, string path, bool launchinbackground = false, string regex = null, bool remove = false, Action callback = null)
         {
-            this.Clam.InfectedFilesCollection.Clear();
+            this.Clam.InfectedFilesCount = 0;
             this.Clam.WindowTitle = "Scan custom locations for viruses";
             this.Clam.EnableCleanNowButton = false;
             this.Clam.EnableCancelButton = true;
@@ -304,15 +305,11 @@ namespace mCleaner.Logics.Clam
                 "--database=\"{1}\"",
                 "--log=\"{2}\"",
                 "--infected",
-                "--show-progress",
-                "--kill",
                 "--recursive=yes"
             };
 
-            if (remove)
-            {
+            if(IsRemove)
                 param.Add("--remove=yes");
-            }
 
             // if max files are declared
             StringCollection max = Settings.Default.ClamWin_Max;
@@ -377,6 +374,8 @@ namespace mCleaner.Logics.Clam
             UpdateProgressLog("╔═══════════════════════════════════════════════╗");
             UpdateProgressLog("║ Starting to scan files and folders for virus. ║");
             UpdateProgressLog("╚═══════════════════════════════════════════════╝");
+            UpdateProgressLog("Scanning please wait..");
+
 
             if (!launchinbackground)
             {
@@ -487,24 +486,69 @@ namespace mCleaner.Logics.Clam
                 // check for infected files
                 if (!string.IsNullOrEmpty(data))
                 {
-                    if (data.Length > 10) // make sure we have enough string to look for "FOUND" string
-                    {
-                        if (data.Substring(data.Length - 5, 5) == "FOUND")
-                        {
-                            string file = data.Substring(0, data.IndexOf(": "));
-                            string virus = data.Substring(data.IndexOf(": ") + 2).Replace(" FOUND", null);
+                    #region update
+                    bool has_logged = false;
 
-                            Application.Current.Dispatcher.BeginInvoke(new Action(() =>
-                            {
-                                this.Clam.InfectedFilesCollection.Add(new Model_VirusDetails()
-                                {
-                                    File = file,
-                                    VirusName = virus,
-                                    ColWidth = -1,
-                                    Status = this.IsRemove ? "Removed" : "Infected!"
-                                });
-                            }));
+                    if (data == null) return;
+
+                    if (log.Count > 0)
+                    {
+                        string last_text = log[log.Count - 1];
+                        string new_text = data;
+
+                        if (last_text.Length != new_text.Length) // if they are not in the same lenght, obviously the new text is different
+                        {
+                            log.Add(new_text);
                         }
+                        else
+                        {
+                            if (!string.IsNullOrEmpty(new_text))
+                            {
+                                if (last_text[0] != new_text[0]) // if both 1st character were not the same, obiosuly the new text is different
+                                {
+                                    log.Add(new_text);
+                                }
+                                else
+                                {
+                                    string temp = string.Empty;
+                                    string diff = string.Empty;
+
+                                    for (int i = 0; i < last_text.Length; i++)
+                                    {
+                                        if (last_text[i] != new_text[i])
+                                        {
+                                            temp = new_text.Substring(0, i);
+                                            diff = new_text.Substring(i);
+                                            break;
+                                        }
+                                    }
+
+                                    if (temp == last_text.Substring(0, temp.Length))
+                                    {
+                                        log[log.Count - 1] = new_text;
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                log.Add(new_text);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        log.Add(data);
+                    }
+
+                    #endregion
+                    //if (has_logged)
+                    {
+                        _preview_log = string.Join("\r\n", this.log.ToArray());
+
+                        Help.RunInBackground(() =>
+                        {
+                            Clam.VirusScanUpdateLog = _preview_log;
+                        }, false);
                     }
                 }
 

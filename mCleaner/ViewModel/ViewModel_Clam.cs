@@ -63,6 +63,20 @@ namespace mCleaner.ViewModel
             }
         }
 
+        private string _virusScanUpdateLog = string.Empty;
+        public string VirusScanUpdateLog
+        {
+            get { return _virusScanUpdateLog; }
+            set
+            {
+                if (_virusScanUpdateLog != value)
+                {
+                    _virusScanUpdateLog = value;
+                    base.RaisePropertyChanged("VirusScanUpdateLog");
+                }
+            }
+        }
+
         private string _windowTitle = "Update Virus Definition Database";
         public string WindowTitle
         {
@@ -106,16 +120,16 @@ namespace mCleaner.ViewModel
         }
 
 
-        private ObservableCollection<Model_VirusDetails> _infectedFilesCollection = new ObservableCollection<Model_VirusDetails>();
-        public ObservableCollection<Model_VirusDetails> InfectedFilesCollection
+        private int _infectedFilesCount = 0;
+        public int InfectedFilesCount
         {
-            get { return _infectedFilesCollection; }
+            get { return _infectedFilesCount; }
             set
             {
-                if (_infectedFilesCollection != value)
+                if (_infectedFilesCount != value)
                 {
-                    _infectedFilesCollection = value;
-                    base.RaisePropertyChanged("InfectedFilesCollection");
+                    _infectedFilesCount = value;
+                    base.RaisePropertyChanged("InfectedFilesCount");
                 }
             }
         }
@@ -185,23 +199,6 @@ namespace mCleaner.ViewModel
                 this.ShowClamWinVirusUpdateWindow = false;
                 this.VirusDefUpdateLog = "Log goes here";
                 this.ProgressText = "Progress Text Here";
-                this.InfectedFilesCollection.Add(new Model_VirusDetails()
-                {
-                    File = @"C:\Windows\Explorer.exe",
-                    VirusName = "Trojan.Delf-11287"
-                });
-
-                this.InfectedFilesCollection.Add(new Model_VirusDetails()
-                {
-                    File = @"G:\Installers\Cracks\VSO.ConvertXtoDVD.3.7.2.188.Incl.Keymaker\Keygen BRD\Keygen.exe",
-                    VirusName = "Win.Trojan.Downloader-28238"
-                });
-
-                this.InfectedFilesCollection.Add(new Model_VirusDetails()
-                {
-                    File = @"G:\Installers\Cracks\VSO.ConvertXtoDVD.3.7.2.188.Incl.Keymaker\vsoConvertXtoDVD3_setup.exe",
-                    VirusName = "Trojan.Dropper-20708"
-                });
             }
             else
             {
