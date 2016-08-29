@@ -386,75 +386,52 @@
                         </StackPanel>
                     </Button>
                     <Separator />
-                    <ToggleButton    Name="btnScanMemoryVirusMenu" VerticalAlignment="Top" Width="70" Click="btnScanMemoryVirusMenu_Click" IsEnabled="{Binding CleanerML.ShowFrontPage}">
-                        <ToggleButton.Content>
-                            <StackPanel>
-                                <Rectangle Fill="#522B6E" Height="32" Width="32">
-                                    <Rectangle.OpacityMask>
-                                        <VisualBrush>
-                                            <VisualBrush.Visual>
-                                                <Image Width="32" Height="32" Source="Assets/scan_for_memory.png" HorizontalAlignment="Center" />
-                                            </VisualBrush.Visual>
-                                        </VisualBrush>
-                                    </Rectangle.OpacityMask>
-                                    <Rectangle.Style>
-                                        <Style TargetType="Rectangle">
-                                            <Style.Triggers>
-                                                <DataTrigger Binding="{Binding ElementName=btnScanMemoryVirusMenu, Path=IsEnabled}" Value="False">
-                                                    <Setter Property="Opacity" Value="0.3" />
-                                                </DataTrigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </Rectangle.Style>
-                                </Rectangle>
-                                <TextBlock Text="Scan for Viruses" HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" Foreground="Black" />
-                                <Path Width="8" Height="8" Fill="#FF527DB5" Stretch="Uniform" HorizontalAlignment="Center" Data="F1 M 301.14,-189.041L 311.57,-189.041L 306.355,-182.942L 301.14,-189.041 Z "/>
-                            </StackPanel>
-                        </ToggleButton.Content>
-                        <ToggleButton.ContextMenu>
-                            <ContextMenu >
-                                <MenuItem Header="Update Virus Definitions" Foreground="Black" ToolTip="Update virus definitions" Command="{Binding Clam.Command_UpdateVirusDefinition}"  >
-                                    <MenuItem.Icon>
-                                        <Rectangle Fill="#DE5F1E" Height="23" Width="23">
-                                            <Rectangle.OpacityMask>
-                                                <VisualBrush>
-                                                    <VisualBrush.Visual>
-                                                        <Image Width="25" Height="25" Source="Assets/dl_vir_def.png" HorizontalAlignment="Center" />
-                                                    </VisualBrush.Visual>
-                                                </VisualBrush>
-                                            </Rectangle.OpacityMask>
-                                        </Rectangle>
-                                    </MenuItem.Icon>
-                                </MenuItem>
-                                <MenuItem Header="Scan PC for Viruses" ToolTip="Scan system for virus"  Foreground="Black" Command="{Binding Clam.Command_ScanForVirus}"  >
-                                    <MenuItem.Icon>
-                                        <Rectangle Fill="#8F71A5" Height="25" Width="25">
-                                            <Rectangle.OpacityMask>
-                                                <VisualBrush>
-                                                    <VisualBrush.Visual>
-                                                        <Image Width="32" Height="32" Source="Assets/scan_for_virus.png" HorizontalAlignment="Center" />
-                                                    </VisualBrush.Visual>
-                                                </VisualBrush>
-                                            </Rectangle.OpacityMask>
-                                        </Rectangle>
-                                    </MenuItem.Icon>
-                                </MenuItem>
-                                <!--<MenuItem Header="Scan Memory for Viruses" ToolTip="Scan system memory for virus" Foreground="Black" Command="{Binding Clam.Command_ScanMemory}"  >
-                                    <MenuItem.Icon>
-                                        <Rectangle Fill="#522B6E" Height="25" Width="25">
-                                            <Rectangle.OpacityMask>
-                                                <VisualBrush>
-                                                    <VisualBrush.Visual>
-                                                        <Image Width="32" Height="32" Source="Assets/scan_for_memory.png" HorizontalAlignment="Center" />
-                                                    </VisualBrush.Visual>
-                                                </VisualBrush>
-                                            </Rectangle.OpacityMask>
-                                        </Rectangle>
-                                    </MenuItem.Icon>
-                                </MenuItem>-->
-                            </ContextMenu>
-                        </ToggleButton.ContextMenu>
-                    </ToggleButton>
+                    <Button Width="75" Command="{Binding Clam.Command_UpdateVirusDefinition}" Name="btnUpdateVirusDefinationMenu" ToolTip="Update virus definitions"  IsEnabled="{Binding CleanerML.ShowFrontPage}">
+                        <StackPanel>
+                            <Rectangle Fill="#DE5F1E" Height="32" Width="32">
+                                <Rectangle.OpacityMask>
+                                    <VisualBrush>
+                                        <VisualBrush.Visual>
+                                            <Image Width="32" Height="32" Source="Assets/dl_vir_def.png" HorizontalAlignment="Center" />
+                                        </VisualBrush.Visual>
+                                    </VisualBrush>
+                                </Rectangle.OpacityMask>
+                                <Rectangle.Style>
+                                    <Style TargetType="Rectangle">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding ElementName=btnUpdateVirusDefinationMenu, Path=IsEnabled}" Value="False">
+                                                <Setter Property="Opacity" Value="0.3" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Rectangle.Style>
+                            </Rectangle>
+                            <TextBlock Text="Update Virus" HorizontalAlignment="Center" Foreground="Black" />
+                        </StackPanel>
+                    </Button>
+                    <Button Width="70" Command="{Binding Clam.Command_ScanForVirus}" Name="btnScanVirusMenu" ToolTip="Scan system for virus"  IsEnabled="{Binding CleanerML.ShowFrontPage}">
+                        <StackPanel>
+                            <Rectangle Fill="#8F71A5" Height="32" Width="32">
+                                <Rectangle.OpacityMask>
+                                    <VisualBrush>
+                                        <VisualBrush.Visual>
+                                            <Image Width="32" Height="32" Source="Assets/scan_for_virus.png" HorizontalAlignment="Center" />
+                                        </VisualBrush.Visual>
+                                    </VisualBrush>
+                                </Rectangle.OpacityMask>
+                                <Rectangle.Style>
+                                    <Style TargetType="Rectangle">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding ElementName=btnScanVirusMenu, Path=IsEnabled}" Value="False">
+                                                <Setter Property="Opacity" Value="0.3" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Rectangle.Style>
+                            </Rectangle>
+                            <TextBlock Text="Scan Virus" HorizontalAlignment="Center" Foreground="Black"/>
+                        </StackPanel>
+                    </Button>
                     <Separator />
                     <Button Width="73" ToolTip="Shred Files and Folders" x:Name="btnShredFilesMenu" Visibility="Visible" Command="{Binding ShredWindow.Command_ShowWindow}" IsEnabled="{Binding CleanerML.ShowFrontPage}">
                         <StackPanel>

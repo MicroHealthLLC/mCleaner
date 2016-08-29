@@ -394,20 +394,6 @@ namespace mCleaner
         {
             await Home.Start();
         }
-        private void btnScanMemoryVirusMenu_Click(object sender, RoutedEventArgs e)
-        {
-            (sender as ToggleButton).ContextMenu.IsEnabled = true;
-            (sender as ToggleButton).ContextMenu.PlacementTarget = (sender as ToggleButton);
-            (sender as ToggleButton).ContextMenu.Placement = PlacementMode.Bottom;
-            (sender as ToggleButton).ContextMenu.IsOpen = true;
-            (sender as ToggleButton).ContextMenu.Closed += ContextMenu_Closed;
-        }
-
-        void ContextMenu_Closed(object sender, RoutedEventArgs e)
-        {
-            btnScanMemoryVirusMenu.IsChecked = false;
-        }
-
         private void Row_DoubleClick(object sender, MouseButtonEventArgs e)
         {
             DataGridRow row = sender as DataGridRow;
